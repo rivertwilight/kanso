@@ -58,7 +58,7 @@ const StyledArticlePage = styled.div`
   }
 `;
 
-const ArticlePage = ({ id, postProps, postContent, siteConfig, locale }) => {
+const ArticlePage = ({ id, postProps, postContent, locale }) => {
   if (!postProps) return null;
 
   return (
