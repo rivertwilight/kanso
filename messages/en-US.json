@@ -1,0 +1,36 @@
+{
+  "nav": {
+    "homePage": "Home",
+    "search": "Search",
+    "back": "BACK",
+    "settings": "settings"
+  },
+  "navbarMenu": {
+    "about": "About"
+  },
+  "postItem": {
+    "readMore": "Read More",
+    "showLess": "Show Less"
+  },
+  "RelatedLinks": {
+    "title": "Related Links",
+    "submit": "Submit"
+  },
+  "homePage": {
+    "features": "Features"
+  },
+  "postList": {
+    "allPosts": "All {count} Posts"
+  },
+  "archivePage": {
+    "title": "All Posts"
+  },
+  "settingsPage": {
+    "exportPosts": "Export All Posts",
+    "openSource": "Open Source Software"
+  },
+  "common": {
+    "all": "All"
+  }
+}
+

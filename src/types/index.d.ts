@@ -37,13 +37,6 @@ export interface ICurrentPage {
 	keywords?: string[];
 }
 
-// 词典
-export type TDictionary = {
-	[dicIndex: string]: {
-		[langIndex: number]: string;
-	};
-};
-
 export type TLocale = "zh-CN" | "en-US";
 
 export interface ISiteConfig {

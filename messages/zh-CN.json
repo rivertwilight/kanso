@@ -1,0 +1,36 @@
+{
+  "nav": {
+    "homePage": "博客",
+    "search": "搜索",
+    "back": "返回",
+    "settings": "设置"
+  },
+  "navbarMenu": {
+    "about": "关于"
+  },
+  "postItem": {
+    "readMore": "阅读全文",
+    "showLess": "收起"
+  },
+  "RelatedLinks": {
+    "title": "友情链接",
+    "submit": "申请"
+  },
+  "homePage": {
+    "features": "精选栏目"
+  },
+  "postList": {
+    "allPosts": "查看全部 {count} 篇文章"
+  },
+  "archivePage": {
+    "title": "全部文章"
+  },
+  "settingsPage": {
+    "exportPosts": "导出所有文章",
+    "openSource": "开源软件"
+  },
+  "common": {
+    "all": "全部"
+  }
+}
+

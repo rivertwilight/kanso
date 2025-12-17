@@ -1,0 +1,84 @@
+"use client";
+
+import React, { useMemo } from "react";
+import { Typography } from "@kindle-ui/core";
+import { sortByDate } from "@/utils/sortPosts";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
+
+const groupByYear = (posts) => {
+  return posts.reduce((acc, post) => {
+    const year = new Date(post.frontmatter.date).getFullYear();
+    if (!acc[year]) {
+      acc[year] = [];
+    }
+    acc[year].push(post);
+    return acc;
+  }, {});
+};
+
+interface AllPostsProps {
+  allPosts: any[];
+  flattedPosts: any[];
+  locale: string;
+}
+
+const AllPost: React.FC<AllPostsProps> = ({
+  allPosts,
+  flattedPosts,
+  locale,
+}) => {
+  const t = useTranslations("archivePage");
+  const sortedPosts = useMemo(() => sortByDate(flattedPosts), [flattedPosts]);
+  const postsByYear = useMemo(() => groupByYear(sortedPosts), [sortedPosts]);
+  const sortedYears = useMemo(
+    () => Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a)),
+    [postsByYear]
+  );
+
+  const locales = [
+    { localeString: "简体中文", routeName: "zh-CN" },
+    { localeString: "English", routeName: "en-US" },
+  ];
+
+  const localeLinks = locales
+    .map((l) => {
+      if (l.routeName === locale) {
+        return <span key={l.routeName}>{l.localeString}</span>;
+      }
+      return (
+        <Link href="/archive" locale={l.routeName} key={l.routeName}>
+          {l.localeString}
+        </Link>
+      );
+    })
+    .reduce(
+      (prev, curr, idx) => (idx === 0 ? [curr] : [...prev, " | ", curr]),
+      [] as React.ReactNode[]
+    );
+
+  return (
+    <>
+      <Typography>
+        <h1>{t("title")}</h1>
+        <p>{localeLinks}</p>
+        {sortedYears.map((year) => (
+          <div key={year}>
+            <h2>{year}</h2>
+            <ul>
+              {postsByYear[year].map((post) => (
+                <li key={post.id}>
+                  <Link href={"/p/" + post.id}>
+                    {post.frontmatter.title || post.slug}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </Typography>
+    </>
+  );
+};
+
+export default AllPost;

@@ -29,20 +29,17 @@ export default async function generateRssFeed() {
 		author,
 	});
 
-	const allPosts = getAllPosts(
-		require.context("../../posts", true, /[\.md|(\.js)]$/),
-		{
-			enableContent: true,
-			enableFlat: true,
-			locale: "zh-CN",
-		}
-	);
+	const allPosts = getAllPosts({
+		enableContent: true,
+		enableFlat: true,
+		locale: "zh-CN",
+	});
 
 	fs.mkdirSync(`./public/rss`, {
 		recursive: true,
 	});
 
-	allPosts.forEach((post) => {
+	allPosts.forEach((post: any) => {
 		feed.addItem({
 			title: post.frontmatter.title,
 			id: post.id,

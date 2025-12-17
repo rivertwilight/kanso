@@ -1,25 +1,19 @@
 import getAllPosts from "@/utils/getAllPosts";
 
-export default (locale) => {
+export default function getPaths(locale: string) {
+	const allPosts = getAllPosts({
+		enableFlat: true,
+		locale,
+	});
 
-	const allPosts = getAllPosts(
-		require.context("../../posts", true, /^(\.)(.+)[\.md|(\.js)]$/),
-		{
-			enableFlat: true,
-			locale
-		}
-	);
-
-	const paths = allPosts.map((post) => {
+	const paths = allPosts.map((post: any) => {
 		return {
 			params: {
-				id: post.id,
+				slug: post.id,
 			},
 			locale: post.locale,
 		};
 	});
 
-	// console.log(paths);
-
 	return paths;
-};
+}
