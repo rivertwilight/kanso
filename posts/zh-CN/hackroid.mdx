@@ -33,8 +33,8 @@ Magsik 的工作原理是直接把 API 写入系统的 boot.img 中，其安装�
 4. 将手机与电脑用数据线连接（要选择有文件传输功能的线材）。
 5. 把手机上修补过的镜像复制到电脑上。
 6. 关机状态下，同时按住音量减和电源键，进入 Fastboot 模式。
-7. 打开 adb 命令行，执行fastboot flash boot <img_directry>
-8. 刷入完毕后，执行fastboot reboot重启设备。完成。
+7. 打开 adb 命令行，执行 `fastboot flash boot <img_directry>`
+8. 刷入完毕后，执行 `fastboot reboot` 重启设备。完成。
 
 ## 刷入官方 ROM
 
@@ -57,8 +57,8 @@ Magsik 的工作原理是直接把 API 写入系统的 boot.img 中，其安装�
 2. 确保设备已解锁 Bootloader。可以在开发者选项中查看设备的解锁状态。
 3. 下载第三方 Rom 以及推荐的 Recovery （如果有）。
 4. 关机状态下，同时按住音量减和电源键，进入 Fastboot 模式。将手机与电脑用数据线连接。
-5. 电脑上打开 adb 命令行，执行fastboot boot <recovery_directry>。如果一切正常，手机会进入 Recovery。
-6. 进入 Recovery 后，如果该 rec 支持 sideload 模式，可以直接进入 sideload 模式，执行adb sideload <rom_directry>；如果不支持 sideload 模式，可以选择刷入 zip 包的方式，执行adb push <rom_directry> /sdcard/Download，然后在 Recovery 中选择刷入 zip 包。
+5. 电脑上打开 adb 命令行，执行 `fastboot boot <recovery_directry>`。如果一切正常，手机会进入 Recovery。
+6. 进入 Recovery 后，如果该 rec 支持 sideload 模式，可以直接进入 sideload 模式，执行 `adb sideload <rom_directry>`；如果不支持 sideload 模式，可以选择刷入 zip 包的方式，执行 `adb push <rom_directry> /sdcard/Download`，然后在 Recovery 中选择刷入 zip 包。
 
 ## 其他资源
 

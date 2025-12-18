@@ -136,7 +136,7 @@ tag: Coding
   5. 执行恶意软件扫描：运行杀毒软件或其他恶意软件扫描工具，以检测系统中是否存在恶意软件。如果发现恶意软件，请根据扫描工具的建议进行清除。
   6. 确保强大的身份验证机制：使用复杂且不容易被猜测的密码。启用多因素身份验证（MFA）以增加安全性。
   7. 监控异常活动：使用安全信息和事件管理（SIEM）工具或其他日志分析工具，监控服务器上的异常活动。配置警报通知以便在检测到可疑活动时立即收到通知。
-  8. 在 Windows 环境下，可以用此命令找出规定时间范围内创建的shell文件 Get-ChildItem -Path "C:\" -Recurse | Where-Object { $*.CreationTime -ge "2023-05-06 00:00:00" -and $*.CreationTime -le "2023-05-06 23:59:59" }
+  8. 在 Windows 环境下，可以用此命令找出规定时间范围内创建的shell文件 `Get-ChildItem -Path "C:\" -Recurse | Where-Object { $*.CreationTime -ge "2023-05-06 00:00:00" -and $*.CreationTime -le "2023-05-06 23:59:59" }`
 
 ## 中间件
 
@@ -193,14 +193,14 @@ DNS外带可以用于获取无回显的漏洞中的数据，例如 SQL 注入、
 - DNSLog 服务器能够记录 DNS 请求日志。
 
 ### NMAP 常见参数
-- Scan a range of IP addresses: **nmap <ip-range>**
-- Port scanning: **nmap -p <port-range> <ip-address>**
-- Ping scan: **nmap -sn <ip-address>**
-- Save scan output to a file: **nmap -oN <filename> <ip-address>**
-- Display open ports: **nmap --open <ip-address>**
-- Exclude hosts/IP addresses from the scan: **nmap <ip-range> --exclude <ip-address>**
-- Service version detection: **nmap -sV <ip-address>**
-- OS detection: **nmap -O <ip-address>**
+- Scan a range of IP addresses: `nmap <ip-range>`
+- Port scanning: `nmap -p <port-range> <ip-address>`
+- Ping scan: `nmap -sn <ip-address>`
+- Save scan output to a file: `nmap -oN <filename> <ip-address>`
+- Display open ports: `nmap --open <ip-address>`
+- Exclude hosts/IP addresses from the scan: `nmap <ip-range> --exclude <ip-address>`
+- Service version detection: `nmap -sV <ip-address>`
+- OS detection: `nmap -O <ip-address>`
 
 ## 前端相关
 - 问：你知道原型链污染吗？
@@ -254,13 +254,13 @@ DNS外带可以用于获取无回显的漏洞中的数据，例如 SQL 注入、
 - 问：假设开启了**特殊字符过滤**，怎么办？
 - 答：使用数字类型的数据（避免使用引号）；用like代替=；
 - 问：假设开启了**关键词过滤**，怎么办？
-- 答：使用/**/或者<>分割关键字；使用双写绕过（例如selectselect）；
+- 答：使用 `/**/` 或者 `<>` 分割关键字；使用双写绕过（例如selectselect）；
 - 问：假设开启了**空格过滤**，怎么办？
-- 答：双空格，/**/，括号或者用回车代替。
+- 答：双空格，`/**/`，括号或者用回车代替。
 - 问：假设开启了逗号过滤，如何盲注？
 - 答：使用from和to，例如：select substr(database() from 1 for 1);
 - 问：sql 如何写 shell？
-  - UNION SELECT '<?php system($_GET["cmd"]); ?>' INTO OUTFILE '/var/www/html/uploads/shell.php’
+  - `UNION SELECT '<?php system($_GET["cmd"]); ?>' INTO OUTFILE '/var/www/html/uploads/shell.php'`
   - 成功注入Web Shell后，你可以通过访问其URL来使用它。例如，如果Web Shell位于**http://example.com/uploads/shell.php**，你可以在URL中附加一个**cmd**参数来执行命令。
 - 问：sql注入时IP被记录怎么办？
 - 答：使用代理服务器，使用VPN。
@@ -327,7 +327,7 @@ Kerberos 的认证流程如下：
 - 问：知道SCRF吗？
 - 答：嗯。这是服务端虚假请求，可以用来access外网获取不到的主机。
 - 问：如何探测存活IP？
-- 答：可以使用 nmap 工具进行存活性探测，命令nmap-sP-n-ilip.txt-oA OUTPUT --no-stylesheet 在 Linux 中使用cat OUTPUT.gnmap |grep Up |awk'{print $2y'>ip_cunhuo.txt即可得到存活 IP。
+- 答：可以使用 nmap 工具进行存活性探测，命令 `nmap-sP-n-ilip.txt-oA OUTPUT --no-stylesheet` 在 Linux 中使用 `cat OUTPUT.gnmap |grep Up |awk'{print $2y'>ip_cunhuo.txt` 即可得到存活 IP。
 - 问：如何识别挖矿流量？
 - 答：通常挖矿木马会造成**高CPU占有率、网络流量、非常规的文件名**，并且会使用非标准端口通信。
 - 问：如何识别告警流量是否为误报？

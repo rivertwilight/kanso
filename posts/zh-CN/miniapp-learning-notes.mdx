@@ -16,7 +16,7 @@ tag: Coding
 
 -   **3.在小程序端使用 update 只能更新字段中的 openid 和自己目前的 openid 相同的字段，如果需要更改别人创建的信息应该在云函数中使用 update，具体看官方文档，很简单。**
 
--   4.在使用云函数 update 的时候，记得在 cloud.init({env: ‘xxx’})中填写你的环境 id。
+-   4.在使用云函数 update 的时候，记得在 `cloud.init({env: 'xxx'})` 中填写你的环境 id。
 
 -   5.确保你上传的数据中的 data 不是 undefined,不然成功上传也会显示更新数据为一条
 
