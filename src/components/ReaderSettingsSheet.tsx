@@ -401,7 +401,7 @@ export const ReaderSettingsSheet: React.FC<ReaderSettingsSheetProps> = ({
         }}
       >
         {/* Tabs */}
-        <div className="flex border-b shrink-0 border-b-2 border-b-solid border-b-black">
+        <div className="flex border-b shrink-0 border-b-2 border-b-solid border-b-(--eink-ink)">
           <TabButton
             label="Themes"
             active={activeTab === "themes"}
