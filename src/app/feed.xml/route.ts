@@ -1,42 +1,44 @@
 import { NextResponse } from "next/server";
 import getAllPosts from "@/utils/getAllPosts";
-import siteConfig from "../../site.config";
 
 function escapeXml(text: string): string {
-	if (!text) return "";
-	return text
-		.replace(/&/g, "&amp;")
-		.replace(/</g, "&lt;")
-		.replace(/>/g, "&gt;")
-		.replace(/"/g, "&quot;")
-		.replace(/'/g, "&apos;");
+  if (!text) return "";
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
 }
 
 function generateAtomXml(locale: string): string {
-	const baseUrl = siteConfig.root;
-	const title = siteConfig.title[locale as keyof typeof siteConfig.title] || siteConfig.title["en"];
-	const description = siteConfig.description[locale as keyof typeof siteConfig.description] || siteConfig.description["en"];
-	const author = siteConfig.author;
-	const now = new Date().toISOString();
+  const baseUrl = "https://rene.wang";
+  const title = "Rene Wang";
+  const description =
+    "My experience about web, AI, iOS, game development, 3D art, start-up, and my life journal.";
+  const author = "Rene Wang";
+  const now = new Date().toISOString();
 
-	const posts = getAllPosts({
-		locale,
-		enableSort: true,
-		enableContent: true,
-	});
+  const posts = getAllPosts({
+    locale,
+    enableSort: true,
+    enableContent: true,
+  });
 
-	const entries = posts
-		.slice(0, 50)
-		.map((post) => {
-			const postTitle = escapeXml(post.frontmatter.title || post.defaultTitle);
-			const postUrl = `${baseUrl}/${locale}/p/${post.id}`;
-			const updated = post.frontmatter.date
-				? new Date(post.frontmatter.date).toISOString()
-				: now;
-			const summary = escapeXml(post.frontmatter.summary || post.markdownBody?.slice(0, 200) || "");
-			const category = post.category || "";
+  const entries = posts
+    .slice(0, 50)
+    .map((post) => {
+      const postTitle = escapeXml(post.frontmatter.title || post.defaultTitle);
+      const postUrl = `${baseUrl}/${locale}/p/${post.id}`;
+      const updated = post.frontmatter.date
+        ? new Date(post.frontmatter.date).toISOString()
+        : now;
+      const summary = escapeXml(
+        post.frontmatter.summary || post.markdownBody?.slice(0, 200) || ""
+      );
+      const category = post.category || "";
 
-			return `
+      return `
   <entry>
     <title>${postTitle}</title>
     <link href="${postUrl}" rel="alternate" type="text/html"/>
@@ -45,14 +47,14 @@ function generateAtomXml(locale: string): string {
     <summary>${summary}</summary>
     ${category ? `<category term="${escapeXml(category)}"/>` : ""}
     <author>
-      <name>${escapeXml(author.name)}</name>
-      <email>${escapeXml(author.email)}</email>
+      <name>${escapeXml(author)}</name>
+      <email>${escapeXml(author)}</email>
     </author>
   </entry>`;
-		})
-		.join("");
+    })
+    .join("");
 
-	return `<?xml version="1.0" encoding="UTF-8"?>
+  return `<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>${escapeXml(title)}</title>
   <subtitle>${escapeXml(description)}</subtitle>
@@ -61,27 +63,28 @@ function generateAtomXml(locale: string): string {
   <id>${baseUrl}/</id>
   <updated>${now}</updated>
   <author>
-    <name>${escapeXml(author.name)}</name>
-    <email>${escapeXml(author.email)}</email>
+    <name>${escapeXml(author)}</name>
+    <email>${escapeXml(author)}</email>
   </author>
   <generator>Next.js</generator>
-  <rights>All rights reserved ${new Date().getFullYear()}, ${escapeXml(author.name)}</rights>
+  <rights>All rights reserved ${new Date().getFullYear()}, ${escapeXml(
+    author
+  )}</rights>
   ${entries}
 </feed>`;
 }
 
 export async function GET(request: Request) {
-	const { searchParams } = new URL(request.url);
-	const locale = searchParams.get("locale") || "zh";
+  const { searchParams } = new URL(request.url);
+  const locale = searchParams.get("locale") || "zh";
 
-	const atomXml = generateAtomXml(locale);
+  const atomXml = generateAtomXml(locale);
 
-	return new NextResponse(atomXml, {
-		status: 200,
-		headers: {
-			"Content-Type": "application/atom+xml; charset=utf-8",
-			"Cache-Control": "public, max-age=3600, s-maxage=3600",
-		},
-	});
+  return new NextResponse(atomXml, {
+    status: 200,
+    headers: {
+      "Content-Type": "application/atom+xml; charset=utf-8",
+      "Cache-Control": "public, max-age=3600, s-maxage=3600",
+    },
+  });
 }
-
