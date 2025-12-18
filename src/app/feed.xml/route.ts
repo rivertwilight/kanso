@@ -14,8 +14,8 @@ function escapeXml(text: string): string {
 
 function generateAtomXml(locale: string): string {
 	const baseUrl = siteConfig.root;
-	const title = siteConfig.title[locale as keyof typeof siteConfig.title] || siteConfig.title["en-US"];
-	const description = siteConfig.description[locale as keyof typeof siteConfig.description] || siteConfig.description["en-US"];
+	const title = siteConfig.title[locale as keyof typeof siteConfig.title] || siteConfig.title["en"];
+	const description = siteConfig.description[locale as keyof typeof siteConfig.description] || siteConfig.description["en"];
 	const author = siteConfig.author;
 	const now = new Date().toISOString();
 

@@ -20,7 +20,7 @@ function formatDate(dateString: string, locale: string): string {
       month: "short",
       day: "numeric",
     };
-    return date.toLocaleDateString("en-US", options);
+    return date.toLocaleDateString("en", options);
   }
 }
 

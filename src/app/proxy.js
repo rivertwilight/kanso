@@ -1,9 +1,9 @@
 import { match } from '@formatjs/intl-localematcher'
 import Negotiator from 'negotiator'
  
-let headers = { 'accept-language': 'en-US,en;q=0.5' }
+let headers = { 'accept-language': 'en,en;q=0.5' }
 let languages = new Negotiator({ headers }).languages()
-let locales = ['en-US', 'zh']
-let defaultLocale = 'en-US'
+let locales = ['en', 'zh']
+let defaultLocale = 'en'
  
-match(languages, locales, defaultLocale) // -> 'en-US'
+match(languages, locales, defaultLocale) // -> 'en'

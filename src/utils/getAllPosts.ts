@@ -83,7 +83,7 @@ export default function getAllPosts(options: GetAllPostsOption): IPost[] {
 					? pocessRes.markdownBody(markdownBody)
 					: markdownBody
 				: "",
-			locale: locale || "en-US",
+			locale: locale || "en",
 			category,
 		};
 	}).filter(Boolean);

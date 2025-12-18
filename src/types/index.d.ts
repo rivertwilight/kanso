@@ -43,7 +43,7 @@ export interface ICurrentPage {
 	keywords?: string[];
 }
 
-export type TLocale = "zh" | "en-US";
+export type TLocale = "zh" | "en";
 
 export interface ISiteConfig {
 	title: string;
