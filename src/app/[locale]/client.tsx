@@ -47,10 +47,12 @@ function PostList({
   allPosts,
   falttedPosts,
   activeCategory,
+  locale,
 }: {
   activeCategory: string;
   allPosts: any;
   falttedPosts: IPost[];
+  locale: string;
 }) {
   const classfiedPosts =
     activeCategory === "All"
@@ -60,7 +62,7 @@ function PostList({
   return (
     <>
       {classfiedPosts.slice(0, MAX_POST_COUNT).map((post) => (
-        <Link key={post.id} href={"/p/" + post.id} style={{ textDecoration: "none" }}>
+        <Link locale={locale} key={post.id} href={"/p/" + post.id} style={{ textDecoration: "none" }}>
           <ListItem
             style={{
               cursor: "pointer",
@@ -150,6 +152,7 @@ const Home = (props: HomeProps) => {
           activeCategory={activeCategory}
           allPosts={allPosts}
           falttedPosts={falttedPosts}
+          locale={locale}
         />
 
         <br />
