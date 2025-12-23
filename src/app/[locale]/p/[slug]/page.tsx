@@ -21,11 +21,15 @@ interface PageProps {
 // Helper to extract SEO fields from the seo array format
 function extractSeoField(seo: any[] | undefined, field: string): any {
   if (!seo || !Array.isArray(seo)) return undefined;
-  const item = seo.find((obj) => obj && typeof obj === "object" && field in obj);
+  const item = seo.find(
+    (obj) => obj && typeof obj === "object" && field in obj
+  );
   return item?.[field];
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const post = getPostBySlug(slug, locale);
 
@@ -40,7 +44,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   // Extract SEO fields if available, otherwise use fallbacks
   const title = extractSeoField(seo, "title") || frontmatter.title || slug;
-  const description = extractSeoField(seo, "description") || frontmatter.summary || content.slice(0, 160);
+  const description =
+    extractSeoField(seo, "description") ||
+    frontmatter.summary ||
+    content.slice(0, 160);
   const keywords = extractSeoField(seo, "keywords") || frontmatter.keywords;
 
   return {
@@ -50,7 +57,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title,
       description,
-      images: frontmatter.cover ? [frontmatter.cover] : undefined,
+      type: "article",
+      publishedTime: frontmatter.date
+        ? new Date(frontmatter.date).toISOString()
+        : undefined,
+      authors: [AUTHOR_NAME],
+      locale: locale,
     },
   };
 }
@@ -81,7 +93,10 @@ export default async function ArticlePage({ params }: PageProps) {
 
   // Extract SEO fields for JSON-LD
   const title = extractSeoField(seo, "title") || frontmatter.title || slug;
-  const description = extractSeoField(seo, "description") || frontmatter.summary || content.slice(0, 160);
+  const description =
+    extractSeoField(seo, "description") ||
+    frontmatter.summary ||
+    content.slice(0, 160);
 
   // Build JSON-LD structured data for SEO
   const jsonLd = {
@@ -89,12 +104,14 @@ export default async function ArticlePage({ params }: PageProps) {
     "@type": "Article",
     headline: title,
     description: description,
-    datePublished: frontmatter.date ? new Date(frontmatter.date).toISOString() : undefined,
-    dateModified: frontmatter.updatedAt 
-      ? new Date(frontmatter.updatedAt).toISOString() 
-      : frontmatter.date 
-        ? new Date(frontmatter.date).toISOString() 
-        : undefined,
+    datePublished: frontmatter.date
+      ? new Date(frontmatter.date).toISOString()
+      : undefined,
+    dateModified: frontmatter.updatedAt
+      ? new Date(frontmatter.updatedAt).toISOString()
+      : frontmatter.date
+      ? new Date(frontmatter.date).toISOString()
+      : undefined,
     author: {
       "@type": "Person",
       name: AUTHOR_NAME,
@@ -112,14 +129,14 @@ export default async function ArticlePage({ params }: PageProps) {
     ...(frontmatter.cover && {
       image: {
         "@type": "ImageObject",
-        url: frontmatter.cover.startsWith("http") 
-          ? frontmatter.cover 
+        url: frontmatter.cover.startsWith("http")
+          ? frontmatter.cover
           : `${SITE_ROOT}${frontmatter.cover}`,
       },
     }),
     ...(frontmatter.keywords && {
-      keywords: Array.isArray(frontmatter.keywords) 
-        ? frontmatter.keywords.join(", ") 
+      keywords: Array.isArray(frontmatter.keywords)
+        ? frontmatter.keywords.join(", ")
         : frontmatter.keywords,
     }),
     inLanguage: locale,
