@@ -7,11 +7,13 @@ import {
 } from "next-intl/server";
 import { routing } from "../../i18n/routing";
 import { notFound } from "next/navigation";
-import { Analytics } from '@vercel/analytics/next';
-import { Provider as JotaiProvider } from 'jotai';
+import { Analytics } from "@vercel/analytics/next";
+import { Provider as JotaiProvider } from "jotai";
 
-import "./global.css";
 import SystemLayout from "src/system/components/SystemLayout";
+import "./global.css";
+import "kindle-fonts/bookerly.css";
+import "kindle-fonts/amazon-ember.css";
 
 type Locale = (typeof routing.locales)[number];
 

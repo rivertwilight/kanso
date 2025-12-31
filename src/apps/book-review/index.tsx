@@ -102,7 +102,7 @@ export default function BookReviewApp({
               </section>
             </Typography>
 
-            <GiscusComments locale={locale} />
+            {/* <GiscusComments locale={locale} /> */}
           </div>
         </div>
       </div>
