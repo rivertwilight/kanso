@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { IPost } from "@/types/index";
+import UniversalBookCover from "@/components/UniversalBookCover";
 
 interface BookCoverProps {
   book: IPost;
@@ -10,9 +12,12 @@ interface BookCoverProps {
 }
 
 export default function BookCover({ book, locale }: BookCoverProps) {
+  const [imageError, setImageError] = useState(false);
   const title = book.frontmatter.title || book.defaultTitle;
   const cover = book.frontmatter.cover;
+  const author = book.frontmatter.metadata?.author;
   const slug = book.slug;
+  const showPlaceholder = !cover || imageError;
 
   return (
     <Link
@@ -24,26 +29,21 @@ export default function BookCover({ book, locale }: BookCoverProps) {
         style={{
           aspectRatio: "2/3",
           borderColor: "var(--eink-ink-muted)",
-          backgroundColor: cover ? "transparent" : "var(--eink-paper-secondary)",
+          backgroundColor: "var(--eink-paper-secondary)",
         }}
       >
-        {cover ? (
+        {cover && !imageError && (
           <Image
             src={cover}
             alt={title}
             fill
             className="object-cover"
             sizes="(max-width: 768px) 50vw, 25vw"
+            onError={() => setImageError(true)}
           />
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center p-4">
-            <h3
-              className="text-center font-serif text-sm line-clamp-4"
-              style={{ color: "var(--eink-ink)" }}
-            >
-              {title}
-            </h3>
-          </div>
+        )}
+        {showPlaceholder && (
+          <UniversalBookCover title={title} author={author} size="small" />
         )}
       </div>
     </Link>

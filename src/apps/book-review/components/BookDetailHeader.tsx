@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
+import UniversalBookCover from "@/components/UniversalBookCover";
 
 interface BookMetadata {
   author?: string;
@@ -43,30 +45,42 @@ export default function BookDetailHeader({
   createAt,
   locale,
 }: BookDetailHeaderProps) {
+  const [imageError, setImageError] = useState(false);
+  const showPlaceholder = !cover || imageError;
+
   return (
     <div className="border-b pb-6 mb-6" style={{ borderColor: "var(--eink-ink-muted)" }}>
       <div className="flex gap-6">
         {/* Book Cover */}
-        {cover && (
-          <div className="flex-shrink-0">
-            <div
-              className="relative"
-              style={{
-                width: "160px",
-                aspectRatio: "2/3",
-                borderColor: "var(--eink-ink-muted)",
-              }}
-            >
+        <div className="flex-shrink-0">
+          <div
+            className="relative border"
+            style={{
+              width: "160px",
+              aspectRatio: "2/3",
+              borderColor: "var(--eink-ink-muted)",
+              backgroundColor: "var(--eink-paper-secondary)",
+            }}
+          >
+            {cover && !imageError && (
               <Image
                 src={cover}
                 alt={title}
                 fill
                 className="object-cover"
                 sizes="160px"
+                onError={() => setImageError(true)}
               />
-            </div>
+            )}
+            {showPlaceholder && (
+              <UniversalBookCover
+                title={title}
+                author={metadata?.author}
+                size="large"
+              />
+            )}
           </div>
-        )}
+        </div>
 
         {/* Book Details */}
         <div className="flex-1 min-w-0">
