@@ -15,7 +15,7 @@
 		"@giscus/react": "^3.1.0",
 		"@notion-stuff/blocks-markdown-parser": "^6.0.0",
 		"@notionhq/client": "^2.3.0",
-		"@vercel/analytics": "^0.1.11",
+		"@vercel/analytics": "^1.6.1",
 		"axios": "^1.13.2",
 		"dotenv": "^16.6.1",
 		"glob": "^11.1.0",
