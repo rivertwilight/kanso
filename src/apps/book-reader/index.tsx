@@ -9,7 +9,7 @@ import GiscusComments from "@/components/GiscusComments";
 import AppToolbar from "@/system/components/AppToolbar";
 import "katex/dist/katex.min.css";
 
-function formatDate(dateString: string, locale: string): string {
+function formatStandardDate(dateString: string, locale: string): string {
   const date = new Date(dateString);
 
   if (locale === "zh") {
@@ -25,6 +25,33 @@ function formatDate(dateString: string, locale: string): string {
     };
     return date.toLocaleDateString("en", options);
   }
+}
+
+function formatRelativeDate(dateString: string, locale: string): string {
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffInMs = now.getTime() - date.getTime();
+  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+  // For dates within the last 30 days, show human-friendly strings
+  if (diffInDays >= 0 && diffInDays < 30) {
+    if (diffInDays === 0) {
+      return locale === "zh" ? "今天" : "Today";
+    } else if (diffInDays === 1) {
+      return locale === "zh" ? "昨天" : "Yesterday";
+    } else if (diffInDays < 7) {
+      return locale === "zh" ? `${diffInDays} 天前` : `${diffInDays} days ago`;
+    } else if (diffInDays < 14) {
+      return locale === "zh" ? "1 周前" : "1 week ago";
+    } else if (diffInDays < 21) {
+      return locale === "zh" ? "2 周前" : "2 weeks ago";
+    } else if (diffInDays < 30) {
+      return locale === "zh" ? "3 周前" : "3 weeks ago";
+    }
+  }
+
+  // For older dates, fall back to standard format
+  return formatStandardDate(dateString, locale);
 }
 
 // Font family mapping
@@ -111,8 +138,17 @@ export default function BookReaderApp({
             <h1 itemProp="headline">{postProps.title}</h1>
             <div className="text-[var(--eink-ink-muted)] text-sm mb-4">
               <time itemProp="datePublished" dateTime={postProps.createAt}>
-                {formatDate(postProps.createAt, locale)}
+                {formatStandardDate(postProps.createAt, locale)}
               </time>
+              {postProps.updateAt && (
+                <>
+                  {" · "}
+                  <span>{locale === "zh" ? "更新于" : "Updated at"} </span>
+                  <time itemProp="dateModified" dateTime={postProps.updateAt}>
+                    {formatRelativeDate(postProps.updateAt, locale)}
+                  </time>
+                </>
+              )}
             </div>
 
             <section
