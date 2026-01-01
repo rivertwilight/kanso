@@ -62,7 +62,7 @@ vim ~/.ssh/id_rsa.pub
 
 ### 2. Pushing Code
 
-Make sure that the Action is enabled, and all updates to the master branch on GitHub will be automatically deployed to the server. Congratulations!
+Make sure that the Action is enabled, and all updates to the main branch on GitHub will be automatically deployed to the server. Congratulations!
 
 ## ✍ Writing
 

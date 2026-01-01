@@ -63,7 +63,7 @@ vim ~/.ssh/id_rsa.pub
 
 ### 2.推送代码
 
-确保 Action 已启用之后，在 github 上所有 master 分支的更新都会自动部署到服务器。大功告成！
+确保 Action 已启用之后，在 github 上所有 main 分支的更新都会自动部署到服务器。大功告成！
 
 ## ✍ 写作
 
