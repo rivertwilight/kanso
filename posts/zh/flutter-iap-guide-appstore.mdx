@@ -21,6 +21,8 @@ seo:
 
 只需要跟着本文一步步走，就可以实现完美的内购功能。注意：**本文适用于你有自己的账号系统。如果你的 App 完全离线管理订阅，那么本文可能不适合你。**
 
+这也是我做 [FlowFerry](https://www.ygeeker.com/flowferry) 总结的经验。
+
 ## App Store 商店设置
 
 开发者需要提前在 App Store Connect 中配置商品信息。App Store 的购买分为两种：订阅和消耗品。对于永久会员，建议使用 In-Ap Purchase，对于订阅类（例如会员），则使用 Subscription。
@@ -127,12 +129,30 @@ sequenceDiagram
 这样设计可以**避免用户在 App 切换账号，然后不断使用恢复购买来刷出大量有订阅资格的账号。**
 
 对 payload 解包后，首先判断 notifcationType 来进行后续操作。注意，此处仅列出常用的类型处理逻辑，对于更复杂的业务需求，建议查看文档自己拓展。
+
 - OFFER_REDEEMED** ：**兑换邀请码。我们需要将兑换请求存放，以供稍后验证。
 - SUBSCRIBED ：用户发起订阅（已完成支付）。我们只需要将订单信息插入到订单数据表即可，等待前端查询。
 - DID_RENEW：自动续费订阅成功。我们需要根据提供的交易 ID 在数据库中找到对应的用户，并延长他们的到期时间。
 - REFUND：用户发起退款。我们需要根据提供的交易 ID 在数据库中找到对应用户并撤销他们的订阅。
 
 理清思路后，以下是参考代码实现：
+
+```ts
+// Supabase Edge Function
+import { createClient } from '@supabase/supabase-js'
+
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY)
+
+export async function onRequest(context) {
+  const { request } = context
+  const { data, error } = await supabase.from('orders').insert({
+    product_id: request.body.product_id,
+    transaction_id: request.body.transaction_id,
+    purchase_date: request.body.purchase_date,
+    expires_date: request.body.expires_date
+  })
+}
+```
 
 配置好我们的服务器后，我们需要把处理来自 App Store 的通知的 API 提交到 App Store Connect。
 
@@ -160,3 +180,7 @@ App Store 对内购有严格的合规要求，以下是一些我遇到的坑：
 
 - 必须要有清晰的「恢复购买」成功或失败的提示
 - 必须要有清晰的「服务协议」入口，解释你的商品是什么，以及如何订阅、退订
+
+## 相关文章
+
+- [Flutter 接入内购指南之 Web 端 Stripe](https://www.ygeeker.com/p/flutter-iap-guide-stripe)
