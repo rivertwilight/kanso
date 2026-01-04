@@ -92,6 +92,27 @@ createAt: 2025-05-20T00:00:00.000Z
 
 整个购买流程如下：
 
+```mermaid
+sequenceDiagram
+    participant User as 用户
+    participant App as Flutter App
+    participant Apple as App Store
+    participant Server as 后端服务器
+    participant DB as 数据库
+
+    User->>App: 点击购买/订阅
+    App->>Apple: 发起购买请求
+    Apple->>User: 显示支付界面
+    User->>Apple: 确认支付
+    Apple->>App: 返回交易信息
+    Apple->>Server: 发送服务器通知 (SUBSCRIBED)
+    Server->>DB: 保存订单信息
+    App->>Server: 验证订单
+    Server->>DB: 查询订单状态
+    DB->>Server: 返回订单信息
+    Server->>App: 返回验证结果
+    App->>User: 显示购买成功
+```
 
 这样设计可以**避免用户在 App 切换账号，然后不断使用恢复购买来刷出大量有订阅资格的账号。**
 

@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import MermaidBlock from "./MermaidBlock";
 import {
 	jsx,
 	javascript,
@@ -113,6 +114,11 @@ const CodeBlock = ({ node, inline, className, children, ...props }: CodeBlockPro
 		: Array.isArray(children)
 			? children.join("")
 			: String(children || "");
+
+	// Check if this is a mermaid diagram
+	if (language === "mermaid") {
+		return <MermaidBlock>{codeString}</MermaidBlock>;
+	}
 
 	return (
 		<div className="my-6 max-md:w-screen max-md:relative max-md:left-1/2 max-md:right-1/2 max-md:-ml-[50vw] max-md:-mr-[50vw]">
