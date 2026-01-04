@@ -15,7 +15,7 @@ createAt: 2025-05-20T00:00:00.000Z
 
 开发者需要提前在 App Store Connect 中配置商品信息。App Store 的购买分为两种：订阅和消耗品。对于永久会员，建议使用 In-Ap Purchase，对于订阅类（例如会员），则使用 Subscription。
 
-![Image](/image/post/a4f48e4a-4198-4879-a71e-3feca35e5191_Screenshot_2024-06-26_at_19.18.30.png)
+![Image](https://file.rene.wang/Screenshot%202024-06-26%20at%2019.18.30.png)
 
 创建订阅或商品时，会要求提供两个值：
 - Reference Name：建议写为人类可读的格式，例如 ClipMemo Plus
@@ -23,13 +23,13 @@ createAt: 2025-05-20T00:00:00.000Z
 
 然后配置可用区及价格。
 
-![Image](/image/post/8e9d3ad0-e4c0-4482-b91c-4063c318d404_Screenshot_2024-07-13_at_17.32.26.png)
+![Image](https://file.rene.wang/Screenshot%202024-07-13%20at%2017.32.26.png)
 
 最后，我们需要提供服务器通知 API，用于接受来自 Apple 的通知。
 
 提交版本之前，别忘了将这些内购选项也勾选提交。
 
-![Image](/image/post/52aa1283-163d-44a1-870c-6041a203c8f2_Screenshot_2024-08-01_at_14.22.14.png)
+![Image](https://file.rene.wang/Screenshot%202024-08-01%20at%2014.22.14.png)
 
 至此，App Store 便设置完毕。
 
@@ -39,7 +39,7 @@ createAt: 2025-05-20T00:00:00.000Z
 
 在 Xcode 新建一个文件，选择 StoreKit。在弹出的窗口中勾选”Sync this file with an app in App Store Connect”选项。此操作会把我们在后台配置的商品信息自动同步。
 
-![Image](/image/post/e18a72bc-ab2c-421c-b108-2f03f02ea01b_Untitled.png)
+![Image](https://file.rene.wang/Untitled.png)
 
 你可以直接将这个文件放在根目录。创建好后，刚刚在后台设置的商品信息就会同步过来。
 
@@ -74,13 +74,11 @@ createAt: 2025-05-20T00:00:00.000Z
 | expires_date |  date |  过期时间 | 
 | is_lifetime |  bool |  是否为永久买断 | 
 
-
-
 ## 服务端实现
 
 服务端是整个流程中最复杂的部分，建议仔细阅读。不同的服务框架处理逻辑仍然是类似的，此处以 Javascript 为例。
 
-![Image](/image/post/5644ac04-cd3b-4438-b150-3d1e7e8f73af_Screenshot_2024-06-26_at_23.09.37.png)
+![服务端流程图](https://file.rene.wang/Screenshot%202024-06-26%20at%2023.09.37.png)
 
 首先，理清需要**服务器的需求**：
 
@@ -93,7 +91,6 @@ createAt: 2025-05-20T00:00:00.000Z
 因此，我们需要编写两个边缘函数（或者 API）。分别处理 App Store Server Notification 和 app 发来的请求。推荐首先参阅 App Store 的这篇[文档](https://developer.apple.com/documentation/appstoreservernotifications/responsebodyv2decodedpayload)。
 
 整个购买流程如下：
-
 
 
 这样设计可以**避免用户在 App 切换账号，然后不断使用恢复购买来刷出大量有订阅资格的账号。**
@@ -127,6 +124,6 @@ createAt: 2025-05-20T00:00:00.000Z
 
 为了贴近真实的购买环境，推荐创建沙盒用户。在你的 App Store Connect 中可以创建账户模拟不同地区账户。此外，你还可以点击
 
-![Image](/image/post/b1c5f2d5-a62b-4044-8373-8d057980433e_Screenshot_2024-07-12_at_13.29.11.png)
+![Image](https://file.rene.wang/Screenshot%202024-07-12%20at%2013.29.11.png)
 
 
