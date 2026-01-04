@@ -1,13 +1,13 @@
 ---
 title: Flutter 接入内购指南之 App Store
-summary: 本文将介绍 Flutter App 对接 App Store 实现
+summary: 本文将介绍 Flutter App 对接 App Store 实现，帮助你创建完美的内购功能。
 tag: Coding
 createAt: 2025-05-20T00:00:00.000Z
 updateAt: 2026-01-04T00:00:00.000Z
 seo:
   keywords:
-    - Flutter
-    - App Store
+    - Flutter IAP
+    - App Store 接入
     - 内购
     - 订阅
     - 异常处理
@@ -134,21 +134,18 @@ sequenceDiagram
 
 理清思路后，以下是参考代码实现：
 
-
-
 配置好我们的服务器后，我们需要把处理来自 App Store 的通知的 API 提交到 App Store Connect。
-
-
 
 ## 异常处理
 
 一个常见的问题就是，客户端发来订单验证请求，但此时 Apple 的订单信息还没落库。所以我们需要：
-- 第一次
-- 
+
+- 第一次验证失败后，等待一段时间再验证一次
 
 ## 测试
 
 你可以在三种环境下测试内购：
+
 - Xcode 模拟器：无法接受服务器通知
 - TestFlight 测试环境：可以接受服务器通知
 - App Store 生产环境：可以接受服务器通知
@@ -157,4 +154,9 @@ sequenceDiagram
 
 ![Image](https://file.rene.wang/Screenshot%202024-07-12%20at%2013.29.11.png)
 
+## 合规要求
 
+App Store 对内购有严格的合规要求，以下是一些我遇到的坑：
+
+- 必须要有清晰的「恢复购买」成功或失败的提示
+- 必须要有清晰的「服务协议」入口，解释你的商品是什么，以及如何订阅、退订
