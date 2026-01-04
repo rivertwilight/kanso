@@ -49,5 +49,28 @@
     "Coding": "编程",
     "Art": "艺术",
     "Ungroup": "未分类"
+  },
+  "errorPages": {
+    "notFound": {
+      "title": "页面未找到",
+      "description": "您要查找的页面不存在或已移至其他位置。",
+      "backHome": "返回首页",
+      "goBack": "返回上一页",
+      "suggestions": "以下是一些建议:",
+      "suggestion1": "检查 URL 是否有拼写错误",
+      "suggestion2": "返回主页",
+      "suggestion3": "使用搜索功能查找您需要的内容"
+    },
+    "error": {
+      "title": "出现问题",
+      "description": "处理您的请求时遇到意外错误。",
+      "productionMessage": "如果此问题持续存在，请联系技术支持。",
+      "tryAgain": "重试",
+      "backHome": "返回首页",
+      "whatToDo": "您可以:",
+      "action1": "尝试刷新页面",
+      "action2": "返回主页重新开始",
+      "action3": "如果问题仍然存在，请联系技术支持"
+    }
   }
 }

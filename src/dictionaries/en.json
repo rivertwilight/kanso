@@ -49,5 +49,28 @@
     "Coding": "Coding",
     "Art": "Art",
     "Ungroup": "Uncategorized"
+  },
+  "errorPages": {
+    "notFound": {
+      "title": "Page Not Found",
+      "description": "The page you're looking for doesn't exist or has been moved to a different location.",
+      "backHome": "Back to Home",
+      "goBack": "Go Back",
+      "suggestions": "Here are some helpful suggestions:",
+      "suggestion1": "Check the URL for typos",
+      "suggestion2": "Return to the home page",
+      "suggestion3": "Use the search function to find what you're looking for"
+    },
+    "error": {
+      "title": "Something Went Wrong",
+      "description": "We encountered an unexpected error while processing your request.",
+      "productionMessage": "If this problem persists, please contact support.",
+      "tryAgain": "Try Again",
+      "backHome": "Back to Home",
+      "whatToDo": "What you can do:",
+      "action1": "Try refreshing the page",
+      "action2": "Return to the home page and start over",
+      "action3": "Contact support if the issue persists"
+    }
   }
 }
