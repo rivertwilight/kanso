@@ -9,7 +9,11 @@
 		"start": "next start -p 4000",
 		"test:notion": "node ./src/utils/notion.js"
 	},
-	"author": "",
+	"author": {
+		"name": "Rene Wang",
+		"email": "contact@rene.wang",
+		"url": "https://rene.wang"
+	},
 	"license": "MIT",
 	"dependencies": {
 		"@giscus/react": "^3.1.0",
@@ -18,14 +22,14 @@
 		"@vercel/analytics": "^1.6.1",
 		"axios": "^1.13.2",
 		"dotenv": "^16.6.1",
-		"glob": "^11.1.0",
+		"glob": "^13.0.0",
 		"gray-matter": "^4.0.3",
 		"jotai": "^2.16.1",
 		"katex": "^0.16.27",
 		"kindle-fonts": "latest",
 		"lucide-react": "^0.562.0",
 		"mermaid": "^11.12.2",
-		"next": "^16.0.10",
+		"next": "^16.1.1",
 		"next-intl": "^4.6.1",
 		"next-mdx-remote": "^5.0.0",
 		"notion-client": "^6.16.0",
