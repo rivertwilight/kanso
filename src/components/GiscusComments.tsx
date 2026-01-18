@@ -11,7 +11,7 @@ export default function GiscusComments({ locale }: GiscusCommentsProps) {
   const theme = "light"; // You can make this dynamic based on your color scheme context
 
   return (
-    <div className="mt-8 pt-8">
+    <div className="mt-8 py-8">
       <Giscus
         repo="ygeeker/kanso"
         repoId={process.env.NEXT_PUBLIC_GISCUS_REPO_ID || ""}
