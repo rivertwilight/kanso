@@ -23,8 +23,8 @@ The elements of a set can be any type of object. A set can also contain other se
 
 The basic operations of sets include: union, intersection, relative complement, absolute complement, and symmetric difference. Among them:
 
-- The absolute complement is the relative complement of set $ A $ with respect to set $ E $, where E is the universal set.
-- The symmetric difference is defined as $ A \bigoplus B = (A - B) \bigcup (B - A) $.
+-   The absolute complement is the relative complement of set $ A $ with respect to set $ E $, where E is the universal set.
+-   The symmetric difference is defined as $ A \bigoplus B = (A - B) \bigcup (B - A) $.
 
 The so-called power set is the collection of all subsets of the original set (including the universal set and the [empty set](https://baike.baidu.com/item/%E7%A9%BA%E9%9B%86/5016874?fromModule=lemma_inlink)).
 
@@ -34,27 +34,27 @@ First, one must learn to judge propositions.
 
 There are three types of propositional formulas:
 
-- Tautology: also known as a universally true statement.
-- Contradiction: also known as a universally false statement. For example, $ p \land \neg p \Leftrightarrow 0 $.
-- Satisfiable formula.
+-   Tautology: also known as a universally true statement.
+-   Contradiction: also known as a universally false statement. For example, $ p \land \neg p \Leftrightarrow 0 $.
+-   Satisfiable formula.
 
 Using propositional equivalences, propositional formulas can be transformed into different forms to meet various problem-solving needs. This is referred to as **equivalence transformation**.
 
-- Double Negation Law: $ \neg \neg A \Leftrightarrow A $.
-- De Morgan's Laws: $ \neg (A \lor B) \Leftrightarrow \neg A \land \neg B $, $ \neg (A \land B) \Leftrightarrow \neg A \lor \neg B $.
-- Absorption Laws: $ A \lor (A \land B) \Leftrightarrow A $, $ A \land (A \lor B) = A $.
-- Law of Contradiction: $ A \land \neg A \Leftrightarrow 0 $.
-- Law of Excluded Middle: $ A \lor \neg A \Leftrightarrow 1 $.
-- Associative Law: $ (A \land B) \land C \Leftrightarrow A \land (B \land C) $.
-- Zero Law.
-- **Implication Equivalence**: $ A \rightarrow B \Rightarrow \neg A \lor B $.
+-   Double Negation Law: $ \neg \neg A \Leftrightarrow A $.
+-   De Morgan's Laws: $ \neg (A \lor B) \Leftrightarrow \neg A \land \neg B $, $ \neg (A \land B) \Leftrightarrow \neg A \lor \neg B $.
+-   Absorption Laws: $ A \lor (A \land B) \Leftrightarrow A $, $ A \land (A \lor B) = A $.
+-   Law of Contradiction: $ A \land \neg A \Leftrightarrow 0 $.
+-   Law of Excluded Middle: $ A \lor \neg A \Leftrightarrow 1 $.
+-   Associative Law: $ (A \land B) \land C \Leftrightarrow A \land (B \land C) $.
+-   Zero Law.
+-   **Implication Equivalence**: $ A \rightarrow B \Rightarrow \neg A \lor B $.
 
 ---
 
 Since a propositional formula can be transformed into different forms, we designate one of these forms as standard, referred to as **normal form**. Among them:
 
-- A disjunction consisting only of a finite number of propositional variables or their negations is called a **simple disjunction**, for example, $ p $, $ p \lor \neg q $.
-- A conjunction consisting only of a finite number of propositional variables or their negations is called a **simple conjunction**, for example, $ p $.
+-   A disjunction consisting only of a finite number of propositional variables or their negations is called a **simple disjunction**, for example, $ p $, $ p \lor \neg q $.
+-   A conjunction consisting only of a finite number of propositional variables or their negations is called a **simple conjunction**, for example, $ p $.
 
 ---
 
@@ -62,19 +62,19 @@ From propositional formulas, we can construct **inferences**. Inference is the c
 
 To prove the correctness of an inference, we can use the **constructive proof method**. This method follows given rules, some of which are based on certain inference laws:
 
-- Syllogism: $ ((A \leftrightarrow B) \land (B \leftrightarrow C)) \Rightarrow (A \leftrightarrow C) $.
-- Disjunctive Syllogism: $ (A \lor B) \land \neg A \Leftrightarrow B $.
-- Hypothetical Syllogism:
-- Modus Tollens: $ (A \rightarrow B) \land \neg B \Rightarrow \neg A $.
-- Modus Ponens: $ (A \rightarrow B) \land A \Leftrightarrow B $.
-- Addition: $ A \Rightarrow (A \lor B) $.
-- Simplification: $ (A \land B) \Rightarrow A $.
-- Constructive Dilemma: $ (A \rightarrow B) \land (C \rightarrow D) \land (A \lor C) \Rightarrow (B \land D) $.
+-   Syllogism: $ ((A \leftrightarrow B) \land (B \leftrightarrow C)) \Rightarrow (A \leftrightarrow C) $.
+-   Disjunctive Syllogism: $ (A \lor B) \land \neg A \Leftrightarrow B $.
+-   Hypothetical Syllogism:
+-   Modus Tollens: $ (A \rightarrow B) \land \neg B \Rightarrow \neg A $.
+-   Modus Ponens: $ (A \rightarrow B) \land A \Leftrightarrow B $.
+-   Addition: $ A \Rightarrow (A \lor B) $.
+-   Simplification: $ (A \land B) \Rightarrow A $.
+-   Constructive Dilemma: $ (A \rightarrow B) \land (C \rightarrow D) \land (A \lor C) \Rightarrow (B \land D) $.
 
 In the process of proving inferences, there are also two special methods that use inference laws:
 
-- Adding Premises Method.
-- Proof by Contradiction (Reductio ad Absurdum).
+-   Adding Premises Method.
+-   Proof by Contradiction (Reductio ad Absurdum).
 
 ## Binary Relations and Functions
 
@@ -86,18 +86,18 @@ Further generalizing, we define **a binary relation as a set that is either empt
 
 Relations can also be represented as graphs. Using graphs and matrices, we can determine their properties.
 
-| Reflexivity  | All diagonal elements are 1 | Each vertex has a loop (points to itself)            |
-| ---- | --------- | ------------------------ |
-| Irreflexivity | All diagonal elements are 0 | Each vertex has no loops                 |
-| Symmetry  | Matrix is symmetric   | If there is an edge between two vertices, there must be a pair of edges in opposite directions. |
-| Antisymmetry |           | If there is an edge between two vertices, there must be a directed edge.    |
-| Transitivity  |           |                          |
+| Reflexivity   | All diagonal elements are 1 | Each vertex has a loop (points to itself)                                                       |
+| ------------- | --------------------------- | ----------------------------------------------------------------------------------------------- |
+| Irreflexivity | All diagonal elements are 0 | Each vertex has no loops                                                                        |
+| Symmetry      | Matrix is symmetric         | If there is an edge between two vertices, there must be a pair of edges in opposite directions. |
+| Antisymmetry  |                             | If there is an edge between two vertices, there must be a directed edge.                        |
+| Transitivity  |                             |                                                                                                 |
 
 Additionally, relation matrices can be used to determine whether a function is injective, surjective, or bijective:
 
-- Injective: Each row has exactly one 1, and each column has at most one 1.
-- Surjective: Each row has exactly one 1, and each column has at least one 1.
-- Bijective: Each row has exactly one 1, and each column has exactly one 1 (injective and surjective).
+-   Injective: Each row has exactly one 1, and each column has at most one 1.
+-   Surjective: Each row has exactly one 1, and each column has at least one 1.
+-   Bijective: Each row has exactly one 1, and each column has exactly one 1 (injective and surjective).
 
 These relations can be abstracted into graphs:
 
@@ -109,9 +109,9 @@ If a relation possesses reflexivity, antisymmetry, and transitivity, it is calle
 
 Sometimes we want to add (as few as possible) ordered pairs to a relation to give it other properties; we refer to the new relation R as a closure. To transform R into a new relation, we need to use three types of closure functions:
 
-- $ t(R) $: Transitive closure.
-- $ s(R) $: Symmetric closure.
-- $ r(R) $: Reflexive closure.
+-   $ t(R) $: Transitive closure.
+-   $ s(R) $: Symmetric closure.
+-   $ r(R) $: Reflexive closure.
 
 ## Graph Theory
 
@@ -119,31 +119,31 @@ A graph consists of edges and vertices. Graphs can be broadly divided into **dir
 
 There are three special undirected graphs that need to be mastered.
 
-- Hamiltonian Graph
-  - Hamiltonian Graph: A graph that contains a Hamiltonian cycle. A Hamiltonian cycle is a **cycle that visits each vertex in the graph exactly once**.
-  - Semi-Hamiltonian Graph:
-- Eulerian Graph
-  - Eulerian Graph: A graph that contains an Eulerian cycle (an Eulerian cycle is a special type of Eulerian path). An Eulerian cycle is a cycle that visits each edge in the graph exactly once and traverses each vertex (i.e., returns to the starting point). Associating the Eulerian graph with the "Seven Bridges of Königsberg" problem leads to the conclusion that Eulerian cycles are related to "edges".
-  - Semi-Eulerian Graph: Contains an Eulerian path but not an Eulerian cycle.
-- Bipartite Graph: An undirected graph $ G = \<V, E> $ is a bipartite graph if and only if G contains no odd-length cycles.
+-   Hamiltonian Graph
+    -   Hamiltonian Graph: A graph that contains a Hamiltonian cycle. A Hamiltonian cycle is a **cycle that visits each vertex in the graph exactly once**.
+    -   Semi-Hamiltonian Graph:
+-   Eulerian Graph
+    -   Eulerian Graph: A graph that contains an Eulerian cycle (an Eulerian cycle is a special type of Eulerian path). An Eulerian cycle is a cycle that visits each edge in the graph exactly once and traverses each vertex (i.e., returns to the starting point). Associating the Eulerian graph with the "Seven Bridges of Königsberg" problem leads to the conclusion that Eulerian cycles are related to "edges".
+    -   Semi-Eulerian Graph: Contains an Eulerian path but not an Eulerian cycle.
+-   Bipartite Graph: An undirected graph $ G = \<V, E> $ is a bipartite graph if and only if G contains no odd-length cycles.
 
 In addition to these three special graphs, one must also master the **handshaking theorem**. The content of the handshaking theorem is as follows:
 
 From this, we can infer:
 
-- In an undirected graph, the sum of the degrees of all vertices equals twice the number of edges.
-- In an undirected graph, vertices with odd degrees must occur in even numbers.
-- In a directed graph, the sum of the degrees of all vertices equals twice the number of edges.
-- In a directed graph, the sum of out-degrees equals the sum of in-degrees.
+-   In an undirected graph, the sum of the degrees of all vertices equals twice the number of edges.
+-   In an undirected graph, vertices with odd degrees must occur in even numbers.
+-   In a directed graph, the sum of the degrees of all vertices equals twice the number of edges.
+-   In a directed graph, the sum of out-degrees equals the sum of in-degrees.
 
 ---
 
 In addition to using images to represent graphs, matrices can also be used to represent graphs. Using matrices makes it easier to discover the properties and intrinsic relationships of graphs. This includes:
 
-- Incidence matrix of an undirected graph: Rows represent each vertex, columns represent each edge, and the element value indicates the number of incidences between vertex $ v_i $ and edge $ e_j $.
-- Reachability matrix of a directed graph: If $ v_i $ can reach $ v_j $, then the element value is 1.
-- Adjacency matrix of a directed graph: The matrix element value indicates the number of edges leading to the endpoint.
-- Incidence matrix of a directed graph: If there is no edge between two points (no incidence), the value is 0; if $ v_i $ is the starting point, the value is 1; if it is the endpoint, the value is -1.
+-   Incidence matrix of an undirected graph: Rows represent each vertex, columns represent each edge, and the element value indicates the number of incidences between vertex $ v_i $ and edge $ e_j $.
+-   Reachability matrix of a directed graph: If $ v_i $ can reach $ v_j $, then the element value is 1.
+-   Adjacency matrix of a directed graph: The matrix element value indicates the number of edges leading to the endpoint.
+-   Incidence matrix of a directed graph: If there is no edge between two points (no incidence), the value is 0; if $ v_i $ is the starting point, the value is 1; if it is the endpoint, the value is -1.
 
 ## Trees
 
@@ -151,6 +151,5 @@ A tree is actually a special type of undirected graph. Specifically, a connected
 
 ## References
 
-- <https://devdocs.io/latex/math-symbols>
-- <https://ashki23.github.io/markdown-latex.html#matrices>
-
+-   [https://devdocs.io/latex/math-symbols](https://devdocs.io/latex/math-symbols)
+-   [https://ashki23.github.io/markdown-latex.html#matrices](https://ashki23.github.io/markdown-latex.html#matrices)
