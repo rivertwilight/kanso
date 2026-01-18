@@ -13,9 +13,9 @@ function escapeXml(text: string): string {
 
 async function getDictionary(locale: string) {
   try {
-    return (await import(`../../dictionaries/${locale}.json`)).default;
+    return (await import(`../../i18n/resources/${locale}.json`)).default;
   } catch {
-    return (await import(`../../dictionaries/zh.json`)).default;
+    return (await import(`../../i18n/resources/zh.json`)).default;
   }
 }
 
