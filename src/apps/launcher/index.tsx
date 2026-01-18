@@ -49,7 +49,7 @@ export default function LauncherApp(props: LauncherAppProps) {
 	return (
 		<>
 			<AppToolbar type="none" />
-			<div className="pb-16">
+			<div className="pb-8">
 				{activeTab === "home" && (
 					<>
 						<Section>
