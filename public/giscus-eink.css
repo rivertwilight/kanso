@@ -1,0 +1,95 @@
+/*! Giscus E-ink Theme - matches Kanso's Kindle-inspired palette */
+
+main {
+  --color-canvas-default: #f5f1e8;
+  --color-canvas-overlay: #efe9dc;
+  --color-canvas-inset: #faf8f3;
+  --color-canvas-subtle: #efe9dc;
+
+  --color-border-default: #c9c4b5;
+  --color-border-muted: #d4d0c4;
+  --color-border-subtle: rgba(201, 196, 181, 0.5);
+
+  --color-neutral-muted: rgba(26, 26, 24, 0.1);
+  --color-neutral-subtle: rgba(26, 26, 24, 0.05);
+  --color-neutral-emphasis-plus: #1a1a18;
+  --color-neutral-emphasis: #3d3d3a;
+
+  --color-accent-fg: #1a1a18;
+  --color-accent-emphasis: #3d3d3a;
+  --color-accent-muted: rgba(61, 61, 58, 0.4);
+  --color-accent-subtle: rgba(61, 61, 58, 0.1);
+
+  --color-success-fg: #3d3d3a;
+  --color-success-emphasis: #1a1a18;
+  --color-success-muted: rgba(61, 61, 58, 0.4);
+  --color-success-subtle: rgba(61, 61, 58, 0.1);
+
+  --color-attention-fg: #6b6b66;
+  --color-attention-emphasis: #3d3d3a;
+  --color-attention-muted: rgba(107, 107, 102, 0.4);
+  --color-attention-subtle: rgba(107, 107, 102, 0.1);
+
+  --color-danger-fg: #1a1a18;
+  --color-danger-emphasis: #3d3d3a;
+  --color-danger-muted: rgba(26, 26, 24, 0.4);
+  --color-danger-subtle: rgba(26, 26, 24, 0.1);
+
+  --color-fg-default: #1a1a18;
+  --color-fg-muted: #6b6b66;
+  --color-fg-subtle: #8a8a84;
+
+  --color-primer-shadow-inset: inset 0 1px 0 rgba(201, 196, 181, 0.2);
+  --color-primer-shadow-focus: 0 0 0 3px rgba(26, 26, 24, 0.3);
+  --color-scale-gray-1: #efe9dc;
+  --color-scale-blue-1: #efe9dc;
+
+  --color-social-reaction-bg-hover: var(--color-canvas-subtle);
+  --color-social-reaction-bg-reacted-hover: var(--color-accent-muted);
+}
+
+main .pagination-loader-container {
+  background-image: none;
+}
+
+main .gsc-reactions-button {
+  border-color: var(--color-border-default);
+}
+
+main .gsc-comment-box {
+  border-color: var(--color-border-default);
+}
+
+main .gsc-comment-box-textarea {
+  background-color: var(--color-canvas-default);
+}
+
+main .gsc-header .gsc-left-header em {
+  color: var(--color-fg-muted);
+}
+
+main .gsc-comment .gsc-comment-content {
+  background-color: var(--color-canvas-default);
+}
+
+main .gsc-comment .gsc-comment-header {
+  background-color: var(--color-canvas-subtle);
+}
+
+main .gsc-reply .gsc-reply-content {
+  background-color: var(--color-canvas-default);
+}
+
+main .BtnGroup-item {
+  border-color: var(--color-border-default);
+}
+
+main .btn-primary {
+  background-color: var(--color-neutral-emphasis-plus);
+  border-color: var(--color-neutral-emphasis-plus);
+  color: var(--color-canvas-default);
+}
+
+main .btn-primary:hover {
+  background-color: var(--color-neutral-emphasis);
+}

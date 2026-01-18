@@ -1,14 +1,28 @@
 "use client";
 
 import Giscus from "@giscus/react";
+import { useAtomValue } from "jotai";
+import { useEffect, useState } from "react";
+import { colorSchemeAtom } from "@/system/atoms/colorScheme";
 
 interface GiscusCommentsProps {
   locale: string;
 }
 
 export default function GiscusComments({ locale }: GiscusCommentsProps) {
-  // Determine theme based on reader settings if available
-  const theme = "light"; // You can make this dynamic based on your color scheme context
+  const colorScheme = useAtomValue(colorSchemeAtom);
+  const [origin, setOrigin] = useState("");
+
+  useEffect(() => {
+    setOrigin(window.location.origin);
+  }, []);
+
+  // Use custom e-ink theme CSS files
+  const theme = origin
+    ? `${origin}/giscus-eink${colorScheme === "dark" ? "-dark" : ""}.css`
+    : colorScheme === "dark"
+      ? "transparent_dark"
+      : "light";
 
   return (
     <div className="mt-8 py-8">
