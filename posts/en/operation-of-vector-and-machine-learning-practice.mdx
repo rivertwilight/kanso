@@ -1,0 +1,59 @@
+---
+title: "Math Notes 1: Vector Operations and Their Applications in Machine Learning"
+summary: This article will introduce common operations on vectors and their extended applications in machine learning.
+tag: Tech
+createAt: 2023-12-12T12:02:00.000Z
+---
+
+We know that a vector is a quantity that has both magnitude and direction. This article will introduce common operations on vectors and their extended applications in machine learning.
+
+## Linear Operations
+
+For addition, we can use the triangle law or the parallelogram law to calculate.
+
+The linear operations of vectors are similar to those of constants and follow these rules:
+
+- Commutative Law: $ a+b=b+a $
+- Associative Law: $ (a+b)+c=a+(b+c) $
+- Distributive Law: $ (a+b)c=ac + bc $
+
+## Dot Product
+
+The result of the dot product operation is a scalar value.
+
+Its geometric meaning is the length of the projection of one vector onto another.
+
+## Cross Product
+
+The cross product can be expressed as:
+
+$
+A × B
+$
+
+**The result of the cross product is a new vector**. The specific calculation method is as follows:
+
+It is not difficult to see that the calculation of the cross product is actually a specific calculation of a 3x3 determinant, where the first row consists of unit vectors, and the last two rows consist of the components of the vectors involved in the cross product. One can think of the cross product of vectors as a special application of the determinant concept in three-dimensional space.
+
+From this, it is also easy to conclude that the cross product does not satisfy the commutative law.
+
+Geometrically, the result of the cross product corresponds to the normal vector of the plane formed by vectors $ A $ and $ B $. To help remember this, you can use the right-hand rule: first, keep your thumb pointing up, then point your other four fingers towards the first vector of the cross product, curling them inward towards the second vector. If the directions of the two vectors align with this gesture, the direction of your thumb indicates the direction of the cross product; if you must curl your fingers outward, the opposite direction of your thumb indicates the direction of the cross product.
+
+### Example Problem
+
+Find the equation of the plane passing through the three points $ M_1(2, -1,4), M_2(-1,3,-2), M_3(0,2,3) $.
+
+According to the point-normal form, we only need to know the normal vector of the plane to write its point-normal form equation.
+
+## Extension 1: Vector Similarity Comparison
+
+In machine learning, we often encounter the problem of comparing vector similarity.
+
+The larger the result of the dot product of two vectors, the more similar they are. It is like a tilted telephone pole; the closer it is to the ground, the larger the projection length, and the more similar it is to the ground.
+
+## Extension 2: Matrix Similarity Comparison
+
+If we abstract a matrix as multiple row vectors, it is not difficult to think of a method to expand it for vector comparison. However, this can lead to the loss of intrinsic relationships between elements. In real learning tasks, such as image recognition, there are relationships between the elements within the matrix (pixels).
+
+A commonly used method is Singular Value Decomposition (SVD). This is one of the five major decompositions of matrices. For more information on singular value decomposition, you can refer to another article by the author.
+

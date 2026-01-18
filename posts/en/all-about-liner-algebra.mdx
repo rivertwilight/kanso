@@ -1,0 +1,234 @@
+---
+title: "Math Notes 5: Summary of Linear Algebra Knowledge"
+summary: This article summarizes and distills all linear algebra-related knowledge points from undergraduate courses. It is suitable for undergraduate students as a study reference or for teachers as a teaching reference.
+tag: Tech
+createAt: 2023-12-28T03:36:00.000Z
+---
+
+Mastering linear algebra has many practical applications:
+
+1. **Computer Graphics**: In video games and film production, linear algebra is used to construct and manipulate complex 3D models. Transformation matrices allow for easy operations such as rotation, scaling, and translation.
+2. **Data Science and Machine Learning**: Linear algebra is fundamental to data science, used to understand and construct data structures, perform data analysis, and develop machine learning algorithms. For example, Principal Component Analysis (PCA) is used for dimensionality reduction and feature extraction, which is entirely based on linear algebra.
+3. **Engineering and Physical Sciences**: In engineering, linear algebra is used to solve various system equations, from circuit analysis to structural balance. In physics, it is used to describe and analyze problems in mechanics, electromagnetism, and other fields.
+4. **Economics**: Linear algebra is used in economics to model and solve optimization problems, such as in resource allocation, risk management, or economic growth models.
+5. **Quantum Computing and Quantum Mechanics**: In quantum theory, linear algebra is used to describe quantum states, quantum superposition, and measurement, forming the basis for understanding and implementing quantum computing.
+
+For example, in machine learning, linear algebra is used to handle and understand large amounts of data. Data often appears in the form of vectors and matrices, and linear algebra tools can help us extract useful features from the data for classification or prediction. For instance, the linear regression model attempts to find the best linear equation to predict or explain the relationship between variables, which is entirely based on the concepts of linear algebra.
+
+This article will summarize and distill all linear algebra-related knowledge points from undergraduate courses. It is suitable for undergraduate students as a study reference or for teachers as a teaching reference.
+
+## Basic Concepts
+
+---
+
+### a. Matrices
+
+A matrix is a rectangular array composed of rows and columns, where each element can be a number, symbol, or mathematical expression. There are various special types of matrices, including but not limited to:
+
+- **Square Matrix**: The number of rows equals the number of columns.
+- **Row Matrix**: Contains only one row.
+- **Column Matrix**: Contains only one column.
+- **Zero Matrix**: All elements are 0.
+- **Identity Matrix**: A square matrix with 1s on the main diagonal and 0s elsewhere, denoted as \( E_n \) or \( I_n \), where \( n \) is the order.
+- **Diagonal Matrix**: All elements outside the main diagonal are 0.
+- **Upper Triangular Matrix**: All elements below the main diagonal are 0.
+- **Lower Triangular Matrix**: All elements above the main diagonal are 0.
+- **Row Echelon Matrix**: Specifically, if the first non-zero element in each row is 1, it is called a **Reduced Row Echelon Matrix**.
+- **Singular Matrix**: A matrix with a determinant of 0, characterized by non-full rank, no inverse, and a non-zero null space.
+
+Matrices can be transformed or operated on, including:
+
+- **Linear Operations**: Two matrices can be added or subtracted if they have the same dimensions. Matrix linear operations are performed element-wise.
+- **Multiplication**: Matrix multiplication includes multiplication of a matrix by a scalar and multiplication of a matrix by another matrix. The multiplication of a matrix by a scalar requires multiplying the scalar by each element; the multiplication of a matrix by another matrix requires that **the number of columns in the first matrix equals the number of rows in the second matrix**.
+- **Inverse Matrix**: For a square matrix, if there exists a matrix \( B \) such that \( AB = BA = I \) (where \( I \) is the identity matrix), then \( B \) is the inverse of \( A \), denoted as \( A^{-1} \).
+- **Transpose**: The transpose of a matrix is a new matrix obtained by swapping its rows and columns, denoted as \( A^T \). If the product of a matrix and its transpose equals the identity matrix, the matrix is called an **Orthogonal Matrix**.
+
+Matrices can undergo **Elementary Transformations**, including:
+
+- Swapping two rows or two columns.
+- Adding a multiple of one row/column to another row/column.
+- Multiplying a row or column by a scalar \( k \).
+
+If matrix \( A \) can be transformed into matrix \( B \) through a finite number of elementary transformations, then matrices \( A \) and \( B \) are said to be equivalent. The equivalence relation has the following properties:
+
+- Reflexivity
+- Transitivity
+- Symmetry
+
+The sum of the elements on the main diagonal of a matrix is called the **Trace** of the matrix.
+
+If two matrices are similar, then:
+
+- Their traces are equal.
+- Their determinants are equal.
+- Their eigenvalues are equal.
+- They are equivalent (but the reverse is not necessarily true).
+
+### b. Vectors
+
+Combining **column vectors** into a matrix and performing **row transformations** to convert it into a **Row Echelon Matrix**. The number of non-zero rows is called the **Rank** of the matrix. If it is full rank, meaning there are no all-zero rows, then the vector set is linearly independent; otherwise, it is linearly dependent.
+
+If the inner product of two vectors is 0, they are said to be **Orthogonal**, which means they are perpendicular in geometric space.
+
+If any two of three vectors are orthogonal, we call these three vectors an **Orthogonal Vector Set**.
+
+If the vector set is not orthogonal, we can use the **Gram-Schmidt Process** to convert it into an orthogonal vector set:
+
+\[
+\beta_2 = a_2 - \frac{\langle \beta_1, a_2 \rangle}{\langle \beta_1, \beta_1 \rangle} \beta_1
+\]
+
+## Related Operations on Matrices
+
+---
+
+### a. Matrix Multiplication
+
+For \( A \times B \), the two matrices must satisfy that **the number of columns in A equals the number of rows in B** in order to multiply. The resulting product will have the same number of rows as \( A \) and the same number of columns as \( B \).
+
+### b. Finding the Rank of a Matrix
+
+The rank of a matrix is a very important numerical characteristic that reflects the size of the **largest linearly independent set** of row or column vectors, denoted as \( R(A) \).
+
+The rank of a matrix has the following properties:
+
+- Elementary transformations do not change the rank of the matrix.
+- The transpose of a matrix does not change its rank.
+
+To find the rank, one can:
+
+- Reduce the matrix to **Row Echelon Form**, where the rank is the number of non-zero rows.
+- Reduce the matrix to **Column Echelon Form**, where the rank is the number of non-zero columns.
+
+The rank of a zero matrix is zero.
+
+### c. Finding the Inverse of a Matrix
+
+First, a matrix has an inverse only when **it is a square matrix and its determinant is not zero**, and it is called an invertible matrix.
+
+There are two methods to find the inverse:
+
+- ⭐️ **Gaussian Elimination**: Combine matrix \( A \) with the identity matrix \( I \) to form a new augmented matrix \( [A | I] \). Perform elementary transformations on the augmented matrix; when the left side becomes the identity matrix, the right side will become the inverse matrix \( A^{-1} \).
+- **Algebraic Cofactor Method**.
+
+### d. Finding the Determinant
+
+The determinant of a matrix is a function from square matrices to real or complex numbers, usually denoted as \( \text{det}(A) \). Its geometric significance is:
+
+- In two-dimensional space, the determinant of a matrix formed by two vectors represents the area of the parallelogram formed by these two vectors, with sign indicating direction or orientation.
+- In three-dimensional space, the determinant of a matrix formed by three vectors represents the volume of the parallelepiped formed by these three vectors, also with directional significance.
+
+The determinant has the following properties:
+
+- **Transposing does not change the determinant of a matrix**, i.e., \( \text{det}(A) = \text{det}(A^T) \).
+- If **two rows of the determinant are proportional**, then the value of the determinant is zero.
+- If \( k \) is multiplied by each element of determinant \( A \) to obtain determinant \( B \), then \( B = k^n \text{det}(A) \) (where \( n \) is the order of the matrix).
+
+To calculate the value of the determinant:
+
+- For a 2x2 determinant: For a matrix of the form \( \begin{bmatrix} a & b \\ c & d \end{bmatrix} \), the calculation is \( ad - bc \).
+- For a 3x3 determinant: For a matrix of the form \( \begin{bmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\ a_{31} & a_{32} & a_{33} \end{bmatrix} \), the calculation is **the sum of the products of the main diagonal minus the sum of the products of the secondary diagonal**, i.e., \( a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32} - a_{13}a_{22}a_{31} - a_{21}a_{12}a_{33} - a_{23}a_{32}a_{11} \).
+- For determinants of order four or higher: They can be calculated using the algebraic cofactor method.
+
+If there are multiple matrices in the determinant, the following rules can be followed:
+
+- \( |AB| = |A||B| \)
+- \( |A^n| = |A|^n \)
+
+## Systems of Linear Equations
+
+---
+
+A system of linear equations is a collection of multiple linear equations, where the variables and their coefficients are usually known, and the goal is to find the values of the variables that satisfy all equations.
+
+### a. Determining **Existence and Uniqueness of Solutions**
+
+The following steps can be followed:
+
+1. **Find the rank of the coefficient matrix**: The coefficient matrix \( A \) is formed by the coefficients of the linear equations.
+2. **Find the rank of the augmented matrix**: The augmented matrix \( [A | b] \) is formed by adding a column of constant terms \( b \) next to the coefficient matrix.
+
+If \( \text{rank}(A) = \text{rank}([A | b]) = n \) (where *n* is the number of variables), then the system has a unique solution.
+
+If \( \text{rank}(A) = \text{rank}([A | b]) < n \), then the system has infinitely many solutions.
+
+If \( \text{rank}(A) < \text{rank}([A | b]) \), then the system has no solution.
+
+### b. Solution Structure and Solving
+
+For a homogeneous system of linear equations, the solving process is as follows:
+
+1. Perform linear transformations to convert it into a row echelon form.
+2. Determine the number of solutions.
+3. Write the corresponding system of equations and find the basis of the solution set.
+
+For a non-homogeneous system of linear equations, the solving process is as follows:
+
+1. Write the augmented matrix and perform linear transformations.
+2. Take the first non-zero element from each row, find the columns they are in, and the remaining vectors not in these columns are called free variables. For example, the first row element.
+3. Set the free variables to 0 and substitute to find a particular solution to the non-linear equations.
+4. Set the free variables to arbitrary values to find the general solution.
+5. The solution is the particular solution + general solution.
+
+Some systems of equations can be solved using Cramer's Rule. Represent the system of linear equations as \( Ax = c \), where \( A \) is the coefficient matrix and \( c \) is the constant vector. By sequentially replacing the \( i \)-th column of the square matrix \( A \) with the constant vector, the solution can be obtained as \( x_i = \frac{D_i}{D} \), where \( D \) is the determinant of \( A \) and \( D_i \) is the determinant of the modified matrix. **This method is only applicable when the number of unknowns equals the number of equations, and the determinant of the coefficient matrix is non-zero.**
+
+## Matrix Decomposition
+
+---
+
+Matrices can be decomposed into eigenvalues and eigenvectors, or into singular values.
+
+Singular Value Decomposition can be applied to any matrix, while **Eigenvalue Decomposition is only applicable to specific types of square matrices**, making Singular Value Decomposition more widely applicable.
+
+### a. Eigenvalue Decomposition
+
+This article will only discuss eigenvalue decomposition.
+
+- **Eigenvalues**: Let \( A \) be an \( n \times n \) square matrix. If there exists a scalar \( \lambda \) and a non-zero vector \( v \) such that \( Av = \lambda v \), then \( \lambda \) is called an eigenvalue of \( A \). A matrix can have multiple eigenvalues.
+- **Eigenvectors**: The non-zero vector \( v \) corresponding to the eigenvalue \( \lambda \) is called an eigenvector of \( A \). This means that when the square matrix \( A \) acts on \( v \), \( v \) is merely scaled, with the scaling factor being the eigenvalue \( \lambda \).
+
+By definition, eigenvalues can satisfy the equation \( Ax = \lambda x \). Rearranging gives \( (A - \lambda I)x = 0 \). At this point, \( A - \lambda I \) must be a singular matrix, which means \( |A - \lambda I| = 0 \). Thus, we can derive the following method:
+
+1. First, calculate the **characteristic polynomial**, which is \( |A - \lambda I| \).
+2. Then substitute \( \lambda \) into \( (A - \lambda I)x = 0 \) to solve for the eigenvector \( x \). (Note that \( x \) is a vector, not a scalar, so it can be written as \( (x_1, x_2, x_3)^T \) in actual calculations.)
+
+### b. Diagonalization
+
+To diagonalize matrix \( A \), the following steps can be followed:
+
+1. Find the eigenvalues \( \lambda_1, \lambda_2, ..., \lambda_n \) and the eigenvectors \( v_1, v_2, ..., v_n \) of \( A \).
+2. Let \( P = [v_1, v_2, ..., v_n] \).
+3. \( P^{-1}AP \) is the desired diagonal matrix.
+
+## Quadratic Forms and Positive Definiteness
+
+---
+
+We define the quadratic form of any symmetric matrix as \( x^TAx \). The result is a **quadratic function**.
+
+For any quadratic function, we will find that there is more than one corresponding matrix.
+
+### a. Converting Between Matrices and Quadratic Functions
+
+To write the quadratic function of a matrix, the following steps can be followed:
+
+1. The coefficients of \( x_1^2, x_2^2, ..., x_n^2 \) are the elements on the main diagonal.
+2. The coefficient of \( x_1x_2 \) is \( a_1a_2 + a_2a_1 \), the coefficient of \( x_2x_3 \) is \( a_2a_3 + a_3a_2 \), and so on (the quadratic form matrix must be **symmetric**).
+
+For example, the quadratic function of the matrix \( \begin{bmatrix} 1 & 1 \\ 1 & 1 \end{bmatrix} \) is \( f(x_1, x_2) = x_1^2 + x_2^2 + 2x_1x_2 \).
+
+### b. Determining Positive Definiteness
+
+A real quadratic form must satisfy **at least one** of the following conditions to be called a positive definite matrix:
+
+- Every \( n \)-th order determinant on the main diagonal is **greater than** 0.
+- All eigenvalues are **positive real numbers**.
+
+## 📚 References
+
+---
+
+- <https://zhuanlan.zhihu.com/p/57944485>
+- <https://ashki23.github.io/markdown-latex.html#matrices>
+- <https://zhuanlan.zhihu.com/p/357187724>
+

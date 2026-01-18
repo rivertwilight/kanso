@@ -1,0 +1,487 @@
+---
+title: "Math Notes 6: This Article is Enough for Probability and Statistics"
+summary: This article is the sixth in my series of math notes. This series records my notes and insights from math courses during my undergraduate studies, hoping to be helpful to you. The theme this time is probability theory and mathematical statistics.
+tag: Tech
+createAt: 2024-07-03T00:00:00.000Z
+---
+
+This article is the sixth in my series of math notes. This series records my notes and insights from math courses during my undergraduate studies, while interspersing the profound connections between probability statistics and modern AI technology, hoping to be helpful to you. The theme this time is probability theory and mathematical statistics.
+
+## Why Learn Probability and Statistics
+
+Probability and statistics are very helpful for **machine learning**, as statistical methods can be used to select and optimize models, such as linear regression, logistic regression, support vector machines, etc.; Bayesian methods are applied for parameter estimation and model selection, commonly used in machine learning to construct Bayesian networks and hidden Markov models.
+
+**The core of generative AI is probability distribution modeling**. Language models predict the probability distribution of the next word, which directly applies conditional probability theory. The model training process relies on statistical inference methods such as maximum likelihood estimation and Bayesian inference to learn parameters from data.
+
+Core knowledge includes:
+
+- Random events and probability
+- One-dimensional discrete random variables and their distributions
+- One-dimensional continuous random variables and their distributions
+- Two-dimensional continuous random variables and their distributions
+- Two-dimensional discrete random variables and their distributions
+- Mathematical expectation of random variables
+- Variance and covariance of random variables
+
+At the end of the article, there are practice questions from real exams.
+
+## Random Events and Probability
+
+### a. Conditional Probability Formula
+
+Conditional probability describes the probability of an event given that another event has already occurred. The formula is as follows:
+
+$$
+P(A|B) = \frac{P(A \cap B)}{P(B)} =\frac{P(AB)}{P(B)}
+$$
+
+The basic task of a language model is to predict the probability distribution of the next word in a sequence. Mathematically, given the preceding word sequence $ w1,w2,...,wt−1 $, the model needs to calculate the conditional probability of the next word $ w_t $:
+
+$$
+P(w_t|w_1, w_2, ..., w_{t-1})
+$$
+
+### b. Bayes' Theorem
+
+It uses **prior probability** and **conditional probability** to update the probability of an event occurring, which is the core foundation of Bayesian statistics (finding the cause given the result). Its formula is:
+
+$$
+P(A|B) = \frac{P(B|A)·P(A)}{P(B)}
+$$
+
+For example, suppose you took a COVID-19 test, and the result is positive. We want to know the probability that you are actually infected with COVID-19. Assume that in a certain city, 1 in 1000 people is infected with COVID-19 (prior probability); if a person is indeed infected, the probability of testing positive is 99% (likelihood), and among uninfected people, there is a 5% chance of testing positive.
+
+Let testing positive be $ B $, and infection be $ A $. Combining the conditional probability formula and substituting into Bayes' theorem gives:
+
+$$
+P(A|B)=\frac{0.99*0.01}{0.99*0.001 + 0.999 \* 0.05}=0.0194
+$$
+
+This means that even if your COVID test is positive, the probability that you have COVID is only 1.94%.
+
+Another example: a person can travel by plane, train, ship, or car, with probabilities of 5%, 20%, 30%, and 45%, respectively. The probabilities of arriving on time for these modes of transport are 100%, 70%, 50%, and 80%, respectively. Assuming the person arrives on time, what is the probability that they took the train?
+
+Let the probability of taking the train be $ P(A_2) $, and the probability of arriving on time be $ P(B) $. According to Bayes' theorem:
+
+$$
+P(A_2|B) = \frac{P(A_2|B)}{P(B)} = \frac{P(B|A_2)P(A_2)}{P(B)}
+$$
+
+Using the law of total probability, we can easily find that $ P(B) =  0.7 $. Thus, the result is 0.2.
+
+Modern language models, while not directly using Bayes' theorem, operate similarly by inferring the most likely next word (posterior probability) based on the observed context (prior information).
+
+### c. Multiplication Formula
+
+$$
+P(A∩B) = P(B) \* P(A|B) = P(A) \* P(B|A)
+$$
+
+Suppose you flip a fair coin twice; what is the probability of getting heads both times?
+
+- Event A: Getting heads on the first flip, $ P(A) = \frac{1}{2} $
+- Event B: Getting heads on the second flip, $ P(B) = \frac{1}{2}  $
+- Since the two flips are independent, $ P(B|A) = P(B) $
+
+Thus, the probability is 1/4.
+
+### d. Independence of Events
+
+If two events $ A $ and $ B $ are independent, they have the following important properties:
+
+- The occurrence of one event does not change the probability of the other event occurring, i.e., $  P(A|B) = P(A) $, and vice versa.
+- $ P(A \cap B) = P(A) \cdot P(B)  $
+- There is no transitivity: A being independent of B, and B being independent of C does not guarantee that A is independent of C. Additional verification is needed for $ P(A ∩ C) = P(A)P(C) $.
+
+For example, in a printing shop app, the order processing time $ A $ is related to the amount $ B $, indicating a lack of independence. High-value orders (e.g., large posters) typically require longer processing times.
+
+## Joint Probability Distribution
+
+Joint probability distribution is a complete description of all possible combinations of values of multiple random variables and their corresponding joint probabilities. For discrete random variables, joint probability distribution is usually represented using a **table**; for continuous random variables, it is described using a joint probability density function.
+
+### Marginal Probability
+
+Marginal probability can be calculated by summing (for discrete) or integrating (for continuous) the joint probability distribution.
+
+## One-Dimensional Discrete Random Variables and Their Distributions
+
+The distribution of discrete random variables is described using a **probability mass function**.
+
+The distribution of continuous random variables is described using a probability density function.
+
+### a. Geometric Distribution
+
+In independent Bernoulli trials (where the outcomes are binary and independent), the number of trials $ X $ until the first success follows a geometric distribution with parameter $ p $. For example:
+
+- A shooter continuously shoots at a target, with a probability of hitting $ p $, and stops after hitting. What is the probability of needing $ n $ trials to stop?
+- Continuously rolling a die, stopping when a 6 is rolled. What is the probability of needing $ n $ trials to stop?
+- Continuously flipping a coin, stopping when heads is flipped. What is the probability of needing $ n $ trials to stop?
+
+In these examples, $ n $ is the random variable (taking values 1, 2, 3, ...), and we say these random variables follow a **geometric distribution**.
+
+For the example of rolling a die, suppose we want to find the probability of needing 3 trials; we can directly substitute into the probability mass function:
+
+$$
+P(X = k) = (1-p)^{k-1}p
+$$
+
+Here, $ p = \frac{1}{6} $, $ k = 3 $, so the probability is 0.1157.
+
+### b. Binomial Distribution
+
+If an experiment has **only two possible outcomes** (success or failure), and is repeated $ n $ times with a success probability of $ p $ each time, then the random variable $ X $ represents the **number of successes**. For example:
+
+- Suppose a coin is flipped 10 times, with the probability of heads being 0.5. What is the probability of getting heads $ n $ times?
+- A product has a defect rate of 10%. If 50 items are sampled, how many defective items are most likely to be found?
+
+Here, $ n $ is the random variable, and we say these random variables follow a **binomial distribution**.
+
+For the coin flip example, suppose we want to find the probability of getting heads 6 times; we can directly substitute into the probability mass function:
+
+$$
+P(X = k) = C(n, k)p^k(1-p)^{n-k}
+$$
+
+Here, $ n = 10 $, $ p = 0.5 $, so the probability is 0.205.
+
+Now, consider a more complex example:
+
+Let the random variable $ X $ follow a binomial distribution $ B(400, 0.01) $. What value of $ k $ maximizes $ P = { X = k } $?
+
+**For a binomial distribution, the probability mass function reaches its maximum at $ k = np $ (when np is an integer). If np is not an integer, the maximum occurs at the floor or ceiling of $ np $.** Therefore, the answer to this question is 4.
+
+### c. Poisson Distribution
+
+If the number of occurrences of an event in a unit time is a random variable, and its rate is $ \lambda $, then this random variable $ X $ follows a Poisson distribution with parameter $ \lambda $, denoted as $ X \sim P(\lambda) $. For example:
+
+- A website receives an average of 2 access requests per minute. What is the probability of receiving 3 access requests in one minute?
+- A product has an average monthly sales of 4. What is the probability of selling 8 units in a month?
+
+For the example of product sales, the probability mass function of the Poisson distribution is:
+
+$$
+P(X = k) = \frac{\lambda^ke^{-\lambda}}{k!}
+$$
+
+Consulting the Poisson distribution table gives a probability of 0.9786. In other words, if 8 units are stocked each month, there is a 97.86% probability that the product will not run out of stock.
+
+## One-Dimensional Continuous Random Variables and Their Distributions
+
+Calculating continuous random variables involves definite integrals.
+
+It is worth noting that **there are three different notation symbols for three types of distributions**. Each distribution has a corresponding probability density function. The integral of the probability density function is the **probability distribution function**, also known as the cumulative distribution function.
+
+For a function to be a density function, it must satisfy the following conditions:
+
+- The definite integral of the probability distribution function over its range must equal 1.
+- It must be monotonic and continuous.
+
+Modern generative models (such as VAE, GAN, and diffusion models) typically operate in continuous latent spaces. Each dimension of these latent vectors can be viewed as a continuous random variable following a specific probability distribution (such as a normal distribution).
+
+### a. Normal Distribution
+
+The normal distribution is one of the most common continuous probability distributions, describing random variables in many natural phenomena. A random variable $ X $ follows a normal distribution with parameters $ \mu $ (mean) and $ \sigma^2 $ (variance), denoted as $ X \sim N(\mu, \sigma^2) $.
+
+Its probability density function is:
+
+$$
+f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}exp(-\frac{(x-\mu)^2}{2\sigma^2})
+$$
+
+The mean $ \mu $ determines the center of symmetry of the distribution, while the variance $ \sigma^2 $ determines the "width" of the distribution. Essentially, it is a Gaussian function.
+
+For example:
+
+- Suppose exam scores follow a normal distribution with a mean of 75 and a standard deviation of 10. What is the probability that a student scores above 85?
+- A brand of light bulbs has a lifespan that follows a normal distribution, with an average lifespan of 1000 hours and a standard deviation of 200 hours. What is the probability that a light bulb lasts more than 1300 hours?
+- The height of adult males in a certain country follows a normal distribution, with an average height of 175 cm and a standard deviation of 6 cm. What is the probability that a randomly selected adult male has a height between 180 and 190 cm?
+
+For the exam example, we first standardize (which represents **the deviation of an observation from the mean**):
+
+$$
+Z = \frac{X - \mu}{\sigma} = \frac{85 - 75}{10} = 1
+$$
+
+According to the normal distribution table,
+
+$$
+P(Z > 1) \approx 0.1587
+$$
+
+The normal distribution has some elegant properties:
+
+- The graph is symmetric about $ x=\mu $.
+
+### b. Uniform Distribution
+
+The uniform distribution indicates that all values within a certain interval are equally likely. A random variable $ X $ follows a uniform distribution on the interval $ [a, b] $, denoted as $ X \sim U(a, b) $. For example:
+
+- Suppose the weight of a certain product is uniformly distributed between 50 grams and 100 grams. What is the probability that the product weighs between 60 grams and 80 grams?
+
+Its probability density function is:
+
+$$
+f(x) = \frac{1}{(b-a)}
+$$
+
+This example demonstrates an important property of the uniform distribution: probability is proportional to the length of the interval. In a uniform distribution, **we only need to know the proportion of the interval of interest to the total interval to directly derive the probability**.
+
+### c. Exponential Distribution
+
+The exponential distribution is commonly used to describe the time intervals between events. A random variable $ X $ follows an exponential distribution with parameter $ \lambda $ (rate parameter), denoted as $ X \sim e(\lambda) $. For example, $ X \sim e(1) $ indicates that $ X $ follows an exponential distribution with $ \lambda = 1 $. Its probability density function is:
+
+$$
+f(x) = \lambda e^{-\lambda x}
+$$
+
+For example, let the random variable $ X \sim e(1) $. What is $ P { X \leq 3 | X > 2 } $?
+
+Note that this uses the conditional probability formula.
+
+$$
+P { X \leq 3 | X > 2 } = 1 - P( 2 < X \leq 3) = F(3) - F(2)
+$$
+
+## Two-Dimensional Discrete Random Variables and Their Distributions
+
+Two-dimensional discrete random variables are combinations of pairs of discrete random variables, used to describe the joint distribution between two variables. Let $ X $ and $ Y $ be two discrete random variables, defining their joint probability distribution $ P(X = x_i, Y = y_j) $, which represents the probability that $ X $ takes the value $ x_i $ and $ Y $ takes the value $ y_j $.
+
+We typically use a table to represent the joint distribution. The joint distribution has the following properties:
+
+- The sum of all probabilities must equal 1.
+- If $ X $ and $ Y $ are independent, this means: $ P(X = x_i) = P(X = x_i, Y = y_1) + P(X = x_i, Y = y_2) + P(X = x_i, Y = y_3) $ holds for each $ x_i $.
+
+## Two-Dimensional Continuous Random Variables and Their Distributions
+
+Two-dimensional continuous random variables refer to a pair of random variables $ (X,Y) $, whose values continuously take values within a certain region in the two-dimensional real plane, and whose probability distribution is described by a **joint probability density function**.
+
+This distribution also has **normalization**. Two random variables $ X $ and $ Y $ are independent if and only if their joint probability density function can be factored into the product of their marginal density functions.
+
+For example, in the case of the printing shop app, the processing time is $ X $, and the order amount is $ Y $. Given the density function, we can obtain the following information:
+
+- The marginal density function $ f_X(x) $ can show whether there are more or fewer orders with longer processing times.
+- The marginal density function $ f_Y(y) $ can show whether there are more high-value orders or low-value orders.
+- The expected value $ E(X) $ can show the average processing time.
+- The expected value $ E(Y) $ can show the average amount.
+
+## Mathematical Expectation of Random Variables
+
+The mathematical expectation of a function of a random variable, also known as the expected value, is the weighted average of the values taken by the random variable, with weights being the corresponding probabilities. Let $ X $ be a random variable, and $ g(X) $ be a function of $ X $. The calculation method for the mathematical expectation $ E[g(X)] $ varies depending on whether $ X $ is discrete or continuous.
+
+The expected value formulas for common distributions are as follows:
+
+- Geometric distribution: $ 1/p $
+- Poisson distribution: $ \lambda $
+- Uniform distribution: $ \frac{2}{a + b} $
+- Exponential distribution: $ \frac{1}{\lambda} $
+
+### a. Discrete Case
+
+The formula for calculating the expected value of a discrete random variable is:
+
+$$
+E[g(X)] = \sum_{i} g(x_i)p_i
+$$
+
+where $ x_i $ is the value of the discrete random variable, and $ p_i $ is the corresponding probability.
+
+For example, let $ X $ be the outcome of a die roll, where $ X $ takes values from 1 to 6, each with a probability of $ \frac{1}{6} $. We want to find the expected value of $ g(X) = X^2 $:
+
+$$
+E[X^2] = \frac{1}{6}(1+4+9+16+25+36)=\frac{91}{6}
+$$
+
+Now consider a more complex example:
+
+![Image](/image/post/f0e47938-5843-4b6e-96c5-a0c23051ccbd_Screenshot_2024-07-01_at_22.45.24.png)
+
+The implicit conditions are:
+
+- $ g(Z) = X + Y $,
+- The interval \[-2, 2\] can be divided into three segments.
+
+Thus, substituting into the formula gives:
+
+$$
+E(X+Y)=\frac{1}{4}*(-2)+\frac{1}{2}*0 + \frac{1}{4} * 2 = 0
+$$
+
+$$
+D(X + Y) = E[(X + Y)^2] - E(X + Y)^2
+$$
+
+### b. Continuous Case
+
+Suppose $ X $ is a continuous random variable with probability density function $ f(x) $, then the mathematical expectation (also known as the mean) of $ X $ is defined as:
+
+$$
+E(X) = ∫_{-\infty}^{+\infty} x * f(x) dx
+$$
+
+This is essentially the definite integral of the calculation formula for discrete cases. We can directly remember some common distribution integral results, as seen at the beginning of this chapter.
+
+### c. Chebyshev's Inequality
+
+Chebyshev's inequality provides an **upper bound on the probability that a random variable deviates from its expected value by a certain distance**. This inequality applies to any random variable, regardless of its distribution shape.
+
+Let $ X $ be a random variable with expected value $ E(X) = \mu $ and variance $ \text{Var}(X) = \sigma^2 $. For any positive number (k > 0), Chebyshev's inequality states:
+
+$$
+P(|x-\mu|\ge k\sigma)\leq\frac{1}{k^2}
+$$
+
+For example, suppose the average score in a math exam for a class is 75 points $ μ $, and the standard deviation is 10 points (σ). We want to know the upper limit of the proportion of students whose scores deviate from the average by more than 20 points.
+
+Here, $ k = 20/10 = 2 $, according to Chebyshev's inequality: $ P(|X - 75| ≥ 20) ≤ 1/2² = 1/4 = 25% $, which means at most 25% of students may score below 55 or above 95.
+
+## Variance and Covariance of Random Variables
+
+Variance and covariance are used to describe the distribution and relationships between random variables.
+
+### a. Variance
+
+Variance measures the **degree of dispersion of the values taken by a random variable**, i.e., how far its values deviate from the expected value. Let $ X $ be a random variable with expected value $ E[X] = \mu $, then the variance of $ X $ is denoted as $ \text{Var}(X) $ or $ \sigma_X^2 $, defined as:
+
+$$
+\text{Var}(X) = E[(X-\mu)^2]
+$$
+
+Additionally, variance has several important properties:
+
+- For a constant $ a $ and random variable $ X $, $ Var(aX) = a²Var(X) $
+- For independent random variables $ X $ and $ Y $, $ Var(X + Y) = Var(X) + Var(Y) $
+- For independent random variables $ X $ and $ Y $, $ Var(X - Y) = Var(X) + Var(Y) $
+- For geometric distribution, the variance equals $ \frac{1-p}{p^2}  $
+- For binomial distribution, the variance equals $ np(1-p) $
+- For exponential distribution, the variance equals $ \frac{1}{\lambda^2} $
+- For Poisson distribution, the variance equals $ \lambda $
+- For uniform distribution, the variance equals $ \frac{(b-a)^2}{12} $
+
+For example, let $ X $ be the outcome of a die roll, taking values from 1 to 6. We want to find the variance of $ X $:
+
+$$
+\text{Var}(X) = E(X^2) - E(X)^2 = \frac{1}{6}(1+2+3+4+5+6) - \frac{91}{6} = \frac{175}{60}
+$$
+
+Now consider another example: let random variables $ X $ and $ Y $ be independent, with variances of 4 and 8, respectively. What is the variance of $ 4X - 2Y $?
+
+Using the properties mentioned above, we can easily find:
+
+$$
+\text{Var}(4X - 2Y) = 16 \text{Var}(X) + 4 \text{Var}(Y) = 96
+$$
+
+### b. Covariance
+
+Covariance is used to describe the linear relationship between two random variables. Let $ X $ and $ Y $ be two random variables with expected values $ E[X] = \mu_X $ and $ E[Y] = \mu_Y $, then the covariance of $ X $ and $ Y $ is denoted as $ \text{Cov}(X, Y) $, defined as:
+
+$$
+\text{Cov}(X,Y) = E[(X-\mu_X)(Y-\mu_Y)]
+$$
+
+## ✍️ Comprehensive Exercises
+
+### Examination of Continuous Random Variables
+
+Given the density function of a continuous random variable $ X $:
+
+![Image](/image/post/1c5aefe4-d320-4043-9109-c16330519b0f_Screenshot_2024-08-17_at_12.40.24.png)
+
+Find the constant $ a $ and $ P{-1 < x \leq 1} $.
+
+$$
+∫_{0}^{a} \frac{2x}{\pi^2} dx = 1
+$$
+
+Calculating gives:
+
+$$
+\frac{1}{\pi^2}a^2 = 1
+$$
+
+Thus, we find:
+
+$$
+a = \pi
+$$
+
+$$
+P{-1 < x \leq 1} = F(1) - F(-1)
+$$
+
+Since $ a = \pi $, we have $  F(-1) = 0 $ and $ F(1) = \frac{1}{\pi^2} $.
+
+### Examination of the Law of Total Probability and Independence
+
+![Image](/image/post/3e1b6c37-df4a-4a3b-8fd1-09ebe06b18ba_Screenshot_2024-08-17_at_12.51.59.png)
+
+This problem can be solved using the law of total probability, which implicitly involves knowledge of joint probabilities.
+
+### Examination of Two-Dimensional Random Variables
+
+![Image](/image/post/e71243e4-d73c-416a-96cb-6755ab17477e_Screenshot_2024-08-17_at_12.58.52.png)
+
+The key to solving this problem is understanding that **the probability density function must satisfy the basic property that the integral over the entire sample space equals 1**.
+
+Thus, we need to compute the double integral. The solution yields $ a = \frac{1}{4} $.
+
+### Examination of Distribution Functions
+
+![Image](/image/post/9efd9a68-22af-4c7f-97f4-df480bde46ba_Screenshot_2024-08-17_at_13.27.40.png)
+
+The key to this problem is understanding that $ P(Y ≤ y) = P(2 - 4X ≤ y) $.
+
+That is, the distribution function $ F(x) $ is defined as the probability that $ X $ is less than or equal to $ x $.
+
+### Examination of Normal Distribution
+
+![Image](/image/post/7a18f5d6-493f-43c4-ab2a-8c08f2a45f3c_Screenshot_2024-08-17_at_13.32.06.png)
+
+This problem requires understanding the two parameters in the normal distribution. We only need to calculate the two parameters (expected value and variance) based on $ X $ and $ Y $ to obtain the answer.
+
+$$
+\sigma^2 = \text{Var}(X) + 4\text{Var}(Y) = 25
+$$
+
+$$
+\mu = \text{E}(X - 2Y) = 3
+$$
+
+### Comprehensive Examination of Variance and Binomial Distribution
+
+![Image](/image/post/55c09504-c314-4d22-ba2c-03be56a51200_Screenshot_2024-08-17_at_19.34.56.png)
+
+This problem requires immediate recognition that $ Y $ is essentially a binomial distribution. First, we easily find that $ P{X \leq \frac{1}{2}} = \frac{1}{8} $. The variance formula for the binomial distribution is $ np(1 - p) $, where $ n $ is 3 and $ p $ is $ \frac{1}{8} $, so the answer to this problem is C.
+
+### Understanding Random Variables
+
+A machine has a failure rate of 0.01, and a person supervises 20 machines simultaneously. What is the probability that they cannot be repaired in time?
+
+Essentially, this refers to the probability that more than two machines fail simultaneously.
+
+The random variable described in this problem follows a binomial distribution, where $ p $ is 0.01, $ n $ is 20, and $ k $ is the number of machines that fail. We are looking for:
+
+$$
+1 - P{X \leq 1} = 1- P{X = 0} - P{X = 1}
+$$
+
+### Comprehensive Examination of Distributions
+
+Let $ X \sim U(2, 5) $, and now we conduct 3 independent observations of $ X $. What is the probability that at least two observations are greater than 3?
+
+First, we use the uniform distribution to find the probability of a single observation being greater than 3, which is $ \frac{2}{3} $.
+
+Then we can use the binomial distribution to find the result.
+
+$$
+P { Y = 2} = 3 * \frac{2}{3}^2 * (1 - \frac{2}{3})^{3-2} = \frac{12}{27}
+$$
+
+$$
+P{Y = 3} = \frac{2}{3}^3 * \frac{1}{3}^0 = \frac{8}{27}
+$$
+
+## Conclusion
+
+The essence of probability and statistics is to **describe, understand, and utilize uncertainty**. It analyzes the regularities of random phenomena through mathematical tools and methods, providing a scientific basis for decision-making, prediction, and inference. It is a core discipline for dealing with an uncertain world, widely applied in the fields of natural sciences, social sciences, and engineering technology.
+

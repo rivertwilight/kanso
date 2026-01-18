@@ -1,0 +1,169 @@
+---
+title: "Operating System Study Notes"
+summary: Almost all knowledge related to the internet is built on top of operating systems. It is highly valuable knowledge.
+tag: Tech
+createAt: 2025-05-03T00:00:00.000Z
+---
+
+## Why Learn Operating Systems
+
+Almost all knowledge related to the internet is built on top of operating systems. It is highly valuable knowledge.
+
+Computer networks, operating systems, and databases are the three types of technology with the highest return on investment in personal learning. First, **they are the electricity, water, and gas of the computer world**; they are applied in almost every corner, and many higher-level applications are actually just combinations of these technologies. Second, the shelf life of these technologies is very long, allowing you to learn once and benefit for a lifetime, with almost no risk of knowledge obsolescence.
+
+## Basics of Operating Systems
+
+An operating system is the core software of a computer system, managing the hardware and software resources of the computer, and also serving as the manager of program execution and resource allocation. The operating system has the following basic characteristics:
+
+- Concurrency: Multiple programs executing simultaneously
+- Sharing: Multiple programs sharing system resources
+- Virtuality: Transforming physical resources into logical resources, expanding resource capabilities
+- Asynchrony: Processes advance at unpredictable speeds, exhibiting a "stop-and-go" characteristic
+
+### History
+
+The development of operating systems has gone through several stages:
+
+1. **Manual Operation Stage**: No operating system, programmers directly operate the computer.
+
+2. **Batch Processing Systems**:
+
+   - Single-channel batch processing: Only one job is executed at a time.
+   - Multi-channel batch processing: Multiple jobs exist in memory simultaneously, with the CPU switching between them.
+
+3. **Time-sharing Systems**: Multiple users share computer resources simultaneously, with each user having a dedicated terminal.
+4. **Personal Computer Operating Systems**: Systems designed for single users (e.g., DOS, Windows, MacOS).
+5. **Network Operating Systems and Distributed Operating Systems**: Support resource sharing and communication in a networked environment.
+6. **Real-time Operating Systems**: Have strict timing requirements, used in industrial control and other scenarios.
+7. **Embedded Operating Systems**: Lightweight systems running on embedded devices.
+8. **Mobile Operating Systems**: Systems designed for mobile devices (e.g., Android, iOS).
+
+## Process Management
+
+### Processes and Threads
+
+- **Process**: The execution of a program, the basic unit of resource allocation.
+- **Thread**: The basic unit of scheduling, lighter than a process. Threads within the same process share the process's resources.
+
+### Process Synchronization and Mutual Exclusion
+
+- **Critical Resource**: A resource that can only be used by one process at a time.
+- **Critical Section**: The segment of a program that accesses a critical resource.
+- **Semaphore**: An integer variable used for inter-process synchronization and mutual exclusion.
+- **P Operation (wait)**: Decreases the semaphore value; if the result is less than 0, it blocks.
+- **V Operation (signal)**: Increases the semaphore value, waking up waiting processes.
+
+In the operating system, the condition for a process to enter the corresponding blocking queue during the P primitive operation on semaphore S is S < 0.
+
+### Typical Synchronization Problems
+
+- **Producer-Consumer Problem**: The producer puts data into a buffer, and the consumer takes data out of the buffer.
+- **Resource Mutual Exclusion Problem**: For example, the single-lane bridge problem, where only one side is allowed to pass at a time.
+
+### Deadlock
+
+Deadlock is a phenomenon where multiple processes are in a state of **standoff due to resource contention**. When processes are in this standoff state, if no external force acts, these processes will never be able to proceed. The formation of a deadlock requires four conditions:
+
+- Mutual Exclusion Condition: Resources cannot be used simultaneously.
+- Hold and Wait Condition: A process holds resources while requesting new resources.
+- No Preemption Condition: Allocated resources cannot be forcibly taken away.
+- Circular Wait Condition: A circular wait chain is formed.
+
+For example, if a system has 3 concurrent processes competing for resource R, and each process needs 5 Rs, how many Rs are needed to avoid deadlock?
+
+Deadlock avoidance can be analyzed using the **Banker's Algorithm**: ensuring that the system can always allocate resources reasonably so that all processes can complete in sequence without entering a deadlock state. In the worst case, each process may hold a maximum demand of resources minus 1 and wait for the last resource. At this point, the system needs additional resources to break the potential circular wait.
+
+Each process holds **M - 1 = 4 resources**, occupying a total of $ 3 \times 4 = 12 $ resources. Therefore, the system needs at least 1 additional resource (the 13th resource) to allocate to a process, allowing it to complete and release all resources.
+
+### Process Scheduling Algorithms
+
+Select a ready process from the ready queue and allocate the processor to run it. The goal is to maximize CPU utilization.
+
+- First-Come, First-Served Scheduling Algorithm (FCFS)
+- Shortest Job First (SJF)
+- Priority Scheduling Algorithm (PR)
+- Highest Response Ratio Next: Response Ratio = (Waiting Time + Service Time) / Service Time
+- Time-Slice Round Robin: Processes are executed in turn according to time slices.
+
+## Memory Management
+
+Virtual memory is used to expand the size of physical memory.
+
+### Demand Paging System
+
+- Optimal Page Replacement Algorithm (OPT): Theoretically optimal but not implementable.
+- First-In, First-Out Algorithm (FIFO)
+- Least Recently Used Algorithm (LRU)
+- Least Frequently Used Algorithm (LFU)
+- Clock Algorithm (CLOCK)
+
+### Example Problem
+
+*In a paged memory management system, if the page size is 4KB and the address bus width is 32 bits, how many memory pages are there?*
+
+1. The address bus width of 32 bits means the addressable physical memory space is $ 2^{32} $ = 4GB.
+2. Each page size is 4KB = 4 × 1024 = 4,096 bytes.
+3. Number of memory pages = Total physical memory size ÷ Page size = $ 2^{20} $.
+
+*In a paged memory management system, if a process's logical address space consists of 16 pages of 4KB each, mapped to a 2MB physical memory space, analyze the logical address format and physical address format of this process.*
+
+1. Page size $ 4096 bytes = 2^{12} $, which is the same as the offset within the logical page, so the offset within the page frame occupies 12 bits.
+2. There are 16 pages, which is $ 2^4 $ pages, requiring 4 bits to represent the page number.
+3. The number of page frames in physical memory is 2,097,152 ÷ 4096 = 512 page frames, $ 512 = 2^{9} $, so 9 bits are needed to represent the page frame number.
+
+Thus, the logical address is:
+
+- **High 4 bits**: Page Number, representing pages 0 to 15.
+- **Low 12 bits**: Page Offset, representing byte offsets 0 to 4095 within the page.
+
+The physical address is:
+
+- High 9 bits: Page Frame Number
+- **Low 12 bits**: Page Frame Offset (which is the page size).
+
+## File System
+
+A file is a collection of related information with a name, and it is the smallest independent data unit in an operating system. From the user's perspective, the main purpose of introducing a file system is to achieve **named access to files**.
+
+### File Types
+
+- **Unstructured Files (Stream Files)**: Byte stream files with no internal structure.
+- **Structured Files**: Collections of records with a fixed structure.
+
+### File Access Methods
+
+- **Sequential Access**: Accessing files in physical order.
+- **Random Access**: Directly accessing data at any position in the file.
+- **Indexed Access**: Determining record locations through an index table.
+
+## Input/Output System
+
+### I/O Control Methods
+
+- **Programmed I/O**: Maximum CPU intervention.
+- **Interrupt-Controlled I/O**: Sends an interrupt request to the CPU after I/O completion.
+- **DMA (Direct Memory Access)**: Reduces CPU intervention. Modern Macs use this method.
+- **Channel Control**: A dedicated I/O processor performs I/O operations.
+
+### Disk Scheduling Algorithms
+
+The physical address format of data on the disk consists of fields such as cylinder number, head number, and sector number.
+
+- **Shortest Seek Time First (SSTF)**: Prioritizes requests closest to the current head position.
+- **Elevator Algorithm (SCAN)**: The head moves in one direction, processing all requests along the way.
+- Turnaround Time = Job Completion Time - Job Arrival Time.
+- Weighted Turnaround Time = Turnaround Time / Actual Running Time.
+
+### Example Problem
+
+*If the read/write head has completed operations on track 88 and is currently performing I/O operations on track 53, while the waiting requests are for tracks 98, 183, 37, 122, 14, 124, 65, and 67, list the order of responding tracks and the total number of tracks moved using both SSTF and SCAN algorithms.*
+
+- *Shortest Seek Time First: Always look for the nearest track 53 → 65 → 67.*
+- *Scan Algorithm: Always move to larger tracks: 53 → 65 → 67 → 98 → 122 → 124 → 183 → 37 → 14.*
+
+## C Language and Operating Systems
+
+The beauty of the C language lies in its **simplicity, control, performance, freedom**, and **historical significance**. It is like a "low-level poetry," expressing the most powerful functions with the least syntax. It lacks the modern conveniences of C#, the concurrency simplicity of Go, or the dynamic flexibility of JavaScript, but it offers unparalleled low-level control and performance, allowing programmers to communicate directly with the machine.
+
+The C community values **extreme efficiency** and **minimalism**, and this culture is reflected in coding styles. C programmers tend to write compact, elegant, and efficient code, striving to "do the most with the least resources." For example, C's standard library functions (like memcpy, strcmp) are renowned for their high efficiency and simplicity.
+

@@ -1,0 +1,107 @@
+---
+title: "Refresh Your Desktop: A Guide to Transforming Windows Desktop into macOS"
+cover: 'https://i.loli.net/2021/11/28/I7SbfaXY4TF6Adl.png'
+tag: Tech
+createAt: 2022/9/15
+---
+
+Due to my university major, I switched to a Windows laptop after the college entrance examination, but my longing for the complete Apple ecosystem still remains. ~~Before this, I had only stuck an exclusive sticker from Apple products on the back.~~
+
+Without further ado, let's take a look at the final product and then get started.
+
+![](https://cdn.sspai.com/2022/09/14/d3f40a5d29e0fe24db4bcae411acc1e1.png)Final Effect
+
+## 📲 Adding the Status Bar and Dock
+
+That's right, the first step is simple and straightforward: just draw the iconic macOS UI on the wallpaper.
+
+Using Canva, PS, Figma, or any image editing software you prefer, create a canvas that matches your screen resolution.
+
+I recommend using [Canva](https://www.canva.cn/), which can save you a lot of hassle in handling materials.
+
+In the "Uploads" section, upload your favorite wallpaper, then set it as the background. In the "Elements" - "Shapes" section, select a rectangle, drag it onto the canvas, adjust it to the appropriate size, and place it at the top. Modify the color of the status bar according to the light/dark mode you want to customize (based on images online, the color code for the status bar in dark mode is **#1a1d25**).
+
+![](https://cdn.sspai.com/2022/09/14/6650382fea632f9bd22a623ee92b0afa.gif)Adding Status Bar
+
+In the elements, search for "Apple" to get the Apple logo, drag it to the top left corner, and set its color to contrast with the status bar.
+
+Next, add the buttons for the status bar. In the sidebar, select "Text," drag it onto the canvas, and adjust the content, size, and color. Note: The "Finder" font is bolder than the other buttons.
+
+Using the same method, search for "wifi," "battery," etc., in the "Elements" section, and drag to add the status icons you want.
+
+![](https://cdn.sspai.com/2022/09/14/9dac97d69d1a3fa04dd0049fccb71a14.png)
+
+Using a similar method, add the Dock. Unlike the status bar, you need to lower the opacity to simulate a frosted glass effect. Since Canva does not have a rounded corner feature, there will be slight differences from the actual Dock, but they are hardly noticeable.
+
+![](https://cdn.sspai.com/2022/09/14/28bbb9c0226a81522c32ee93b181622f.png)Set Opacity in the Top Right Corner
+
+You may need to download and preview multiple times, adjusting the position of the Dock until the underlying icons are perfectly centered in the Dock.
+
+If you have a pursuit for perfection, you can enable auto-hide for the taskbar and reduce the height of the Dock.
+
+![](https://cdn.sspai.com/2022/09/14/817a355c90b955d4e6bb0cc253d97e5f.png)
+
+## ⬆️ Remove Icon Names and Small Arrows from the Dock
+
+With the Dock in place, we also need to remove the names of the shortcuts. Press the Win key, search for "Character Map," open it, and find "Non-Breaking Space," select it, and copy it below.
+
+![](https://cdn.sspai.com/2022/09/14/07516b27b4626b2c5992db886e7f7621.png)
+
+Next, modify the names of the shortcuts one by one. Since file names cannot be duplicated, you need to mix "real spaces" and "space characters from the character map" to create multiple "different" blank names. **File names should not be too long**, or ellipses will appear.
+
+Once done, we also need to remove the small arrows that come with the shortcuts. Search for [dism++](https://github.com/Chuyu-Team/Dism-Multi-language) on GitHub, download the corresponding version for your system, open it, and check "Hide shortcut arrows" and "Hide executable file shield" under System Optimization - Explorer.
+
+![](https://cdn.sspai.com/2022/09/14/4727e9b1fc830ed589cbb8e5ac181491.png)
+
+## 📁 Change Folder Icons
+
+Alright, is your desktop starting to look a bit "fruity"? However, the yellow folders are quite glaring.
+
+Search online for macOS folder icons, and use image processing software to set the background to transparent (if you are a SAI user, just import the image, erase the background with the eraser, and set the background to transparent in Image - Canvas Background).
+
+Finally, use this [website](https://www.freeconvert.com/ico-converter) to generate an ico file. Right-click the folder - Properties - Customize - Change Icon to do so. Shortcuts can be set through right-click - Properties - Shortcut.
+
+![](https://cdn.sspai.com/2022/09/14/157c6b4d26e8a432a2c10da5140293c3.png)
+
+Then, using a similar method, create a Recycle Bin icon, also generating an ico file with this [website](https://www.freeconvert.com/ico-converter):
+
+![](https://cdn.sspai.com/2022/09/14/c8849ff3801e07e0bf197de288f6ea16.png)SAI Ver.2
+
+In Settings - Personalization - Themes - Desktop Icon Settings, you can change the Recycle Bin icon to the ico file you just created.
+
+## 🪟 Bring Finder and Files to Life
+
+With the above icon changes in mind, we can also replace "My Computer" with a transparent icon and place it in the position corresponding to the status bar button to simulate a click effect.
+
+Right-click on a blank area of the desktop - View, and uncheck "Align icons to grid."
+
+Use PS or other software to create a 200 x 200 transparent image (you can also download it directly at the end of this article), and convert it using this [website](https://www.freeconvert.com/ico-converter).
+
+In Settings - Personalization - Themes - Desktop Icon Settings, replace "My Computer" and "Control Panel" with the transparent icons, hide their names using the previous method, and drag them to the corresponding position in the status bar.
+
+![](https://cdn.sspai.com/2022/09/14/09fe597a7ef5e295227e7e1f1f59af4a.png)Settings - Personalization - Desktop Icon Settings![](https://cdn.sspai.com/2022/09/14/ee78eb37a92dcd4f08d4acb9fb191b61.png)It seems that Windows generates a border for transparent icons, but it’s not noticeable unless you look closely. I can't think of a perfect solution for now, but if you have a good method, feel free to leave a comment.
+
+After this, just click on the "status bar" to use it.
+
+## ⬜ Set the Taskbar to Transparent
+
+The final step is simply to download [TranslucentTB](https://apps.microsoft.com/store/detail/9PF4KZ2VN4W9?hl=en-us\&gl=US) to make the taskbar transparent. You can search for it in the Microsoft Store, and there is also a Chinese version available.
+
+![](https://cdn.sspai.com/2022/09/14/6f4b546ae8d0a28aa5b013f64c7e235d.png)
+
+## ⏱️ Optional Feature: Bring the Clock to Life
+
+Using Windows' built-in slideshow wallpaper feature, we can design multiple wallpapers with different clocks and set them to play in rotation, with the interval set to 1 minute.
+
+![](https://cdn.sspai.com/2022/09/14/c3d4d8bac16feec9cb266cf1dac1003b.png)
+
+## ⬇️ Material Download
+
+If you are too lazy to process the icons yourself, you can use my pre-made icon material pack and finished wallpaper (2600 x 1600).
+
+- Icons and finished wallpaper (2600 x 1600): [Download Link](https://www.aliyundrive.com/s/Ks1PZ6SSavY)
+- Canva Project: [View Link](https://www.canva.cn/design/DAFMLWswCf4/HWvHBpNchqSltCJI_PzgWg/edit?utm_content=DAFMLWswCf4\&utm_campaign=designshare\&utm_medium=link2\&utm_source=sharebutton)
+- macOS Wallpaper: [Download Link](https://wallpapercave.com/mac-os-4k-wallpapers)
+
+If you have any questions, feel free to leave a comment, and I will try my best to answer.
+

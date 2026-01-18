@@ -1,0 +1,50 @@
+---
+title: "A Code Deployment Platform Better than GitHub"
+tag: Tech
+createAt: 2020/7/5
+---
+
+## Introduction
+
+Recently, I have been exploring suitable solutions for personal blogging. Initially, I used Hexo and pushed it to the Coding Page repository. Later, I developed a static blog called [NBlog](https://github.com/RiverTwilight/NBlog) using Next.js (which could no longer be exported statically after adding multilingual support). The official Next.js documentation recommends using Vercel for deployment, so I decided to give it a try, and I was surprised by how powerful Vercel is.
+
+## GitHub Pages vs Vercel
+
+### GitHub Pages
+
+- When using a development framework, you need to manually execute the compilation script of the framework and create a separate Git repository for the packaged folder.
+
+- Each account can only have one repository and site.
+
+- Access speed is relatively slow.
+
+### Vercel
+
+- Supports a dozen development frameworks (Next.js/Create React App/Vue...), requiring only the creation of a source code repository, with packaging done in the cloud. It automatically deploys after pushing the code.
+
+- Each account supports binding to unlimited GitHub/GitLab repositories and sites.
+
+- Global CDN acceleration.
+
+~~Of course, Vercel has one drawback: if you modify the dependencies used during development, it will be ineffective after deployment because Vercel will reinstall the dependencies.~~
+
+## Tutorial
+
+### Binding a Repository
+
+Visit the [Vercel](https://vercel.com/) official website and register an account according to the prompts. Individual users can use it for free.
+
+Click `Import Project` -> `Import Git Repository`, enter the Git repository address. Vercel integrates seamlessly with GitHub, making the binding process very easy.
+
+After binding, you will configure the project. Vercel will automatically recognize the development framework, and you can customize the compilation code and output folder. You can add your own logic in the compilation code; generally, do not modify the output folder when using built-in frameworks.
+
+Once configured, click `Deploy` and wait patiently.
+
+### Binding a Domain Name
+
+After deployment, Vercel will automatically generate a domain name (usually *.vercel.app). Access your domain provider's control panel and add a **CNAME** record, filling in the value with the domain name you see in the Vercel console. After the record is set up, return to the console, and Vercel will automatically verify the domain. Once verified, it will automatically apply for an SSL certificate for you for free.
+
+Mission accomplished!
+
+[Official Vercel Documentation](https://vercel.com/docs)
+

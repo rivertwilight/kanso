@@ -1,0 +1,39 @@
+---
+title: "Mini Program Pitfall Record"
+categories:
+  - Programming
+tag: Coding
+createAt: 2021/2/20
+---
+
+After spending five days creating a mini program, I discovered that personal mini programs do not allow users to publish content when preparing for review. My heart sank...
+
+## Issues with the update function?
+
+- 1. Database permissions: First, check if the current database collection is set to the first option, where all users can read, and only the creator can read and write.
+
+- 2. Check if the collection contains the openid field. If you are importing a table from an external source, you need to add the openid field.
+
+- **3. When using update on the mini program side, you can only update fields where the openid matches your current openid. If you need to change information created by others, you should use update in a cloud function. Refer to the official documentation; it's quite simple.**
+
+- 4. When using the cloud function update, remember to fill in your environment ID in `cloud.init({env: 'xxx'})`.
+
+- 5. Ensure that the data you upload is not undefined; otherwise, even if the upload is successful, it will show that one record was updated.
+
+## Related to Cloud Functions
+
+- The `cloud.init()` method should be placed in the onLaunch lifecycle of app.js, so you don't need to call it again later.
+- After making changes, remember to right-click the modified file and select `Upload`, otherwise the changes will not take effect.
+
+## Precautions Before Development
+
+- First, search to see if there are any name conflicts.
+
+- Carefully read the official documentation on [Service Categories](https://developers.weixin.qq.com/minigame/product/material/#%E4%B8%AA%E4%BA%BA%E4%B8%BB%E4%BD%93%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E6%94%BE%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%B1%BB%E7%9B%AE).
+
+- Personal mini programs cannot have users publish content!
+
+## Why are tabBar icons not displaying?
+
+You can debug on a real device. [Here](https://svgtopng.com/) is a tool to convert SVG to PNG format, which is convenient for converting SVG icons from design drafts to PNG.
+

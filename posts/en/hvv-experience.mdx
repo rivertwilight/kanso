@@ -1,0 +1,426 @@
+---
+title: "HVV Interview Experience"
+summary: Recently participated in several HVV interviews, summarized as follows. Includes content from both agency and vendor interviews.
+tag: Coding
+createAt: 2023-04-20T01:17:00.000Z
+---
+
+Recently participated in several HVV interviews, summarized as follows.
+
+Typically, interviewers ask questions based on the resume, so it is essential to be meticulous with your resume.
+
+## Personal Experience Related Questions
+
+Initially, a self-introduction is usually requested. Many of my classmates prepare a script in advance; this can be chosen based on personal preference. Personally, I prefer to improvise. A simple introduction of your school and experience in network security is sufficient; be sure to remain calm and composed.
+
+Here is my **introduction**:
+
+> My name is xxx, from Sichuan xx. Let me talk about how I got into this field. I started as a personal website owner in 2019 and gradually became a full-stack developer. Since I needed to maintain the website myself, I came into contact with a lot of knowledge in network security. Later, I went on a network security protection trip with friends.
+
+If asked about **work experience**, you can respond like this:
+
+> I previously worked short-term at Shandong Hanren, focusing on penetration testing. My main role was to help assess the weaknesses in the network systems of enterprises and organizations and provide corresponding solutions. The general workflow is: **first, information gathering, collecting subdomains, Whois, C-segment, side stations, and web system fingerprint recognition, then testing for vulnerabilities in the web system**.
+
+If asked about **network security protection experience**, you can respond like this:
+
+> In 2022, I participated in the National Network Security Protection. Initially, I mainly assisted clients in sorting out assets, security rectification, and strategy optimization. During the HW period, my main role was as an analysis and judgment personnel, where I judged the type of attack based on the content submitted by the monitoring team, the attack results, and specific attack details, then handled it and generated reports.
+
+If asked, "Have you had any actual emergency experience?" you can respond like this:
+
+> I’m not sure if this counts as an emergency, but it was a routine alarm. The honeypot at the user's end triggered an alarm, but the user couldn't figure it out, so they called me to investigate. I used a tool to scan and found it, then passed it to the second line for analysis, confirming it was a trojan and deleting it. Additionally, I scanned for a few web shells and notified the user.
+
+If asked **what vulnerabilities you have discovered**, you can respond like this:
+
+> The first domestic case of OpenCore loading macOS kernel extensions to achieve the installation of macOS 13.4 on a regular x86 PC with AMD APU.
+> Principle: Utilizing the commonality of EFI booting, loading specific EFI before booting macOS, allowing the Apple BIOS to be loaded into memory, thus bypassing macOS's model detection.
+> Since Apple uses standard hardware and rewrites drivers, we only need to deceive macOS into thinking that the ordinary hardware installed on a regular motherboard is from Apple. (Common method) This implementation has a problem; only hardware for which Apple has rewritten drivers can be properly driven. If Apple has never used that hardware, it cannot be driven. All AMD drivers are open-source, so we can modify the official open-source drivers to achieve driving under macOS.
+> Throughout this process, having explored installing macOS on ordinary computers since middle school, I keenly noticed that Apple's method of achieving GPU acceleration is merely converting the original drivers related to DirectX and other Windows-specific calls into open-source OpenCL. Thus, I completed the replacement and adaptation of these calls. In overcoming the challenge of screen output, I cleverly utilized the characteristics of SSH to achieve debugging and output customization without a display.
+
+## Windows Related
+
+### Common Commands
+
+- tasklist: View the process list
+- regedit: Registry
+- netstat: View ports
+- dir: View current folder contents
+- net user: View users (including shadow accounts)
+- ping: Check network connectivity
+
+### Common Backdoors on Windows
+
+- Shift backdoor: Move the sethc.exe application from the system32 folder under the C drive and create a sethc.exe.bak file. Then copy cmd.exe to overwrite sethc.exe. Check method: See if the MD5 of cmd.exe matches. certutil -hashfile filename MD5
+
+### Windows Hardening Ideas
+
+1. The system does not display the last logged-in username.
+2. Clean up invalid accounts in the system.
+3. Assign accounts based on user types.
+4. Configure password policies.
+5. Account lockout policies.
+6. Remote system forced shutdown settings.
+7. Local shutdown settings.
+8. User permission assignments.
+9. Authorize local login for accounts.
+10. Authorize network access for accounts.
+
+---
+
+- Question: Where is the security log directory on Windows?
+- Answer: Located at windows/System32/winevt/Logs
+
+## Linux Related
+
+### Common Commands
+
+- w: Display currently logged-in user information
+- who: View current logged-in users (tty for local login, pts for remote login)
+- last: Login records of all users
+- cat .bash_history: View command history
+- ps -aux: ps is used to monitor processes, and the aux parameters represent viewing all processes.
+
+---
+
+- Question: How to create a scheduled task in Linux?
+- Answer: Use the crontab command.
+- Question: Where is the crontab scheduled task list stored?
+- Answer: Located in the /etc/crontab directory.
+- Question: Can you explain the detailed syntax of cron?
+- Answer: Refer to [https://blog.csdn.net/chen__yang_/article/details/109523061](https://blog.csdn.net/chen__yang_/article/details/109523061#:~:text=cron%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E8%AF%A6%E8%A7%A3%201%20%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E7%AE%80%E4%BB%8B%20%2A%2A%2A%2A%2A%2A%2A%2A%E7%AE%80%E5%8D%95%E7%9A%84%E9%9C%80%E6%B1%82%2A%2A%2A%2A%2A%2A%2A%2A%201%20...%202%20cron%E5%9F%BA%E7%A1%80,1%20...%204%20%E7%94%A8%E6%88%B7%E7%BA%A7%E7%9A%84%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%20crontab%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%20-u%20%E9%99%84%E5%8A%A0%E8%A6%81%E4%BF%AE%E6%94%B9%E5%85%B6crontab%E7%9A%84%E7%94%A8%E6%88%B7%E7%9A%84%E5%90%8D%E7%A7%B0%E3%80%82%20). The command to create or edit a scheduled task is crontab -e, to view current scheduled tasks is crontab -l, and to delete a scheduled task is crontab -r.
+- Question: Great. How to output execution results to a file?
+- Answer: 30 23 * * * /path/to/script.sh > /path/to/logfile.log 2>&1
+- Question: How to check the status of open ports in Linux?
+- Answer: You can use the command netstat -anp | grep port_number to check the process and status corresponding to the port number.
+- Question: How to determine if a superuser has been added?
+- Answer: Check if there is a user with UID 0.
+- Question: How to harden Linux?
+- Answer: Delete unused accounts, **configure password policies (complexity, expiration time)**, restrict the use of the su command (limit users from using the su command to switch to other users, preventing improper role switching), restrict SSH remote login for root, reduce command history size (.bash_history), and upgrade kernel versions.
+
+### After an attacker gains file read permissions, which files do they typically read?
+
+- /etc/hosts: Host information
+- /etc/shadow: Stores encrypted passwords of system users and other security-related information
+- /etc/passwd: Passwords
+- /root/.bashrc: Environment variables
+- /root/.ssh/id_rsa: SSH private key
+
+## HW Business Related
+
+### Security Incident Handling Process for Hosts
+
+1. Containment: First, determine the impact range, disconnect the host from the network or isolate it to prevent further damage.
+2. Information Collection: Gather client information and infected host information, including samples.
+3. Type Determination: Determine if it is a security incident, what type of security incident, such as **ransomware, mining, network disconnection, DoS**, etc.
+4. In-depth Analysis: Log analysis, process analysis, startup item analysis, sample analysis for later tracing.
+5. Cleanup and Disposal: Kill processes, delete files, patch vulnerabilities, remove abnormal system services, clear backdoor accounts to prevent the incident from expanding, and restore production after handling.
+6. Report Generation: Organize and output a complete security incident report.
+
+### How to handle the discovery of a wild 0DAY exploit during HW?
+
+1. First, confirm the affected product and the severity of the threat, and identify the vulnerability point.
+2. Take the application offline.
+3. Check application logs for any attack requests.
+4. Update to the latest patches or upgrade versions released by the official source.
+
+### **IOC (Indicator of Compromise) Indicators/Features**
+
+These can reflect the characteristics of compromised hosts or networks, including attributes of intrusion tools, malware, and attack organizations, such as email addresses, domain names, IPs, URLs, file names, file hashes, certificates, and signatures, collectively referred to as IOCs.
+
+### Common Security Devices in HW
+
+- Intrusion Detection: IDS
+- Intrusion Prevention: IPS
+- **Traffic Threat Detection:** Tencent Yujie, Qihoo 360 Tianyan, Green Alliance, Deepin, etc.
+- Traffic Monitoring: Kela
+- Application Firewall (**WAF**): Green Alliance WAF, Tencent Cloud WAF, Deepin WAF, Alibaba Cloud WAF, etc.
+- **Honeypots:** Moan Honeypot, Zhidao Chuangyu Honeypot, etc. Firewalls: Firewall (Xuanwudun), Shanshi Firewall, 360 Wangkang/Wangshen Firewall
+- **Situation Awareness:** Green Alliance Situation Awareness, Qihoo 360 Situation Awareness (currently, some financial clients block attack IPs uniformly in the situation awareness system)
+- SOC: Green Alliance, Qihoo 360
+
+---
+
+- Question: Suppose you discover abnormal login situations on a server. After resolving the issue, how do you further investigate potential risks?
+
+  1. Check logs: Review the server's login logs, system logs, application logs, etc., to identify the time, source, and credentials used for the abnormal login. This information helps determine how the attacker gained access and what activities they performed in the system.
+  2. Audit users and permissions: Review all user accounts, delete unnecessary accounts, and check if account permissions comply with the principle of least privilege. Ensure only legitimate users have appropriate permissions.
+  3. Update systems and software: Ensure the operating system and all installed software are up to date. Install security patches to prevent known vulnerabilities from being exploited.
+  4. Review firewall and network settings: Check firewall rules and network settings to ensure only necessary ports and services are exposed. Restrict source IP addresses to allow only trusted IPs to access.
+  5. Perform malware scans: Run antivirus or other malware scanning tools to detect any malware present in the system. If malware is found, follow the scanning tool's recommendations for removal.
+  6. Ensure strong authentication mechanisms: Use complex and hard-to-guess passwords. Enable multi-factor authentication (MFA) to enhance security.
+  7. Monitor for abnormal activities: Use Security Information and Event Management (SIEM) tools or other log analysis tools to monitor for abnormal activities on the server. Configure alert notifications to receive immediate notifications when suspicious activities are detected.
+  8. In a Windows environment, you can use this command to find shell files created within a specified time range: `Get-ChildItem -Path "C:\" -Recurse | Where-Object { $*.CreationTime -ge "2023-05-06 00:00:00" -and $*.CreationTime -le "2023-05-06 23:59:59" }`
+
+## Middleware
+
+Under normal circumstances, the access sequence for a web request is: web browser — server (hardware) — web container — web application server — database server.
+
+**It is important to note that middleware is a general term for a class of software, not a standalone software.**
+
+- Question: What are some common middleware?
+- Answer: IIS, Nginx, Apache, Tomcat, JBoss, WebSphere, WebLogic
+- Question: How to distinguish traffic between status and WebLogic?
+- Answer: If the request URL contains .action or .do, this is the default request suffix for Struts2. The default request suffix for WebLogic is .jsp or .html; requests containing default parameters for Struts2, such as action, method, etc. WebLogic's request parameters are more flexible and do not follow a fixed pattern.
+- Question: How to harden middleware?
+- Answer: Change default ports, use low-privilege operations, lower the website root directory's permissions, customize error pages, delete built-in web pages, prevent deserialization vulnerabilities, SSRF arbitrary file uploads, and deploy backdoor files.
+- Question: What middleware have you learned about? What are the hardening points?
+- Answer: **IIS** truncates special characters, for example, ".asp", thus considering the file extension as ".asp". **Tomcat** has remote code execution vulnerabilities and war backdoor file deployment.
+
+## Penetration Testing
+
+### How to test with only one login page
+
+1. Check if the password recovery options like "send email" or "mobile number" can be intercepted.
+2. Determine if front-end validation is in place during login; check if it can be bypassed by modifying the HTTP response.
+3. Check if the registration function can be used to overwrite the admin registration; see if the registration page has second-order injection vulnerabilities.
+4. Check if the CAPTCHA can be bypassed.
+5. Check if the username can be brute-forced.
+
+### How to achieve evasion?
+
+Mainly to prevent detection by antivirus software. Evasion can be divided into two situations:
+
+1. **Static file evasion**: Detected by antivirus software due to the file signature being in the virus database. This can be achieved by modifying the source code or combining it with binary evasion techniques.
+2. **Dynamic behavior evasion**: Certain behaviors executed during runtime are intercepted by antivirus software. If there is no source code, it becomes challenging to handle.
+
+### Spear Phishing and Watering Hole Attacks
+
+- **Spear Phishing**: Refers to using trojan programs as email attachments sent to the target computer, enticing the victim to open the attachment to infect the trojan.
+- **Watering Hole Attack**: Analyzes the target's browsing habits, finds weaknesses in frequently visited websites, compromises those sites, and implants malicious programs, waiting for the target to visit. The danger of watering hole attacks comes from utilizing **legitimate websites that won't be blacklisted**, making them harder to detect. Visitors, due to their habitual trust in these sites, are more likely to let their guard down and fall into the trap.
+
+### Types of Webshells
+
+- **Large Shell**: Large in size, fully functional; calls critical system functions; hides using code encryption.
+- **Small Shell**: Small in size, limited functionality; generally only has an upload feature for uploading large shells.
+- **One-liner Trojan**: Short code; widely applicable; can generate files independently; can be inserted into files; high security, strong concealment, can change shape to evade detection; framework remains unchanged, data execution, data transmission.
+- **Memory Shell**: No file landing; extremely difficult to detect and discover; hard to remove.
+
+### Unauthorized Access
+
+- **FTP**: Weak passwords or anonymous login vulnerabilities, generally refers to users using FTP who have enabled anonymous login or have passwords that are too short, not complex enough, only contain numbers, or only contain letters, making them easy targets for hackers, leading to malicious file uploads or more severe intrusions.
+- **Docker**: This unauthorized access vulnerability arises because the Docker API can execute Docker commands, which is intended to replace the Docker command line interface, allowing Docker operations via URL.
+- **Redis**: Redis is a database with a default port of 6379, and Redis does not have password verification by default, allowing password-free login operations. Attackers can further control the server through Redis operations. Unauthorized access to Redis in versions before 4.x/5.0.5 can load remote modules using master/slave mode, executing arbitrary commands through dynamic link libraries.
+- **Jupyter Notebook**
+
+### DNS Exfiltration
+
+DNS exfiltration can be used to obtain data from vulnerabilities without feedback, such as SQL injection, XSS, XXE, SSRF, etc. The implementation of DNS exfiltration requires the following conditions:
+
+- The target system can make DNS requests.
+- The target system can access the DNSLog server.
+- The DNSLog server can record DNS request logs.
+
+### Common NMAP Parameters
+
+- Scan a range of IP addresses: `nmap <ip-range>`
+- Port scanning: `nmap -p <port-range> <ip-address>`
+- Ping scan: `nmap -sn <ip-address>`
+- Save scan output to a file: `nmap -oN <filename> <ip-address>`
+- Display open ports: `nmap --open <ip-address>`
+- Exclude hosts/IP addresses from the scan: `nmap <ip-range> --exclude <ip-address>`
+- Service version detection: `nmap -sV <ip-address>`
+- OS detection: `nmap -O <ip-address>`
+
+## Frontend Related
+
+- Question: Do you know about prototype pollution?
+- Answer: Prototype pollution is a common security vulnerability that allows attackers to modify an object's prototype, thereby affecting other parts of the application. This vulnerability is particularly common in JavaScript. In JavaScript, every object has a prototype, which is a reference to another object. When you try to access a property of an object, if that object does not have the property, JavaScript will look up the prototype chain until it finds the property or reaches the top of the prototype chain. Attackers can inject malicious code into input data to modify objects on the prototype chain, thus altering the application's behavior. For example, an attacker can change a method in **Object.prototype** to malicious code, causing all objects in the application to inherit this malicious method. This way, the attacker can execute arbitrary code in the application, even obtaining sensitive information.
+- Question: How to avoid prototype pollution?
+- Answer: To avoid prototype pollution, developers should always use **Object.hasOwnProperty()** to check if an object truly has a property, rather than relying on the prototype chain. Additionally, developers should strictly validate and filter input data to prevent the injection of malicious code. Finally, regularly updating and upgrading the application's dependencies is essential to ensure that the libraries used do not have prototype pollution vulnerabilities.
+- Question: What effects can XSS achieve?
+- Answer: Frontend mining, simulating login pages, hijacking user credentials, etc.
+- Question: Can you talk about the logic vulnerabilities you know?
+- Answer: Not preventing duplicate registrations/permission verification from the backend, but rather from the frontend; static file download links, etc. Essentially, it is something the backend should have done but did not.
+
+## Tool Related
+
+List some common ports and their corresponding services.
+
+- 21: FTP
+- 22: SSH
+- 23: Telnet
+- 139: SMB
+- 445: SMB
+- 1080: Socks
+- 3389: RDP
+- 7001: WebLogic (a Java EE application server that allows developers to develop and deploy multi-tier distributed enterprise applications. It centralizes application services such as web server functionality, business components, and access to backend enterprise systems.)
+- 3306: MySQL
+- 5432: PostgreSQL
+- 1521: Oracle
+- 6379: Redis (an open-source in-memory data structure store that can be used as a database, cache, and message broker. Redis provides sub-millisecond response times, enabling real-time applications in industries such as gaming, ad tech, financial services, healthcare, and IoT to make millions of requests per second.)
+
+---
+
+- Question: Can you describe the traffic characteristics of webshell management tools?
+- Answer: **CaiDao** webshell only uses URL encoding + base64 encoding; the shell characteristic is that the transmission parameter name is z0, and there is also the string characteristic int_set("display_errors","0"). The UA header is Baidu spider. The default **Ant Sword** shell requests twice upon connection, and its request body is only URL encoded, with code similar to Ant Sword present in its traffic. The first request disables error reporting and magic_quotes, then retrieves host information. The second request lists the host directory. **Bingxie 2.0** uses AES encryption to initiate three requests. **Bingxie 3.0** uses AES encryption to initiate two requests. **Bingxie 4.0** has 10 built-in user agents, randomly selecting one for each connection to the shell.
+- Question: Can you explain the principle of **sqlmap**'s OS shell?
+- Answer: For MySQL databases, the **--os-shell** essentially writes two shell files, one of which allows us to execute commands, and the other, if accessed by the website, allows us to upload files. There are two restrictions when writing shells: first, we need to know the two restrictions for uploading files, specifically the absolute path of the website (where our shell is written), and we need import/export permissions.
+- Question: How to capture HTTPS traffic with Wireshark?
+- Answer: You need to configure SSL certificates.
+
+## PHP
+
+- Question: What is the difference between include and require?
+- Answer: Include can be called at any position in the script, while require must be called at the beginning of the script. Additionally, the module introduced by require will definitely be referenced at runtime, while include is loaded on demand.
+- Question: Do you know about GPC?
+- Answer: Yes. GPC is a deprecated security feature in PHP that automatically escapes special characters (such as single quotes, double quotes, backslashes, etc.) in GET, POST, and Cookie data. When GPC is enabled, it may affect the execution of certain SQL injection attacks. However, it is still possible to perform SQL injection attacks by bypassing GPC.
+
+## SQL (Key Points)
+
+- Question: What types of SQL injection are there?
+- Answer: **Boolean blind injection, time-based blind injection, error-based injection**.
+- Question: How to determine if there is an injection vulnerability?
+- Answer: Use sqlmap to scan; or add a quote at the end of the request content to check if the response size changes (blind injection).
+- Question: What functions can be used for error-based injection?
+- Answer: floor(), name_const(), exp(), convert(), extractvalue(), updatexml()
+- Question: How to bypass WAF?
+- Answer: Use URL encoding, use uncommon functions, mix case, and overflow with junk data, etc.
+- Question: Suppose special character filtering is enabled, what to do?
+- Answer: Use numeric data (avoid using quotes); use like instead of =;
+- Question: Suppose keyword filtering is enabled, what to do?
+- Answer: Use `/**/` or `<>` to split keywords; use double writing to bypass (e.g., selectselect);
+- Question: Suppose space filtering is enabled, what to do?
+- Answer: Use double spaces, `/**/`, parentheses, or replace with line breaks.
+- Question: Suppose comma filtering is enabled, how to perform blind injection?
+- Answer: Use from and to, for example: select substr(database() from 1 for 1);
+- Question: How to write a shell in SQL?
+  - `UNION SELECT '<?php system($_GET["cmd"]); ?>' INTO OUTFILE '/var/www/html/uploads/shell.php'`
+  - After successfully injecting the Web Shell, you can use it by accessing its URL. For example, if the Web Shell is located at **<http://example.com/uploads/shell.php**, you can append a **cmd** parameter to the URL to execute commands.>
+- Question: What to do if the IP is recorded during SQL injection?
+- Answer: Use proxy servers, use VPNs.
+- Question: What if the **sleep keyword** is blocked?
+- Answer: Use select benchmark(count, expr) to repeatedly execute the count times expr expression, causing a long processing time to create a delay. For example: SELECT benchmark(100000000, md5("hello"));
+
+## Social Engineering
+
+### Domain Source Channels
+
+1. Whois query
+2. Record query
+3. Enterprise query/Heavenly Eye query
+4. ZoomEye/FoFa query
+
+### Mobile Number Source Channels
+
+1. Social media platform queries (WeChat/Alipay/Weibo/Douyin)
+2. Use the social engineering database bot in Telegram for precise information queries
+3. Query which websites have been registered: <https://www.reg007.com/>
+
+## Other Miscellaneous
+
+- Question: Why was the 2019-0708 vulnerability detected but not exploitable?
+- Answer: Version mismatch. This vulnerability only affects versions between Exchange 2010 SP3 Update Rollup 12 and Exchange 2019 CU4. If the target system's Exchange version is not within this range, it cannot be exploited; if a patch has been applied. If the target system has already applied the security updates released by Microsoft, this vulnerability has been fixed and cannot be exploited; firewall or WAF interception. If the target system has a firewall or WAF enabled, and the rules have been updated to detect and intercept this vulnerability exploitation, it cannot be exploited.
+- Question: What are the main differences between Shiro versions 550 and 721 regarding deserialization vulnerabilities?
+- Answer: The Shiro 550 version only requires a maliciously constructed rememberMe cookie to trigger the deserialization vulnerability; the Shiro 721 version **requires logging in first**, setting rememberMe=true, and then sending a maliciously constructed rememberMe cookie to trigger the deserialization vulnerability. Additionally, the Shiro 550 version deserializes the ShiroRememberMeManager class; the Shiro 721 version deserializes the ShiroRememberMeManager$RememberMeToken class. **(Shiro-550 is a deserialization vulnerability in the Apache Shiro framework, where the AES encryption key is hardcoded in the source code, allowing attackers to construct malicious serialized data by leaking the key, thus enabling remote code execution and other attacks.)**
+- Question: What malicious traffic analysis tools do you know?
+- Answer: Wireshark, Brim, TShark
+- Question: How to bypass Win10 UAC?
+  - Registry modification: Certain registry keys allow programs to execute at startup, such as **HKCU\Software\Classes\ms-settings\shell\open\command**. You can modify these keys to execute a privilege escalation program.
+  - Dynamic Link Library Hijacking (DLL Hijacking): This method involves creating a malicious DLL file and placing it in a specific path so that when an executable file with automatic privilege elevation loads, the malicious DLL will be executed. This method requires finding a location with write permissions in the DLL search path.
+- Question: If there are multiple IPs in xff, how to determine which one is real?
+- Answer: The leftmost one. Of course, xff can be forged and may not be real.
+- Question: What is the difference between a probe and analysis?
+- Answer: Probes and analysis are two different technical means. Probes are mainly used for real-time monitoring and collecting network traffic data, while analysis is primarily used for in-depth analysis and mining of network traffic data to discover security threats and vulnerabilities in the network. In practical applications, probes and analysis are often used in combination to enhance network security monitoring and defense levels.
+- Question: How to understand cybersecurity?
+- Answer: The implementation of cybersecurity typically requires a combination of technology, processes, and policies. Technology includes firewalls, intrusion detection systems, encryption technologies, etc.; processes may include user training, disaster recovery plans, regular updates, and patching; policies include various regulations, such as password policies, user behavior policies, etc.
+
+---
+
+### Kerberos and Golden Tickets
+
+The authentication process of Kerberos is as follows:
+
+![Image](/image/post/7e4c789e-0570-470a-a5aa-c0ed5263abdc_Untitled.png)
+
+Among them, there is a special user in the DC called **krbtgt**, which is an account that cannot log in and is automatically created by the system when the domain is created. Its hash value is used multiple times throughout the Kerberos authentication process, and its hash value remains unchanged.
+
+- **Golden Ticket**: Therefore, as long as you obtain the NTLM Hash of krbtgt, you can forge TGT and Logon Session Key to proceed to the next step of interaction between Client and TGS. With the golden ticket, you can skip AS verification, avoiding the need to verify the account and password, so there is no concern about domain admin password changes.
+- **Silver Ticket**: In the third step of Kerberos authentication, the Client requests a service on the Server with ST and Authenticator3. After receiving the Client's request, the Server decrypts the ST with its Master Key to obtain the Session Key. It then decrypts Authenticator3 with the Session Key to verify the identity of the other party. If verification is successful, the Client is allowed to access the specified service on the server.
+  Therefore, we only need to know the **Hash of the Server user** to forge an ST, and it will not go through KDC, but **the forged ticket only works for certain services.**
+
+## Java
+
+- Question: Do you know about Java deserialization?
+- Answer: Yes. (If you don't know, just say you don't.)
+- Question: Using **java.io.ObjectInputStream**: This is the most commonly used deserialization method in Java. You can use **ObjectInputStream** to read and deserialize objects from byte streams. Here is an example:
+- Question: How to investigate memory shells?
+- Answer: If it is JSP injection, check the logs for suspicious JSP access requests; if it is a code execution vulnerability, check the middleware's error.log for any suspicious errors, determine the injection time and method: check if there are possible Java code execution vulnerabilities based on the components used in the business and whether there are web shells, check for framework vulnerabilities, deserialization vulnerabilities. If it is a servlet or spring controller type, check the logs based on the reported web shell URL (the logs may be turned off, so there may not be any), determine the injection time based on the earliest access time of the URL. If it is a filter or listener type, there may be many 404s but with parameters in the requests, or a large number of requests to different URLs but with the same parameters, or pages that do not exist but return 200.
+- Question: Do you understand RCE in Java code execution? Similar to PHP's eval.
+- Answer: RCE is an abbreviation for two types of vulnerabilities, namely Remote Command/Code Execution.
+
+## Operations
+
+- Question: How to prevent DDoS?
+- Answer: **Increase bandwidth and strengthen server performance**. This can give the server a greater capacity to handle traffic, reducing the impact during an attack; **use DDoS protection services**. Services like Cloudflare, Incapsula, Akamai, etc., can effectively defend against DDoS attacks, filtering out malicious traffic and allowing only legitimate traffic through; **configure firewalls and routers**. You can set rules to filter traffic from certain IP addresses or countries/regions. You can also set SYN Flood protection, etc.; **monitor traffic and services**. When a DDoS attack occurs, you can promptly detect service performance degradation and a large number of anomalies.
+- Question: Do you know about SCRF?
+- Answer: Yes. This is a server-side false request that can be used to access hosts that cannot be reached externally.
+- Question: How to detect live IPs?
+- Answer: You can use the nmap tool for liveliness detection, with the command `nmap -sP -n -iL ip.txt -oA OUTPUT --no-stylesheet` in Linux, then use `cat OUTPUT.gnmap | grep Up | awk '{print $2}' > ip_cunhuo.txt` to get the live IPs.
+- Question: How to identify mining traffic?
+- Answer: Mining trojans usually cause **high CPU usage, network traffic, and unconventional file names**, and they communicate using non-standard ports.
+- Question: How to identify whether alarm traffic is a false positive?
+- Answer: Check if there are special files or paths in the access path, whether there are SQL statements, whether there are XSS scripts, etc.
+
+## Device Related: Tianyan
+
+### Reasons why the same attack traffic triggers two alarms
+
+1. The same alarm traffic may trigger two alarm rules.
+2. The same alarm traffic may have multiple IPs because external IPs are converted to internal IPs.
+3. When extracting IPs from the xff field, it may be extracted multiple times.
+
+### Log Retrieval Statements
+
+- AND operator (AND, &&, or +)
+- OR operator (OR or ||)
+- NOT operator (NOT, !, or -)
+
+```plain text
+1-  dip      -- Attacked IP
+2-  dport    -- Attacked port
+3-  sip      -- Source IP
+4-  sport    -- Source port
+5-  uri      -- Requested URL
+6-  data     -- Request body content
+7-  status   -- Response status code
+8-  host     -- Domain name
+```
+
+### Threat Alerts
+
+```plain text
+1- attack_sip       -- Attacker's IP
+2- alarm_sip        -- Victim's IP
+3- attack_type      -- Type of attack
+4- is_web_attack    -- Used to mark whether the alert is a web alert (1: yes, 0: no)
+5- hazard_level     -- Threat level (value: 0~10)
+```
+
+### Tianyan Interface Services
+
+- Traffic sensors (probes)
+- File threat identification (sandbox)
+- Analysis platform
+- Tianqing (not necessarily available)
+
+### Tianyan Menu Interface:
+
+- Traffic Sensors
+  - Status monitoring, threat alerts, rule configuration, policy configuration, system configuration
+- Analysis Platform
+  - Threat perception - alert list, analysis center - log retrieval
+
+### Alert Types:
+
+- Attempt
+- Success
+- Compromised
+- Failure
+
+## Notes
+
+- Try to maintain the initiative and tell a complete story. Do not directly say you don't know.
+
+## References
+
+- <https://www.jianshu.com/p/4936da524040>
+

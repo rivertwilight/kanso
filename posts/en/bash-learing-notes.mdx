@@ -1,0 +1,28 @@
+---
+title: "Bash Learning Notes"
+categories:
+  - Programming
+tag: Ungroup
+createAt: 2020/8/27
+---
+
+Since I recently started playing with WSL, I remembered the long-abandoned learning plan—Bash. This article records some key points.
+I am learning from [Mr. Ruan Yifeng's tutorial](https://wangdoc.com/bash).
+
+## 1
+
+When a filename contains spaces, it should be enclosed in double quotes; otherwise, it will be treated as two separate files.
+
+```shell
+$ ls "two words.txt"
+```
+
+## 2
+
+Whenever the Shell sees a word that starts with `$`, it will attempt to read the value corresponding to that variable name. 
+If the variable does not exist, Bash will not throw an error but will output an empty string. Therefore, even if the `unset` command deletes the variable, it can still be read, and the variable value will be an empty string.
+
+## 3
+
+The result of the division operator is always an integer. For example, 5 divided by 2 results in 2, not 2.5.
+

@@ -7,7 +7,8 @@
 		"dev": "next",
 		"build": "next build",
 		"start": "next start -p 4000",
-		"test:notion": "node ./src/utils/notion.js"
+		"test:notion": "node ./src/utils/notion.js",
+		"i18n:post": "lobe-i18n md"
 	},
 	"author": {
 		"name": "Rene Wang",

@@ -1,0 +1,20 @@
+---
+title: "Solving the Rogue Issue of Chrome Forcing Bing to Open When Opening a New Tab"
+tag: Tech
+createAt: 2020/06/25
+---
+
+## Background of the Issue
+
+When setting Chrome's search engine to Bing, if you are in the habit of opening a new tab and immediately typing in the address bar, the address bar gets cleared again after the page loads! It's really frustrating.
+
+## Solution
+
+Use a custom Bing engine. Go to `Settings -> Manage Search Engines -> Add`, and you can write anything for the name and keyword. For the query URL, enter `https://cn.bing.com/search?q=%s`!
+
+## About Bing
+
+For programmers behind the Great Firewall who cannot access the internet freely, using Bing instead of Google is a good choice.
+
+What? You say to use Baidu? Be careful of dimensionality reduction attacks!
+
