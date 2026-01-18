@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { createPortal } from "react-dom";
 import { BatteryIcon } from "../Icons";
 import { useAtom, useSetAtom } from "jotai";
 import {
@@ -17,6 +18,7 @@ import {
   DarkModeIcon,
   ChevronDownIcon,
 } from "./StatusBarIcons";
+import { DialogPortalContext } from "@/system/contexts/dialogPortal";
 
 /**
  * Control Center (Kindle-style)
@@ -70,6 +72,7 @@ export const ControlCenter: React.FC<ControlCenterProps> = ({
   const setWifiEnabled = useSetAtom(setWifiEnabledAtom);
   const setBluetoothEnabled = useSetAtom(setBluetoothEnabledAtom);
   const [dateTime, setDateTime] = useState("");
+  const portalContext = useContext(DialogPortalContext);
 
   useEffect(() => {
     const updateDateTime = () => {
@@ -93,11 +96,11 @@ export const ControlCenter: React.FC<ControlCenterProps> = ({
 
   if (!isOpen) return null;
 
-  return (
+  const content = (
     <>
       {/* Backdrop overlay */}
       <div
-        className="fixed inset-0 z-40"
+        className="fixed inset-0 z-50"
         style={{ backgroundColor: "rgba(0,0,0,0.3)" }}
         onClick={onClose}
       />
@@ -271,5 +274,13 @@ export const ControlCenter: React.FC<ControlCenterProps> = ({
       </div>
     </>
   );
+
+  // Use portal to render outside Navbar's stacking context
+  if (portalContext?.portalRef?.current) {
+    return createPortal(content, portalContext.portalRef.current);
+  }
+
+  // Fallback for when portal is not available
+  return content;
 };
 
