@@ -22,7 +22,7 @@ export default function GiscusComments({ locale }: GiscusCommentsProps) {
         emitMetadata="0"
         inputPosition="top"
         theme={theme}
-        lang={locale}
+        lang={locale === "zh" ? "zh-CN" : "en"}
         loading="lazy"
       />
     </div>
