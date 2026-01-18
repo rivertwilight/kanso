@@ -1,0 +1,14 @@
+{
+	"entry": "src/i18n/resources/en-US.json",
+	"entryLocale": "zh-CN",
+	"output": "src/i18n/resources",
+	"outputLocales": ["en-US"],
+	"modelName": "gpt-4o-mini",
+	"reference": "",
+	"markdown": {
+		"entry": ["posts/zh/*.mdx"],
+		"entryExtension": ".mdx",
+		"outputExtension": ".mdx",
+		"includeMatter": true
+	}
+}
