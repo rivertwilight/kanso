@@ -16,7 +16,6 @@ export default async function ArchivePage({ params }: PageProps) {
 
   const allPosts = getAllPosts({
     enableFlat: true,
-    locale: locale,
   });
 
   return (

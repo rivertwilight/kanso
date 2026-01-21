@@ -69,7 +69,7 @@ export default function CatalogApp({
       <div className="px-4 md:px-6 pb-8">
         <Typography>
           <h1>{t("title")}</h1>
-        <p>{localeLinks}</p>
+        {/* <p>{localeLinks}</p> */}
         {sortedYears.map((year) => (
           <div key={year}>
             <h2>{year}</h2>

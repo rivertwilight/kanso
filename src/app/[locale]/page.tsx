@@ -23,7 +23,6 @@ export default async function HomePage({ params }: PageProps) {
     },
     enableFlat: true,
     enableSort: true,
-    locale: locale,
     excludeBooks: true,
   }).filter((post: any) => !post.frontmatter.hidden);
 
