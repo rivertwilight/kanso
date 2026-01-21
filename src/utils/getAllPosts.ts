@@ -122,22 +122,49 @@ export default function getAllPosts(options: GetAllPostsOption): IPost[] {
 }
 
 /**
- * Get a single post by slug and locale
+ * Get a single post by slug and optional locale.
+ * If no locale is provided, scans all locale directories to find a matching slug.
  */
-export function getPostBySlug(slug: string, locale: string): { frontmatter: any; content: string } | null {
-	const filePath = path.join(POSTS_DIR, locale, `${slug}.mdx`);
+export function getPostBySlug(slug: string, locale?: string): { frontmatter: any; content: string; locale: string } | null {
+	if (locale) {
+		const filePath = path.join(POSTS_DIR, locale, `${slug}.mdx`);
 
-	if (!fs.existsSync(filePath)) {
-		return null;
+		if (!fs.existsSync(filePath)) {
+			return null;
+		}
+
+		const content = fs.readFileSync(filePath, "utf-8");
+		const document = matter(content);
+
+		return {
+			frontmatter: document.data,
+			content: document.content,
+			locale,
+		};
 	}
 
-	const content = fs.readFileSync(filePath, "utf-8");
-	const document = matter(content);
+	// No locale provided - scan all locale directories
+	const locales = fs.readdirSync(POSTS_DIR).filter((dir) => {
+		const dirPath = path.join(POSTS_DIR, dir);
+		return fs.statSync(dirPath).isDirectory();
+	});
 
-	return {
-		frontmatter: document.data,
-		content: document.content,
-	};
+	for (const loc of locales) {
+		const filePath = path.join(POSTS_DIR, loc, `${slug}.mdx`);
+
+		if (fs.existsSync(filePath)) {
+			const content = fs.readFileSync(filePath, "utf-8");
+			const document = matter(content);
+
+			return {
+				frontmatter: document.data,
+				content: document.content,
+				locale: loc,
+			};
+		}
+	}
+
+	return null;
 }
 
 /**
