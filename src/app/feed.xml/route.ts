@@ -2,49 +2,53 @@ import { NextResponse } from "next/server";
 import getAllPosts from "@/utils/getAllPosts";
 
 function escapeXml(text: string): string {
-  if (!text) return "";
-  return text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
+	if (!text) return "";
+	return text
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;")
+		.replace(/"/g, "&quot;")
+		.replace(/'/g, "&apos;");
 }
 
 async function getDictionary(locale: string) {
-  try {
-    return (await import(`../../i18n/resources/${locale}.json`)).default;
-  } catch {
-    return (await import(`../../i18n/resources/zh.json`)).default;
-  }
+	try {
+		return (await import(`../../i18n/resources/${locale}.json`)).default;
+	} catch {
+		return (await import(`../../i18n/resources/zh.json`)).default;
+	}
 }
 
 async function generateAtomXml(locale: string): Promise<string> {
-  const baseUrl = "https://rene.wang";
-  const dictionary = await getDictionary(locale);
-  const { title, description, author } = dictionary.metadata;
-  const now = new Date().toISOString();
+	const baseUrl = "https://rene.wang";
+	const dictionary = await getDictionary(locale);
+	const { title, description, author } = dictionary.metadata;
+	const now = new Date().toISOString();
 
-  const posts = getAllPosts({
-    locale,
-    enableSort: true,
-    enableContent: true,
-  });
+	const posts = getAllPosts({
+		locale,
+		enableSort: true,
+		enableContent: true,
+	});
 
-  const entries = posts
-    .slice(0, 50)
-    .map((post) => {
-      const postTitle = escapeXml(post.frontmatter.title || post.defaultTitle);
-      const postUrl = `${baseUrl}/${locale}/p/${post.id}`;
-      const updated = post.frontmatter.createAt
-        ? new Date(post.frontmatter.createAt).toISOString()
-        : now;
-      const summary = escapeXml(
-        post.frontmatter.summary || post.markdownBody?.slice(0, 200) || ""
-      );
-      const category = post.category || "";
+	const entries = posts
+		.slice(0, 50)
+		.map((post) => {
+			const postTitle = escapeXml(
+				post.frontmatter.title || post.defaultTitle
+			);
+			const postUrl = `${baseUrl}/p/${post.id}`;
+			const updated = post.frontmatter.createAt
+				? new Date(post.frontmatter.createAt).toISOString()
+				: now;
+			const summary = escapeXml(
+				post.frontmatter.summary ||
+					post.markdownBody?.slice(0, 200) ||
+					""
+			);
+			const category = post.category || "";
 
-      return `
+			return `
   <entry>
     <title>${postTitle}</title>
     <link href="${postUrl}" rel="alternate" type="text/html"/>
@@ -57,10 +61,10 @@ async function generateAtomXml(locale: string): Promise<string> {
       <email>${escapeXml(author.email)}</email>
     </author>
   </entry>`;
-    })
-    .join("");
+		})
+		.join("");
 
-  return `<?xml version="1.0" encoding="UTF-8"?>
+	return `<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>${escapeXml(title)}</title>
   <subtitle>${escapeXml(description)}</subtitle>
@@ -74,23 +78,23 @@ async function generateAtomXml(locale: string): Promise<string> {
   </author>
   <generator>Next.js</generator>
   <rights>All rights reserved ${new Date().getFullYear()}, ${escapeXml(
-    author.name
-  )}</rights>
+		author.name
+	)}</rights>
   ${entries}
 </feed>`;
 }
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const locale = searchParams.get("locale") || "zh";
+	const { searchParams } = new URL(request.url);
+	const locale = searchParams.get("locale") || "zh";
 
-  const atomXml = await generateAtomXml(locale);
+	const atomXml = await generateAtomXml(locale);
 
-  return new NextResponse(atomXml, {
-    status: 200,
-    headers: {
-      "Content-Type": "application/atom+xml; charset=utf-8",
-      "Cache-Control": "public, max-age=3600, s-maxage=3600",
-    },
-  });
+	return new NextResponse(atomXml, {
+		status: 200,
+		headers: {
+			"Content-Type": "application/atom+xml; charset=utf-8",
+			"Cache-Control": "public, max-age=3600, s-maxage=3600",
+		},
+	});
 }
