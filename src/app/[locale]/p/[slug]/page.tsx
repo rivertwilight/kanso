@@ -29,7 +29,7 @@ export async function generateMetadata({
 	params,
 }: PageProps): Promise<Metadata> {
 	const { locale, slug } = await params;
-	const post = getPostBySlug(slug, locale);
+	const post = getPostBySlug(slug);
 
 	if (!post) {
 		return {
