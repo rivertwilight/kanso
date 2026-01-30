@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { getPostBySlug, getAllPostSlugs } from "@/utils/getAllPosts";
 import { setRequestLocale, getTranslations } from "next-intl/server";
+
 import BookReviewApp from "@/apps/book-review";
 import { compileMDX } from "next-mdx-remote/rsc";
 import remarkMath from "remark-math";
@@ -29,7 +30,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
-  const post = getPostBySlug(slug, locale);
+  const post = getPostBySlug(slug);
 
   if (!post) {
     return {
@@ -74,16 +75,20 @@ export async function generateMetadata({
 export async function generateStaticParams() {
   const slugs = getAllPostSlugs();
 
-  // Filter to only include book reviews
-  return slugs
-    .filter(({ slug, locale }) => {
-      const post = getPostBySlug(slug, locale);
-      return post?.frontmatter?.type === "book";
-    })
-    .map(({ slug, locale }) => ({
-      locale: locale,
-      slug: slug,
-    }));
+  // Collect unique book review slugs
+  const bookSlugs = new Set<string>();
+  for (const { slug, locale } of slugs) {
+    const post = getPostBySlug(slug, locale);
+    if (post?.frontmatter?.type === "book") {
+      bookSlugs.add(slug);
+    }
+  }
+
+  // Generate params for all locales per book slug
+  const locales = ["en", "zh"];
+  return Array.from(bookSlugs).flatMap((slug) =>
+    locales.map((locale) => ({ locale, slug }))
+  );
 }
 
 export default async function BookReviewPage({ params }: PageProps) {
@@ -92,7 +97,7 @@ export default async function BookReviewPage({ params }: PageProps) {
   // Enable static rendering
   setRequestLocale(locale);
 
-  const post = getPostBySlug(slug, locale);
+  const post = getPostBySlug(slug, locale) || getPostBySlug(slug);
 
   if (!post) {
     return <div>Book review not found</div>;
