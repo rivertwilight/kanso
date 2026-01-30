@@ -13,6 +13,7 @@ import PostList from "./components/PostList";
 import BottomNav from "./components/BottomNav";
 import BookGrid from "./components/BookGrid";
 import AppToolbar from "@/system/components/AppToolbar";
+import projects from "./projects.json";
 
 interface LauncherAppProps {
 	allPosts: any;
@@ -41,9 +42,9 @@ export default function LauncherApp(props: LauncherAppProps) {
 						? tCategories(item.slug)
 						: item.slug;
 					return { name: item.slug, text: translatedName };
-				})
+				}),
 			),
-		[allCategories, tCategories, tCommon]
+		[allCategories, tCategories, tCommon],
 	);
 
 	return (
@@ -59,42 +60,17 @@ export default function LauncherApp(props: LauncherAppProps) {
 							/>
 
 							<Grid>
-								<GridItem
-									href={`/${locale}/browser?url=${encodeURIComponent(
-										"https://github.com/RiverTwilight/Awesome-Machine-Learning-Playground?tab=readme-ov-file"
-									)}`}
-									src="/image/cover/machine-learning.png"
-								/>
-								<GridItem
-									href={`/${locale}/browser?url=${encodeURIComponent(
-										"https://febook.rene.wang"
-									)}`}
-									src="/image/cover/febook.png"
-								/>
-								<GridItem
-									href={`/${locale}/browser?url=${encodeURIComponent(
-										"https://geekits.ygeeker.com"
-									)}`}
-									src="/image/cover/geekits.png"
-								/>
-								<GridItem
-									href={`/${locale}/browser?url=${encodeURIComponent(
-										"https://geekits.ygeeker.com"
-									)}`}
-									src="/image/cover/geekits.png"
-								/>
-								<GridItem
-									href={`/${locale}/browser?url=${encodeURIComponent(
-										"https://geekits.ygeeker.com"
-									)}`}
-									src="/image/cover/geekits.png"
-								/>
-								<GridItem
-									href={`/${locale}/browser?url=${encodeURIComponent(
-										"https://geekits.ygeeker.com"
-									)}`}
-									src="/image/cover/geekits.png"
-								/>
+								{projects.map((project, index) => (
+									<GridItem
+										key={index}
+										href={
+											project.externalBrowser
+												? project.url
+												: `/${locale}/browser?url=${encodeURIComponent(project.url)}`
+										}
+										src={project.cover}
+									/>
+								))}
 							</Grid>
 						</Section>
 						<Section>
