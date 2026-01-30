@@ -7,7 +7,7 @@ import {
 import type { IPost } from "@/types/index";
 import Link from "next/link";
 
-const MAX_POST_COUNT = 25;
+const MAX_POST_COUNT = 50;
 
 export default function PostList({
   allPosts,
