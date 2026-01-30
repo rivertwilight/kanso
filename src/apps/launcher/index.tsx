@@ -14,6 +14,7 @@ import BottomNav from "./components/BottomNav";
 import BookGrid from "./components/BookGrid";
 import AppToolbar from "@/system/components/AppToolbar";
 import projects from "./projects.json";
+import Image from "next/image";
 
 interface LauncherAppProps {
 	allPosts: any;
@@ -53,6 +54,23 @@ export default function LauncherApp(props: LauncherAppProps) {
 			<div className="pb-8">
 				{activeTab === "home" && (
 					<>
+						<Section>
+							<SectionTitle label="Hello, I'm Rene." />
+							<div className="flex gap-4">
+								<Image
+									src="/icon/apple-icon-180x180.png"
+									alt="Avatar"
+									width={56}
+									height={56}
+									className="shrink-0 w-14 h-14"
+								/>
+								<div className="font-sans">
+									I'm a design engineer at LobeHub. Welcome to
+									my Kindle. Here's my projects and thoughts.
+									Feel free to try or comment them.
+								</div>
+							</div>
+						</Section>
 						<Section>
 							<SectionTitle
 								label={t("homePage.features")}
