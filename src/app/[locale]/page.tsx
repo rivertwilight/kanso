@@ -30,7 +30,7 @@ export default async function HomePage({ params }: PageProps) {
   const bookReviews = getAllPosts({
     filterByType: "book",
     enableSort: true,
-    locale: locale,
+    // locale: locale,
   }).filter((post: any) => !post.frontmatter.hidden);
 
   const allCategories = getCategories(locale);

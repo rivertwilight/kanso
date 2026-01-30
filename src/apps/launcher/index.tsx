@@ -77,6 +77,24 @@ export default function LauncherApp(props: LauncherAppProps) {
 									)}`}
 									src="/image/cover/geekits.png"
 								/>
+								<GridItem
+									href={`/${locale}/browser?url=${encodeURIComponent(
+										"https://geekits.ygeeker.com"
+									)}`}
+									src="/image/cover/geekits.png"
+								/>
+								<GridItem
+									href={`/${locale}/browser?url=${encodeURIComponent(
+										"https://geekits.ygeeker.com"
+									)}`}
+									src="/image/cover/geekits.png"
+								/>
+								<GridItem
+									href={`/${locale}/browser?url=${encodeURIComponent(
+										"https://geekits.ygeeker.com"
+									)}`}
+									src="/image/cover/geekits.png"
+								/>
 							</Grid>
 						</Section>
 						<Section>
