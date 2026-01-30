@@ -40,6 +40,7 @@ export const Typography: React.FC<TypographyProps> = ({
         [&_blockquote]:pl-4 [&_blockquote]:py-2 [&_blockquote]:my-4
         [&_blockquote]:bg-[var(--eink-paper-warm)] [&_blockquote]:italic
         [&_blockquote]:text-[var(--eink-ink-secondary)]
+        [&_blockquote>*:last-child]:mb-0!
         
         [&_a]:underline [&_a]:underline-offset-2
         [&_a]:decoration-[var(--eink-ink-tertiary)]
