@@ -52,7 +52,7 @@ export const Typography: React.FC<TypographyProps> = ({
         [&_th]:border [&_th]:border-[var(--eink-border)] [&_th]:p-2 [&_th]:bg-[var(--eink-paper-warm)]
         [&_td]:border [&_td]:border-[var(--eink-border)] [&_td]:p-2
         
-        [&_img]:max-w-full [&_img]:h-auto [&_img]:my-4
+        [&_img]:max-w-full [&_img]:max-h-[50vh] [&_img]:h-auto [&_img]:my-4
         
         ${className}
       `}
