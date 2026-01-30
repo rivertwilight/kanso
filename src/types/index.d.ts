@@ -10,6 +10,8 @@ export type IPost = {
 		summary?: string;
 		/** Pin to top */
 		pin?: boolean;
+		/** Hide from post lists */
+		unlist?: boolean;
 	};
 	id: string;
 	markdownBody?: string;

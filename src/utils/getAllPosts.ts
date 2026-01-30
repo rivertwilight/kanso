@@ -100,6 +100,9 @@ export default function getAllPosts(options: GetAllPostsOption): IPost[] {
 		};
 	}).filter(Boolean);
 
+	// Filter out unlisted posts
+	posts = posts.filter((post) => !post.frontmatter.unlist);
+
 	// Filter by type if specified
 	if (filterByType) {
 		posts = posts.filter((post) => post.frontmatter.type === filterByType);
