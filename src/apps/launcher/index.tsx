@@ -92,7 +92,7 @@ export default function LauncherApp(props: LauncherAppProps) {
 							</Grid>
 						</Section>
 						<Section>
-							<div className="flex flex-wrap gap-2 mb-4">
+							{/* <div className="flex flex-wrap gap-2 mb-4">
 								{categoryLabels.map((category) => (
 									<CategoryLabel
 										key={category.name}
@@ -105,7 +105,7 @@ export default function LauncherApp(props: LauncherAppProps) {
 										}
 									/>
 								))}
-							</div>
+							</div> */}
 
 							<PostList
 								activeCategory={activeCategory}
