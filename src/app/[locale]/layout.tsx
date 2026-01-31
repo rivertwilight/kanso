@@ -44,8 +44,8 @@ export async function generateMetadata({
       images: [
         {
           url: "/og.png",
-          width: 2514,
-          height: 1606,
+          width: 1200,
+          height: 600,
           alt: "Rene Wang",
         },
       ],
