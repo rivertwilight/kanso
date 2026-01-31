@@ -4,6 +4,8 @@ export type IPost = {
 	frontmatter: {
 		title?: string;
 		createAt: string;
+		/** Updated date, takes priority over createAt for sorting */
+		updateAt?: string;
 		/** Tag/category of the post */
 		tag?: string;
 		/** Summary/description */

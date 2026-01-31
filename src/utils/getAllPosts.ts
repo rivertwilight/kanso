@@ -115,8 +115,8 @@ export default function getAllPosts(options: GetAllPostsOption): IPost[] {
 
 	if (enableSort) {
 		return posts.sort((a, b) => {
-			const dateA = new Date(a.frontmatter.createAt);
-			const dateB = new Date(b.frontmatter.createAt);
+			const dateA = new Date(a.frontmatter.updateAt || a.frontmatter.createAt);
+			const dateB = new Date(b.frontmatter.updateAt || b.frontmatter.createAt);
 			return dateB.getTime() - dateA.getTime();
 		});
 	}
