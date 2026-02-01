@@ -1,6 +1,6 @@
 {
 	"name": "kanso",
-	"version": "26.1.30",
+	"version": "26.02.01",
 	"description": "A Responsive, Fast, i18n and Theme-able static blog base on Next.js.",
 	"scripts": {
 		"dev": "next -p 3005",
@@ -47,8 +47,6 @@
 		"@tailwindcss/postcss": "^4.1.18",
 		"@types/node": "^13.13.52",
 		"@types/react": "^19.2.7",
-		"autoprefixer": "^10.4.23",
-		"feed": "^4.2.2",
 		"tailwindcss": "^4.1.18",
 		"typescript": "^5.9.3"
 	}
