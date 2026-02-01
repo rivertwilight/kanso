@@ -3,11 +3,10 @@
 	"version": "26.1.30",
 	"description": "A Responsive, Fast, i18n and Theme-able static blog base on Next.js.",
 	"scripts": {
-		"dev": "next",
+		"dev": "next -p 3005",
 		"build": "next build",
-		"start": "next start -p 4000",
-		"test:notion": "node ./src/utils/notion.js",
-		"i18n:post": "lobe-i18n md"
+		"start": "next start -p 3005",
+		"test:notion": "node ./src/utils/notion.js"
 	},
 	"author": {
 		"name": "Rene Wang",

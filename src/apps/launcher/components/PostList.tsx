@@ -7,7 +7,18 @@ import {
 import type { IPost } from "@/types/index";
 import Link from "next/link";
 
-const MAX_POST_COUNT = 50;
+const MAX_POST_COUNT = 12;
+
+function formatDate(dateStr: string, locale: string): string {
+  const date = new Date(dateStr);
+  const now = new Date();
+  const isThisYear = date.getFullYear() === now.getFullYear();
+  return date.toLocaleDateString(locale, {
+    ...(isThisYear ? {} : { year: "numeric" }),
+    month: "long",
+    day: "numeric",
+  });
+}
 
 export default function PostList({
   allPosts,
@@ -36,13 +47,12 @@ export default function PostList({
           >
             <ListItemText
               primary={post.frontmatter ? post.frontmatter.title : post.slug}
-              second={post.frontmatter ? post.frontmatter.createAt : "1970/01/01"}
+              second={(post.frontmatter?.updateAt || post.frontmatter?.createAt) ? formatDate(post.frontmatter.updateAt || post.frontmatter.createAt, locale) : "1970/01/01"}
               allowWrap
             />
             <ListItemIcon
               onClick={(e) => {
                 e.preventDefault();
-                console.log("Clicked");
               }}
             >
               <EllipsisVerticalIcon />

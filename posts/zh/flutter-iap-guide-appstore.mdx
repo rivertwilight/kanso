@@ -5,14 +5,14 @@ tag: Coding
 createAt: 2025-05-20T00:00:00.000Z
 updateAt: 2026-01-04T00:00:00.000Z
 seo:
-  keywords:
-    - Flutter IAP
-    - App Store 接入
-    - 内购
-    - 订阅
-    - 异常处理
-    - 防止掉单
-    - 最佳实践
+    keywords:
+        - Flutter IAP
+        - App Store 接入
+        - 内购
+        - 订阅
+        - 异常处理
+        - 防止掉单
+        - 最佳实践
 ---
 
 ## 概览
@@ -27,21 +27,22 @@ seo:
 
 开发者需要提前在 App Store Connect 中配置商品信息。App Store 的购买分为两种：订阅和消耗品。对于永久会员，建议使用 In-Ap Purchase，对于订阅类（例如会员），则使用 Subscription。
 
-![Image](https://file.rene.wang/Screenshot%202024-06-26%20at%2019.18.30.png)
+![](https://file.rene.wang/Screenshot%202024-06-26%20at%2019.18.30.png)
 
 创建订阅或商品时，会要求提供两个值：
+
 - Reference Name：建议写为人类可读的格式，例如 ClipMemo Plus
 - Product ID：商品 ID，建议使用下划线连接，全小写。例如 lifetime_plus_v2。注意：一旦创建了这个商品，那么这个 ID 就不能再被使用了（即使你删除了这个商品）
 
 然后配置可用区及价格。
 
-![Image](https://file.rene.wang/Screenshot%202024-07-13%20at%2017.32.26.png)
+![](https://file.rene.wang/Screenshot%202024-07-13%20at%2017.32.26.png)
 
 最后，我们需要提供服务器通知 API，用于接受来自 Apple 的通知。
 
 提交版本之前，别忘了将这些内购选项也勾选提交。
 
-![Image](https://file.rene.wang/Screenshot%202024-08-01%20at%2014.22.14.png)
+![](https://file.rene.wang/Screenshot%202024-08-01%20at%2014.22.14.png)
 
 至此，App Store 便设置完毕。
 
@@ -51,7 +52,7 @@ seo:
 
 在 Xcode 新建一个文件，选择 StoreKit。在弹出的窗口中勾选”Sync this file with an app in App Store Connect”选项。此操作会把我们在后台配置的商品信息自动同步。
 
-![Image](https://file.rene.wang/Untitled.png)
+![](https://file.rene.wang/Untitled.png)
 
 你可以直接将这个文件放在根目录。创建好后，刚刚在后台设置的商品信息就会同步过来。
 
@@ -70,21 +71,21 @@ seo:
 我们需要更新数据库来保存用户的订阅信息。当然，你也可以完全在本地存储购买信息。用户切换设备后，只需要点击恢复购买即可更新本地的购买信息，这里不多讨论。
 
 首先，在用户数据库中新增一个 order 表，用于存储订单信息。
-| 名称 |  类型 |  说明 | 
+| 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| product_id |  text |  商品 ID，与App Store中的保持一致 | 
-| transaction_id |  text |  交易 ID，由 Apple 提供 | 
-| purchase_date |  date |  购买时间 | 
-| expires_date |  date |  过期时间 | 
+| product_id | text | 商品 ID，与App Store中的保持一致 |
+| transaction_id | text | 交易 ID，由 Apple 提供 |
+| purchase_date | date | 购买时间 |
+| expires_date | date | 过期时间 |
 
 接着，新增一个 subscription 表，用于存储订阅（包括永久买断）信息。
-| 名称 |  类型 |  说明 | 
+| 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| product_id |  text |  商品 ID，与App Store中的保持一致 | 
-| user_id |  text |  用户 ID | 
-| purchase_date |  date |  购买时间 | 
-| expires_date |  date |  过期时间 | 
-| is_lifetime |  bool |  是否为永久买断 | 
+| product_id | text | 商品 ID，与App Store中的保持一致 |
+| user_id | text | 用户 ID |
+| purchase_date | date | 购买时间 |
+| expires_date | date | 过期时间 |
+| is_lifetime | bool | 是否为永久买断 |
 
 ## 服务端实现
 
@@ -139,18 +140,21 @@ sequenceDiagram
 
 ```ts
 // Supabase Edge Function
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY)
+const supabase = createClient(
+	process.env.SUPABASE_URL,
+	process.env.SUPABASE_ANON_KEY,
+);
 
 export async function onRequest(context) {
-  const { request } = context
-  const { data, error } = await supabase.from('orders').insert({
-    product_id: request.body.product_id,
-    transaction_id: request.body.transaction_id,
-    purchase_date: request.body.purchase_date,
-    expires_date: request.body.expires_date
-  })
+	const { request } = context;
+	const { data, error } = await supabase.from("orders").insert({
+		product_id: request.body.product_id,
+		transaction_id: request.body.transaction_id,
+		purchase_date: request.body.purchase_date,
+		expires_date: request.body.expires_date,
+	});
 }
 ```
 
