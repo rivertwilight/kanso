@@ -8,7 +8,7 @@ const POSTS_DIR = path.join(process.cwd(), "posts");
 export interface ICategory {
 	slug: string;
 	config: {
-		name?: string;
+		name: string;
 		description?: string;
 	};
 }
