@@ -18,7 +18,7 @@ A static-based personal website system that seamlessly integrates with Notion an
 ## 🚀 Quick Start
 
 1. Click "Use this template" to create your repository
-2. Edit site.config.js with your information
+2. Edit `src/i18n/resources/en.json` with your information
 3. Deploy to your preferred platform
 
 ## Deploying to Vercel
@@ -31,10 +31,12 @@ A static-based personal website system that seamlessly integrates with Notion an
 CI= yarn run build
 ```
 
-## Deploying to Your Own Server
+<details>
+<summary>Deploying to Your Own Server</summary>
 
-0. Server Configuration
-   Make sure that Node.js, git, and pm2 are installed on the server.
+### 0. Server Configuration
+
+Make sure that Node.js, git, and pm2 are installed on the server.
 
 Create a `/app/ygk-blog` directory on the server and execute git init to initialize the repository.
 
@@ -64,17 +66,18 @@ vim ~/.ssh/id_rsa.pub
 
 Make sure that the Action is enabled, and all updates to the main branch on GitHub will be automatically deployed to the server. Congratulations!
 
+</details>
+
 ## ✍ Writing
 
 Currently, two writing methods are supported:
 
-1. Place the Markdown file in the /posts/<categories> directory. Currently, up to two-level directories are supported.
+1. Place the .mdx file in the `/posts/<locale>` directory. (Recommended)
 2. Automatically sync articles from Notion.
 
 If you choose the first method, each article must have at least the following two frontmatter:
 
-- title
-- date
+![Notion Database Properties](https://file.rene.wang/clipboard-1769920503244-dfe49dcb7279d.png)
 
 If you choose to use Notion for writing, refer to this [database] () to create a similar one.
 
