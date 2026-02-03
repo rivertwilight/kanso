@@ -215,9 +215,7 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
                       overscrollBehavior: "none",
                       // Disable iOS momentum scrolling to prevent bounce
                       WebkitOverflowScrolling: "auto",
-                      // CSS containment - isolate this scroll container from the rest of the page
-                      // This prevents layout/paint recalculation of parent elements during scroll
-                      contain: "layout paint style",
+                      // Note: CSS containment removed to allow Safari Reader to access full article content
                     }}
                   >
                     {children}

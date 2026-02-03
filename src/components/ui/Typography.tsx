@@ -2,8 +2,11 @@
 
 import React from "react";
 
-interface TypographyProps extends React.HTMLAttributes<HTMLDivElement> {
+type ElementType = "div" | "article" | "section" | "main";
+
+interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
+  as?: ElementType;
 }
 
 /**
@@ -13,10 +16,11 @@ interface TypographyProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Typography: React.FC<TypographyProps> = ({
   className = "",
   children,
+  as: Component = "div",
   ...props
 }) => {
   return (
-    <div
+    <Component
       className={`
         font-serif
         text-[var(--eink-ink)]
@@ -59,7 +63,7 @@ export const Typography: React.FC<TypographyProps> = ({
       {...props}
     >
       {children}
-    </div>
+    </Component>
   );
 };
 
