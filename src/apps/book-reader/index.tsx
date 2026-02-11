@@ -4,7 +4,6 @@ import { useEffect, useRef, ReactNode, useMemo } from "react";
 import { useAtom } from "jotai";
 import { readerSettingsAtom } from "@/system/atoms/readerSettings";
 import ImageBlock from "@/components/ImageBlock";
-import { Typography } from "@/components/ui";
 import GiscusComments from "@/components/GiscusComments";
 import AppToolbar from "@/system/components/AppToolbar";
 import "katex/dist/katex.min.css";
@@ -148,13 +147,13 @@ export default function BookReaderApp({
 							paddingRight: readerStyles.paddingRight,
 						}}
 					>
-						<Typography
-							as="article"
+						<article
+							className="font-serif text-(--eink-ink)"
 							itemScope
 							itemType="http://schema.org/Article"
 						>
-							<h1 itemProp="headline">{postProps.title}</h1>
-							<div className="text-[var(--eink-ink-muted)] text-sm mb-4">
+							<h1 className="text-3xl font-bold mb-4 mt-6 font-sans tracking-tight" itemProp="headline">{postProps.title}</h1>
+							<div className="text-(--eink-ink-muted) text-sm mb-4">
 								<time
 									itemProp="datePublished"
 									dateTime={postProps.createAt}
@@ -195,7 +194,7 @@ export default function BookReaderApp({
 							>
 								{postContent}
 							</section>
-						</Typography>
+						</article>
 
 						<GiscusComments locale={locale} />
 					</div>

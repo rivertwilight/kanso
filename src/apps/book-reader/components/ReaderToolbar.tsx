@@ -114,7 +114,7 @@ export const ReaderToolbar: React.FC<ReaderToolbarProps> = ({
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   const handleBack = () => {
-    router.back();
+    router.push("/");
   };
 
   // Truncate title if too long

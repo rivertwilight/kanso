@@ -3,7 +3,6 @@
 import { useEffect, useRef, ReactNode, useMemo } from "react";
 import { useAtom } from "jotai";
 import { readerSettingsAtom } from "@/system/atoms/readerSettings";
-import { Typography } from "@/components/ui";
 import GiscusComments from "@/components/GiscusComments";
 import AppToolbar from "@/system/components/AppToolbar";
 import BookDetailHeader from "./components/BookDetailHeader";
@@ -81,7 +80,7 @@ export default function BookReviewApp({
       <div ref={topRef}>
         <div className="overflow-hidden p-0">
           <div style={{ paddingLeft: readerStyles.paddingLeft, paddingRight: readerStyles.paddingRight }}>
-            <Typography itemScope itemType="http://schema.org/Review">
+            <div className="font-serif text-(--eink-ink)" itemScope itemType="http://schema.org/Review">
               <BookDetailHeader
                 title={bookProps.title}
                 cover={bookProps.cover}
@@ -100,7 +99,7 @@ export default function BookReviewApp({
               >
                 {reviewContent}
               </section>
-            </Typography>
+            </div>
 
             {/* <GiscusComments locale={locale} /> */}
           </div>

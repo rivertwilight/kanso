@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo } from "react";
-import { Typography } from "@/components/ui";
 import { sortByDate } from "@/utils/sortPosts";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
@@ -67,16 +66,15 @@ export default function CatalogApp({
         onMenuClick={() => console.log("Menu clicked")}
       />
       <div className="px-4 md:px-6 pb-8">
-        <Typography>
-          <h1>{t("title")}</h1>
-        {/* <p>{localeLinks}</p> */}
+        <div className="font-serif text-(--eink-ink)">
+          <h1 className="text-3xl font-bold mb-4 mt-6 font-sans tracking-tight">{t("title")}</h1>
         {sortedYears.map((year) => (
           <div key={year}>
-            <h2>{year}</h2>
-            <ul>
+            <h2 className="text-2xl font-bold mb-3 mt-5 font-sans tracking-tight border-b border-(--eink-divider) pb-2">{year}</h2>
+            <ul className="list-disc pl-6 mb-4 space-y-1">
               {postsByYear[year].map((post: any) => (
                 <li key={post.id}>
-                  <Link href={"/p/" + post.id}>
+                  <Link href={"/p/" + post.id} className="underline underline-offset-2 decoration-(--eink-ink-tertiary) hover:decoration-(--eink-ink)">
                     {post.frontmatter.title || post.slug}
                   </Link>
                 </li>
@@ -84,7 +82,7 @@ export default function CatalogApp({
             </ul>
           </div>
         ))}
-        </Typography>
+        </div>
       </div>
     </>
   );

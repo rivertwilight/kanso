@@ -7,11 +7,7 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
-import CodeBlock from "@/components/CodeBlock";
-import ImageBlock from "@/components/ImageBlock";
-import HeadingBlock from "@/components/HeadingBlock";
-import FrameBlock from "@/components/FrameBlock";
-import TableBlock from "@/components/TableBlock";
+import { mdxComponents } from "@/components/mdxComponents";
 
 const SITE_ROOT = "https://rene.wang";
 const AUTHOR_NAME = "Rene Wang";
@@ -161,18 +157,7 @@ export default async function BookReviewPage({ params }: PageProps) {
         rehypePlugins: [rehypeKatex],
       },
     },
-    components: {
-      code: CodeBlock,
-      img: ImageBlock,
-      table: TableBlock,
-      h1: (props) => <HeadingBlock level={1} {...props} />,
-      h2: (props) => <HeadingBlock level={2} {...props} />,
-      h3: (props) => <HeadingBlock level={3} {...props} />,
-      h4: (props) => <HeadingBlock level={4} {...props} />,
-      h5: (props) => <HeadingBlock level={5} {...props} />,
-      h6: (props) => <HeadingBlock level={6} {...props} />,
-      iframe: FrameBlock,
-    },
+    components: mdxComponents,
   });
 
   return (

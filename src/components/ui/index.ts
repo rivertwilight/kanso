@@ -8,7 +8,6 @@ export * from "./Icons";
 
 // Core Components
 export { Button } from "./Button";
-export { Typography } from "./Typography";
 
 // List Components
 export { List, ListItem, ListItemText, ListItemIcon } from "./List";
