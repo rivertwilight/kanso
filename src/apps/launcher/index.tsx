@@ -13,7 +13,6 @@ import PostList from "./components/PostList";
 import BottomNav from "./components/BottomNav";
 import BookGrid from "./components/BookGrid";
 import AppToolbar from "@/system/components/AppToolbar";
-import projects from "./projects.json";
 import Image from "next/image";
 
 interface LauncherAppProps {
@@ -21,12 +20,11 @@ interface LauncherAppProps {
 	falttedPosts: IPost[];
 	locale: string;
 	allCategories: { slug: string; config: { name: string } }[];
-	bookReviews: IPost[];
+	projects: IPost[];
 }
 
 export default function LauncherApp(props: LauncherAppProps) {
-	const { allPosts, falttedPosts, locale, allCategories, bookReviews } =
-		props;
+	const { allPosts, falttedPosts, locale, allCategories, projects } = props;
 	const [activeCategory, setActiveCategory] = useAtom(activeCategoryAtom);
 	const searchParams = useSearchParams();
 	const activeTab = searchParams.get("tab") || "home";
@@ -43,9 +41,9 @@ export default function LauncherApp(props: LauncherAppProps) {
 						? tCategories(item.slug)
 						: item.slug;
 					return { name: item.slug, text: translatedName };
-				}),
+				})
 			),
-		[allCategories, tCategories, tCommon],
+		[allCategories, tCategories, tCommon]
 	);
 
 	return (
@@ -81,12 +79,8 @@ export default function LauncherApp(props: LauncherAppProps) {
 								{projects.map((project, index) => (
 									<GridItem
 										key={index}
-										href={
-											project.externalBrowser
-												? project.url
-												: `/${locale}/browser?url=${encodeURIComponent(project.url)}`
-										}
-										src={project.cover}
+										href={`/project/${project.slug}`}
+										src={project.frontmatter.cover}
 									/>
 								))}
 							</Grid>
@@ -135,7 +129,7 @@ export default function LauncherApp(props: LauncherAppProps) {
 
 				{activeTab === "library" && (
 					<Section>
-						<BookGrid books={bookReviews} locale={locale} />
+						<BookGrid books={projects} locale={locale} />
 					</Section>
 				)}
 			</div>

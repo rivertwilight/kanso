@@ -18,7 +18,9 @@ export default async function HomePage({ params }: PageProps) {
 	const allPosts = getAllPosts({
 		pocessRes: {
 			markdownBody: (content) =>
-				`${content.substring(0, 200)}${content.length >= 200 ? "..." : ""}`,
+				`${content.substring(0, 200)}${
+					content.length >= 200 ? "..." : ""
+				}`,
 			id: (text) => text,
 		},
 		enableFlat: true,
@@ -27,7 +29,7 @@ export default async function HomePage({ params }: PageProps) {
 	}).filter((post: any) => !post.frontmatter.hidden);
 
 	// Get book reviews
-	const bookReviews = getAllPosts({
+	const projects = getAllPosts({
 		filterByType: "book",
 		enableSort: true,
 		// locale: locale,
@@ -41,7 +43,7 @@ export default async function HomePage({ params }: PageProps) {
 				allPosts={allPosts}
 				falttedPosts={allPosts}
 				allCategories={allCategories}
-				bookReviews={bookReviews}
+				projects={projects}
 				locale={locale}
 			/>
 		</Suspense>
