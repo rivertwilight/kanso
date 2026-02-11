@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 
 /**
  * Kindle-style List Components
@@ -28,27 +28,12 @@ interface ListItemProps extends React.HTMLAttributes<HTMLLIElement> {
   children: React.ReactNode;
 }
 
-export const ListItem: React.FC<ListItemProps> = ({ 
-  className = "", 
+export const ListItem: React.FC<ListItemProps> = ({
+  className = "",
   children,
   style,
-  ...props 
+  ...props
 }) => {
-  const [isActive, setIsActive] = useState(false);
-
-  // Kindle-style invert colors on tap
-  const normalStyles = {
-    backgroundColor: 'transparent',
-    color: 'var(--eink-ink)',
-  };
-
-  const activeStyles = {
-    backgroundColor: 'var(--eink-ink)',
-    color: 'var(--eink-paper)',
-  };
-
-  const currentStyles = isActive ? activeStyles : normalStyles;
-
   return (
     <li
       className={`
@@ -58,18 +43,15 @@ export const ListItem: React.FC<ListItemProps> = ({
         cursor-pointer
         select-none
         border-b
+        bg-transparent text-(--eink-ink)
+        active:bg-(--eink-ink) active:text-(--eink-paper)
+        sm:hover:bg-(--eink-ink) sm:hover:text-(--eink-paper)
         ${className}
       `}
-      style={{ 
-        ...currentStyles, 
+      style={{
         borderColor: 'var(--eink-divider)',
-        ...style 
+        ...style
       }}
-      onMouseDown={() => setIsActive(true)}
-      onMouseUp={() => setIsActive(false)}
-      onMouseLeave={() => setIsActive(false)}
-      onTouchStart={() => setIsActive(true)}
-      onTouchEnd={() => setIsActive(false)}
       {...props}
     >
       {children}
