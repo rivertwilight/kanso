@@ -41,6 +41,7 @@ export async function generateMetadata({
 			description: t("description"),
 			locale: validLocale,
 			type: "website",
+			siteName: t("title"),
 			images: [
 				{
 					url: "/og.png",
