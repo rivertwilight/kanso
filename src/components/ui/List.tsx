@@ -45,7 +45,6 @@ export const ListItem: React.FC<ListItemProps> = ({
         border-b
         bg-transparent text-(--eink-ink)
         active:bg-(--eink-ink) active:text-(--eink-paper)
-        sm:hover:bg-(--eink-ink) sm:hover:text-(--eink-paper)
         ${className}
       `}
       style={{

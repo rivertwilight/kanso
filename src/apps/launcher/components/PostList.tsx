@@ -7,7 +7,7 @@ import {
 import type { IPost } from "@/types/index";
 import Link from "next/link";
 
-const MAX_POST_COUNT = 12;
+const MAX_POST_COUNT = 99;
 
 function formatDate(dateStr: string, locale: string): string {
   const date = new Date(dateStr);

@@ -64,8 +64,8 @@ export default function LauncherApp(props: LauncherAppProps) {
 								/>
 								<div className="font-sans">
 									I'm a design engineer at LobeHub. Welcome to
-									my Kindle. Here's my projects and thoughts.
-									Feel free to try or comment them.
+									my Kindle, where I showcase projects and
+									share thoughts.
 								</div>
 							</div>
 						</Section>
@@ -108,7 +108,7 @@ export default function LauncherApp(props: LauncherAppProps) {
 								locale={locale}
 							/>
 
-							<br />
+							{/* <br />
 							<div
 								style={{
 									display: "flex",
@@ -122,7 +122,7 @@ export default function LauncherApp(props: LauncherAppProps) {
 										})}
 									</Button>
 								</Link>
-							</div>
+							</div> */}
 						</Section>
 					</>
 				)}
