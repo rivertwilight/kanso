@@ -62,7 +62,7 @@ const Header: React.FC<HeaderProps> = ({ menuItems = [] }) => {
       <SearchBar />
 
       {/* Shopping cart icon */}
-      <button
+      {/* <button
         onClick={() => {
           window.open("https://www.ygeeker.com", "_blank");
         }}
@@ -76,7 +76,7 @@ const Header: React.FC<HeaderProps> = ({ menuItems = [] }) => {
       >
         <ShoppingCartIcon size={20} className="md:hidden" />
         <ShoppingCartIcon size={18} className="hidden md:block" />
-      </button>
+      </button> */}
 
       {/* Three-dot menu dropdown */}
       <ActionBarMenu
