@@ -31,7 +31,7 @@ export default function BookGrid({ books, locale }: BookGridProps) {
 			}}
 		>
 			{books.map((book) => (
-				<BookCover key={book.id} book={book} locale={locale} />
+				<BookCover key={book.id} book={book} locale={locale} showYearBadge />
 			))}
 		</div>
 	);

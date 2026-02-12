@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import getAllPosts from "@/utils/getAllPosts";
+import { getAllProjects } from "@/utils/getAllPosts";
 import getCategories from "@/utils/getCategories";
 import { setRequestLocale } from "next-intl/server";
 import LauncherApp from "@/apps/launcher";
@@ -14,7 +15,7 @@ export default async function HomePage({ params }: PageProps) {
 	// Enable static rendering
 	setRequestLocale(locale);
 
-	// Get regular posts (exclude books)
+	// Get regular posts
 	const allPosts = getAllPosts({
 		pocessRes: {
 			markdownBody: (content) =>
@@ -25,14 +26,11 @@ export default async function HomePage({ params }: PageProps) {
 		},
 		enableFlat: true,
 		enableSort: true,
-		excludeBooks: true,
 	}).filter((post: any) => !post.frontmatter.hidden);
 
-	// Get book reviews
-	const projects = getAllPosts({
-		filterByType: "book",
+	// Get projects
+	const projects = getAllProjects({
 		enableSort: true,
-		// locale: locale,
 	}).filter((post: any) => !post.frontmatter.hidden);
 
 	const allCategories = getCategories(locale);

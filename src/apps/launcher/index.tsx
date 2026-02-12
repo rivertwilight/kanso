@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { useAtom } from "jotai";
 import { activeCategoryAtom } from "./atoms";
-import { Button, Grid, GridItem, Section, SectionTitle } from "@/components/ui";
+import { Button, Grid, Section, SectionTitle } from "@/components/ui";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import type { IPost } from "@/types/index";
@@ -12,6 +12,7 @@ import CategoryLabel from "./components/CategoryLabel";
 import PostList from "./components/PostList";
 import BottomNav from "./components/BottomNav";
 import BookGrid from "./components/BookGrid";
+import BookCover from "./components/BookCover";
 import AppToolbar from "@/system/components/AppToolbar";
 import Image from "next/image";
 
@@ -75,13 +76,14 @@ export default function LauncherApp(props: LauncherAppProps) {
 								showArrow
 							/>
 
-							<Grid>
+							<Grid className="items-end">
 								{projects.map((project, index) => (
-									<GridItem
-										key={index}
-										href={`/project/${project.slug}`}
-										src={project.frontmatter.cover}
-									/>
+									<div key={index} className="shrink-0 w-24">
+										<BookCover
+											book={project}
+											locale={locale}
+										/>
+									</div>
 								))}
 							</Grid>
 						</Section>

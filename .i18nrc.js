@@ -8,7 +8,7 @@ module.exports = defineConfig({
 	modelName: "gpt-4o-mini",
 	reference: "",
 	markdown: {
-		entry: ["posts/zh/*.mdx"],
+		entry: ["content/crafts/zh/*.mdx"],
 		entryLocale: "zh",
 		outputLocales: ["en"],
 		entryExtension: ".mdx",

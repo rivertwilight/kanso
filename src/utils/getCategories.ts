@@ -3,7 +3,7 @@ import path from "path";
 import { globSync } from "glob";
 import matter from "gray-matter";
 
-const POSTS_DIR = path.join(process.cwd(), "posts");
+const CRAFTS_DIR = path.join(process.cwd(), "content", "crafts");
 
 export interface ICategory {
 	slug: string;
@@ -17,7 +17,7 @@ export interface ICategory {
  * Get all categories for a locale by reading tags from post frontmatter
  */
 function getCategories(locale: string): ICategory[] {
-	const pattern = `${POSTS_DIR}/${locale}/*.mdx`;
+	const pattern = `${CRAFTS_DIR}/${locale}/*.mdx`;
 	const files = globSync(pattern, { nodir: true });
 
 	const categorySet = new Map<string, ICategory>();

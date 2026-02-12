@@ -9,13 +9,33 @@ import UniversalBookCover from "@/components/UniversalBookCover";
 interface BookCoverProps {
 	book: IPost;
 	locale: string;
+	showYearBadge?: boolean;
 }
 
-export default function BookCover({ book, locale }: BookCoverProps) {
+function YearBadge({ year }: { year: number }) {
+	return (
+		<div className="absolute top-0 right-0 overflow-hidden w-16 h-16 z-10">
+			<div
+				className="absolute text-[10px] font-bold text-center w-[90px] py-0.5 rotate-45 origin-center"
+				style={{
+					top: "12px",
+					right: "-22px",
+					backgroundColor: "var(--eink-ink)",
+					color: "var(--eink-paper)",
+				}}
+			>
+				{year}
+			</div>
+		</div>
+	);
+}
+
+export default function BookCover({ book, locale, showYearBadge = false }: BookCoverProps) {
 	const [imageError, setImageError] = useState(false);
 	const title = book.frontmatter.title || book.defaultTitle;
 	const cover = book.frontmatter.cover;
 	const author = book.frontmatter.metadata?.author;
+	const year = book.frontmatter.metadata?.year;
 	const slug = book.slug;
 	const showPlaceholder = !cover || imageError;
 
@@ -30,6 +50,7 @@ export default function BookCover({ book, locale }: BookCoverProps) {
 						backgroundColor: "var(--eink-paper-secondary)",
 					}}
 				>
+					{showYearBadge && year && <YearBadge year={year} />}
 					<UniversalBookCover
 						title={title}
 						author={author}
@@ -38,11 +59,12 @@ export default function BookCover({ book, locale }: BookCoverProps) {
 				</div>
 			) : (
 				<div
-					className="w-full relative border"
+					className="w-full relative overflow-hidden border"
 					style={{
 						borderColor: "var(--eink-ink-muted)",
 					}}
 				>
+					{showYearBadge && year && <YearBadge year={year} />}
 					<Image
 						src={cover!}
 						alt={title}
