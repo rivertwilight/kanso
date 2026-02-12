@@ -65,7 +65,7 @@ const nextConfig: NextConfig = {
 			// Social links
 			{
 				source: "/s/twitter",
-				destination: "https://twitter.com/rea1DonandTrump",
+				destination: "https://twitter.com/renedotwang",
 				permanent: true,
 			},
 			{
