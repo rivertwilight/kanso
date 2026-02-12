@@ -39,7 +39,7 @@ export default function PostList({
   return (
     <>
       {classfiedPosts.slice(0, MAX_POST_COUNT).map((post) => (
-        <Link locale={locale} key={post.id} href={"/p/" + post.id} style={{ textDecoration: "none" }}>
+        <Link locale={locale} key={post.id} href={"/essay/" + post.id} style={{ textDecoration: "none" }}>
           <ListItem
             style={{
               cursor: "pointer",

@@ -91,7 +91,7 @@ src/
 │   │   ├── atoms.ts             # Category filter state
 │   │   └── components/          # App-specific components
 │   │
-│   ├── book-reader/             # Article reader app ("/p/[slug]")
+│   ├── book-reader/             # Article reader app ("/essay/[slug]")
 │   │   ├── index.tsx
 │   │   ├── atoms.ts             # Scroll position, TOC state
 │   │   └── components/

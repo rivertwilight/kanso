@@ -124,7 +124,7 @@ export default async function ArticlePage({ params }: PageProps) {
 		},
 		mainEntityOfPage: {
 			"@type": "WebPage",
-			"@id": `${SITE_ROOT}/${locale}/p/${slug}`,
+			"@id": `${SITE_ROOT}/${locale}/essay/${slug}`,
 		},
 		...(frontmatter.cover && {
 			image: {

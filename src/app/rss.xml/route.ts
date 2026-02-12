@@ -36,7 +36,7 @@ async function generateRssXml(locale: string): Promise<string> {
 			const postTitle = escapeXml(
 				post.frontmatter.title || post.defaultTitle
 			);
-			const postUrl = `${baseUrl}/${locale}/p/${post.id}`;
+			const postUrl = `${baseUrl}/${locale}/essay/${post.id}`;
 			const pubDate = post.frontmatter.createAt
 				? new Date(post.frontmatter.createAt).toUTCString()
 				: new Date().toUTCString();

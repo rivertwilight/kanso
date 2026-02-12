@@ -74,7 +74,7 @@ export default function CatalogApp({
             <ul className="list-disc pl-6 mb-4 space-y-1">
               {postsByYear[year].map((post: any) => (
                 <li key={post.id}>
-                  <Link href={"/p/" + post.id} className="underline underline-offset-2 decoration-(--eink-ink-tertiary) hover:decoration-(--eink-ink)">
+                  <Link href={"/essay/" + post.id} className="underline underline-offset-2 decoration-(--eink-ink-tertiary) hover:decoration-(--eink-ink)">
                     {post.frontmatter.title || post.slug}
                   </Link>
                 </li>

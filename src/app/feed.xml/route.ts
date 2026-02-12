@@ -37,7 +37,7 @@ async function generateAtomXml(locale: string): Promise<string> {
 			const postTitle = escapeXml(
 				post.frontmatter.title || post.defaultTitle
 			);
-			const postUrl = `${baseUrl}/p/${post.id}`;
+			const postUrl = `${baseUrl}/essay/${post.id}`;
 			const updated = post.frontmatter.createAt
 				? new Date(post.frontmatter.createAt).toISOString()
 				: now;

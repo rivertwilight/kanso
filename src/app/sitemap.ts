@@ -1,44 +1,44 @@
 import { MetadataRoute } from "next";
-import getAllPosts, { getAllPostSlugs } from "@/utils/getAllPosts";
+import getAllPosts from "@/utils/getAllPosts";
+import { getAllProjects } from "@/utils/getAllPosts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
 	const baseUrl = "https://rene.wang";
-	const locales = ["en", "zh"];
 
-	// Static pages
-	const staticPages: MetadataRoute.Sitemap = locales.flatMap((locale) => [
+	// Root page
+	const rootPages: MetadataRoute.Sitemap = [
 		{
-			url: `${baseUrl}/${locale}`,
+			url: baseUrl,
 			lastModified: new Date(),
 			changeFrequency: "weekly" as const,
 			priority: 1,
 		},
-		{
-			url: `${baseUrl}/${locale}/archive`,
-			lastModified: new Date(),
-			changeFrequency: "weekly" as const,
-			priority: 0.8,
-		},
-		{
-			url: `${baseUrl}/${locale}/settings`,
-			lastModified: new Date(),
-			changeFrequency: "monthly" as const,
-			priority: 0.3,
-		},
-	]);
+	];
 
-	// Dynamic post pages
-	const postPages: MetadataRoute.Sitemap = locales.flatMap((locale) => {
-		const posts = getAllPosts({ locale, enableSort: true });
-
-		return posts.map((post) => ({
-			url: `${baseUrl}/${locale}/p/${post.id}`,
+	// Post pages (deduplicated by slug, no locale prefix)
+	const posts = getAllPosts({ enableSort: true });
+	const seenSlugs = new Set<string>();
+	const postPages: MetadataRoute.Sitemap = posts
+		.filter((post) => {
+			if (seenSlugs.has(post.id)) return false;
+			seenSlugs.add(post.id);
+			return true;
+		})
+		.map((post) => ({
+			url: `${baseUrl}/essay/${post.id}`,
 			lastModified: post.frontmatter.createAt ? new Date(post.frontmatter.createAt) : new Date(),
 			changeFrequency: "monthly" as const,
 			priority: 0.6,
 		}));
-	});
 
-	return [...staticPages, ...postPages];
+	// Project pages
+	const projects = getAllProjects();
+	const projectPages: MetadataRoute.Sitemap = projects.map((project) => ({
+		url: `${baseUrl}/project/${project.id}`,
+		lastModified: new Date(),
+		changeFrequency: "monthly" as const,
+		priority: 0.6,
+	}));
+
+	return [...rootPages, ...postPages, ...projectPages];
 }
-
