@@ -30,12 +30,16 @@ function YearBadge({ year }: { year: number }) {
 	);
 }
 
-export default function BookCover({ book, locale, showYearBadge = false }: BookCoverProps) {
+export default function BookCover({
+	book,
+	locale,
+	showYearBadge = false,
+}: BookCoverProps) {
 	const [imageError, setImageError] = useState(false);
 	const title = book.frontmatter.title || book.defaultTitle;
 	const cover = book.frontmatter.cover;
-	const author = book.frontmatter.metadata?.author;
-	const year = book.frontmatter.metadata?.year;
+	const author = book.frontmatter.author;
+	const year = book.frontmatter?.year;
 	const slug = book.slug;
 	const showPlaceholder = !cover || imageError;
 
