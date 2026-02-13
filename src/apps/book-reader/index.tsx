@@ -199,6 +199,7 @@ export default function BookReaderApp({
 								{postContent}
 							</section>
 						</article>
+						<div className="h-32" />
 					</div>
 				</div>
 			</div>
