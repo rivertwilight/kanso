@@ -35,7 +35,6 @@
 		"react": "^19.2.3",
 		"react-dom": "^19.2.3",
 		"react-katex": "^3.1.0",
-		"react-markdown": "^9.1.0",
 		"react-mathjax": "^1.0.1",
 		"react-syntax-highlighter": "latest",
 		"rehype-katex": "latest",

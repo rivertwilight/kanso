@@ -65,9 +65,6 @@ importers:
       react-katex:
         specifier: ^3.1.0
         version: 3.1.0(prop-types@15.8.1)(react@19.2.3)
-      react-markdown:
-        specifier: ^9.1.0
-        version: 9.1.0(@types/react@19.2.7)(react@19.2.3)
       react-mathjax:
         specifier: ^1.0.1
         version: 1.0.1(react@19.2.3)
@@ -1784,9 +1781,6 @@ packages:
     resolution: {integrity: sha512-oWv4T4yJ52iKrufjnyZPkrN0CH3QnrUqdB6In1g5Fe1mia8GmF36gnfNySxoZtxD5+NmYw1EElVXiBk93UeskA==}
     engines: {node: '>=12'}
 
-  html-url-attributes@3.0.1:
-    resolution: {integrity: sha512-ol6UPyBWqsrO6EJySPz2O7ZSr856WDrEzM5zMqp+FJJLGMW35cLYmmZnl0vztAZxRUoNZJFTCohfjuIJ8I4QBQ==}
-
   http-errors@2.0.1:
     resolution: {integrity: sha512-4FbRdAX+bSdmo4AUFuS0WNiPz8NgFt+r8ThgNWmlrjQjt1Q7ZR9+zTlce2859x4KSXrwIsaeTqDoKQmtP8pLmQ==}
     engines: {node: '>= 0.8'}
@@ -2628,12 +2622,6 @@ packages:
     peerDependencies:
       prop-types: ^15.8.1
       react: '>=15.3.2 <20'
-
-  react-markdown@9.1.0:
-    resolution: {integrity: sha512-xaijuJB0kzGiUdG7nc2MOMDUDBWPyGAjZtUrow9XxUeua8IqeP+VlIfAZ3bphpcLTnSZXz6z9jcVC/TCwbfgdw==}
-    peerDependencies:
-      '@types/react': '>=18'
-      react: '>=18'
 
   react-mathjax@1.0.1:
     resolution: {integrity: sha512-+mjFcciZY3GQoqiQm3aRTyDjgBKuoaXpY+SCONX00jScuPpTKwnASeFMS5+pbTIzDf5zPT2Y9ZZfQ9U/d4CKtQ==}
@@ -5009,8 +4997,6 @@ snapshots:
     dependencies:
       whatwg-encoding: 2.0.0
 
-  html-url-attributes@3.0.1: {}
-
   http-errors@2.0.1:
     dependencies:
       depd: 2.0.0
@@ -6149,24 +6135,6 @@ snapshots:
       katex: 0.16.27
       prop-types: 15.8.1
       react: 19.2.3
-
-  react-markdown@9.1.0(@types/react@19.2.7)(react@19.2.3):
-    dependencies:
-      '@types/hast': 3.0.4
-      '@types/mdast': 4.0.4
-      '@types/react': 19.2.7
-      devlop: 1.1.0
-      hast-util-to-jsx-runtime: 2.3.6
-      html-url-attributes: 3.0.1
-      mdast-util-to-hast: 13.2.1
-      react: 19.2.3
-      remark-parse: 11.0.0
-      remark-rehype: 11.1.2
-      unified: 11.0.5
-      unist-util-visit: 5.0.0
-      vfile: 6.0.3
-    transitivePeerDependencies:
-      - supports-color
 
   react-mathjax@1.0.1(react@19.2.3):
     dependencies:
