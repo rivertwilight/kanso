@@ -161,7 +161,7 @@ export default function BookReaderApp({
 							itemType="http://schema.org/Article"
 						>
 							<h1
-								className="text-3xl font-bold mb-4 mt-6 font-sans tracking-tight"
+								className="text-3xl font-bold mb-4 mt-6 font-sans tracking-wide"
 								itemProp="headline"
 							>
 								{postProps.title}
@@ -204,8 +204,6 @@ export default function BookReaderApp({
 									</>
 								)}
 							</div>
-
-							<div className="w-full h-4"></div>
 
 							<section
 								itemProp="articleBody"
