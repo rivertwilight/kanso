@@ -56,12 +56,12 @@
   /* Customize these to change code block colors */
   --shiki-color-text: #393a34;
   --shiki-color-background: #f8f5ec;
-  --shiki-token-constant: #7c4dff;
+  --shiki-token-constant: #d06b00;
   --shiki-token-string: #2e7d32;
   --shiki-token-comment: #8a8a84;
-  --shiki-token-keyword: #8b4513;
+  --shiki-token-keyword: #d06b00;
   --shiki-token-parameter: #393a34;
-  --shiki-token-function: #6f42c1;
+  --shiki-token-function: #2e7d32;
   --shiki-token-string-expression: #2e7d32;
   --shiki-token-punctuation: #6b6b66;
   --shiki-token-link: #2e7d32;
@@ -121,12 +121,12 @@
 .dark {
   --shiki-color-text: #d4d4d4;
   --shiki-color-background: #1e1e1a;
-  --shiki-token-constant: #b388ff;
+  --shiki-token-constant: #e8a24e;
   --shiki-token-string: #a5d6a7;
   --shiki-token-comment: #6e6d68;
-  --shiki-token-keyword: #dba676;
+  --shiki-token-keyword: #e8a24e;
   --shiki-token-parameter: #d4d4d4;
-  --shiki-token-function: #ce93d8;
+  --shiki-token-function: #a5d6a7;
   --shiki-token-string-expression: #a5d6a7;
   --shiki-token-punctuation: #9a9890;
   --shiki-token-link: #a5d6a7;
@@ -174,12 +174,12 @@
   :root:not([data-theme="light"]) {
     --shiki-color-text: #d4d4d4;
     --shiki-color-background: #1e1e1a;
-    --shiki-token-constant: #b388ff;
+    --shiki-token-constant: #e8a24e;
     --shiki-token-string: #a5d6a7;
     --shiki-token-comment: #6e6d68;
-    --shiki-token-keyword: #dba676;
+    --shiki-token-keyword: #e8a24e;
     --shiki-token-parameter: #d4d4d4;
-    --shiki-token-function: #ce93d8;
+    --shiki-token-function: #a5d6a7;
     --shiki-token-string-expression: #a5d6a7;
     --shiki-token-punctuation: #9a9890;
     --shiki-token-link: #a5d6a7;
@@ -298,6 +298,32 @@ pre.shiki code .line::before {
   text-align: right;
   color: var(--shiki-token-comment);
   opacity: 0.5;
+}
+
+/* Diff line highlighting */
+pre.shiki code .line.diff-add {
+  background-color: rgba(46, 125, 50, 0.15);
+}
+
+pre.shiki code .line.diff-remove {
+  background-color: rgba(208, 107, 0, 0.15);
+}
+
+.dark pre.shiki code .line.diff-add {
+  background-color: rgba(165, 214, 167, 0.12);
+}
+
+.dark pre.shiki code .line.diff-remove {
+  background-color: rgba(232, 162, 78, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) pre.shiki code .line.diff-add {
+    background-color: rgba(165, 214, 167, 0.12);
+  }
+  :root:not([data-theme="light"]) pre.shiki code .line.diff-remove {
+    background-color: rgba(232, 162, 78, 0.12);
+  }
 }
 
 pre.shiki-fallback {

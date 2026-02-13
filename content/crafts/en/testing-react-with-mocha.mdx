@@ -14,7 +14,7 @@ Recently, I continued the development of the previous [Kindle UI](https://github
 
 Jest was originally designed for testing React apps. Compared to Jest, Mocha offers greater flexibility (the latter requires additional configuration, while the former works out of the box), can run in both browser and Node environments, and supports some complex statements such as:
 
-```plain text
+```javascript
 expect(person.age).to.be.lte(35).and.to.be.gte(18);
 ```
 
@@ -110,6 +110,23 @@ module.exports = function getBabelConfig(api) {
 };
 ```
 
+## Diff Example
+
+Here is what a config change looks like:
+
+```diff-javascript
+ module.exports = {
+   extension: ["js", "mjs", "ts", "tsx"],
+-  ignore: ["**/build/**"],
++  ignore: ["**/build/**", "**/node_modules/**"],
+   recursive: true,
+-  timeout: 2000,
++  timeout: (process.env.CIRCLECI === "true" ? 5 : 2) * 1000,
+   reporter: "dot",
++  require: [require.resolve("./test/utils/setupBabel")],
+ };
+```
+
 ## Testing
 
 Add a shortcut script in package.json, please configure according to your actual project:
@@ -152,7 +169,7 @@ describe("<ListItem />", () => {
 
 ### Checking Render Results
 
-```plain text
+```tsx
 it("render in Container", () => {
 	expect(() =>
 		renderer.create(
@@ -191,7 +208,7 @@ module.exports = {
 
 Update the test code:
 
-```plain text
+```tsx
 import { queries, within } from "@testing-library/react/pure";
 
 describe("general rendering", async () => {

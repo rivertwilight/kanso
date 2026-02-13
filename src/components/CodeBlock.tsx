@@ -66,6 +66,43 @@ const LANG_ALIASES: Record<string, string> = {
 	kt: "kotlin",
 };
 
+// Parse diff markers from code lines and return stripped code + marker map
+function parseDiffMarkers(code: string): {
+	strippedCode: string;
+	markers: ("add" | "remove" | "context")[];
+} {
+	const lines = code.split("\n");
+	const markers: ("add" | "remove" | "context")[] = [];
+	const strippedLines = lines.map((line) => {
+		if (line.startsWith("+")) {
+			markers.push("add");
+			return line.slice(1);
+		}
+		if (line.startsWith("-")) {
+			markers.push("remove");
+			return line.slice(1);
+		}
+		// Context line (leading space or empty)
+		markers.push("context");
+		return line.startsWith(" ") ? line.slice(1) : line;
+	});
+	return { strippedCode: strippedLines.join("\n"), markers };
+}
+
+// Apply diff line classes to Shiki HTML output using pre-computed markers
+function applyDiffClasses(
+	html: string,
+	markers: ("add" | "remove" | "context")[]
+): string {
+	let lineIndex = 0;
+	return html.replace(/<span class="line">/g, () => {
+		const marker = markers[lineIndex++];
+		if (marker === "add") return `<span class="line diff-add">`;
+		if (marker === "remove") return `<span class="line diff-remove">`;
+		return `<span class="line">`;
+	});
+}
+
 interface CodeBlockProps {
 	node?: any;
 	inline?: boolean;
@@ -121,21 +158,38 @@ const CodeBlock = ({
 		if (language === "mermaid") return;
 
 		let cancelled = false;
-		const lang = language
-			? LANG_ALIASES[language] || language
+
+		// Detect diff-{lang} pattern (e.g. diff-javascript, diff-tsx)
+		const isDiff = language?.startsWith("diff-") ?? false;
+		const baseLang = isDiff ? language!.slice(5) : language;
+		const lang = baseLang
+			? LANG_ALIASES[baseLang] || baseLang
 			: "text";
 
 		getHighlighter().then((highlighter) => {
 			if (cancelled) return;
 
-			// Check if the language is loaded, fall back to "text"
 			const loadedLangs = highlighter.getLoadedLanguages();
 			const resolvedLang = loadedLangs.includes(lang) ? lang : "text";
 
-			const html = highlighter.codeToHtml(trimmedCode, {
+			let codeToHighlight = trimmedCode;
+			let markers: ("add" | "remove" | "context")[] | null = null;
+
+			if (isDiff) {
+				const parsed = parseDiffMarkers(trimmedCode);
+				codeToHighlight = parsed.strippedCode;
+				markers = parsed.markers;
+			}
+
+			let html = highlighter.codeToHtml(codeToHighlight, {
 				lang: resolvedLang,
 				theme: "css-variables",
 			});
+
+			if (markers) {
+				html = applyDiffClasses(html, markers);
+			}
+
 			setHighlightedHtml(html);
 		});
 
