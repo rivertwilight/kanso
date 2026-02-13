@@ -37,4 +37,16 @@ export const mdxComponents = {
 	hr: (props: any) => (
 		<hr className="border-(--eink-divider) my-8" {...props} />
 	),
+	th: (props: any) => (
+		<th
+			className="border border-(--eink-border) px-3 py-2 bg-(--eink-paper-warm) text-left font-semibold"
+			{...props}
+		/>
+	),
+	td: (props: any) => (
+		<td
+			className="border border-(--eink-border) px-3 py-2"
+			{...props}
+		/>
+	),
 };
