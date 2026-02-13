@@ -21,7 +21,7 @@ function extractSeoField(seo: any, field: string): any {
 
 export default async function Image({ params }: OGImageProps) {
   const { locale, slug } = await params;
-  const post = getPostBySlug(slug, locale);
+  const post = getPostBySlug(slug);
 
   if (!post) {
     return new ImageResponse(
