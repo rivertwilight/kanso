@@ -38,6 +38,7 @@ export default function BookCover({
 	const [imageError, setImageError] = useState(false);
 	const title = book.frontmatter.title || book.defaultTitle;
 	const cover = book.frontmatter.cover;
+	// @ts-expect-error
 	const author = book.frontmatter.author;
 	const year = book.frontmatter?.year;
 	const slug = book.slug;
