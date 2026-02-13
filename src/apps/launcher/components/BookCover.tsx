@@ -16,7 +16,7 @@ function YearBadge({ year }: { year: number }) {
 	return (
 		<div className="absolute top-0 right-0 overflow-hidden w-16 h-16 z-10">
 			<div
-				className="absolute text-[10px] font-bold text-center w-[90px] py-0.5 rotate-45 origin-center"
+				className="absolute text-[10px] font-bold text-center w-22.5 py-0.5 rotate-45 origin-center"
 				style={{
 					top: "12px",
 					right: "-22px",
