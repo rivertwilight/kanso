@@ -48,7 +48,7 @@ export const StatuBar: React.FC<StatusBarProps> = ({
   return (
     <>
       <div
-        className="flex items-center justify-between px-4 py-2 md:py-1.5 cursor-pointer select-none"
+        className="hidden sm:flex items-center justify-between px-4 py-2 md:py-1.5 cursor-pointer select-none"
         style={{
           borderColor: "var(--eink-divider)",
           backgroundColor: "var(--eink-paper)",

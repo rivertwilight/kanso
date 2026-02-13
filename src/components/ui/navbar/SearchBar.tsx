@@ -29,7 +29,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 			<div className="relative">
 				<SearchIcon
 					size={16}
-					className="absolute left-3 top-1/2 -translate-y-1/2 hidden md:block"
+					className="absolute left-3 top-1/2 -translate-y-1/2"
 				/>
 				<input
 					type="text"
@@ -44,7 +44,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             transition-colors duration-150
             placeholder-(--eink-ink)
             bg-(--eink-paper)
-            border-(--eink-ink)
+            border-(--eink-border)
             text-(--eink-ink)
           "
 				/>
