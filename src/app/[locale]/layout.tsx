@@ -33,6 +33,7 @@ export async function generateMetadata({
 	});
 
 	return {
+		metadataBase: new URL("https://rene.wang"),
 		title: t("title"),
 		description: t("description"),
 		authors: [{ name: "Rene Wang" }],
