@@ -89,7 +89,7 @@ export default function getAllPosts(options: GetAllPostsOption): IPost[] {
 
 		return {
 			defaultTitle: slug,
-			frontmatter,
+			frontmatter: frontmatter as IPost["frontmatter"],
 			id,
 			slug,
 			markdownBody: enableContent
@@ -202,7 +202,7 @@ export function getAllProjects(options: { enableSort?: boolean; enableContent?: 
 
 		return {
 			defaultTitle: slug,
-			frontmatter,
+			frontmatter: frontmatter as IPost["frontmatter"],
 			id: slug,
 			slug,
 			markdownBody: enableContent ? markdownBody : "",

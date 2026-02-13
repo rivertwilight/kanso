@@ -47,7 +47,7 @@ export default function PostList({
           >
             <ListItemText
               primary={post.frontmatter ? post.frontmatter.title : post.slug}
-              second={(post.frontmatter?.updateAt || post.frontmatter?.createAt) ? formatDate(post.frontmatter.updateAt || post.frontmatter.createAt, locale) : "1970/01/01"}
+              secondary={(post.frontmatter?.updateAt || post.frontmatter?.createAt) ? formatDate(post.frontmatter.updateAt || post.frontmatter.createAt, locale) : "1970/01/01"}
               allowWrap
             />
             <ListItemIcon

@@ -6,7 +6,8 @@
 		"dev": "next -p 3005",
 		"build": "next build",
 		"start": "next start -p 3005",
-		"test:notion": "node ./src/utils/notion.js"
+		"test:notion": "node ./src/utils/notion.js",
+		"type-check": "tsc --noEmit"
 	},
 	"author": {
 		"name": "Rene Wang",
@@ -36,7 +37,6 @@
 		"react-katex": "^3.1.0",
 		"react-markdown": "^9.1.0",
 		"react-mathjax": "^1.0.1",
-		"react-notion-x": "^6.16.0",
 		"react-syntax-highlighter": "latest",
 		"rehype-katex": "latest",
 		"remark-gfm": "^4.0.1",

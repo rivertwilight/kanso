@@ -60,14 +60,14 @@ export const ListItem: React.FC<ListItemProps> = ({
 
 interface ListItemTextProps {
   primary: string;
-  second?: string;
+  secondary?: string;
   allowWrap?: boolean;
   className?: string;
 }
 
 export const ListItemText: React.FC<ListItemTextProps> = ({
   primary,
-  second,
+  secondary,
   allowWrap = false,
   className = "",
 }) => {
@@ -82,12 +82,12 @@ export const ListItemText: React.FC<ListItemTextProps> = ({
       >
         {primary}
       </p>
-      {second && (
+      {secondary && (
         <p 
           className="text-sm mt-0.5 opacity-60"
           style={{ color: 'inherit' }}
         >
-          {second}
+          {secondary}
         </p>
       )}
     </div>

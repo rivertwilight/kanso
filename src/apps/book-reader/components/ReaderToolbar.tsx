@@ -6,7 +6,6 @@ import { ActionBar } from "@/components/ui";
 import {
   ArrowBackSharpIcon,
   EllipsisVerticalIcon,
-  TocIcon,
 } from "@/components/ui/Icons";
 import ReaderSettingsSheet from "./ReaderSettingsSheet";
 import { Table2Icon } from "lucide-react";

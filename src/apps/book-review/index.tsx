@@ -3,7 +3,6 @@
 import { useEffect, useRef, ReactNode, useMemo } from "react";
 import { useAtom } from "jotai";
 import { readerSettingsAtom } from "@/system/atoms/readerSettings";
-import GiscusComments from "@/components/GiscusComments";
 import AppToolbar from "@/system/components/AppToolbar";
 import BookDetailHeader from "./components/BookDetailHeader";
 import "katex/dist/katex.min.css";

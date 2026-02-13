@@ -142,7 +142,7 @@ export const DarkModeIcon: React.FC<{
 );
 
 // Chevron down icon with wide ~120 degree angle (Kindle-style)
-export const ChevronDownIcon: React.FC<{ size?: number; className?: string }> = ({
+export const ChevronDownIcon: React.FC<{ size?: number; className?: string; style?: React.CSSProperties }> = ({
   size = 20,
   className = "",
 }) => (

@@ -89,7 +89,7 @@ export default class extends React.Component<SearchProps, SearchState> {
 		return (
 			<>
 				<div
-					ref={(r) => (this.searchField = r)}
+					ref={(r: HTMLDivElement | null) => { if (r) this.searchField = r; }}
 					className={`search ${searchIsFocus ? "search-focus" : ""}`}
 				>
 					<input

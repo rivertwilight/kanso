@@ -31,7 +31,7 @@ const Snackbar = ({ message, type }: { message: string, type?: string }): ReactE
     )
 }
 
-export default (config: JSX.IntrinsicAttributes & { message: string; type?: string; delay?: number }) => {
+export default (config: React.JSX.IntrinsicAttributes & { message: string; type?: string; delay?: number }) => {
     var container = document.createElement('div');
     container.id = "snackbar";
     document.body.appendChild(container);

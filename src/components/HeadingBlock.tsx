@@ -17,7 +17,7 @@ const headingStyles: Record<number, string> = {
 };
 
 const HeadingBlock = ({ level = 1, children, ...props }: HeadingBlockProps) => {
-	const Tag = `h${level}` as keyof JSX.IntrinsicElements;
+	const Tag = `h${level}` as "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 	// Generate an ID from children text content for anchor links
 	const generateId = (content: ReactNode): string => {
@@ -25,7 +25,7 @@ const HeadingBlock = ({ level = 1, children, ...props }: HeadingBlockProps) => {
 		if (Array.isArray(content)) {
 			return content.map(generateId).join("");
 		}
-		if (React.isValidElement(content) && content.props?.children) {
+		if (React.isValidElement<{ children?: ReactNode }>(content) && content.props?.children) {
 			return generateId(content.props.children);
 		}
 		return "";

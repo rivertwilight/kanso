@@ -33,7 +33,8 @@ export const Section: React.FC<SectionProps> = ({
 };
 
 interface SectionTitleProps {
-  label: string;
+  label?: string;
+  children?: React.ReactNode;
   href?: string;
   showArrow?: boolean;
   className?: string;
@@ -41,6 +42,7 @@ interface SectionTitleProps {
 
 export const SectionTitle: React.FC<SectionTitleProps> = ({
   label,
+  children,
   href,
   showArrow = false,
   className = "",
@@ -51,7 +53,7 @@ export const SectionTitle: React.FC<SectionTitleProps> = ({
         className="uppercase tracking-wider text-sm font-sans font-semibold"
         style={{ color: "var(--eink-ink)" }}
       >
-        {label}
+        {label || children}
       </span>
       {(href || showArrow) && (
         <ChevronRightIcon

@@ -14,6 +14,12 @@ export type IPost = {
 		pin?: boolean;
 		/** Hide from post lists */
 		unlist?: boolean;
+		/** Cover image URL */
+		cover?: string;
+		/** SEO keywords */
+		keywords?: string[];
+		/** Additional metadata (e.g. for book-type projects) */
+		metadata?: Record<string, any>;
 	};
 	id: string;
 	markdownBody?: string;
