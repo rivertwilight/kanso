@@ -54,6 +54,25 @@ function formatRelativeDate(dateString: string, locale: string): string {
 	return formatStandardDate(dateString, locale);
 }
 
+function formatTimeAgo(dateString: string, locale: string): string | null {
+	const date = new Date(dateString);
+	const now = new Date();
+	const diffInMs = now.getTime() - date.getTime();
+	const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+	if (diffInDays < 30) return null;
+
+	const diffInMonths =
+		(now.getFullYear() - date.getFullYear()) * 12 +
+		(now.getMonth() - date.getMonth());
+	const diffInYears = Math.floor(diffInMonths / 12);
+
+	if (diffInYears >= 1) {
+		return locale === "zh" ? `${diffInYears}年前` : `${diffInYears}y ago`;
+	}
+	return locale === "zh" ? `${diffInMonths}个月前` : `${diffInMonths}m ago`;
+}
+
 // Font family mapping
 const fontFamilyMap: Record<string, string> = {
 	bookerly: "'Bookerly', 'Noto Serif SC', Georgia, serif",
@@ -166,6 +185,11 @@ export default function BookReaderApp({
 										postProps.createAt,
 										locale
 									)}
+									{formatTimeAgo(
+										postProps.createAt,
+										locale
+									) &&
+										` (${formatTimeAgo(postProps.createAt, locale)})`}
 								</time>
 								{postProps.updateAt && (
 									<>
