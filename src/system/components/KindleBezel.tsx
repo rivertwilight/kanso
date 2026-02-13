@@ -40,13 +40,17 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 	const pathname = usePathname();
 
 	// Launch screen state - only show once per session
-	const [showLaunchScreen, setShowLaunchScreen] = useState(() => {
-		if (typeof window === "undefined") return true;
-		const hasShown = sessionStorage.getItem("kindle-launch-shown");
-		return !hasShown;
-	});
+	const [isChecking, setIsChecking] = useState(true);
+	const [showLaunchScreen, setShowLaunchScreen] = useState(false);
 	const [progress, setProgress] = useState(0);
 	const [isFadingOut, setIsFadingOut] = useState(false);
+
+	// Check sessionStorage on client side only (after hydration)
+	useEffect(() => {
+		const hasShown = sessionStorage.getItem("kindle-launch-shown");
+		setShowLaunchScreen(!hasShown);
+		setIsChecking(false);
+	}, []);
 
 	// Animate progress bar with random increments
 	useEffect(() => {
@@ -251,7 +255,7 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 								}}
 							>
 								{/* Launch Screen - Desktop */}
-								{showLaunchScreen && (
+								{(isChecking || showLaunchScreen) && (
 									<div
 										className="absolute inset-0 z-100 flex items-center justify-center bg-[#F5F1E8] dark:bg-gray-100 transition-opacity"
 										style={{
