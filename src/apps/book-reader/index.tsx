@@ -4,7 +4,6 @@ import { useEffect, useRef, ReactNode, useMemo } from "react";
 import { useAtom } from "jotai";
 import { readerSettingsAtom } from "@/system/atoms/readerSettings";
 import ImageBlock from "@/components/ImageBlock";
-import GiscusComments from "@/components/GiscusComments";
 import AppToolbar from "@/system/components/AppToolbar";
 import "katex/dist/katex.min.css";
 
@@ -83,7 +82,7 @@ export default function BookReaderApp({
 	useEffect(() => {
 		// Find the scrollable parent container (KindleBezel content area)
 		const findScrollableParent = (
-			element: HTMLElement | null,
+			element: HTMLElement | null
 		): HTMLElement | null => {
 			if (!element) return null;
 			const parent = element.parentElement;
@@ -116,7 +115,7 @@ export default function BookReaderApp({
 			paddingLeft: `${settings.marginHorizontal}px`,
 			paddingRight: `${settings.marginHorizontal}px`,
 		}),
-		[settings],
+		[settings]
 	);
 
 	if (!postProps) return null;
@@ -152,7 +151,12 @@ export default function BookReaderApp({
 							itemScope
 							itemType="http://schema.org/Article"
 						>
-							<h1 className="text-3xl font-bold mb-4 mt-6 font-sans tracking-tight" itemProp="headline">{postProps.title}</h1>
+							<h1
+								className="text-3xl font-bold mb-4 mt-6 font-sans tracking-tight"
+								itemProp="headline"
+							>
+								{postProps.title}
+							</h1>
 							<div className="text-(--eink-ink-muted) text-sm mb-4">
 								<time
 									itemProp="datePublished"
@@ -160,7 +164,7 @@ export default function BookReaderApp({
 								>
 									{formatStandardDate(
 										postProps.createAt,
-										locale,
+										locale
 									)}
 								</time>
 								{postProps.updateAt && (
@@ -177,7 +181,7 @@ export default function BookReaderApp({
 										>
 											{formatRelativeDate(
 												postProps.updateAt,
-												locale,
+												locale
 											)}
 										</time>
 									</>
@@ -195,8 +199,6 @@ export default function BookReaderApp({
 								{postContent}
 							</section>
 						</article>
-
-						<GiscusComments locale={locale} />
 					</div>
 				</div>
 			</div>

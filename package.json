@@ -1,6 +1,6 @@
 {
 	"name": "kanso",
-	"version": "26.02.01",
+	"version": "26.02.13",
 	"description": "A Responsive, Fast, i18n and Theme-able static blog base on Next.js.",
 	"scripts": {
 		"dev": "next -p 3005",
@@ -15,7 +15,6 @@
 	},
 	"license": "MIT",
 	"dependencies": {
-		"@giscus/react": "^3.1.0",
 		"@notion-stuff/blocks-markdown-parser": "^6.0.0",
 		"@notionhq/client": "^2.3.0",
 		"@vercel/analytics": "^1.6.1",
