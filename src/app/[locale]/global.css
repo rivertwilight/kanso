@@ -52,6 +52,20 @@
 }
 
 :root {
+  /* === Shiki Code Syntax Theme (css-variables) === */
+  /* Customize these to change code block colors */
+  --shiki-color-text: #393a34;
+  --shiki-color-background: #f8f5ec;
+  --shiki-token-constant: #7c4dff;
+  --shiki-token-string: #2e7d32;
+  --shiki-token-comment: #8a8a84;
+  --shiki-token-keyword: #8b4513;
+  --shiki-token-parameter: #393a34;
+  --shiki-token-function: #6f42c1;
+  --shiki-token-string-expression: #2e7d32;
+  --shiki-token-punctuation: #6b6b66;
+  --shiki-token-link: #2e7d32;
+
   /* === LIGHT MODE (Default) === */
   /* E-ink paper colors - warm, slightly cream-toned */
   --eink-paper: #f5f1e8;
@@ -105,6 +119,18 @@
 /* E-ink dark mode is distinct - uses warm grays, not pure blacks */
 [data-theme="dark"],
 .dark {
+  --shiki-color-text: #d4d4d4;
+  --shiki-color-background: #1e1e1a;
+  --shiki-token-constant: #b388ff;
+  --shiki-token-string: #a5d6a7;
+  --shiki-token-comment: #6e6d68;
+  --shiki-token-keyword: #dba676;
+  --shiki-token-parameter: #d4d4d4;
+  --shiki-token-function: #ce93d8;
+  --shiki-token-string-expression: #a5d6a7;
+  --shiki-token-punctuation: #9a9890;
+  --shiki-token-link: #a5d6a7;
+
   --eink-paper: #262622;
   --eink-paper-warm: #2d2d28;
   --eink-paper-highlight: #333330;
@@ -146,6 +172,18 @@
 /* System preference dark mode */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
+    --shiki-color-text: #d4d4d4;
+    --shiki-color-background: #1e1e1a;
+    --shiki-token-constant: #b388ff;
+    --shiki-token-string: #a5d6a7;
+    --shiki-token-comment: #6e6d68;
+    --shiki-token-keyword: #dba676;
+    --shiki-token-parameter: #d4d4d4;
+    --shiki-token-function: #ce93d8;
+    --shiki-token-string-expression: #a5d6a7;
+    --shiki-token-punctuation: #9a9890;
+    --shiki-token-link: #a5d6a7;
+
     --eink-paper: #262622;
     --eink-paper-warm: #2d2d28;
     --eink-paper-highlight: #333330;
@@ -219,6 +257,52 @@ a:hover {
 :not(pre) > code {
   font-family: "Inconsolata", "Monaco", "Consolas", "Courier New", Courier,
     monospace;
+}
+
+/* Shiki code block styling */
+pre.shiki,
+pre.shiki-fallback {
+  margin: 0;
+  padding: 0.75rem 0.75rem 0.75rem 0.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  max-height: 90vh;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+@media (max-width: 767px) {
+  pre.shiki,
+  pre.shiki-fallback {
+    border-radius: 0;
+  }
+}
+
+pre.shiki code,
+pre.shiki-fallback code {
+  font-family: "Inconsolata", "Monaco", "Consolas", "Courier New", Courier,
+    monospace;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  counter-reset: line;
+}
+
+pre.shiki code .line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: var(--shiki-token-comment);
+  opacity: 0.5;
+}
+
+pre.shiki-fallback {
+  background-color: var(--shiki-color-background);
+  color: var(--shiki-color-text);
 }
 
 /* Syntax highlighted code blocks should not have these styles */

@@ -1,33 +1,70 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import React, { useEffect, useState } from "react";
 import MermaidBlock from "./MermaidBlock";
-import {
-	jsx,
-	javascript,
-	bash,
-	sass,
-	scss,
-	typescript,
-	python,
-	java,
-	go,
-	rust,
-	cpp,
-	c,
-	css,
-	json,
-	yaml,
-	markdown,
-	sql,
-	graphql,
-	php,
-	ruby,
-	swift,
-	kotlin,
-} from "react-syntax-highlighter/dist/cjs/languages/prism";
+
+let highlighterPromise: Promise<any> | null = null;
+
+function getHighlighter() {
+	if (!highlighterPromise) {
+		highlighterPromise = import("shiki").then(
+			({ createHighlighter, createCssVariablesTheme }) => {
+				const cssVarsTheme = createCssVariablesTheme({
+					name: "css-variables",
+					variablePrefix: "--shiki-",
+					variableDefaults: {},
+					fontStyle: true,
+				});
+				return createHighlighter({
+					themes: [cssVarsTheme],
+					langs: [
+						"javascript",
+						"typescript",
+						"jsx",
+						"tsx",
+						"bash",
+						"python",
+						"java",
+						"go",
+						"rust",
+						"cpp",
+						"c",
+						"css",
+						"scss",
+						"sass",
+						"json",
+						"yaml",
+						"markdown",
+						"sql",
+						"graphql",
+						"php",
+						"ruby",
+						"swift",
+						"kotlin",
+						"html",
+					],
+				});
+			}
+		);
+	}
+	return highlighterPromise;
+}
+
+// Map common aliases to canonical language names
+const LANG_ALIASES: Record<string, string> = {
+	js: "javascript",
+	ts: "typescript",
+	py: "python",
+	rb: "ruby",
+	rs: "rust",
+	"c++": "cpp",
+	sh: "bash",
+	shell: "bash",
+	yml: "yaml",
+	md: "markdown",
+	gql: "graphql",
+	kt: "kotlin",
+};
 
 interface CodeBlockProps {
 	node?: any;
@@ -37,65 +74,75 @@ interface CodeBlockProps {
 	[key: string]: any;
 }
 
-const CodeBlock = ({ node, inline, className, children, ...props }: CodeBlockProps) => {
-	useEffect(() => {
-		// Register all supported languages
-		SyntaxHighlighter.registerLanguage("jsx", jsx);
-		SyntaxHighlighter.registerLanguage("javascript", javascript);
-		SyntaxHighlighter.registerLanguage("js", javascript);
-		SyntaxHighlighter.registerLanguage("typescript", typescript);
-		SyntaxHighlighter.registerLanguage("ts", typescript);
-		SyntaxHighlighter.registerLanguage("bash", bash);
-		SyntaxHighlighter.registerLanguage("sh", bash);
-		SyntaxHighlighter.registerLanguage("shell", bash);
-		SyntaxHighlighter.registerLanguage("sass", sass);
-		SyntaxHighlighter.registerLanguage("scss", scss);
-		SyntaxHighlighter.registerLanguage("python", python);
-		SyntaxHighlighter.registerLanguage("py", python);
-		SyntaxHighlighter.registerLanguage("java", java);
-		SyntaxHighlighter.registerLanguage("go", go);
-		SyntaxHighlighter.registerLanguage("rust", rust);
-		SyntaxHighlighter.registerLanguage("rs", rust);
-		SyntaxHighlighter.registerLanguage("cpp", cpp);
-		SyntaxHighlighter.registerLanguage("c++", cpp);
-		SyntaxHighlighter.registerLanguage("c", c);
-		SyntaxHighlighter.registerLanguage("css", css);
-		SyntaxHighlighter.registerLanguage("json", json);
-		SyntaxHighlighter.registerLanguage("yaml", yaml);
-		SyntaxHighlighter.registerLanguage("yml", yaml);
-		SyntaxHighlighter.registerLanguage("markdown", markdown);
-		SyntaxHighlighter.registerLanguage("md", markdown);
-		SyntaxHighlighter.registerLanguage("sql", sql);
-		SyntaxHighlighter.registerLanguage("graphql", graphql);
-		SyntaxHighlighter.registerLanguage("gql", graphql);
-		SyntaxHighlighter.registerLanguage("php", php);
-		SyntaxHighlighter.registerLanguage("ruby", ruby);
-		SyntaxHighlighter.registerLanguage("rb", ruby);
-		SyntaxHighlighter.registerLanguage("swift", swift);
-		SyntaxHighlighter.registerLanguage("kotlin", kotlin);
-		SyntaxHighlighter.registerLanguage("kt", kotlin);
-	}, []);
+const CodeBlock = ({
+	node,
+	inline,
+	className,
+	children,
+	...props
+}: CodeBlockProps) => {
+	const [highlightedHtml, setHighlightedHtml] = useState<string | null>(null);
 
-	// Extracting the language - support both MDX and react-markdown formats
+	// Extract language from className or node properties
 	let language: string | null = null;
-	
-	// MDX format: className is passed directly as a prop
+
 	if (typeof className === "string" && className.startsWith("language-")) {
 		language = className.replace("language-", "");
-	} 
-	// React-markdown format: className is in node.properties
-	else if (node?.properties?.className) {
+	} else if (node?.properties?.className) {
 		const nodeClassName = node.properties.className;
-		const match = Array.isArray(nodeClassName) 
+		const match = Array.isArray(nodeClassName)
 			? nodeClassName.find((cn: string) => cn.startsWith("language-"))
-			: typeof nodeClassName === "string" && nodeClassName.startsWith("language-") 
-				? nodeClassName 
+			: typeof nodeClassName === "string" &&
+				  nodeClassName.startsWith("language-")
+				? nodeClassName
 				: null;
 		language = match ? match.replace("language-", "") : null;
 	}
 
 	// Check if this is inline code
-	const isInline = inline || (!language && typeof children === "string" && !children.includes("\n"));
+	const isInline =
+		inline ||
+		(!language &&
+			typeof children === "string" &&
+			!children.includes("\n"));
+
+	// Build code string
+	const codeString =
+		typeof children === "string"
+			? children
+			: Array.isArray(children)
+				? children.join("")
+				: String(children || "");
+
+	const trimmedCode = codeString.replace(/\n$/, "");
+
+	useEffect(() => {
+		if (isInline) return;
+		if (language === "mermaid") return;
+
+		let cancelled = false;
+		const lang = language
+			? LANG_ALIASES[language] || language
+			: "text";
+
+		getHighlighter().then((highlighter) => {
+			if (cancelled) return;
+
+			// Check if the language is loaded, fall back to "text"
+			const loadedLangs = highlighter.getLoadedLanguages();
+			const resolvedLang = loadedLangs.includes(lang) ? lang : "text";
+
+			const html = highlighter.codeToHtml(trimmedCode, {
+				lang: resolvedLang,
+				theme: "css-variables",
+			});
+			setHighlightedHtml(html);
+		});
+
+		return () => {
+			cancelled = true;
+		};
+	}, [trimmedCode, language, isInline]);
 
 	if (isInline) {
 		return (
@@ -108,42 +155,19 @@ const CodeBlock = ({ node, inline, className, children, ...props }: CodeBlockPro
 		);
 	}
 
-	// Ensure children is a string for syntax highlighter
-	const codeString = typeof children === "string"
-		? children
-		: Array.isArray(children)
-			? children.join("")
-			: String(children || "");
-
-	// Check if this is a mermaid diagram
 	if (language === "mermaid") {
 		return <MermaidBlock>{codeString}</MermaidBlock>;
 	}
 
+	if (highlightedHtml) {
+		return <div className="mt-1 mb-6" dangerouslySetInnerHTML={{ __html: highlightedHtml }} />;
+	}
+
 	return (
-		<div className="my-6 max-md:w-screen max-md:relative max-md:left-1/2 max-md:right-1/2 max-md:-ml-[50vw] max-md:-mr-[50vw]">
-			<SyntaxHighlighter
-				language={language || "text"}
-				style={vscDarkPlus}
-				showLineNumbers={true}
-				wrapLongLines={true}
-				customStyle={{
-					margin: 0,
-					borderRadius: '0.5rem',
-					fontSize: '0.875rem',
-					maxHeight: '90vh',
-					padding: '1.25rem',
-					boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
-				}}
-				codeTagProps={{
-					style: {
-						fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace',
-						textShadow: 'none',
-					}
-				}}
-			>
-				{codeString.replace(/\n$/, "")}
-			</SyntaxHighlighter>
+		<div className="mt-1 mb-6">
+			<pre className="shiki-fallback">
+				<code>{trimmedCode}</code>
+			</pre>
 		</div>
 	);
 };
