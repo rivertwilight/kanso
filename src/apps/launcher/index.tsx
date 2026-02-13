@@ -64,9 +64,8 @@ export default function LauncherApp(props: LauncherAppProps) {
 									className="shrink-0 w-14 h-14"
 								/>
 								<div className="font-sans">
-									I'm a design engineer at LobeHub. Welcome to
-									my Kindle, where I showcase projects and
-									share thoughts.
+									I'm a design engineer at LobeHub from China. I previously work at ByteDance and Tiktok.
+									I build interface and make things happen.
 								</div>
 							</div>
 						</Section>
@@ -82,43 +81,12 @@ export default function LauncherApp(props: LauncherAppProps) {
 							/>
 						</Section>
 						<Section>
-							{/* <div className="flex flex-wrap gap-2 mb-4">
-								{categoryLabels.map((category) => (
-									<CategoryLabel
-										key={category.name}
-										text={category.text}
-										selected={
-											activeCategory === category.name
-										}
-										onClick={() =>
-											setActiveCategory(category.name)
-										}
-									/>
-								))}
-							</div> */}
-
 							<PostList
 								activeCategory={activeCategory}
 								allPosts={allPosts}
 								falttedPosts={falttedPosts}
 								locale={locale}
 							/>
-
-							{/* <br />
-							<div
-								style={{
-									display: "flex",
-									justifyContent: "center",
-								}}
-							>
-								<Link href="/archive">
-									<Button variant="outline">
-										{t("postList.allPosts", {
-											count: falttedPosts.length,
-										})}
-									</Button>
-								</Link>
-							</div> */}
 						</Section>
 					</>
 				)}
