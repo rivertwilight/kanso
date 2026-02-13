@@ -44,6 +44,12 @@ export async function generateMetadata({
 		content.slice(0, 160);
 	const keywords = extractSeoField(seo, "keywords") || frontmatter.keywords;
 
+	const ogImage = frontmatter.cover
+		? frontmatter.cover.startsWith("http")
+			? frontmatter.cover
+			: `${SITE_ROOT}${frontmatter.cover}`
+		: undefined;
+
 	return {
 		title,
 		description,
@@ -57,12 +63,18 @@ export async function generateMetadata({
 				: undefined,
 			authors: [AUTHOR_NAME],
 			locale: locale,
+			...(ogImage && {
+				images: [{ url: ogImage }],
+			}),
 		},
 		twitter: {
 			card: "summary_large_image",
 			title,
 			description,
 			creator: "@" + AUTHOR_NAME,
+			...(ogImage && {
+				images: [ogImage],
+			}),
 		},
 	};
 }
