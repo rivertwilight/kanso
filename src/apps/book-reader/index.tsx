@@ -148,17 +148,7 @@ export default function BookReaderApp({
 			/>
 			<div ref={topRef}>
 				<div className="overflow-hidden p-0">
-					<div className="mt-1.5 -mx-2.5 [&_img]:object-cover [&_img]:w-full [&_img]:max-h-[40vh]">
-						{typeof postProps.cover == "string" && (
-							<>
-								<ImageBlock alt="Cover" src={postProps.cover} />
-								<meta
-									itemProp="thumbnailUrl"
-									content={postProps.cover}
-								/>
-							</>
-						)}
-					</div>
+					<div className="w-full h-12"></div>
 					<div
 						style={{
 							paddingLeft: readerStyles.paddingLeft,
@@ -189,7 +179,10 @@ export default function BookReaderApp({
 										postProps.createAt,
 										locale
 									) &&
-										` (${formatTimeAgo(postProps.createAt, locale)})`}
+										` (${formatTimeAgo(
+											postProps.createAt,
+											locale
+										)})`}
 								</time>
 								{postProps.updateAt && (
 									<>
@@ -211,6 +204,8 @@ export default function BookReaderApp({
 									</>
 								)}
 							</div>
+
+							<div className="w-full h-4"></div>
 
 							<section
 								itemProp="articleBody"
