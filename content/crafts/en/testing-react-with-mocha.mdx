@@ -1,12 +1,9 @@
 ---
 title: "Testing React Applications with Mocha + Chai"
-summary: '---    Recently, I continued the development of the previous [Kindle UI](https://github.com/'
+summary: 'Recently, I continued the development of the previous [Kindle UI](https://github.com/'
+createAt: 2023-04-12T01:23:00.000Z
 keywords:
   - Open Source
-tag: Coding
-createAt: 2023-04-12T01:23:00.000Z
----
-
 ---
 
 Recently, I continued the development of the previous [Kindle UI](https://github.com/RiverTwilight/kindle-ui) library and thought it was time to write some tests, so I decided to use the testing solution provided by [Mocha](https://mochajs.org/) (to try something new).
@@ -72,7 +69,7 @@ require("@babel/register")({
 
 With Babel, we can use CJS format test files without the annoying "type": "module" setting.
 
-```plain text
+```javascript
 // babel.config.js
 module.exports = function getBabelConfig(api) {
 	const useESModules = api.env(["legacy", "modern", "stable", "rollup"]);
@@ -117,7 +114,7 @@ module.exports = function getBabelConfig(api) {
 
 Add a shortcut script in package.json, please configure according to your actual project:
 
-```plain text
+```txt
 "test:unit": "cross-env NODE_ENV=test mocha --config .mocharc.js 'packages/kindle-ui/**/*.test.{mjs,js,ts,tsx}' 'test/utils/**/*.test.{js,ts,tsx}'"
 ```
 
@@ -129,7 +126,7 @@ Here are some common testing scenarios for reference:
 
 ### Checking Component Type
 
-```plain text
+```tsx
 import * as React from "react";
 import { expect } from "chai";
 import renderer from "react-test-renderer";
