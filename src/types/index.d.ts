@@ -18,6 +18,10 @@ export type IPost = {
 		cover?: string;
 		/** SEO keywords */
 		keywords?: string[];
+		/** Project link (domain or URL) */
+		link?: string;
+		/** Project year */
+		year?: number;
 		/** Additional metadata (e.g. for book-type projects) */
 		metadata?: Record<string, any>;
 	};

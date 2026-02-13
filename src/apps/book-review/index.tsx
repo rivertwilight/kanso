@@ -77,13 +77,15 @@ export default function BookReviewApp({
         onMenuClick={() => console.log("Menu clicked")}
       />
       <div ref={topRef}>
-        <div className="overflow-hidden p-0">
+        <div className="overflow-hidden p-0 pt-8">
           <div style={{ paddingLeft: readerStyles.paddingLeft, paddingRight: readerStyles.paddingRight }}>
             <div className="font-serif text-(--eink-ink)" itemScope itemType="http://schema.org/Review">
               <BookDetailHeader
                 title={bookProps.title}
                 cover={bookProps.cover}
                 metadata={bookProps.metadata}
+                year={bookProps.year}
+                link={bookProps.link}
                 createAt={bookProps.createAt}
                 locale={locale}
               />

@@ -214,10 +214,10 @@ export function getAllProjects(options: { enableSort?: boolean; enableContent?: 
 	projects = projects.filter((p) => !p.frontmatter.unlist);
 
 	if (enableSort) {
-		// Sort by metadata.year (latest first), fallback to createAt
+		// Sort by year (latest first), fallback to createAt
 		return projects.sort((a, b) => {
-			const yearA = a.frontmatter.metadata?.year ?? 0;
-			const yearB = b.frontmatter.metadata?.year ?? 0;
+			const yearA = a.frontmatter.year ?? 0;
+			const yearB = b.frontmatter.year ?? 0;
 			return yearB - yearA;
 		});
 	}

@@ -61,6 +61,7 @@ export default function BookCover({ book, locale, showYearBadge = false }: BookC
 				<div
 					className="w-full relative overflow-hidden border"
 					style={{
+						aspectRatio: "2/3",
 						borderColor: "var(--eink-ink-muted)",
 					}}
 				>
@@ -70,7 +71,7 @@ export default function BookCover({ book, locale, showYearBadge = false }: BookC
 						alt={title}
 						width={300}
 						height={450}
-						className="w-full h-auto"
+						className="w-full h-full object-cover"
 						sizes="(max-width: 768px) 50vw, 25vw"
 						onError={() => setImageError(true)}
 					/>

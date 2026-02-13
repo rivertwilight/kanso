@@ -7,7 +7,6 @@ import UniversalBookCover from "@/components/UniversalBookCover";
 interface BookMetadata {
   author?: string;
   publisher?: string;
-  year?: number;
   pages?: number;
   language?: string;
 }
@@ -16,8 +15,27 @@ interface BookDetailHeaderProps {
   title: string;
   cover?: string;
   metadata?: BookMetadata;
+  year?: number;
+  link?: string;
   createAt?: string;
   locale: string;
+}
+
+// Helper to extract domain from a URL or return as-is if it's already just a domain
+function extractDomain(link: string): string {
+  if (!link) return "";
+
+  // If it doesn't start with http/https, assume it's already a domain
+  if (!link.startsWith("http://") && !link.startsWith("https://")) {
+    return link;
+  }
+
+  try {
+    const url = new URL(link);
+    return url.hostname;
+  } catch {
+    return link;
+  }
 }
 
 function formatDate(dateString: string, locale: string): string {
@@ -42,6 +60,8 @@ export default function BookDetailHeader({
   title,
   cover,
   metadata,
+  year,
+  link,
   createAt,
   locale,
 }: BookDetailHeaderProps) {
@@ -93,9 +113,9 @@ export default function BookDetailHeader({
             {title}
           </h1>
 
-          {metadata && (
+          {(metadata || year || link) && (
             <div className="space-y-2 text-sm mb-4">
-              {metadata.author && (
+              {metadata?.author && (
                 <div className="flex">
                   <span
                     className="w-24 flex-shrink-0 font-sans"
@@ -111,7 +131,7 @@ export default function BookDetailHeader({
                   </span>
                 </div>
               )}
-              {metadata.publisher && (
+              {metadata?.publisher && (
                 <div className="flex">
                   <span
                     className="w-24 flex-shrink-0 font-sans"
@@ -127,7 +147,7 @@ export default function BookDetailHeader({
                   </span>
                 </div>
               )}
-              {metadata.year && (
+              {year && (
                 <div className="flex">
                   <span
                     className="w-24 flex-shrink-0 font-sans"
@@ -139,11 +159,30 @@ export default function BookDetailHeader({
                     className="font-sans"
                     style={{ color: "var(--eink-ink)" }}
                   >
-                    {metadata.year}
+                    {year}
                   </span>
                 </div>
               )}
-              {metadata.pages && (
+              {link && (
+                <div className="flex">
+                  <span
+                    className="w-24 flex-shrink-0 font-sans"
+                    style={{ color: "var(--eink-ink-secondary)" }}
+                  >
+                    Link
+                  </span>
+                  <a
+                    href={link.startsWith("http") ? link : `https://${link}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-sans hover:opacity-70 transition-opacity"
+                    style={{ color: "var(--eink-ink)" }}
+                  >
+                    {extractDomain(link)}
+                  </a>
+                </div>
+              )}
+              {metadata?.pages && (
                 <div className="flex">
                   <span
                     className="w-24 flex-shrink-0 font-sans"
@@ -159,7 +198,7 @@ export default function BookDetailHeader({
                   </span>
                 </div>
               )}
-              {metadata.language && (
+              {metadata?.language && (
                 <div className="flex">
                   <span
                     className="w-24 flex-shrink-0 font-sans"

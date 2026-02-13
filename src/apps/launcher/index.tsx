@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { useAtom } from "jotai";
 import { activeCategoryAtom } from "./atoms";
-import { Button, Grid, Section, SectionTitle } from "@/components/ui";
+import { Button, Section, SectionTitle } from "@/components/ui";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import type { IPost } from "@/types/index";
@@ -12,7 +12,7 @@ import CategoryLabel from "./components/CategoryLabel";
 import PostList from "./components/PostList";
 import BottomNav from "./components/BottomNav";
 import BookGrid from "./components/BookGrid";
-import BookCover from "./components/BookCover";
+import ProjectScroller from "./components/ProjectScroller";
 import AppToolbar from "@/system/components/AppToolbar";
 import Image from "next/image";
 
@@ -76,16 +76,10 @@ export default function LauncherApp(props: LauncherAppProps) {
 								showArrow
 							/>
 
-							<Grid className="items-end">
-								{projects.map((project, index) => (
-									<div key={index} className="shrink-0 w-24">
-										<BookCover
-											book={project}
-											locale={locale}
-										/>
-									</div>
-								))}
-							</Grid>
+							<ProjectScroller
+								projects={projects}
+								locale={locale}
+							/>
 						</Section>
 						<Section>
 							{/* <div className="flex flex-wrap gap-2 mb-4">
