@@ -148,7 +148,7 @@ export default function BookReaderApp({
 			/>
 			<div ref={topRef}>
 				<div className="overflow-hidden p-0">
-					<div className="w-full h-12"></div>
+					<div className="w-full h-4"></div>
 					<div
 						style={{
 							paddingLeft: readerStyles.paddingLeft,
