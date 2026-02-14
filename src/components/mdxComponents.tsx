@@ -39,11 +39,11 @@ export const mdxComponents = {
 	),
 	th: (props: any) => (
 		<th
-			className="border border-(--eink-border) px-3 py-2 bg-(--eink-paper-warm) text-left font-semibold"
+			className="border border-(--eink-border) px-3 py-2 bg-(--eink-paper-warm) text-left font-semibold whitespace-nowrap"
 			{...props}
 		/>
 	),
 	td: (props: any) => (
-		<td className="border border-(--eink-border) px-3 py-2" {...props} />
+		<td className="border border-(--eink-border) px-3 py-2 whitespace-nowrap" {...props} />
 	),
 };

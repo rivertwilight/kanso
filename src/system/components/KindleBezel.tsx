@@ -111,7 +111,7 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 			>
 				{/* Kindle Oasis device body */}
 				<div
-					className="relative flex rounded-[20px] lg:rounded-l-[20px] lg:rounded-r-[24px]"
+					className="relative flex rounded-l-[20px] rounded-r-[24px]"
 					style={{
 						maxHeight: "calc(100vh - 4rem)",
 						// Optimized shadow using box-shadow instead of filter for better performance
@@ -130,7 +130,7 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 				>
 					{/* Outer raised edge frame - creates the beveled edge effect */}
 					<div
-						className="absolute inset-0 rounded-[20px] lg:rounded-l-[20px] lg:rounded-r-[24px] pointer-events-none"
+						className="absolute inset-0 rounded-l-[20px] rounded-r-[24px] pointer-events-none"
 						style={{
 							background: `linear-gradient(145deg,
                 rgba(255,255,255,0.12) 0%,
@@ -168,19 +168,6 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 							willChange: "transform",
 						}}
 					>
-						{/* Add full radius when grip is hidden on smaller screens */}
-						<div
-							className="lg:hidden absolute inset-0 rounded-[18px] pointer-events-none"
-							style={{
-								background: "inherit",
-								boxShadow: `
-                  inset 2px 0 4px rgba(255,255,255,0.06),
-                  inset 0 2px 4px rgba(255,255,255,0.08),
-                  inset 0 -2px 4px rgba(0,0,0,0.12),
-                  inset -2px 0 4px rgba(255,255,255,0.06)`,
-							}}
-						/>
-
 						{/* Top edge highlight - raised bevel */}
 						<div
 							className="absolute top-0 left-4 right-4 h-[2px] rounded-full"
@@ -221,7 +208,7 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 						/>
 
 						{/* Screen area with bezel padding */}
-						<div className="relative m-6 lg:m-7 lg:mr-6">
+						<div className="relative m-7 mr-6">
 							{/* Screen inset - recessed effect */}
 							<div
 								className="absolute inset-0 pointer-events-none"
@@ -351,7 +338,7 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 
 					{/* Right ergonomic grip - Oasis signature asymmetric design */}
 					<div
-						className="hidden lg:flex relative shrink-0"
+						className="hidden md:flex relative shrink-0"
 						style={{
 							width: "80px",
 							background: `linear-gradient(180deg,
