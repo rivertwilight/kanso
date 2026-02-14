@@ -42,7 +42,7 @@ export const ListItem: React.FC<ListItemProps> = ({
         transition-colors duration-75
         cursor-pointer
         select-none
-        border-b
+        border-b last:border-b-0
         bg-transparent text-(--eink-ink)
         active:bg-(--eink-ink) active:text-(--eink-paper)
         ${className}
