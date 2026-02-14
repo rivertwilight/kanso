@@ -481,3 +481,48 @@ mark {
     z-index: 40;
   }
 }
+
+/**
+ * =============================================================================
+ * ************   Footnotes (GFM)   ************
+ * Styled to match the Kindle / e-ink aesthetic
+ * =============================================================================
+ */
+section[data-footnotes] {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--eink-divider);
+  font-size: 0.875rem;
+  color: var(--eink-ink-secondary);
+}
+
+section[data-footnotes] > h2 {
+  display: none;
+}
+
+section[data-footnotes] ol {
+  padding-left: 1.5rem;
+  list-style-type: decimal;
+}
+
+section[data-footnotes] li {
+  margin-bottom: 0.5rem;
+}
+
+section[data-footnotes] li p {
+  margin-bottom: 0.25rem;
+}
+
+/* Footnote inline reference */
+a[data-footnote-ref] {
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0 0.1em;
+}
+
+/* Footnote back-reference arrow */
+a[data-footnote-backref] {
+  text-decoration: none;
+  margin-left: 0.25em;
+  font-size: 0.75rem;
+}
