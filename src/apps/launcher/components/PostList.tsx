@@ -1,8 +1,8 @@
 import {
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  EllipsisVerticalIcon,
+	ListItem,
+	ListItemIcon,
+	ListItemText,
+	EllipsisVerticalIcon,
 } from "@/components/ui";
 import type { IPost } from "@/types/index";
 import Link from "next/link";
@@ -10,56 +10,74 @@ import Link from "next/link";
 const MAX_POST_COUNT = 99;
 
 function formatDate(dateStr: string, locale: string): string {
-  const date = new Date(dateStr);
-  const now = new Date();
-  const isThisYear = date.getFullYear() === now.getFullYear();
-  return date.toLocaleDateString(locale, {
-    ...(isThisYear ? {} : { year: "numeric" }),
-    month: "long",
-    day: "numeric",
-  });
+	const date = new Date(dateStr);
+	const now = new Date();
+	const isThisYear = date.getFullYear() === now.getFullYear();
+	return date.toLocaleDateString(locale, {
+		...(isThisYear ? {} : { year: "numeric" }),
+		month: "long",
+		day: "numeric",
+	});
 }
 
 export default function PostList({
-  allPosts,
-  falttedPosts,
-  activeCategory,
-  locale,
+	allPosts,
+	falttedPosts,
+	activeCategory,
+	locale,
 }: {
-  activeCategory: string;
-  allPosts: any;
-  falttedPosts: IPost[];
-  locale: string;
+	activeCategory: string;
+	allPosts: any;
+	falttedPosts: IPost[];
+	locale: string;
 }) {
-  const classfiedPosts =
-    activeCategory === "All"
-      ? falttedPosts
-      : falttedPosts.filter((post) => post.category === activeCategory);
+	const classfiedPosts =
+		activeCategory === "All"
+			? falttedPosts
+			: falttedPosts.filter((post) => post.category === activeCategory);
 
-  return (
-    <>
-      {classfiedPosts.slice(0, MAX_POST_COUNT).map((post) => (
-        <Link locale={locale} key={post.id} href={"/essay/" + post.id} style={{ textDecoration: "none" }}>
-          <ListItem
-            style={{
-              cursor: "pointer",
-            }}
-          >
-            <ListItemText
-              primary={post.frontmatter ? post.frontmatter.title : post.slug}
-              secondary={(post.frontmatter?.updateAt || post.frontmatter?.createAt) ? formatDate(post.frontmatter.updateAt || post.frontmatter.createAt, locale) : "1970/01/01"}
-              allowWrap
-            />
-            <ListItemIcon
-              onClick={(e) => {
-                e.preventDefault();
-              }}
-            >
-              <EllipsisVerticalIcon />
-            </ListItemIcon>
-          </ListItem>
-        </Link>
-      ))}
-    </>
-  );
+	return (
+		<>
+			{classfiedPosts.slice(0, MAX_POST_COUNT).map((post) => (
+				<Link
+					locale={locale}
+					key={post.id}
+					href={"/essay/" + post.id}
+					style={{ textDecoration: "none" }}
+				>
+					<ListItem
+						style={{
+							cursor: "pointer",
+						}}
+					>
+						<ListItemText
+							primary={
+								post.frontmatter
+									? post.frontmatter.title
+									: post.slug
+							}
+							secondary={
+								post.frontmatter?.updateAt ||
+								post.frontmatter?.createAt
+									? formatDate(
+											post.frontmatter.updateAt ||
+												post.frontmatter.createAt,
+											locale
+									  )
+									: "1970/01/01"
+							}
+							allowWrap
+						/>
+						{/* <ListItemIcon
+							onClick={(e) => {
+								e.preventDefault();
+							}}
+						>
+							<EllipsisVerticalIcon />
+						</ListItemIcon> */}
+					</ListItem>
+				</Link>
+			))}
+		</>
+	);
 }

@@ -80,7 +80,7 @@ export default function SystemLayout({
 						)}
 					</Navbar>
 
-					<div className="h-[88px] md:hidden shrink-0" />
+					<div className="h-16 md:hidden shrink-0" />
 
 					<main
 						className={

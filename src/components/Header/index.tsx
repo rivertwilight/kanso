@@ -57,7 +57,7 @@ const Header: React.FC<HeaderProps> = ({ menuItems = [] }) => {
   var pageMenuItems: any[] = [];
 
   return (
-    <div className="flex items-center px-3 py-2 md:py-1.5 gap-2">
+    <div className="flex items-center px-2 sm:px-3 py-2 md:py-1.5 gap-2">
       {/* Search bar takes most of the space */}
       <SearchBar />
 
