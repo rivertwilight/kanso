@@ -306,7 +306,7 @@ DNS外带可以用于获取无回显的漏洞中的数据，例如 SQL 注入、
 
 Kerberos 的认证流程如下：
 
-![Image](/image/post/7e4c789e-0570-470a-a5aa-c0ed5263abdc_Untitled.png)
+![](/image/post/7e4c789e-0570-470a-a5aa-c0ed5263abdc_Untitled.png)
 
 其中 DC中有一个特殊用户叫做 **krbtgt，**它是一个无法登录的账户，是在创建域时系统自动创建的,在整个kerberos认证中会多次用到它的Hash值去做验证。而他的hash值是不变的。
 - **黄金票据**：所以只要得到 krbtgt 的 NTLM Hash，就可以伪造TGT和Logon Session Key来进入下一步Client与TGS的交互。而已有了金票后,就跳过AS验证,不用验证账户和密码,所以也不担心域管密码修改。

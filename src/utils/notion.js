@@ -193,7 +193,7 @@ async function notionBlocksToMarkdown(blocks, indent = 0) {
 
 				await downloadImage(imageURL, localFilesystemPath);
 
-				return `\n![Image](${localImagePath})\n`;
+				return `\n![](${localImagePath})\n`;
 			case "video":
 				// TODO Parse Notion's video block
 				return `\n![Video](${block.video.url})\n`;
