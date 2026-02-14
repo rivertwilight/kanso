@@ -53,7 +53,7 @@ const MermaidBlock: React.FC<MermaidBlockProps> = ({ children }) => {
 	return (
 		<div
 			ref={containerRef}
-			className="my-6 flex justify-center items-center p-4 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 overflow-x-auto"
+			className="mt-1 mb-6 flex justify-center items-center p-4 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 overflow-x-auto"
 			dangerouslySetInnerHTML={{ __html: svg }}
 		/>
 	);

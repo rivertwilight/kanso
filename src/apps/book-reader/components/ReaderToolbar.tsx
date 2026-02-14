@@ -10,41 +10,7 @@ import {
 } from "@/components/ui/Icons";
 import ReaderSettingsSheet from "./ReaderSettingsSheet";
 import { tocVisibleAtom } from "../atoms";
-import { Table2Icon } from "lucide-react";
-
-/**
- * Reader Style Settings Icon (Aa)
- */
-const TextStyleIcon: React.FC<{ size?: number; className?: string }> = ({
-	size = 20,
-	className = "",
-}) => (
-	<svg
-		className={className}
-		width={size}
-		height={size}
-		viewBox="0 0 24 24"
-		fill="none"
-		stroke="currentColor"
-		strokeWidth="2"
-		strokeLinecap="round"
-		strokeLinejoin="round"
-	>
-		<text
-			x="2"
-			y="17"
-			fontSize="14"
-			fontWeight="bold"
-			fill="currentColor"
-			stroke="none"
-		>
-			A
-		</text>
-		<text x="12" y="17" fontSize="10" fill="currentColor" stroke="none">
-			a
-		</text>
-	</svg>
-);
+import { Table2Icon, ALargeSmallIcon } from "lucide-react";
 
 /**
  * Toolbar Button Component
@@ -151,7 +117,7 @@ export const ReaderToolbar: React.FC<ReaderToolbarProps> = ({
 						onClick={() => setSettingsOpen(true)}
 						title="Reader settings"
 					>
-						<TextStyleIcon size={20} />
+						<ALargeSmallIcon size={18} />
 					</ToolbarButton>
 
 					<ToolbarButton onClick={onMenuClick} title="More options">
