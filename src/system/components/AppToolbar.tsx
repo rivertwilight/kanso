@@ -22,7 +22,6 @@ interface StandardToolbarProps extends BaseToolbarProps {
 interface ReaderToolbarProps extends BaseToolbarProps {
   type: "reader";
   title: string;
-  onTocClick?: () => void;
   onMenuClick?: () => void;
 }
 
@@ -69,7 +68,6 @@ export function AppToolbar(props: AppToolbarProps) {
       setCustomToolbar(
         <ReaderToolbar
           title={props.title}
-          onTocClick={props.onTocClick}
           onMenuClick={props.onMenuClick}
         />
       );

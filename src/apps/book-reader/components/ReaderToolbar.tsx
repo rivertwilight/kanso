@@ -2,12 +2,14 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAtom } from "jotai";
 import { ActionBar } from "@/components/ui";
 import {
 	ArrowBackSharpIcon,
 	EllipsisVerticalIcon,
 } from "@/components/ui/Icons";
 import ReaderSettingsSheet from "./ReaderSettingsSheet";
+import { tocVisibleAtom } from "../atoms";
 import { Table2Icon } from "lucide-react";
 
 /**
@@ -97,7 +99,6 @@ const ToolbarButton: React.FC<ToolbarButtonProps> = ({
  */
 interface ReaderToolbarProps {
 	title: string;
-	onTocClick?: () => void;
 	onMenuClick?: () => void;
 }
 
@@ -106,11 +107,11 @@ interface ReaderToolbarProps {
  */
 export const ReaderToolbar: React.FC<ReaderToolbarProps> = ({
 	title,
-	onTocClick,
 	onMenuClick,
 }) => {
 	const router = useRouter();
 	const [settingsOpen, setSettingsOpen] = useState(false);
+	const [tocVisible, setTocVisible] = useAtom(tocVisibleAtom);
 
 	const handleBack = () => {
 		router.push("/");
@@ -140,7 +141,7 @@ export const ReaderToolbar: React.FC<ReaderToolbarProps> = ({
 				{/* Trailing: ToC, Settings and menu */}
 				<div className="flex items-center">
 					<ToolbarButton
-						onClick={onTocClick}
+						onClick={() => setTocVisible(!tocVisible)}
 						title="Table of contents"
 					>
 						<Table2Icon size={18} />

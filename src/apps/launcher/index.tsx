@@ -7,7 +7,6 @@ import { Button, Section, SectionTitle } from "@/components/ui";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import type { IPost } from "@/types/index";
-import Link from "next/link";
 import CategoryLabel from "./components/CategoryLabel";
 import PostList from "./components/PostList";
 import BottomNav from "./components/BottomNav";
@@ -15,6 +14,12 @@ import BookGrid from "./components/BookGrid";
 import ProjectScroller from "./components/ProjectScroller";
 import AppToolbar from "@/system/components/AppToolbar";
 import Image from "next/image";
+
+const FRIEND_LINKS = [
+	{ name: "Innei", url: "https://innei.in" },
+	{ name: "Justin", url: "https://jsun.lol" },
+	{ name: "pseudoyu", url: "https://www.pseudoyu.com" },
+];
 
 interface LauncherAppProps {
 	allPosts: any;
@@ -64,8 +69,9 @@ export default function LauncherApp(props: LauncherAppProps) {
 									className="shrink-0 w-14 h-14"
 								/>
 								<div className="font-sans">
-									I'm a design engineer at LobeHub from China. I previously work at ByteDance and Tiktok.
-									I build interface and make things happen.
+									I'm a design engineer at LobeHub from China.
+									I previously work at ByteDance and Tiktok. I
+									build interface and make things happen.
 								</div>
 							</div>
 						</Section>
@@ -87,6 +93,25 @@ export default function LauncherApp(props: LauncherAppProps) {
 								falttedPosts={falttedPosts}
 								locale={locale}
 							/>
+						</Section>
+						<Section>
+							<SectionTitle label="Friends" />
+							<div className="flex flex-wrap gap-2">
+								{FRIEND_LINKS.map((link) => (
+									<a
+										key={link.url}
+										href={link.url}
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										<CategoryLabel
+											text={link.name}
+											selected={false}
+											onClick={() => {}}
+										/>
+									</a>
+								))}
+							</div>
 						</Section>
 					</>
 				)}

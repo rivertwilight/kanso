@@ -1,11 +1,17 @@
 "use client";
 
-import { useEffect, useRef, ReactNode, useMemo } from "react";
+import { useEffect, useRef, useState, ReactNode, useMemo, useCallback } from "react";
 import { useAtom } from "jotai";
 import { readerSettingsAtom } from "@/system/atoms/readerSettings";
-import ImageBlock from "@/components/ImageBlock";
+import { tocVisibleAtom } from "./atoms";
 import AppToolbar from "@/system/components/AppToolbar";
 import "katex/dist/katex.min.css";
+
+interface TocHeading {
+	id: string;
+	text: string;
+	level: number;
+}
 
 function formatStandardDate(dateString: string, locale: string): string {
 	const date = new Date(dateString);
@@ -95,7 +101,10 @@ export default function BookReaderApp({
 	locale,
 }: BookReaderAppProps) {
 	const topRef = useRef<HTMLDivElement>(null);
+	const articleRef = useRef<HTMLElement>(null);
 	const [settings] = useAtom(readerSettingsAtom);
+	const [tocVisible, setTocVisible] = useAtom(tocVisibleAtom);
+	const [headings, setHeadings] = useState<TocHeading[]>([]);
 
 	// Reset scroll position when navigating to article
 	useEffect(() => {
@@ -122,7 +131,34 @@ export default function BookReaderApp({
 		}
 		// Also reset window scroll for mobile view
 		window.scrollTo(0, 0);
+		setTocVisible(false);
 	}, [id]);
+
+	// Extract headings from the article DOM after render
+	useEffect(() => {
+		if (!articleRef.current) return;
+		const els = articleRef.current.querySelectorAll("h1, h2, h3, h4");
+		const extracted: TocHeading[] = Array.from(els).map((el, i) => {
+			// Ensure the heading has an id for scrolling
+			if (!el.id) {
+				el.id = `heading-${i}`;
+			}
+			return {
+				id: el.id,
+				text: el.textContent || "",
+				level: parseInt(el.tagName[1], 10),
+			};
+		});
+		setHeadings(extracted);
+	}, [postContent]);
+
+	const handleTocItemClick = useCallback((headingId: string) => {
+		const el = document.getElementById(headingId);
+		if (el) {
+			el.scrollIntoView({ behavior: "smooth", block: "start" });
+			setTocVisible(false);
+		}
+	}, [setTocVisible]);
 
 	// Compute reader styles based on settings
 	const readerStyles = useMemo(
@@ -156,6 +192,7 @@ export default function BookReaderApp({
 						}}
 					>
 						<article
+							ref={articleRef}
 							className="font-serif text-(--eink-ink)"
 							itemScope
 							itemType="http://schema.org/Article"
@@ -220,6 +257,49 @@ export default function BookReaderApp({
 					</div>
 				</div>
 			</div>
+
+			{/* Table of Contents Panel */}
+			{tocVisible && headings.length > 0 && (
+				<>
+					<div
+						className="fixed inset-0 z-[200]"
+						onClick={() => setTocVisible(false)}
+					/>
+					<div
+						className="fixed bottom-0 left-0 right-0 z-[201] flex flex-col overflow-y-auto"
+						style={{
+							backgroundColor: "var(--eink-paper)",
+							borderTop: "2px solid var(--eink-ink)",
+							maxHeight: "60vh",
+						}}
+					>
+						<div
+							className="text-sm font-sans font-medium px-4 py-3 border-b"
+							style={{
+								color: "var(--eink-ink)",
+								borderColor: "var(--eink-divider)",
+							}}
+						>
+							{locale === "zh" ? "目录" : "Table of Contents"}
+						</div>
+						<nav className="py-2">
+							{headings.map((heading) => (
+								<button
+									key={heading.id}
+									onClick={() => handleTocItemClick(heading.id)}
+									className="block w-full text-left px-4 py-2 text-sm font-sans hover:bg-(--eink-paper-warm) truncate"
+									style={{
+										color: "var(--eink-ink-secondary)",
+										paddingLeft: `${(heading.level - 1) * 16 + 16}px`,
+									}}
+								>
+									{heading.text}
+								</button>
+							))}
+						</nav>
+					</div>
+				</>
+			)}
 		</>
 	);
 }
