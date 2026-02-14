@@ -21,7 +21,7 @@ export const Section: React.FC<SectionProps> = ({
 	return (
 		<section
 			className={`
-        py-4 border-b last-of-type:border-b-0
+        py-4
         ${className}
       `}
 			style={{ borderColor: "var(--eink-divider)" }}
