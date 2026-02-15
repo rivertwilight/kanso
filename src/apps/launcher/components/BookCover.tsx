@@ -41,11 +41,14 @@ export default function BookCover({
 	// @ts-expect-error
 	const author = book.frontmatter.author;
 	const year = book.frontmatter?.year;
+	const rawLink = book.frontmatter.link;
+	const link = rawLink && !/^https?:\/\//.test(rawLink) ? `https://${rawLink}` : rawLink;
 	const slug = book.slug;
 	const showPlaceholder = !cover || imageError;
+	const href = link || `/${locale}/project/${slug}`;
 
 	return (
-		<Link href={`/${locale}/project/${slug}`} className="block w-full">
+		<Link href={href} className="block w-full" {...(link ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
 			{showPlaceholder ? (
 				<div
 					className="w-full relative overflow-hidden border"
