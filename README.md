@@ -6,14 +6,11 @@ A static-based personal website system powered by Markdown.
 
 ## Features
 
--   Minimalist Design - Clean, distraction-free reading experience
--   Markdown Writing - Write in Markdown with MDX support
--   Multilingual Ready - Support for multiple languages in UI and content
--   Modern Stack - Built with Next.js for optimal performance
--   Deploy Anywhere - One-click deploy to Vercel, Netlify, or your own server
--   Comments - Integrated with Giscus for community engagement
--   SEO Optimized - Full SEO support out of the box
--   RSS Feed - Keep your readers updated
+-   Minimalist Design with Amazon Kindle style
+-   Write in Markdown with MDX support
+-   Code block, mermaid and video block supported
+-   Full SEO support out of the box
+-   RSS Feed
 
 ## Quick Start
 
@@ -25,12 +22,6 @@ A static-based personal website system powered by Markdown.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRiverTwilight%2Frene.wang)
 
-## Deploying to Netify
-
-```bash
-CI= yarn run build
-```
-
 <details>
 <summary>Deploying to Your Own Server</summary>
 
@@ -38,7 +29,7 @@ CI= yarn run build
 
 Make sure that Node.js, git, and pm2 are installed on the server.
 
-Create a `/app/ygk-blog` directory on the server and execute git init to initialize the repository.
+Create a `/app/blog` directory on the server and execute git init to initialize the repository.
 
 ```bash
 mkdir -p /app/blog && cd /app/blog
@@ -72,10 +63,30 @@ Make sure that the Action is enabled, and all updates to the main branch on GitH
 
 Place `.mdx` files in the `/content/crafts/<locale>` directory. Each article must have at least the following frontmatter:
 
-```yaml
+```mdx
 ---
 title: Your Article Title
 createAt: 2024-01-01
+---
+
+Article content.
+```
+
+## Projects
+
+Place `.mdx` files in `content/projects` directory.
+
+```mdx
+---
+title: Mute
+createAt: 2026-02-12
+cover: "/project/mute.png"
+year: 2026
+link: mute.ink
+seo:
+    keywords:
+        - text RPG
+        - AI fictoin
 ---
 ```
 

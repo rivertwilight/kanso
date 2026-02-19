@@ -1,7 +1,7 @@
 {
 	"name": "kanso",
 	"version": "26.02.19",
-	"description": "A Responsive, Fast, i18n and Theme-able static blog base on Next.js.",
+	"description": "Personal website in Amazon Kindle style. Write thoughts, showcase projects, and more.",
 	"scripts": {
 		"dev": "next -p 3005",
 		"build": "next build",
