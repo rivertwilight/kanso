@@ -24,11 +24,9 @@ function getHighlighter() {
 						"tsx",
 						"bash",
 						"python",
-						"java",
 						"go",
 						"rust",
 						"cpp",
-						"c",
 						"css",
 						"scss",
 						"sass",
@@ -36,11 +34,9 @@ function getHighlighter() {
 						"yaml",
 						"markdown",
 						"sql",
-						"graphql",
-						"php",
-						"ruby",
 						"swift",
 						"kotlin",
+						"dart",
 						"html",
 					],
 				});
@@ -130,26 +126,24 @@ const CodeBlock = ({
 		const match = Array.isArray(nodeClassName)
 			? nodeClassName.find((cn: string) => cn.startsWith("language-"))
 			: typeof nodeClassName === "string" &&
-				  nodeClassName.startsWith("language-")
-				? nodeClassName
-				: null;
+			  nodeClassName.startsWith("language-")
+			? nodeClassName
+			: null;
 		language = match ? match.replace("language-", "") : null;
 	}
 
 	// Check if this is inline code
 	const isInline =
 		inline ||
-		(!language &&
-			typeof children === "string" &&
-			!children.includes("\n"));
+		(!language && typeof children === "string" && !children.includes("\n"));
 
 	// Build code string
 	const codeString =
 		typeof children === "string"
 			? children
 			: Array.isArray(children)
-				? children.join("")
-				: String(children || "");
+			? children.join("")
+			: String(children || "");
 
 	const trimmedCode = codeString.replace(/\n$/, "");
 
@@ -162,9 +156,7 @@ const CodeBlock = ({
 		// Detect diff-{lang} pattern (e.g. diff-javascript, diff-tsx)
 		const isDiff = language?.startsWith("diff-") ?? false;
 		const baseLang = isDiff ? language!.slice(5) : language;
-		const lang = baseLang
-			? LANG_ALIASES[baseLang] || baseLang
-			: "text";
+		const lang = baseLang ? LANG_ALIASES[baseLang] || baseLang : "text";
 
 		getHighlighter().then((highlighter) => {
 			if (cancelled) return;
@@ -214,7 +206,12 @@ const CodeBlock = ({
 	}
 
 	if (highlightedHtml) {
-		return <div className="mt-1 mb-6" dangerouslySetInnerHTML={{ __html: highlightedHtml }} />;
+		return (
+			<div
+				className="mt-1 mb-6"
+				dangerouslySetInnerHTML={{ __html: highlightedHtml }}
+			/>
+		);
 	}
 
 	return (
