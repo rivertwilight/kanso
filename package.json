@@ -1,6 +1,6 @@
 {
 	"name": "kanso",
-	"version": "26.02.13",
+	"version": "26.02.19",
 	"description": "A Responsive, Fast, i18n and Theme-able static blog base on Next.js.",
 	"scripts": {
 		"dev": "next -p 3005",

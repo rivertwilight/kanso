@@ -1,21 +1,21 @@
 # Kanso
 
-A static-based personal website system that seamlessly integrates with Notion and Markdown.
+A static-based personal website system powered by Markdown.
 
 [简体中文](./README.md) | English
 
-## ✨ Features
+## Features
 
-- Minimalist Design - Clean, distraction-free reading experience
-- Dual Writing Flow - Write in Markdown or sync from Notion
-- Multilingual Ready - Support for multiple languages in UI and content
-- Modern Stack - Built with Next.js for optimal performance
-- Deploy Anywhere - One-click deploy to Vercel, Netlify, or your own server
-- Comments - Integrated with Giscus for community engagement
-- SEO Optimized - Full SEO support out of the box
-- RSS Feed - Keep your readers updated
+-   Minimalist Design - Clean, distraction-free reading experience
+-   Markdown Writing - Write in Markdown with MDX support
+-   Multilingual Ready - Support for multiple languages in UI and content
+-   Modern Stack - Built with Next.js for optimal performance
+-   Deploy Anywhere - One-click deploy to Vercel, Netlify, or your own server
+-   Comments - Integrated with Giscus for community engagement
+-   SEO Optimized - Full SEO support out of the box
+-   RSS Feed - Keep your readers updated
 
-## 🚀 Quick Start
+## Quick Start
 
 1. Click "Use this template" to create your repository
 2. Edit `src/i18n/resources/en.json` with your information
@@ -68,32 +68,16 @@ Make sure that the Action is enabled, and all updates to the main branch on GitH
 
 </details>
 
-## ✍ Writing
+## Writing
 
-Currently, two writing methods are supported:
+Place `.mdx` files in the `/content/crafts/<locale>` directory. Each article must have at least the following frontmatter:
 
-1. Place the .mdx file in the `/posts/<locale>` directory. (Recommended)
-2. Automatically sync articles from Notion.
-
-If you choose the first method, each article must have at least the following two frontmatter:
-
-![Notion Database Properties](https://file.rene.wang/clipboard-1769920503244-dfe49dcb7279d.png)
-
-If you choose to use Notion for writing, refer to this [database] () to create a similar one.
-
-Then, create a new Integration in Notion to obtain an API Key. Also, get your database_id.
-
-Finally, add two environment variables in the GitHub repository:
-
-```bash
-NOTION_API_KEY=<YOUR_KEY>
-NOTION_DATABASE_ID=<YOUR_ID>
+```yaml
+---
+title: Your Article Title
+createAt: 2024-01-01
+---
 ```
-
-> [!NOTE]  
-> To get the NOTION_DATABASE_ID, open the page where the database is located, and the long string after the username in the browser URL is the id. To get the NOTION_API_KEY, you need to create a Connection on the first page of the Database, and then click "Manage connections" to get the TOKEN.
-
-Once everything is ready, you can choose the deployment method you prefer.
 
 ## License
 

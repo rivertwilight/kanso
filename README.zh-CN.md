@@ -1,13 +1,13 @@
 # Kanso
 
-Kanso 是一个静态写作的个人网站系统，可以无缝集成 Notion 和 Markdown。
+Kanso 是一个基于 Markdown 的静态个人网站系统。
 
 简体中文 | [English](./README.en-US.md)
 
 ## ✨ 特点
 
 -   极简设计 - 清爽、无干扰的阅读体验
--   双重写作流 - 支持 Markdown 写作或从 Notion 同步
+-   Markdown 写作 - 支持 Markdown 和 MDX 格式
 -   多语言支持 - UI 和内容支持多种语言
 -   现代技术栈 - 使用 Next.js 构建，性能优异
 -   灵活部署 - 一键部署到 Vercel、Netlify 或自己的服务器
@@ -19,7 +19,7 @@ Kanso 是一个静态写作的个人网站系统，可以无缝集成 Notion 和
 
 1. Fork 此仓库
 2. 部署到你喜欢的平台（参考下面的部署方法）
-3. （可选）启用 Notion 同步的 Workflow（参考写作部分）
+3. 部署到你喜欢的平台
 
 ## 部署到 Vercel
 
@@ -67,31 +67,14 @@ vim ~/.ssh/id_rsa.pub
 
 ## ✍ 写作
 
-目前支持两种写作方式：
+将 `.mdx` 文件放入 `/content/crafts/<locale>` 目录即可。每篇文章至少需要以下 frontmatter：
 
-1. 将 Markdown 文件放入`/posts/<catagories>`目录即可。目前最高支持二级目录。
-2. 从 Notion 单向同步文章。
-
-两种方式可以同步使用。
-
-如果你选择第一种方式，每篇文章至少需要以下两个 frontmatter：
-
--   title
--   date
-
-如果选择使用 Notion 写作，请参考这个 [database](https://rivertwilight.notion.site/faf0f2effa1746f8806af0c0df3d7b30?v=7c3efd0a9f7c4b858cee4f3d563b5d89) 的形式创建一个一样的。（打开后点击右上角 `Duplicate` 一键复制）
-
-之后，请在 Notion 新建一个 Intergation，获取 API Key. 同时获取你的 database_id
-
-然后，在 GitHub 仓库新增两个环境变量：
-
-```bash
-NOTION_API_KEY=secret_xxxxx
-NOTION_DATABASE_ID=xxxxx
+```yaml
+---
+title: 文章标题
+createAt: 2024-01-01
+---
 ```
-
-> [!NOTE]  
-> 要获取 NOTION_DATABASE_ID，只需要打开数据库所在的页面，此时浏览器 URL 中用户名之后的长字符就是 id。要获取 NOTION_API_KEY，你需要先在 Database 的首页创建一个 Connection，然后点击 Manage connections 获取 TOKEN。
 
 ## License
 
