@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useState } from "react";
 import Image from "next/image";
 
 interface ImageBlockProps {
@@ -30,18 +29,20 @@ const ImageBlock = (props: ArticleUsageProps | NonArticleUsageProps) => {
 
 	return (
 		<>
-			<div className="w-full relative mb-2">
+			<div className="w-full max-h-[50vh] relative mb-2 overflow-hidden">
 				<Image
 					src={src}
 					alt={alt}
 					width={0}
 					height={0}
 					sizes="100vw"
-					style={{ width: '100%', height: 'auto' }}
+					style={{ width: "100%", height: "auto", maxHeight: "50vh" }}
 					className="object-contain"
 				/>
 			</div>
-			{alt && <div className="text-center text-[#666] text-sm">{alt}</div>}
+			{alt && (
+				<div className="text-center text-[#666] text-sm">{alt}</div>
+			)}
 		</>
 	);
 };

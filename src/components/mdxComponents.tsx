@@ -44,6 +44,9 @@ export const mdxComponents = {
 		/>
 	),
 	td: (props: any) => (
-		<td className="border border-(--eink-border) px-3 py-2 whitespace-nowrap" {...props} />
+		<td
+			className="border border-(--eink-border) px-3 py-2 whitespace-nowrap"
+			{...props}
+		/>
 	),
 };
