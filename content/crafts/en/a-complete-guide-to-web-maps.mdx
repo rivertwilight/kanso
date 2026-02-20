@@ -1,0 +1,182 @@
+---
+title: A Complete Guide to Web Maps
+summary: Everything you need to know to render a real-world map on the web — from data sources and rendering engines to custom styling.
+keywords:
+    - Open Source
+createAt: 2026-02-20T00:00:00.000Z
+seo:
+    keywords:
+        - web maps
+        - map rendering
+        - map styling
+        - map data sources
+        - map rendering engine
+        - vector tiles
+---
+
+Web map is hard. It's easy to just use the out-the-box lib like OpenStreetMap. But if you want fully control style of every bits, it's a complex job.
+
+This guide walks you through everything you need to build a fully custom, real-world map on the web — picking a data source, choosing a rendering engine, styling the map, and getting it on screen.
+
+Check out [Chizu](http://chizu.ygeeker.com/) to see what the end result looks like.
+
+![Chizu](https://file.rene.wang/Screenshot%202026-01-20%20at%2010.48.10.png)
+
+## How Web Maps Work
+
+Before writing any code, it helps to understand what a web map is actually made of. There are three core pieces:
+
+-   **Data sources** provide the raw geographic information — place names, water bodies, contour lines, roads, and so on. You can tap into a public provider or host your own. Each rendering engine has its own conventions for how data is served. Common providers include:
+    -   Google Maps
+    -   MapTiler — a commercial map provider
+    -   **OpenStreetMap** — community-maintained, like Wikipedia for maps
+    -   [Stadia Maps](https://docs.stadiamaps.com/maps-for-web/) — a commercial map provider
+    -   Various region-specific providers (Amap/Gaode in China, etc.)
+-   **Styles** define how the map looks — colors, fonts, which features are visible at which zoom levels. Different engines use different style specs.
+-   **Rendering engines** take the data and the styles and draw them on screen. The main options are:
+    -   Mapbox GL JS — partially open-source; using its official data source requires a paid plan
+    -   MapLibre GL JS — a fully open-source fork of Mapbox, with its own open style specification
+    -   Leaflet — open-source, with JS and React SDKs
+    -   OpenLayers — open-source
+
+Because each engine has its own spec, data providers often ship SDKs that handle format conversion between them.
+
+A note on compliance: serving maps in mainland China requires following national surveying regulations, including the use of the GCJ-02 encrypted coordinate system and obtaining a map review number. And regardless of where you operate, you're generally expected to visibly credit your data source.
+
+## Rendering Under the Hood
+
+Map data is typically split into discrete **vector tiles**. Each tile covers a specific geographic region at a specific zoom level.
+
+Taking MapLibre as an example, a map can be understood from two perspectives:
+
+-   **Tiles** — viewed from above, the map is a grid of tiles, much like tiles in a 2D game engine. Each tile is identified by a triplet `(z, x, y)`.
+-   **Layers** — viewed in cross-section, the map is a stack of layers: water on one layer, roads on another, labels on yet another. Zoom levels range from 0 (the whole globe) up to 20+ (street-level detail). Each zoom increment quadruples the number of tiles (doubling both axes).
+
+Tiles, fonts, and other map assets are stored in the **PBF** (Protocol Buffer Binary) format. PBF encodes vector data — points, lines, and polygons — rather than pre-rendered raster images. This means the rendering engine (e.g., MapLibre GL JS) can leverage WebGL for hardware-accelerated rendering on the client.
+
+PBF is a binary format, so it's far more compact than text-based alternatives like XML or JSON. An OpenStreetMap PBF file is typically half the size of its gzip-compressed XML equivalent, and about 30% smaller than a bzip2-compressed one.
+
+It's also the core format of the Mapbox Vector Tile specification, which is widely adopted (OpenStreetMap, Mapbox, Tilezen, etc.), ensuring broad compatibility and interoperability.
+
+## Building a Map, Step by Step
+
+To make this concrete, let's build a map styled after _Red Dead Redemption 2_.
+
+### Step 1 — Pick a Data Source and Rendering Engine
+
+Since we're mapping the real world, we need real-world data. We'll use MapTiler here.
+
+1. Sign up for a free [MapTiler](https://cloud.maptiler.com/auth/widget?next=https%3A%2F%2Fcloud.maptiler.com%2Fmaps%2F) account.
+2. Generate an API key — you'll append it as a query parameter to every request.
+
+Both MapTiler and Stadia Maps allow free usage during local development. If cost is a concern, you could set up a proxy that mimics localhost requests for production use.
+
+In Next.js, for example, you can create an API route to handle this.
+
+_Note: this workaround is for learning purposes only — don't use it in production._
+
+### Step 2 — Design the Map Style
+
+MapTiler's rendering relies on a JSON style file. This file is where the magic happens.
+
+MapTiler provides an official visual editor called **Maputnik**. You can open one of the built-in styles and tweak it, or start from scratch. Starting from an existing style is usually faster.
+
+![](/image/post/22cb60fd-4a96-809d-974d-df933fdd87f3_asynccode)
+
+You can also edit the JSON directly. Pairing this with an AI coding assistant works surprisingly well.
+
+Think carefully about your design: color palette, typography, which elements appear at which zoom levels — every detail matters. Layer visibility can be tied to zoom level, so features can appear and disappear as the user zooms in and out.
+
+Here's the design language we're going for — the _Red Dead Redemption 2_ map aesthetic:
+
+![](/image/post/22cb60fd-4a96-8061-a044-de471c82fab4_asynccode)
+
+We need to identify the fonts by eye. I'm no typographer, but here's my best guess:
+
+-   Water bodies / landmarks: Ephesis
+-   State (province) names: Merriweather
+-   City names: Outfit
+-   Water labels: Metal
+
+Taking water body labels as an example:
+
+-   Set **Rotation Alignment** to `Viewport` (in RDR2, landscape labels always face the camera — they never warp or rotate)
+-   Set the **Font** to Ephesis
+-   Match the **Halo** color to the text color, then use **Halo Width** to control the apparent font weight
+
+Next, let's add contour lines.
+
+The default style doesn't include contour data, but the RDR2 map clearly has topographic lines. We need to **add an additional data source** for the contour layer. MapTiler provides one out of the box:
+
+/api/maptiler/tiles/contours-v2/tiles.json?key=Qnr580YQzLS9WFZBXZYE
+
+You can also host your own. First, add a new source called `contours` in the Sources panel:
+
+![](/image/post/22cb60fd-4a96-8093-a468-e498b62f5d6d_asynccode)
+
+Then add a new **contour line layer** using the `Line` type. Point it at the source you just created and configure the color, width, and other properties.
+
+![](/image/post/22cb60fd-4a96-80b2-8ce6-f926df61967c_asynccode)
+
+Once you're happy with the design, export the JSON file.
+
+Many style properties support expressions — instead of fixed values, they can be computed dynamically based on conditions. Layers themselves also support conditional rendering. For instance, the contour lines above are configured to only appear between zoom levels 10 and 24; zoom out further and they disappear.
+
+### Step 3 — Use Custom Fonts
+
+If you're fine with the default fonts, skip this step.
+
+Unlike CSS, you can't just point to a `.ttf` file. Map fonts need to be converted to **PBF glyph files**, just like every other map asset.
+
+MapLibre maintains an open-source tool called [Font Maker](https://maplibre.org/font-maker/) that handles the conversion. Upload all the fonts you need:
+
+![](/image/post/22cb60fd-4a96-8009-ae0a-f250e993dd0f_asynccode)
+
+After conversion, host the generated PBF files somewhere publicly accessible so the client can fetch them.
+
+The engine resolves fonts through a URL template like this:
+
+```
+https://www.example.com/font-server/{fontstack}/{range}.pbf
+```
+
+`{fontstack}` is the font name, so your server's file structure should look something like this:
+
+![](/image/post/22cb60fd-4a96-80f6-bc0f-e8eeed3ee768_asynccode)
+
+Then add the glyph URL to your style JSON:
+
+```
+"glyphs": "https://chizu.ygeeker.com/font-server/{fontstack}/{range}.pbf",
+```
+
+You can also set this in Maputnik's settings — it'll write it into the JSON for you:
+
+![](/image/post/22cb60fd-4a96-8035-8e68-fc3327251255_asynccode)
+
+Once the glyph source is configured, you can reference font names in any text/symbol layer. The name corresponds to the font's folder name on the server.
+
+### Step 4 — Render the Map in Your App
+
+In React, it's as simple as loading the style JSON. From there, you can use the MapLibre API for more advanced features. Here's a basic example:
+
+```tsx
+
+```
+
+## Bonus: Why Google Maps Looks Broken at the Shenzhen–Hong Kong Border
+
+Here's a fun quirk: if you open Google Maps' satellite view at the Shenzhen–Hong Kong border, you'll notice that on the Shenzhen side, the roads don't align with the satellite imagery. On the Hong Kong side, everything lines up perfectly.
+
+![](/image/post/22cb60fd-4a96-8089-a464-fed02b43de35_asynccode)
+
+This happens because mainland China uses the **GCJ-02** coordinate system (colloquially known as the "Mars coordinate system"), an intentionally offset system mandated by the Chinese government. Hong Kong and the rest of the world use WGS-84, the standard GPS coordinate system.
+
+GCJ-02 uses a non-public, one-way encryption algorithm. You can convert WGS-84 coordinates _to_ GCJ-02 easily, but going in the other direction is deliberately difficult.
+
+Licensed Chinese map providers have access to the algorithm and can display satellite imagery correctly. Services like Google, which don't have the decryption keys, can't convert the government-supplied road data back to WGS-84 — so the roads and satellite images end up misaligned.
+
+## Resources
+
+-   [MapLibre Ecosystem](https://github.com/maplibre/awesome-maplibre)
+-   [Leaflet Plugins](https://leafletjs.com/plugins.html)

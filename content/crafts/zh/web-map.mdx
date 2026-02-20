@@ -2,17 +2,16 @@
 title: 玩转 Web 地图
 summary: 本文介绍一下如何在 Web 技术栈里实现一个真实世界里的地图，并定制样式。
 keywords:
-  - Open Source
-tag: Tech
+    - Open Source
 createAt: 2025-07-08T00:00:00.000Z
 seo:
-  keywords:
-    - Web 地图
-    - 地图
-    - 地图渲染
-    - 地图样式
-    - 地图数据源
-    - 地图渲染引擎
+    keywords:
+        - Web 地图
+        - 地图
+        - 地图渲染
+        - 地图样式
+        - 地图数据源
+        - 地图渲染引擎
 ---
 
 本文介绍一下如何在 Web 技术栈里实现一个真实世界里的地图，并定制样式。
@@ -26,18 +25,19 @@ seo:
 首先要搞清楚：Web 中的地图是如何实现的？
 
 一般来说会包括如下实体：
-- **数据源**：提供地图信息，包括地名、水体、等高线等。可以使用公开数据源，亦可自己托管数据源。不同的渲染引擎有不同的数据约定。常见的数据源有：
-  - Google Map
-  - Maptiler：商业地图提供商
-  - **OpenStreetMap**：由志愿者维护，类似 Wikipedia
-  - [Stadia Map](https://docs.stadiamaps.com/maps-for-web/)：商业地图提供商
-  - 高德地图等国产地图
-- **样式**：描述地图的样式的规范。和数据源一样，不同的渲染引擎有不同的数据约定
-- **渲染引擎**：结合数据源和样式源，将其绘制到屏幕上。主流引擎有：
-  - Mapbox GL JS：半开源，接入官方数据源需要付费
-  - MapLibre GL JS：Mapbox 的开源替代。其制定了一套开源的自有样式方案
-  - Leaflet：开源，提供了 JS SDK / React SDK 等
-  - OpenLayers：开源
+
+-   **数据源**：提供地图信息，包括地名、水体、等高线等。可以使用公开数据源，亦可自己托管数据源。不同的渲染引擎有不同的数据约定。常见的数据源有：
+    -   Google Map
+    -   Maptiler：商业地图提供商
+    -   **OpenStreetMap**：由志愿者维护，类似 Wikipedia
+    -   [Stadia Map](https://docs.stadiamaps.com/maps-for-web/)：商业地图提供商
+    -   高德地图等国产地图
+-   **样式**：描述地图的样式的规范。和数据源一样，不同的渲染引擎有不同的数据约定
+-   **渲染引擎**：结合数据源和样式源，将其绘制到屏幕上。主流引擎有：
+    -   Mapbox GL JS：半开源，接入官方数据源需要付费
+    -   MapLibre GL JS：Mapbox 的开源替代。其制定了一套开源的自有样式方案
+    -   Leaflet：开源，提供了 JS SDK / React SDK 等
+    -   OpenLayers：开源
 
 由于不同的渲染引擎都有不同的规范，所以地图数据提供商往往会提供一些 SDK 来实现格式互转。例如：
 
@@ -52,8 +52,9 @@ seo:
 地图数据通常被分割成离散的**矢量瓦片 (Vector Tiles)**。每个瓦片只包含特定区域和缩放级别的数据。
 
 以 MapLibre 为例。地图从不同角度可以分为两种组成：
-- Tile：平面上看，地图可以拆分为一个个瓦片。类似 Unity 2D 中的 Tile。瓦片通过三元组(z, x, y)标识。
-- Layer：垂直来看，地图可以拆分为一个个 Layer，例如水体是一个 Layer，道路是一个 Layer，文字是一个 layer。缩放层级从0（全球视图）到20+（街道级细节）。每增加一级缩放，Tile 数量增加4倍（横纵各翻倍）。
+
+-   Tile：平面上看，地图可以拆分为一个个瓦片。类似 Unity 2D 中的 Tile。瓦片通过三元组(z, x, y)标识。
+-   Layer：垂直来看，地图可以拆分为一个个 Layer，例如水体是一个 Layer，道路是一个 Layer，文字是一个 layer。缩放层级从 0（全球视图）到 20+（街道级细节）。每增加一级缩放，Tile 数量增加 4 倍（横纵各翻倍）。
 
 地图、字体等数据都是使用 PBF 格式存储的。PBF 存储的是矢量数据（点、线、面），而不是预渲染的图片（栅格瓦片）。这意味着地图渲染引擎（如 MapLibre GL JS）可以在客户端使用 WebGL 进行硬件加速渲染。
 
@@ -95,19 +96,21 @@ Maptile 提供了一个官方的地图编辑器 Maputink，可以直接使用它
 ![](/image/post/22cb60fd-4a96-8061-a044-de471c82fab4_asynccode)
 
 这里需要肉眼辨识一下字体。我不是专业的设计师，粗略判断如下：
-- 水体 / 景点：Ephesis
-- 州（省）名：Merriweather
-- 城市名：Outfit
-- 水体：Metal
+
+-   水体 / 景点：Ephesis
+-   州（省）名：Merriweather
+-   城市名：Outfit
+-   水体：Metal
 
 以水体为例：
-- 设置 Rotation Aligment 为 Viewport（大镖客中景观文字永远是正的，不会扭曲）
-- 设置 Font 为 Ephesis
-- 设置 Halo 与字体颜色相同，并通过 Halo Width 调整字体粗细
+
+-   设置 Rotation Aligment 为 Viewport（大镖客中景观文字永远是正的，不会扭曲）
+-   设置 Font 为 Ephesis
+-   设置 Halo 与字体颜色相同，并通过 Halo Width 调整字体粗细
 
 接下来我们添加等高线。
 
-由于默认的配置不支持等高线，然而《荒野大镖客2》中的地图是有等高线的，所以我们需要**添加一个额外的数据源**，来实现等高线层。这里可以直接使用 maptiler 的数据源：
+由于默认的配置不支持等高线，然而《荒野大镖客 2》中的地图是有等高线的，所以我们需要**添加一个额外的数据源**，来实现等高线层。这里可以直接使用 maptiler 的数据源：
 
 /api/maptiler/tiles/contours-v2/tiles.json?key=Qnr580YQzLS9WFZBXZYE
 
@@ -177,7 +180,6 @@ GCJ-02 是一个非公开的单向加密算法。也就是说，GCJ-02 难以转
 因此，取得中国授权的本地地图软件可以展示正确的卫星地图。对于没有掌握此算法的 Google 等服务商，它们无法把中国政府提供的数据转换为 WGS-84 格式，因此就无法匹配道路和卫星地图。
 
 ## 相关资源
-- [MapLibre 生态](https://github.com/maplibre/awesome-maplibre)
-- [Leaflet 生态](https://leafletjs.com/plugins.html)
 
-
+-   [MapLibre 生态](https://github.com/maplibre/awesome-maplibre)
+-   [Leaflet 生态](https://leafletjs.com/plugins.html)

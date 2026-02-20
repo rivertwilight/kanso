@@ -70,8 +70,8 @@ export default function LauncherApp(props: LauncherAppProps) {
 								/>
 								<div className="font-sans">
 									I'm a design engineer at LobeHub from China.
-									I previously work at ByteDance and Tiktok. I
-									build interface and make things happen.
+									I previously work at ByteDance. I build
+									interface and make things happen.
 								</div>
 							</div>
 						</Section>
