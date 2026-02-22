@@ -3,14 +3,14 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAtom } from "jotai";
-import { ActionBar } from "@/components/ui";
+import { ActionBar, ActionBarMenu } from "@/components/ui";
 import {
 	ArrowBackSharpIcon,
-	EllipsisVerticalIcon,
 } from "@/components/ui/Icons";
 import ReaderSettingsSheet from "./ReaderSettingsSheet";
 import { tocVisibleAtom } from "../atoms";
 import { Table2Icon, ALargeSmallIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 /**
  * Toolbar Button Component
@@ -76,6 +76,7 @@ export const ReaderToolbar: React.FC<ReaderToolbarProps> = ({
 	onMenuClick,
 }) => {
 	const router = useRouter();
+	const t = useTranslations();
 	const [settingsOpen, setSettingsOpen] = useState(false);
 	const [tocVisible, setTocVisible] = useAtom(tocVisibleAtom);
 
@@ -120,9 +121,33 @@ export const ReaderToolbar: React.FC<ReaderToolbarProps> = ({
 						<ALargeSmallIcon size={18} />
 					</ToolbarButton>
 
-					<ToolbarButton onClick={onMenuClick} title="More options">
-						<EllipsisVerticalIcon size={18} />
-					</ToolbarButton>
+					<ActionBarMenu
+						items={[
+							{
+								textPrimary: t("nav.homePage"),
+								onClick: () => router.push("/"),
+							},
+							{
+								textPrimary: t("nav.settings"),
+								onClick: () => router.push("/settings"),
+							},
+							{
+								textPrimary: "GitHub",
+								component: "a",
+								href: "https://github.com/renewang",
+							},
+							{
+								textPrimary: "Pixiv",
+								component: "a",
+								href: "https://www.pixiv.net/en/users/35572742",
+							},
+							{
+								textPrimary: "X",
+								component: "a",
+								href: "https://x.com/renewang",
+							},
+						]}
+					/>
 				</div>
 			</ActionBar>
 
