@@ -46,11 +46,10 @@ export default function SystemLayout({
 		<>
 			{/* Device label at bottom-left */}
 			<div
-				className="hidden md:block fixed bottom-4 left-4 pointer-events-none z-50"
+				className="hidden md:block fixed bottom-4 left-4 pointer-events-none z-50 text-black/50 dark:text-white/50"
 				style={{
 					fontSize: "10px",
 					fontFamily: "system-ui, -apple-system, sans-serif",
-					color: "rgba(80, 80, 80, 0.5)",
 					lineHeight: "1.5",
 				}}
 			>

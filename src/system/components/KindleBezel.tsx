@@ -244,7 +244,7 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 								{/* Launch Screen - Desktop */}
 								{(isChecking || showLaunchScreen) && (
 									<div
-										className="absolute inset-0 z-100 flex items-center justify-center bg-[#F5F1E8] dark:bg-gray-100 transition-opacity"
+										className="absolute inset-0 z-100 flex items-center justify-center bg-[#F5F1E8] dark:bg-[#0a0e17] transition-opacity"
 										style={{
 											opacity: isFadingOut ? 0 : 1,
 											transitionDuration: `${LAUNCH_SCREEN_FADE_OUT_DURATION}ms`,
@@ -255,7 +255,7 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 												src="/launch-screen.png"
 												alt="Kindle Launch Screen"
 												fill
-												className="object-contain"
+												className="object-contain dark:invert"
 												priority
 											/>
 											{/* Progress Bar Overlay */}
