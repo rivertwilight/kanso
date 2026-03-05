@@ -153,11 +153,41 @@ export default function BookReaderApp({
 	}, [postContent]);
 
 	const handleTocItemClick = useCallback((headingId: string) => {
-		const el = document.getElementById(headingId);
-		if (el) {
-			el.scrollIntoView({ behavior: "smooth", block: "start" });
-			setTocVisible(false);
-		}
+		// Close the TOC panel first, then scroll after layout settles.
+		// Mobile Safari has issues with scrollIntoView during DOM changes,
+		// and may target the wrong scrollable container.
+		setTocVisible(false);
+
+		requestAnimationFrame(() => {
+			const el = document.getElementById(headingId);
+			if (!el) return;
+
+			// Find the scrollable parent (main with overflow-y-auto, or KindleBezel scroll container)
+			let scrollable: HTMLElement | null = el.parentElement;
+			while (scrollable) {
+				const style = window.getComputedStyle(scrollable);
+				if (
+					scrollable.scrollHeight > scrollable.clientHeight &&
+					(style.overflowY === "auto" || style.overflowY === "scroll")
+				) {
+					break;
+				}
+				scrollable = scrollable.parentElement;
+			}
+
+			if (scrollable) {
+				const elRect = el.getBoundingClientRect();
+				const containerRect = scrollable.getBoundingClientRect();
+				const targetTop =
+					scrollable.scrollTop + (elRect.top - containerRect.top);
+				scrollable.scrollTo({ top: targetTop, behavior: "smooth" });
+			} else {
+				// Fallback: scroll the window
+				const elRect = el.getBoundingClientRect();
+				const targetTop = window.scrollY + elRect.top;
+				window.scrollTo({ top: targetTop, behavior: "smooth" });
+			}
+		});
 	}, [setTocVisible]);
 
 	// Compute reader styles based on settings
