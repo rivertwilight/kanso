@@ -1,7 +1,3 @@
-"use client";
-
-import Image from "next/image";
-
 interface ImageBlockProps {
 	node: any;
 	alt: string;
@@ -28,22 +24,19 @@ const ImageBlock = (props: ArticleUsageProps | NonArticleUsageProps) => {
 	}
 
 	return (
-		<>
-			<div className="w-full max-h-[50vh] relative mb-2 overflow-hidden">
-				<Image
-					src={src}
-					alt={alt}
-					width={0}
-					height={0}
-					sizes="100vw"
-					style={{ width: "100%", height: "auto", maxHeight: "50vh" }}
-					className="object-contain"
-				/>
-			</div>
+		<figure className="mb-4">
+			{/* eslint-disable-next-line @next/next/no-img-element */}
+			<img
+				src={src}
+				alt={alt || ""}
+				className="w-full max-h-[50vh] object-contain"
+			/>
 			{alt && (
-				<div className="text-center text-[#666] text-sm">{alt}</div>
+				<figcaption className="text-center text-[#666] text-sm mt-2">
+					{alt}
+				</figcaption>
 			)}
-		</>
+		</figure>
 	);
 };
 
