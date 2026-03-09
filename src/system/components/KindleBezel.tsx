@@ -266,7 +266,7 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 												<div className="relative w-[60%] max-w-75">
 													{/* Progress bar with border */}
 													<div
-														className="w-full h-4 rounded-full border-2 border-black overflow-hidden"
+														className="w-full h-4 rounded-full border-2 border-black dark:border-white overflow-hidden"
 														style={{
 															backgroundColor:
 																"transparent",
@@ -274,7 +274,7 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 													>
 														{/* Progress bar fill */}
 														<div
-															className="h-full bg-black transition-all duration-200 ease-out"
+															className="h-full bg-black dark:bg-white transition-all duration-200 ease-out"
 															style={{
 																width: `${progress}%`,
 															}}
