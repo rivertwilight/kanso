@@ -1,3 +1,4 @@
+import { ExternalLink } from "lucide-react";
 import CodeBlock from "@/components/CodeBlock";
 import ImageBlock from "@/components/ImageBlock";
 import HeadingBlock from "@/components/HeadingBlock";
@@ -24,16 +25,32 @@ export const mdxComponents = {
 	),
 	blockquote: (props: any) => (
 		<blockquote
-			className="border-l-4 border-(--eink-border) pl-4 py-2 my-4 bg-(--eink-paper-warm) italic text-(--eink-ink-secondary) [&>*:last-child]:mb-0!"
+			className="border-l-4 border-(--eink-border) pl-4 py-2 my-4 bg-(--eink-paper-warm) text-(--eink-ink-secondary) [&>*:last-child]:mb-0!"
 			{...props}
 		/>
 	),
-	a: (props: any) => (
-		<a
-			className="underline underline-offset-2 decoration-(--eink-ink-tertiary) hover:decoration-(--eink-ink)"
-			{...props}
-		/>
-	),
+	a: ({ children, href, ...props }: any) => {
+		const isExternal =
+			href && (href.startsWith("http://") || href.startsWith("https://"));
+		return (
+			<a
+				className="underline underline-offset-2 decoration-(--eink-ink-tertiary) hover:decoration-(--eink-ink)"
+				href={href}
+				{...(isExternal
+					? { target: "_blank", rel: "noopener noreferrer" }
+					: {})}
+				{...props}
+			>
+				{children}
+				{isExternal && (
+					<ExternalLink
+						className="inline ml-0.5"
+						style={{ width: "0.75em", height: "0.75em" }}
+					/>
+				)}
+			</a>
+		);
+	},
 	hr: (props: any) => (
 		<hr className="border-(--eink-divider) my-8" {...props} />
 	),
