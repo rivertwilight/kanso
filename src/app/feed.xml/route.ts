@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import getAllPosts from "@/utils/getAllPosts";
+import { SITE_ROOT } from "@/utils/constants";
 
 function escapeXml(text: string): string {
 	if (!text) return "";
@@ -20,7 +21,7 @@ async function getDictionary(locale: string) {
 }
 
 async function generateAtomXml(locale: string): Promise<string> {
-	const baseUrl = "https://rene.wang";
+	const baseUrl = SITE_ROOT;
 	const dictionary = await getDictionary(locale);
 	const { title, description, author } = dictionary.metadata;
 	const now = new Date().toISOString();

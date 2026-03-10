@@ -11,6 +11,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Provider as JotaiProvider } from "jotai";
 
 import SystemLayout from "src/system/components/SystemLayout";
+import { SITE_ROOT, AUTHOR_NAME } from "@/utils/constants";
 import "./global.css";
 import "kindle-fonts/bookerly.css";
 import "kindle-fonts/amazon-ember.css";
@@ -33,10 +34,10 @@ export async function generateMetadata({
 	});
 
 	return {
-		metadataBase: new URL("https://rene.wang"),
+		metadataBase: new URL(SITE_ROOT),
 		title: t("title"),
 		description: t("description"),
-		authors: [{ name: "Rene Wang" }],
+		authors: [{ name: AUTHOR_NAME }],
 		openGraph: {
 			title: t("title"),
 			description: t("description"),

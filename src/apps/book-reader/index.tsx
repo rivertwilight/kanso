@@ -5,6 +5,9 @@ import { useAtom } from "jotai";
 import { readerSettingsAtom } from "@/system/atoms/readerSettings";
 import { tocVisibleAtom } from "./atoms";
 import AppToolbar from "@/system/components/AppToolbar";
+import { List, ListItem, ListItemText } from "@/components/ui";
+import { ChevronRightIcon } from "@/components/ui";
+import Link from "next/link";
 import "katex/dist/katex.min.css";
 
 interface TocHeading {
@@ -92,6 +95,7 @@ interface BookReaderAppProps {
 	postProps: any;
 	postContent: ReactNode;
 	locale: string;
+	nextPost?: { slug: string; title: string } | null;
 }
 
 export default function BookReaderApp({
@@ -99,6 +103,7 @@ export default function BookReaderApp({
 	postProps,
 	postContent,
 	locale,
+	nextPost,
 }: BookReaderAppProps) {
 	const topRef = useRef<HTMLDivElement>(null);
 	const articleRef = useRef<HTMLElement>(null);
@@ -283,7 +288,30 @@ export default function BookReaderApp({
 								{postContent}
 							</section>
 						</article>
-						<div className="h-32" />
+						{nextPost && (
+							<div className="mt-16">
+								<Link
+									href={`/${locale}/essay/${nextPost.slug}`}
+								>
+									<List>
+										<ListItem className="border-b-0">
+											<ListItemText
+												primary={
+													locale === "zh"
+														? "下一篇"
+														: "Next"
+												}
+												secondary={nextPost.title}
+											/>
+											<ChevronRightIcon
+												size={18}
+												className="opacity-40"
+											/>
+										</ListItem>
+									</List>
+								</Link>
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

@@ -1,9 +1,10 @@
 import { MetadataRoute } from "next";
 import getAllPosts from "@/utils/getAllPosts";
 import { getAllProjects } from "@/utils/getAllPosts";
+import { SITE_ROOT } from "@/utils/constants";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-	const baseUrl = "https://rene.wang";
+	const baseUrl = SITE_ROOT;
 
 	// Root page
 	const rootPages: MetadataRoute.Sitemap = [

@@ -1,5 +1,8 @@
 import { Metadata } from "next";
-import { getPostBySlug, getAllPostSlugs } from "@/utils/getAllPosts";
+import getAllPosts, {
+	getPostBySlug,
+	getAllPostSlugs,
+} from "@/utils/getAllPosts";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import BookReaderApp from "@/apps/book-reader";
 import { compileMDX } from "next-mdx-remote/rsc";
@@ -7,9 +10,7 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
 import { mdxComponents } from "@/components/mdxComponents";
-
-const SITE_ROOT = "https://rene.wang";
-const AUTHOR_NAME = "Rene Wang";
+import { SITE_ROOT, AUTHOR_NAME } from "@/utils/constants";
 
 interface PageProps {
 	params: Promise<{ locale: string; slug: string }>;
@@ -104,6 +105,14 @@ export default async function ArticlePage({ params }: PageProps) {
 	const { frontmatter, content } = post;
 	const seo = frontmatter.seo;
 
+	// Find the next post (sorted by date, so next = one after current)
+	const allPosts = getAllPosts({ locale, enableSort: true });
+	const currentIndex = allPosts.findIndex((p) => p.slug === slug);
+	const nextPost =
+		currentIndex >= 0 && currentIndex < allPosts.length - 1
+			? allPosts[currentIndex + 1]
+			: null;
+
 	// Extract SEO fields for JSON-LD
 	const title = extractSeoField(seo, "title") || frontmatter.title || slug;
 	const description =
@@ -178,6 +187,14 @@ export default async function ArticlePage({ params }: PageProps) {
 				postProps={frontmatter}
 				id={slug}
 				locale={locale}
+				nextPost={
+					nextPost
+						? {
+								slug: nextPost.slug,
+								title: nextPost.frontmatter.title,
+						  }
+						: null
+				}
 			/>
 		</>
 	);

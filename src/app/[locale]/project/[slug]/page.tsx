@@ -8,9 +8,7 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
 import { mdxComponents } from "@/components/mdxComponents";
-
-const SITE_ROOT = "https://rene.wang";
-const AUTHOR_NAME = "Rene Wang";
+import { SITE_ROOT, AUTHOR_NAME } from "@/utils/constants";
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
