@@ -1,21 +1,21 @@
 ---
 title: 2024 年 macOS 开发环境配置指南
 summary: 本文将指导你如何将一台新 Mac 配置成开发机器
+unlist: true
 keywords:
-  - Apple
-  - Mac
-tag: Coding
+    - Apple
+    - Mac
 createAt: 2024-06-06T12:00:00.000Z
 ---
 
-
 ## Web 开发环境
 
-访问这些产品的官网，一路默认安装即可。如果遇到无法打开，可能需要在macOS的设置-隐私里允许未知来源应用。
-- Node（自带NPM）
-- VSCode
-- Git
-- Chrome（可选）
+访问这些产品的官网，一路默认安装即可。如果遇到无法打开，可能需要在 macOS 的设置-隐私里允许未知来源应用。
+
+-   Node（自带 NPM）
+-   VSCode
+-   Git
+-   Chrome（可选）
 
 安装好 git 之后，需要配置一下用户名和邮箱。一般来说，和 GitHub 或其他托管服务同步即可。
 
@@ -26,7 +26,7 @@ git config --global user.email johndoe@example.com
 
 关于更多的 Git 初次安装配置，可以参考这篇[官方文章](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)。
 
-然后，生成ssh密钥，用于推送到版本管理仓库。将公钥添加到 GitHub 或其他托管平台即可。执行命令后，会输出公钥所在的目录。
+然后，生成 ssh 密钥，用于推送到版本管理仓库。将公钥添加到 GitHub 或其他托管平台即可。执行命令后，会输出公钥所在的目录。
 
 ```bash
 ssh-keygen
