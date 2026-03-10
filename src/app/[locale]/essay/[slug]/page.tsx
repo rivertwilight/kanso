@@ -105,8 +105,8 @@ export default async function ArticlePage({ params }: PageProps) {
 	const { frontmatter, content } = post;
 	const seo = frontmatter.seo;
 
-	// Find the next post (sorted by date, so next = one after current)
-	const allPosts = getAllPosts({ locale, enableSort: true });
+	// Find the next post, consistent with the home page post list
+	const allPosts = getAllPosts({ enableSort: true });
 	const currentIndex = allPosts.findIndex((p) => p.slug === slug);
 	const nextPost =
 		currentIndex >= 0 && currentIndex < allPosts.length - 1
