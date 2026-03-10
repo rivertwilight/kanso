@@ -57,6 +57,7 @@ export async function generateMetadata({
 		openGraph: {
 			title,
 			description,
+			url: `${SITE_ROOT}/${locale}/essay/${slug}`,
 			type: "article",
 			publishedTime: frontmatter.createAt
 				? new Date(frontmatter.createAt).toISOString()
