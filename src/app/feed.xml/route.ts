@@ -47,8 +47,6 @@ async function generateAtomXml(locale: string): Promise<string> {
 					post.markdownBody?.slice(0, 200) ||
 					""
 			);
-			const category = post.category || "";
-
 			return `
   <entry>
     <title>${postTitle}</title>
@@ -56,7 +54,6 @@ async function generateAtomXml(locale: string): Promise<string> {
     <id>${postUrl}</id>
     <updated>${updated}</updated>
     <summary>${summary}</summary>
-    ${category ? `<category term="${escapeXml(category)}"/>` : ""}
     <author>
       <name>${escapeXml(author.name)}</name>
       <email>${escapeXml(author.email)}</email>
