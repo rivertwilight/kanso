@@ -16,7 +16,22 @@ export const mdxComponents = {
 	h5: (props: any) => <HeadingBlock level={5} {...props} />,
 	h6: (props: any) => <HeadingBlock level={6} {...props} />,
 	iframe: FrameBlock,
-	p: (props: any) => <p className="mb-4" {...props} />,
+	p: ({ children, ...props }: any) => {
+		// If the paragraph contains only an image/figure, unwrap it to avoid
+		// invalid <figure> inside <p> nesting (causes hydration errors).
+		const childArray = Array.isArray(children) ? children : [children];
+		const nonEmpty = childArray.filter(
+			(c: any) => c !== "\n" && c !== "" && c != null
+		);
+		if (
+			nonEmpty.length === 1 &&
+			typeof nonEmpty[0] === "object" &&
+			nonEmpty[0]?.type === ImageBlock
+		) {
+			return <>{children}</>;
+		}
+		return <p className="mb-4" {...props}>{children}</p>;
+	},
 	ul: (props: any) => (
 		<ul className="list-disc pl-6 mb-4 space-y-1" {...props} />
 	),
