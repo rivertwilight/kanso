@@ -20,7 +20,7 @@ const nextConfig: NextConfig = {
 				headers: [
 					{
 						key: "Content-Security-Policy",
-						value: "frame-src https://giscus.app;",
+						value: "frame-src https://giscus.app https://player.bilibili.com;",
 					},
 				],
 			},

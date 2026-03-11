@@ -1,13 +1,13 @@
-// TODO FrameBlock for Notion
-
-const IFrameBlock = () => {
+const FrameBlock = (props: React.IframeHTMLAttributes<HTMLIFrameElement>) => {
 	return (
-		<iframe
-			srcDoc="{{UNTRUSTED_HTML_HERE}}"
-			sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin"
-			{...{ csp: "script-src 'none'" } as React.IframeHTMLAttributes<HTMLIFrameElement>}
-		/>
+		<div className="flex justify-center my-6">
+			<iframe
+				className="w-full max-w-3xl aspect-video"
+				allowFullScreen
+				{...props}
+			/>
+		</div>
 	);
 };
 
-export default IFrameBlock
+export default FrameBlock;
