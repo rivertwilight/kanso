@@ -69,9 +69,10 @@ export default function LauncherApp(props: LauncherAppProps) {
 									className="shrink-0 w-14 h-14"
 								/>
 								<div className="font-sans">
-									I'm a design engineer at LobeHub from China.
-									I previously work at ByteDance. I build
-									interface and make things happen.
+									I'm a Chinese design engineer loving to
+									craft interface. Here I'm sharing my
+									thoughts and projects. I previously worked
+									at ByteDance.
 								</div>
 							</div>
 						</Section>
