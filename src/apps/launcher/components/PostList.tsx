@@ -21,24 +21,15 @@ function formatDate(dateStr: string, locale: string): string {
 }
 
 export default function PostList({
-	allPosts,
 	falttedPosts,
-	activeCategory,
 	locale,
 }: {
-	activeCategory: string;
-	allPosts: any;
 	falttedPosts: IPost[];
 	locale: string;
 }) {
-	const classfiedPosts =
-		activeCategory === "All"
-			? falttedPosts
-			: falttedPosts.filter((post) => post.category === activeCategory);
-
 	return (
 		<>
-			{classfiedPosts.slice(0, MAX_POST_COUNT).map((post) => (
+			{falttedPosts.slice(0, MAX_POST_COUNT).map((post) => (
 				<Link
 					locale={locale}
 					key={post.id}

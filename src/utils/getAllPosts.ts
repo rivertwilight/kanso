@@ -84,9 +84,6 @@ export default function getAllPosts(options: GetAllPostsOption): IPost[] {
 			frontmatter.createAt = parseDate(frontmatter.createAt).toLocaleDateString();
 		}
 
-		// Get category from frontmatter tag
-		const category = frontmatter.tag || "Uncategorized";
-
 		return {
 			defaultTitle: slug,
 			frontmatter: frontmatter as IPost["frontmatter"],
@@ -98,7 +95,6 @@ export default function getAllPosts(options: GetAllPostsOption): IPost[] {
 					: markdownBody
 				: "",
 			locale: locale || "en",
-			category,
 		};
 	}).filter(Boolean);
 
@@ -107,8 +103,8 @@ export default function getAllPosts(options: GetAllPostsOption): IPost[] {
 
 	if (enableSort) {
 		return posts.sort((a, b) => {
-			const dateA = new Date(a.frontmatter.updateAt || a.frontmatter.createAt);
-			const dateB = new Date(b.frontmatter.updateAt || b.frontmatter.createAt);
+			const dateA = new Date(a.frontmatter.createAt);
+			const dateB = new Date(b.frontmatter.createAt);
 			return dateB.getTime() - dateA.getTime();
 		});
 	}
@@ -198,15 +194,12 @@ export function getAllProjects(options: { enableSort?: boolean; enableContent?: 
 			frontmatter.createAt = parseDate(frontmatter.createAt).toLocaleDateString();
 		}
 
-		const category = frontmatter.tag || "Uncategorized";
-
 		return {
 			defaultTitle: slug,
 			frontmatter: frontmatter as IPost["frontmatter"],
 			id: slug,
 			slug,
 			markdownBody: enableContent ? markdownBody : "",
-			category,
 		};
 	}).filter(Boolean);
 

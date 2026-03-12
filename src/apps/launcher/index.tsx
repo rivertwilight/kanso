@@ -1,8 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
-import { useAtom } from "jotai";
-import { activeCategoryAtom } from "./atoms";
 import { Button, Section, SectionTitle } from "@/components/ui";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
@@ -25,32 +22,14 @@ interface LauncherAppProps {
 	allPosts: any;
 	falttedPosts: IPost[];
 	locale: string;
-	allCategories: { slug: string; config: { name: string } }[];
 	projects: IPost[];
 }
 
 export default function LauncherApp(props: LauncherAppProps) {
-	const { allPosts, falttedPosts, locale, allCategories, projects } = props;
-	const [activeCategory, setActiveCategory] = useAtom(activeCategoryAtom);
+	const { allPosts, falttedPosts, locale, projects } = props;
 	const searchParams = useSearchParams();
 	const activeTab = searchParams.get("tab") || "home";
 	const t = useTranslations();
-	const tCommon = useTranslations("common");
-	const tCategories = useTranslations("categories");
-
-	const categoryLabels = useMemo<{ name: string; text: string }[]>(
-		() =>
-			[{ name: "All", text: tCommon("all") }].concat(
-				allCategories.map((item) => {
-					// Use translated name if available, fallback to slug
-					const translatedName = tCategories.has(item.slug)
-						? tCategories(item.slug)
-						: item.slug;
-					return { name: item.slug, text: translatedName };
-				})
-			),
-		[allCategories, tCategories, tCommon]
-	);
 
 	return (
 		<>
@@ -89,8 +68,6 @@ export default function LauncherApp(props: LauncherAppProps) {
 						</Section>
 						<Section>
 							<PostList
-								activeCategory={activeCategory}
-								allPosts={allPosts}
 								falttedPosts={falttedPosts}
 								locale={locale}
 							/>

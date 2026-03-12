@@ -27,8 +27,6 @@ export type IPost = {
 	};
 	id: string;
 	markdownBody?: string;
-	/** Category derived from frontmatter.tag */
-	category?: string;
 	locale?: string;
 };
 

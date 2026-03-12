@@ -43,13 +43,6 @@
 	"common": {
 		"all": "All"
 	},
-	"categories": {
-		"Life": "Life",
-		"Tech": "Tech",
-		"Coding": "Coding",
-		"Art": "Art",
-		"Ungroup": "Uncategorized"
-	},
 	"errorPages": {
 		"notFound": {
 			"title": "Page Not Found",

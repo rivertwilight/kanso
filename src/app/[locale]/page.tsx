@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import getAllPosts from "@/utils/getAllPosts";
 import { getAllProjects } from "@/utils/getAllPosts";
-import getCategories from "@/utils/getCategories";
 import { setRequestLocale } from "next-intl/server";
 import LauncherApp from "@/apps/launcher";
 
@@ -33,14 +32,11 @@ export default async function HomePage({ params }: PageProps) {
 		enableSort: true,
 	}).filter((post: any) => !post.frontmatter.hidden);
 
-	const allCategories = getCategories(locale);
-
 	return (
 		<Suspense fallback={<div />}>
 			<LauncherApp
 				allPosts={allPosts}
 				falttedPosts={allPosts}
-				allCategories={allCategories}
 				projects={projects}
 				locale={locale}
 			/>
