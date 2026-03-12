@@ -3,7 +3,7 @@ import path from "path";
 import { globSync } from "glob";
 import matter from "gray-matter";
 
-const CRAFTS_DIR = path.join(process.cwd(), "content", "crafts");
+const CRAFTS_DIR = path.join(process.cwd(), "content", "essays");
 
 export interface ICategory {
 	slug: string;

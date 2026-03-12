@@ -61,7 +61,7 @@ Make sure that the Action is enabled, and all updates to the main branch on GitH
 
 ## Writing
 
-Place `.mdx` files in the `/content/crafts/<locale>` directory. Each article must have at least the following frontmatter:
+Place `.mdx` files in the `/content/essays/<locale>` directory. Each article must have at least the following frontmatter:
 
 ```mdx
 ---

@@ -67,7 +67,7 @@ vim ~/.ssh/id_rsa.pub
 
 ## ✍ 写作
 
-将 `.mdx` 文件放入 `/content/crafts/<locale>` 目录即可。每篇文章至少需要以下 frontmatter：
+将 `.mdx` 文件放入 `/content/essays/<locale>` 目录即可。每篇文章至少需要以下 frontmatter：
 
 ```yaml
 ---

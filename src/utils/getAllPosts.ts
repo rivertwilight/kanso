@@ -5,7 +5,7 @@ import matter from "gray-matter";
 import type { IPost } from "@/types/index";
 import parseDate from "./parseDateStr";
 
-const CRAFTS_DIR = path.join(process.cwd(), "content", "crafts");
+const CRAFTS_DIR = path.join(process.cwd(), "content", "essays");
 const PROJECTS_DIR = path.join(process.cwd(), "content", "projects");
 
 interface IFileData {

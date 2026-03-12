@@ -292,7 +292,7 @@ async function getBlogPosts() {
 		for (const locale of post.locale) {
 			for (const tag of post.tags) {
 				const directoryPath = path.join(
-					`./content/crafts/${locale.name}/${tag.name}`
+					`./content/essays/${locale.name}/${tag.name}`
 				);
 
 				if (!fs.existsSync(directoryPath)) {

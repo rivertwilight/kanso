@@ -24,23 +24,23 @@ This project uses `pnpm` as the package manager. Use `pnpm install` to install d
 ### Content Management System
 
 **Content Directory Structure:**
-- `/content/crafts/{locale}/{slug}.mdx` — Blog posts (locale-specific)
+- `/content/essays/{locale}/{slug}.mdx` — Blog posts (locale-specific)
 - `/content/projects/{slug}.mdx` — Projects (not locale-specific)
 
-**Crafts (Blog Posts):**
+**Essays (Blog Posts):**
 - Supported locales: `en`, `zh`
 - Required frontmatter: `title`, `createAt`
 - Optional frontmatter: `tag` (category), `summary`, `pin`, `cover`, `keywords`
 
 **Projects:**
 - Flat directory, no locale nesting
-- Same frontmatter fields as crafts, plus `type: book`, `cover`, `metadata`
+- Same frontmatter fields as essays, plus `type: book`, `cover`, `metadata`
 
 **Notion Database** (optional):
 - Configured via `NOTION_API_KEY` and `NOTION_DATABASE_ID` environment variables
 - Auto-syncs on push to main branch and daily at 13:00 UTC via GitHub Actions
 - Sync script: `src/utils/notion.js`
-- Converts Notion blocks to Markdown and saves to `/content/crafts/{locale}/` directory
+- Converts Notion blocks to Markdown and saves to `/content/essays/{locale}/` directory
 - Downloads and stores images in `/public/image/post/`
 
 ### Internationalization (i18n)
@@ -164,9 +164,9 @@ src/app/
 ### Key Utilities
 
 - `src/utils/getAllPosts.ts` - Core content retrieval logic
-  - `getAllPosts(options)` - Get all crafts/posts with filtering and sorting
-  - `getPostBySlug(slug, locale)` - Get single craft/post by slug
-  - `getAllPostSlugs(locale?)` - Get all craft/post slugs for static generation
+  - `getAllPosts(options)` - Get all essays/posts with filtering and sorting
+  - `getPostBySlug(slug, locale)` - Get single essay/post by slug
+  - `getAllPostSlugs(locale?)` - Get all essay/post slugs for static generation
   - `getAllProjects(options)` - Get all projects
   - `getProjectBySlug(slug)` - Get single project by slug
   - `getAllProjectSlugs()` - Get all project slugs for static generation
@@ -259,7 +259,7 @@ Key types in `src/types/index.d.ts`:
 - All remote image hostnames are allowed in Next.js image config
 
 ### Post Structure
-- Crafts are flat within each locale directory (no nested categories in file structure)
+- Essays are flat within each locale directory (no nested categories in file structure)
 - Projects are flat in `/content/projects/` (no locale nesting)
 - Categories are derived from the `tag` frontmatter field
 - Posts without a `tag` are categorized as "Uncategorized"
