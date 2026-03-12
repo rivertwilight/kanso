@@ -1,4 +1,8 @@
 import { atom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
+
+// Brightness: 0-24 range, default 10. Persisted to localStorage.
+export const brightnessAtom = atomWithStorage('kanso-brightness', 10);
 
 export interface WirelessSettings {
   airplaneMode: boolean;

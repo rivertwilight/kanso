@@ -3,12 +3,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { createPortal } from "react-dom";
 import { BatteryIcon } from "../Icons";
+import { Minus, Plus } from "lucide-react";
 import { useAtom, useSetAtom } from "jotai";
 import {
   wirelessSettingsAtom,
   setAirplaneModeAtom,
   setWifiEnabledAtom,
   setBluetoothEnabledAtom,
+  brightnessAtom,
 } from "@/system/atoms/deviceSettings";
 import {
   AirplaneModeIcon,
@@ -71,6 +73,7 @@ export const ControlCenter: React.FC<ControlCenterProps> = ({
   const setAirplaneMode = useSetAtom(setAirplaneModeAtom);
   const setWifiEnabled = useSetAtom(setWifiEnabledAtom);
   const setBluetoothEnabled = useSetAtom(setBluetoothEnabledAtom);
+  const [brightness, setBrightness] = useAtom(brightnessAtom);
   const [dateTime, setDateTime] = useState("");
   const portalContext = useContext(DialogPortalContext);
 
@@ -236,27 +239,44 @@ export const ControlCenter: React.FC<ControlCenterProps> = ({
         {/* Brightness slider */}
         <div className="px-4 pb-3">
           <div
-            className="text-sm font-sans mb-2"
+            className="text-sm font-sans mb-2 cursor-pointer select-none"
             style={{ color: "var(--eink-ink)" }}
+            onClick={() => setBrightness(10)}
           >
             Brightness
           </div>
-          <div className="flex items-center gap-2">
-            <span style={{ color: "var(--eink-ink-muted)" }}>−</span>
-            <div className="flex-1 relative">
+          <div className="flex items-center gap-3">
+            <Minus size={16} style={{ color: "var(--eink-ink-muted)" }} className="shrink-0" />
+            <div className="flex-1 relative h-1.5 rounded-full" style={{ backgroundColor: "var(--eink-border)" }}>
+              <div
+                className="absolute inset-y-0 left-0 rounded-full"
+                style={{
+                  width: `${(brightness / 24) * 100}%`,
+                  backgroundColor: "var(--eink-ink)",
+                }}
+              />
+              <div
+                className="absolute top-1/2 -translate-y-1/2 rounded-full pointer-events-none"
+                style={{
+                  left: `${(brightness / 24) * 100}%`,
+                  width: "14px",
+                  height: "14px",
+                  marginLeft: "-7px",
+                  backgroundColor: "var(--eink-paper)",
+                  border: "2px solid var(--eink-ink)",
+                  boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
+                }}
+              />
               <input
                 type="range"
                 min="0"
                 max="24"
-                defaultValue="10"
-                className="w-full h-1 rounded-full appearance-none cursor-pointer"
-                style={{
-                  backgroundColor: "var(--eink-border)",
-                  accentColor: "var(--eink-ink)",
-                }}
+                value={brightness}
+                onChange={(e) => setBrightness(Number(e.target.value))}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               />
             </div>
-            <span style={{ color: "var(--eink-ink-muted)" }}>+</span>
+            <Plus size={16} style={{ color: "var(--eink-ink-muted)" }} className="shrink-0" />
           </div>
         </div>
 

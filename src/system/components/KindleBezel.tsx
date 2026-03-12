@@ -3,6 +3,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { DialogPortalContext } from "@/system/contexts/dialogPortal";
+import { brightnessAtom } from "@/system/atoms/deviceSettings";
+import { useAtom } from "jotai";
 import Image from "next/image";
 
 interface KindleBezelProps {
@@ -34,6 +36,8 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 	children,
 	dark = false,
 }) => {
+	const [brightness] = useAtom(brightnessAtom);
+	const brightnessFilter = `brightness(${(brightness + 1) / 11})`;
 	const desktopPortalRef = useRef<HTMLDivElement>(null);
 	const mobilePortalRef = useRef<HTMLDivElement>(null);
 	const scrollableContentRef = useRef<HTMLDivElement>(null);
@@ -236,6 +240,7 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 									minWidth: "320px",
 									// Create isolated stacking context for the screen
 									isolation: "isolate",
+									filter: brightnessFilter,
 									// Force GPU layer for entire screen container
 									transform: "translate3d(0, 0, 0)",
 									// Containment to prevent reflow affecting parent elements
@@ -449,6 +454,7 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 				style={{
 					backgroundColor: "var(--eink-paper)",
 					color: "var(--eink-ink)",
+					filter: brightnessFilter,
 				}}
 			>
 				{/* Dialog portal target for mobile */}
