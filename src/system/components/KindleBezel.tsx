@@ -102,6 +102,17 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 		}
 	}, [pathname]);
 
+	// Page turn: scroll the virtual screen by one viewport height
+	const handlePageTurn = (direction: "prev" | "next") => {
+		const el = scrollableContentRef.current;
+		if (!el) return;
+		const pageHeight = el.clientHeight;
+		el.scrollBy({
+			top: direction === "next" ? pageHeight : -pageHeight,
+			behavior: "smooth",
+		});
+	};
+
 	return (
 		<div
 			className={dark ? "dark" : ""}
@@ -403,6 +414,7 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 							{/* Page back button (top) - thin long bar */}
 							<button
 								className="relative cursor-pointer active:opacity-80"
+								onClick={() => handlePageTurn("prev")}
 								style={{
 									width: "8px",
 									height: "72px",
@@ -425,6 +437,7 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 							{/* Page forward button (bottom) - thin long bar */}
 							<button
 								className="relative cursor-pointer active:opacity-80"
+								onClick={() => handlePageTurn("next")}
 								style={{
 									width: "8px",
 									height: "72px",
