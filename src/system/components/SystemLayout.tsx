@@ -79,7 +79,7 @@ export default function SystemLayout({
 						)}
 					</Navbar>
 
-					<div className="h-16 md:hidden shrink-0" />
+					{/* No spacer needed - navbar uses sticky positioning */}
 
 					<main
 						className={

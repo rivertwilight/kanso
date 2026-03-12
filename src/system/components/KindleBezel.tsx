@@ -462,8 +462,11 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 			</div>
 
 			{/* Mobile: Full screen without bezel */}
+			{/* h-screen + overflow-y-auto makes this the scroll container,
+			    so position:sticky works inside it despite the filter property
+			    (filter creates a new containing block that breaks fixed positioning) */}
 			<div
-				className="md:hidden min-h-screen relative"
+				className="md:hidden h-screen overflow-y-auto relative"
 				style={{
 					backgroundColor: "var(--eink-paper)",
 					color: "var(--eink-ink)",

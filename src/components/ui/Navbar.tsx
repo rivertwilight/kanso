@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 /**
  * Kindle-style Navigation Components
@@ -44,30 +44,11 @@ export const Navbar: React.FC<NavbarProps> = ({
   autoClose = false,
   className = "",
 }) => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   const navStyle: React.CSSProperties = {
     backgroundColor: "var(--eink-paper)",
     borderColor: "var(--eink-divider)",
-    ...(fixed && isMobile
-      ? {
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 40,
-        }
-      : fixed
+    ...(fixed
       ? {
           position: "sticky",
           top: 0,
