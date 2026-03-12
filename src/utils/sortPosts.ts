@@ -1,7 +1,7 @@
 import type { IPost } from "../types";
 
 function getSortDate(post: IPost): number {
-	const dateStr = post.frontmatter.updateAt || post.frontmatter.createAt;
+	const dateStr = post.frontmatter.createAt;
 	return new Date(dateStr).getTime();
 }
 

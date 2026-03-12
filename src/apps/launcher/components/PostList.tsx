@@ -57,11 +57,9 @@ export default function PostList({
 									: post.slug
 							}
 							secondary={
-								post.frontmatter?.updateAt ||
 								post.frontmatter?.createAt
 									? formatDate(
-											post.frontmatter.updateAt ||
-												post.frontmatter.createAt,
+											post.frontmatter.createAt,
 											locale
 									  )
 									: "1970/01/01"
