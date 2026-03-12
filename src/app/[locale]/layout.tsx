@@ -41,6 +41,7 @@ export async function generateMetadata({
 		openGraph: {
 			title: t("title"),
 			description: t("description"),
+			url: `${SITE_ROOT}`,
 			locale: validLocale,
 			type: "website",
 			siteName: t("title"),
