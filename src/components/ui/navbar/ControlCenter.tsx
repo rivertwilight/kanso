@@ -147,7 +147,7 @@ export const ControlCenter: React.FC<ControlCenterProps> = ({
 
         {/* Control buttons grid */}
         <div className="p-4">
-          <div className="flex justify-center gap-3 flex-wrap">
+          <div className="flex justify-evenly">
             {/* Airplane Mode */}
             <div className="flex flex-col items-center gap-1">
               <ControlButton
@@ -200,7 +200,7 @@ export const ControlCenter: React.FC<ControlCenterProps> = ({
             </div>
           </div>
 
-          <div className="flex justify-center gap-3 flex-wrap mt-3">
+          <div className="flex justify-evenly mt-3">
             {/* Sync */}
             <div className="flex flex-col items-center gap-1">
               <ControlButton
