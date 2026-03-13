@@ -63,7 +63,7 @@ export default function SystemLayout({
 			<KindleBezel dark={colorScheme === "dark"}>
 				<div
 					ref={containerRef}
-					className={hasCustomToolbar ? "flex flex-col h-full" : ""}
+					className={hasCustomToolbar ? "flex flex-col h-full" : "flex flex-col h-full md:block"}
 				>
 					<Navbar autoClose fixed>
 						<StatuBar
@@ -85,7 +85,7 @@ export default function SystemLayout({
 						className={
 							hasCustomToolbar
 								? "flex-1 overflow-y-auto relative"
-								: "min-h-[80vh] pb-8 px-4 md:px-6"
+								: "flex-1 overflow-y-auto md:flex-none md:overflow-visible md:min-h-[80vh] pb-8 px-4 md:px-6"
 						}
 					>
 						{children}

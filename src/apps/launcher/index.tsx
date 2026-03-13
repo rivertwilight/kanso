@@ -3,6 +3,7 @@
 import { Button, Section, SectionTitle } from "@/components/ui";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import type { IPost } from "@/types/index";
 import CategoryLabel from "./components/CategoryLabel";
 import PostList from "./components/PostList";
@@ -30,6 +31,11 @@ export default function LauncherApp(props: LauncherAppProps) {
 	const searchParams = useSearchParams();
 	const activeTab = searchParams.get("tab") || "home";
 	const t = useTranslations();
+
+	useEffect(() => {
+		const main = document.querySelector("main");
+		if (main) main.scrollTop = 0;
+	}, [activeTab]);
 
 	return (
 		<>

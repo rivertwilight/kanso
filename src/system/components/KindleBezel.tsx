@@ -462,11 +462,11 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 			</div>
 
 			{/* Mobile: Full screen without bezel */}
-			{/* h-screen + overflow-y-auto makes this the scroll container,
-			    so position:sticky works inside it despite the filter property
-			    (filter creates a new containing block that breaks fixed positioning) */}
+			{/* h-screen flex flex-col: Navbar stays pinned at top as a flex item,
+			    only <main> scrolls (overflow-y-auto). This avoids the Safari bug
+			    where filter on a scroll container breaks position:sticky. */}
 			<div
-				className="md:hidden h-screen overflow-y-auto relative"
+				className="md:hidden h-screen flex flex-col relative"
 				style={{
 					backgroundColor: "var(--eink-paper)",
 					color: "var(--eink-ink)",
