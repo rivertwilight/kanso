@@ -466,7 +466,7 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 			    only <main> scrolls (overflow-y-auto). This avoids the Safari bug
 			    where filter on a scroll container breaks position:sticky. */}
 			<div
-				className="md:hidden h-screen flex flex-col relative"
+				className="md:hidden h-dvh flex flex-col relative"
 				style={{
 					backgroundColor: "var(--eink-paper)",
 					color: "var(--eink-ink)",
