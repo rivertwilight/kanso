@@ -44,8 +44,8 @@ export default function LauncherApp(props: LauncherAppProps) {
 				{activeTab === "home" && (
 					<>
 						<Section>
-							<SectionTitle label="Hello, I'm Rene." />
-							<div className="flex gap-4">
+							{/* <SectionTitle label="Hello, I'm Rene." /> */}
+							<div className="flex gap-4 items-center">
 								<Image
 									src="/icon/apple-icon-180x180.png"
 									alt="Avatar"
@@ -54,10 +54,11 @@ export default function LauncherApp(props: LauncherAppProps) {
 									className="shrink-0 w-14 h-14"
 								/>
 								<div className="font-sans">
-									I'm a Chinese design engineer loving to
-									craft interface. Here I'm sharing my
-									thoughts and projects. I previously worked
-									at ByteDance.
+									Rene Wang <br />{" "}
+									<span className="opacity-60">
+										{" "}
+										Design Engineer from China{" "}
+									</span>
 								</div>
 							</div>
 						</Section>
