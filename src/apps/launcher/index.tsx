@@ -57,7 +57,9 @@ export default function LauncherApp(props: LauncherAppProps) {
 									Rene Wang <br />{" "}
 									<span className="opacity-60">
 										{" "}
-										Design Engineer from China{" "}
+										Design Engineer from China. I love
+										crafting interface. Previously, I worked
+										as enginner at ByteDance.
 									</span>
 								</div>
 							</div>
@@ -69,11 +71,13 @@ export default function LauncherApp(props: LauncherAppProps) {
 							/>
 
 							<ProjectScroller
-								projects={projects}
+								projects={projects.filter(p => p.frontmatter.featured)}
 								locale={locale}
 							/>
 						</Section>
 						<Section>
+							<SectionTitle label="Essays" showArrow />
+
 							<PostList
 								falttedPosts={falttedPosts}
 								locale={locale}

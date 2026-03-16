@@ -63,7 +63,7 @@ export default function SystemLayout({
 			<KindleBezel dark={colorScheme === "dark"}>
 				<div
 					ref={containerRef}
-					className={hasCustomToolbar ? "flex flex-col h-full" : "flex flex-col h-full md:block"}
+					className={hasCustomToolbar ? "flex flex-col h-full" : "flex flex-col h-full md:block md:h-auto"}
 				>
 					<Navbar autoClose fixed>
 						<StatuBar

@@ -22,6 +22,8 @@ export type IPost = {
 		link?: string;
 		/** Project year */
 		year?: number;
+		/** Featured on home page */
+		featured?: boolean;
 		/** Additional metadata (e.g. for book-type projects) */
 		metadata?: Record<string, any>;
 	};
