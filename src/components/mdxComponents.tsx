@@ -4,9 +4,11 @@ import ImageBlock from "@/components/ImageBlock";
 import HeadingBlock from "@/components/HeadingBlock";
 import FrameBlock from "@/components/FrameBlock";
 import TableBlock from "@/components/TableBlock";
+import TweetEmbed from "@/components/TweetEmbed";
 
 export const mdxComponents = {
 	code: CodeBlock,
+	TweetEmbed,
 	img: ImageBlock,
 	table: TableBlock,
 	h1: (props: any) => <HeadingBlock level={1} {...props} />,
