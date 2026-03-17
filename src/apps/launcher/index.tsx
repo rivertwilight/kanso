@@ -17,6 +17,7 @@ const FRIEND_LINKS = [
 	{ name: "Innei", url: "https://innei.in" },
 	{ name: "Justin", url: "https://jsun.lol" },
 	{ name: "pseudoyu", url: "https://www.pseudoyu.com" },
+	{ name: "Zack", url: "https://www.zackmount.blog" },
 ];
 
 interface LauncherAppProps {
@@ -71,7 +72,9 @@ export default function LauncherApp(props: LauncherAppProps) {
 							/>
 
 							<ProjectScroller
-								projects={projects.filter(p => p.frontmatter.featured)}
+								projects={projects.filter(
+									(p) => p.frontmatter.featured
+								)}
 								locale={locale}
 							/>
 						</Section>
