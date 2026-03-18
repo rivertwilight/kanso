@@ -59,7 +59,7 @@ export default function LauncherApp(props: LauncherAppProps) {
 									<span className="opacity-60">
 										{" "}
 										Design Engineer from China. I love
-										crafting interface. Previously, I worked
+										crafting software. Previously, I worked
 										as enginner at ByteDance.
 									</span>
 								</div>
