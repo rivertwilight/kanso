@@ -6,7 +6,7 @@ import FrameBlock from "@/components/FrameBlock";
 import TableBlock from "@/components/TableBlock";
 import TweetEmbed from "@/components/TweetEmbed";
 
-export const mdxComponents = {
+export const mdxComponents: Record<string, any> = {
 	code: CodeBlock,
 	TweetEmbed,
 	img: ImageBlock,
