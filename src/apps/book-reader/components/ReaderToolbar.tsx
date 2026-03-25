@@ -134,7 +134,7 @@ export const ReaderToolbar: React.FC<ReaderToolbarProps> = ({
 							{
 								textPrimary: "GitHub",
 								component: "a",
-								href: "https://github.com/renewang",
+								href: "https://github.com/rivertwilight",
 							},
 							{
 								textPrimary: "Pixiv",

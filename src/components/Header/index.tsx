@@ -94,7 +94,7 @@ const Header: React.FC<HeaderProps> = ({ menuItems = [] }) => {
           {
             textPrimary: "GitHub",
             component: "a",
-            href: "https://github.com/renewang",
+            href: "https://github.com/rivertwilight",
           },
           {
             textPrimary: "Pixiv",

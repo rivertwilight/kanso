@@ -31,7 +31,7 @@ Kanso 是一个基于 Markdown 的静态个人网站系统。
 
 在你 Fork 的仓库，点击下方按钮。
 
-[![Deploy with Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ReneWang/kanso)
+[![Deploy with Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/rivertwilight/kanso)
 
 ## 部署到自己的服务器
 
