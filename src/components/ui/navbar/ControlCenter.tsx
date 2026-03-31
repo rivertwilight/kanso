@@ -12,6 +12,7 @@ import {
   setBluetoothEnabledAtom,
   brightnessAtom,
 } from "@/system/atoms/deviceSettings";
+import { colorSchemeAtom } from "@/system/atoms/colorScheme";
 import {
   AirplaneModeIcon,
   BluetoothIcon,
@@ -74,8 +75,18 @@ export const ControlCenter: React.FC<ControlCenterProps> = ({
   const setWifiEnabled = useSetAtom(setWifiEnabledAtom);
   const setBluetoothEnabled = useSetAtom(setBluetoothEnabledAtom);
   const [brightness, setBrightness] = useAtom(brightnessAtom);
+  const [colorScheme, setColorScheme] = useAtom(colorSchemeAtom);
+  const [syncing, setSyncing] = useState(false);
   const [dateTime, setDateTime] = useState("");
   const portalContext = useContext(DialogPortalContext);
+
+  const isDark = colorScheme === "dark";
+
+  const handleSync = () => {
+    if (syncing) return;
+    setSyncing(true);
+    setTimeout(() => setSyncing(false), 2000);
+  };
 
   useEffect(() => {
     const updateDateTime = () => {
@@ -190,15 +201,16 @@ export const ControlCenter: React.FC<ControlCenterProps> = ({
             {/* Dark Mode */}
             <div className="flex flex-col items-center gap-1">
               <ControlButton
-                icon={<DarkModeIcon size={22} filled={false} />}
+                icon={<DarkModeIcon size={22} filled={isDark} />}
                 label="Dark Mode"
-                active={false}
+                active={isDark}
+                onClick={() => setColorScheme(isDark ? "light" : "dark")}
               />
               <span
                 className="text-[10px] font-sans"
                 style={{ color: "var(--eink-ink-secondary)" }}
               >
-                Dark Mode
+                {isDark ? "On" : "Off"}
               </span>
             </div>
           </div>
@@ -207,15 +219,20 @@ export const ControlCenter: React.FC<ControlCenterProps> = ({
             {/* Sync */}
             <div className="flex flex-col items-center gap-1">
               <ControlButton
-                icon={<SyncIcon size={22} filled={false} />}
+                icon={
+                  <span className={syncing ? "animate-spin" : ""} style={{ display: "inline-flex" }}>
+                    <SyncIcon size={22} filled={syncing} />
+                  </span>
+                }
                 label="Sync"
-                active={false}
+                active={syncing}
+                onClick={handleSync}
               />
               <span
                 className="text-[10px] font-sans"
                 style={{ color: "var(--eink-ink-secondary)" }}
               >
-                Sync
+                {syncing ? "Syncing..." : "Sync"}
               </span>
             </div>
 
