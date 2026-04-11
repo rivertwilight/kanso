@@ -1,9 +1,23 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
+import createMDX from "@next/mdx";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
+const withMDX = createMDX({
+	options: {
+		remarkPlugins: [
+			"remark-math",
+			"remark-gfm",
+			"remark-frontmatter",
+			["remark-mdx-frontmatter", { name: "frontmatter" }],
+		],
+		rehypePlugins: ["rehype-katex"],
+	},
+});
+
 const nextConfig: NextConfig = {
+	pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
 	images: {
 		unoptimized: true,
 		remotePatterns: [
@@ -75,4 +89,4 @@ const nextConfig: NextConfig = {
 	},
 };
 
-export default withNextIntl(nextConfig);
+export default withMDX(withNextIntl(nextConfig));

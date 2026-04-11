@@ -3,11 +3,6 @@ import { getProjectBySlug, getAllProjectSlugs } from "@/utils/getAllPosts";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 
 import BookReviewApp from "@/apps/book-review";
-import { compileMDX } from "next-mdx-remote/rsc";
-import remarkMath from "remark-math";
-import rehypeKatex from "rehype-katex";
-import remarkGfm from "remark-gfm";
-import { mdxComponents } from "@/components/mdxComponents";
 import { SITE_ROOT, AUTHOR_NAME } from "@/utils/constants";
 
 interface PageProps {
@@ -131,17 +126,11 @@ export default async function BookReviewPage({ params }: PageProps) {
     inLanguage: locale,
   };
 
-  // Compile MDX content with plugins and custom components
-  const { content: mdxContent } = await compileMDX({
-    source: content,
-    options: {
-      mdxOptions: {
-        remarkPlugins: [remarkMath, remarkGfm],
-        rehypePlugins: [rehypeKatex],
-      },
-    },
-    components: mdxComponents,
-  });
+  // Dynamically import the MDX file as a module
+  const { default: MdxContent } = await import(
+    `../../../../../content/projects/${slug}.mdx`
+  );
+  const mdxContent = <MdxContent />;
 
   return (
     <>

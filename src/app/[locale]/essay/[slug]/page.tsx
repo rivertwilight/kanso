@@ -5,12 +5,6 @@ import getAllPosts, {
 } from "@/utils/getAllPosts";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import BookReaderApp from "@/apps/book-reader";
-import { compileMDX } from "next-mdx-remote/rsc";
-import remarkMath from "remark-math";
-import rehypeKatex from "rehype-katex";
-import remarkGfm from "remark-gfm";
-import { mdxComponents } from "@/components/mdxComponents";
-import { getEssayComponents } from "@/components/essay/essayComponents";
 import { SITE_ROOT, AUTHOR_NAME } from "@/utils/constants";
 
 interface PageProps {
@@ -165,17 +159,12 @@ export default async function ArticlePage({ params }: PageProps) {
 		inLanguage: locale,
 	};
 
-	// Compile MDX content with plugins and custom components
-	const { content: mdxContent } = await compileMDX({
-		source: content,
-		options: {
-			mdxOptions: {
-				remarkPlugins: [remarkMath, remarkGfm],
-				rehypePlugins: [rehypeKatex],
-			},
-		},
-		components: { ...mdxComponents, ...getEssayComponents(slug) },
-	});
+	// Dynamically import the MDX file as a module — @next/mdx processes it
+	// through the bundler, so import statements inside .mdx files work natively.
+	const { default: MdxContent } = await import(
+		`../../../../../content/essays/${locale}/${slug}.mdx`
+	);
+	const mdxContent = <MdxContent />;
 
 	return (
 		<>

@@ -16,6 +16,9 @@
 	},
 	"license": "MIT",
 	"dependencies": {
+		"@mdx-js/loader": "^3.1.1",
+		"@mdx-js/react": "^3.1.1",
+		"@next/mdx": "^16.2.3",
 		"@notionhq/client": "^2.3.0",
 		"@vercel/analytics": "^1.6.1",
 		"axios": "^1.13.2",
@@ -29,13 +32,14 @@
 		"mermaid": "^11.12.2",
 		"next": "^16.2.0",
 		"next-intl": "^4.6.1",
-		"next-mdx-remote": "^6.0.0",
 		"react": "^19.2.3",
 		"react-dom": "^19.2.3",
 		"react-tweet": "^3.3.0",
 		"rehype-katex": "latest",
+		"remark-frontmatter": "^5.0.0",
 		"remark-gfm": "^4.0.1",
 		"remark-math": "latest",
+		"remark-mdx-frontmatter": "^5.2.0",
 		"shiki": "^3.22.0"
 	},
 	"devDependencies": {
