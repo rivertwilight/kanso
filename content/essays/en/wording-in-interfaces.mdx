@@ -18,8 +18,6 @@ Every word in an interface is a design decision. Strip away the colors, the shad
 
 A pixel-perfect layout with lazy copy feels broken. A plain layout with precise copy feels professional. The gap between the two is not aesthetics — it's trust.
 
-This essay is interactive. You'll see six pairs of live UI snippets. Try interacting with both options, then reveal the answer to see which one gets the wording right — and why.
-
 ## Button Labels Are Promises
 
 A button label is a promise — it tells the user what will happen when they click. That makes it one of the highest-stakes pieces of text in any interface.
@@ -42,7 +40,7 @@ I follow a simple test: a button label should complete the sentence "I want to \
 
 A placeholder disappears the moment you start typing, which means it fails at the exact moment the user needs it most — when they're mid-input, trying to remember what the field is asking for.
 
-Placeholders have one legitimate job: showing the _format_ of expected input. An email field's placeholder should be "you@example.com" — not "Enter your email address." The label says what it is. The placeholder shows what it looks like.
+The label says what it is. The placeholder shows what it looks like.
 
 <DetailComparison
 	answer="B"
@@ -62,7 +60,7 @@ Placeholders have one legitimate job: showing the _format_ of expected input. An
 
 The worst error message is "Invalid input." It tells the user they're wrong without telling them how to be right. Good error messages have three parts: what happened, why it happened, and what to do about it.
 
-Tone matters too. "Password must be at least 8 characters" is neutral. "Your password is too short" feels judgmental. "Use 8 or more characters" is helpful. The difference is subtle, but it compounds across dozens of interactions into an overall feeling of hostility or warmth.
+Tone matters too. "Password must be at least 8 characters" is neutral. "Your password is too short" feels judgmental. "Use 8 or more characters" is helpful.
 
 <DetailComparison
 	answer="B"
@@ -116,8 +114,6 @@ But an empty state is actually a _turning point_. A thoughtful one echoes back w
 
 "Delete" is fine for removing a tag from a list. "Delete" is dangerous for wiping a project someone spent three months building. The word is the same, but the stakes are completely different — and the interface should reflect that.
 
-Equally important is what happens _after_ the action. A bare "Deleted." with no undo is a trapdoor. A confirmation that names what was deleted and offers a way back is a safety net.
-
 <DetailComparison
 	answer="B"
 	explanation="A bare 'Delete' button gives zero context — what's being deleted? Is it reversible? Can I get it back? Naming the target ('Permanently delete Landing Page') makes the gravity of the action visible. The warning 'This action cannot be undone' sets expectations. And the undo option after deletion provides a safety net. The distinction between 'Delete' and 'Permanently delete Landing Page' is not verbosity — it's respect for the user's data and peace of mind."
@@ -148,12 +144,29 @@ Second: **no relative dates**. "This link will expire in 72 hours" is useless th
 	</ComparisonOption>
 </DetailComparison>
 
----
+## Changelogs Are Retention Surfaces
+
+Most changelogs read like commit messages: "Added dark mode support. Fixed bug in export." Nobody cares. The engineer who wrote the fix cares. The PM who filed the ticket cares. The user scrolling the "What's New" modal does not.
+
+A changelog is a retention marketing surface disguised as documentation. Every line is an opportunity to remind users why they pay for your product. "Fixed custom font rendering issue" describes what the engineer did. "Your exports now include custom fonts" tells the user what they gained. The first is a task completion. The second is a gift.
+
+The shift is simple: write from the user's perspective, not the developer's. Instead of describing the change, describe the outcome. Instead of naming the component, name the benefit. "Added dark mode support" becomes "You can now switch to dark mode from Settings" — suddenly the user knows exactly where to find it and what to do.
+
+Teams that write changelogs like release notes churn users. Teams that write them like personal letters keep them.
+
+<DetailComparison
+	answer="B"
+	explanation="The left reads like a git log — it describes what engineers did, using internal language ('support', 'rendering issue', 'bug'). The right speaks directly to the user: 'You can now...' and 'Your exports now include...' reframe every change as something the user gained. It also names the specific problem that was fixed ('blank pages on Firefox') instead of the vague 'bug in PDF export'. Users don't care about your bugs — they care about their workflows."
+>
+	<ComparisonOption>
+		<ChangelogA />
+	</ComparisonOption>
+	<ComparisonOption>
+		<ChangelogB />
+	</ComparisonOption>
+</DetailComparison>
 
 ## Notes
 
-Interfaces should sound like a helpful colleague — clear, concise, and human. Not a chatbot trying to be friendly. Not a manual trying to be thorough. Not a lawyer trying to be safe.
-
-Every comparison in this essay follows the same principle: **be specific, be helpful, be human**. Vague copy forces users to guess. Specific copy builds trust. The best interface text is invisible — not because people don't read it, but because it answers their question before they finish forming it.
-
-Words compound. One well-written label is forgettable. A hundred of them make software feel _alive_. The difference between good and great is rarely a feature — it's the sum of a thousand small acts of clarity.
+-   Interfaces should sound like a helpful colleague — clear, concise, and human.
+-   Words compound. One well-written label is forgettable. A hundred of them make software feel _alive_.

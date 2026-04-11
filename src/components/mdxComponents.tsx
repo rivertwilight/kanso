@@ -15,6 +15,7 @@ import {
 	EmptyStateWordingA, EmptyStateWordingB,
 	DestructiveActionA, DestructiveActionB,
 	EmailWordingA, EmailWordingB,
+	ChangelogA, ChangelogB,
 } from "@/components/essay/DetailDemos";
 
 export const mdxComponents: Record<string, any> = {
@@ -30,6 +31,7 @@ export const mdxComponents: Record<string, any> = {
 	EmptyStateWordingA, EmptyStateWordingB,
 	DestructiveActionA, DestructiveActionB,
 	EmailWordingA, EmailWordingB,
+	ChangelogA, ChangelogB,
 	img: ImageBlock,
 	table: TableBlock,
 	h1: (props: any) => <HeadingBlock level={1} {...props} />,

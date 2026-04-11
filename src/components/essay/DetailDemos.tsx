@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { HelpCircle, Monitor, Sparkles } from "lucide-react";
 
 /* ─── Standalone palette (no design tokens) ─── */
 const c = {
@@ -30,40 +31,130 @@ const demoBox: React.CSSProperties = {
 
 /* ─── 1. Button Labels ─── */
 
-const btnBase: React.CSSProperties = {
+function MoreIcon() {
+	return (
+		<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+			<circle cx="3" cy="8" r="1.5" />
+			<circle cx="8" cy="8" r="1.5" />
+			<circle cx="13" cy="8" r="1.5" />
+		</svg>
+	);
+}
+
+const menuItem: React.CSSProperties = {
 	...font,
-	padding: "10px 24px",
-	border: `2px solid ${c.text}`,
-	background: "transparent",
-	fontSize: 14,
-	cursor: "pointer",
-	color: c.text,
-	borderRadius: 6,
+	display: "flex",
+	alignItems: "center",
+	gap: 8,
 	width: "100%",
-	textAlign: "center" as const,
+	padding: "8px 14px",
+	fontSize: 13,
+	color: c.text,
+	background: "transparent",
+	border: "none",
+	textAlign: "left" as const,
+	cursor: "pointer",
 };
 
-export function ButtonLabelA() {
+type MenuItem = { icon: React.ReactNode; label: string };
+
+function ButtonLabelMenu({
+	open,
+	onToggle,
+	items,
+}: {
+	open: boolean;
+	onToggle: () => void;
+	items: MenuItem[];
+}) {
 	return (
-		<div style={{ ...center, ...demoBox }}>
-			<div style={{ display: "flex", flexDirection: "column", gap: 8, width: 180 }}>
-				<button style={btnBase}>Submit</button>
-				<button style={btnBase}>OK</button>
-				<button style={btnBase}>Click Here</button>
+		<div
+			style={{
+				...demoBox,
+				padding: 20,
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
+				gap: 12,
+			}}
+		>
+			<button
+				onClick={onToggle}
+				style={{
+					...font,
+					display: "flex",
+					alignItems: "center",
+					gap: 6,
+					padding: "8px 16px",
+					border: `1.5px solid ${c.border}`,
+					background: "transparent",
+					fontSize: 13,
+					cursor: "pointer",
+					color: c.text,
+					borderRadius: 6,
+				}}
+			>
+				<MoreIcon />
+				<span>More</span>
+			</button>
+			<div
+				style={{
+					background: c.bg,
+					border: `1px solid ${c.border}`,
+					borderRadius: 8,
+					boxShadow: open ? "0 4px 12px rgba(0,0,0,0.1)" : "none",
+					minWidth: 180,
+					padding: "4px 0",
+					visibility: open ? "visible" : "hidden",
+				}}
+			>
+				{items.map((item, i) => (
+					<button
+						key={i}
+						style={menuItem}
+						onMouseEnter={(e) =>
+							(e.currentTarget.style.background = c.borderLight)
+						}
+						onMouseLeave={(e) =>
+							(e.currentTarget.style.background = "transparent")
+						}
+					>
+						{item.icon}
+						{item.label}
+					</button>
+				))}
 			</div>
 		</div>
 	);
 }
 
-export function ButtonLabelB() {
+export function ButtonLabelA() {
+	const [open, setOpen] = useState(false);
 	return (
-		<div style={{ ...center, ...demoBox }}>
-			<div style={{ display: "flex", flexDirection: "column", gap: 8, width: 180 }}>
-				<button style={btnBase}>Save Changes</button>
-				<button style={btnBase}>Create Account</button>
-				<button style={btnBase}>Download Report</button>
-			</div>
-		</div>
+		<ButtonLabelMenu
+			open={open}
+			onToggle={() => setOpen(!open)}
+			items={[
+				{ icon: <HelpCircle size={15} />, label: "Help" },
+				{ icon: <Monitor size={15} />, label: "Desktop App" },
+				{ icon: <Sparkles size={15} />, label: "Become a Pro" },
+			]}
+		/>
+	);
+}
+
+export function ButtonLabelB() {
+	const [open, setOpen] = useState(false);
+	return (
+		<ButtonLabelMenu
+			open={open}
+			onToggle={() => setOpen(!open)}
+			items={[
+				{ icon: <HelpCircle size={15} />, label: "Get Help" },
+				{ icon: <Monitor size={15} />, label: "Download Desktop App" },
+				{ icon: <Sparkles size={15} />, label: "Upgrade Plan" },
+			]}
+		/>
 	);
 }
 
@@ -366,7 +457,7 @@ export function EmptyStateWordingB() {
 				placeholder="Search..."
 			/>
 			<div style={{ textAlign: "center", padding: "12px 0" }}>
-				<div style={{ marginBottom: 8 }}>
+				<div style={{ marginBottom: 8, display: "flex", justifyContent: "center" }}>
 					<svg
 						width="32"
 						height="32"
@@ -573,6 +664,278 @@ export function EmailWordingB() {
 					<span style={emailLink}>Manage notification settings</span>
 				</p>
 			</div>
+		</div>
+	);
+}
+
+/* ─── 8. Changelog ─── */
+
+const changelogItem: React.CSSProperties = {
+	...font,
+	fontSize: 13,
+	lineHeight: 1.5,
+	padding: "8px 0",
+	borderBottom: `1px solid ${c.borderLight}`,
+	color: c.textSec,
+};
+
+const changelogTag: React.CSSProperties = {
+	...font,
+	display: "inline-block",
+	fontSize: 10,
+	fontWeight: 700,
+	textTransform: "uppercase" as const,
+	letterSpacing: "0.05em",
+	padding: "2px 6px",
+	borderRadius: 3,
+	marginRight: 8,
+	verticalAlign: "middle",
+};
+
+export function ChangelogA() {
+	return (
+		<div style={{ padding: 20, ...demoBox }}>
+			<div
+				style={{
+					...font,
+					fontSize: 14,
+					fontWeight: 700,
+					color: c.text,
+					marginBottom: 12,
+				}}
+			>
+				v2.4.0
+			</div>
+			<div style={changelogItem}>
+				<span
+					style={{
+						...changelogTag,
+						background: "#dbeafe",
+						color: "#1e40af",
+					}}
+				>
+					New
+				</span>
+				Added dark mode support
+			</div>
+			<div style={changelogItem}>
+				<span
+					style={{
+						...changelogTag,
+						background: "#dcfce7",
+						color: "#166534",
+					}}
+				>
+					Fix
+				</span>
+				Fixed bug in PDF export
+			</div>
+			<div style={{ ...changelogItem, borderBottom: "none" }}>
+				<span
+					style={{
+						...changelogTag,
+						background: "#fef9c3",
+						color: "#854d0e",
+					}}
+				>
+					Fix
+				</span>
+				Fixed custom font rendering issue
+			</div>
+		</div>
+	);
+}
+
+export function ChangelogB() {
+	return (
+		<div style={{ padding: 20, ...demoBox }}>
+			<div
+				style={{
+					...font,
+					fontSize: 14,
+					fontWeight: 700,
+					color: c.text,
+					marginBottom: 12,
+				}}
+			>
+				v2.4.0
+			</div>
+			<div style={changelogItem}>
+				<span
+					style={{
+						...changelogTag,
+						background: "#dbeafe",
+						color: "#1e40af",
+					}}
+				>
+					New
+				</span>
+				You can now switch to dark mode from Settings
+			</div>
+			<div style={changelogItem}>
+				<span
+					style={{
+						...changelogTag,
+						background: "#dcfce7",
+						color: "#166534",
+					}}
+				>
+					Fix
+				</span>
+				PDFs no longer export as blank pages on Firefox
+			</div>
+			<div style={{ ...changelogItem, borderBottom: "none" }}>
+				<span
+					style={{
+						...changelogTag,
+						background: "#dcfce7",
+						color: "#166534",
+					}}
+				>
+					Fix
+				</span>
+				Your exports now include custom fonts
+			</div>
+		</div>
+	);
+}
+
+/* ─── 9. Loading State Copy ─── */
+
+function Spinner({ size = 18 }: { size?: number }) {
+	return (
+		<span
+			style={{
+				display: "inline-block",
+				width: size,
+				height: size,
+				border: `2px solid ${c.borderLight}`,
+				borderTopColor: c.textSec,
+				borderRadius: "50%",
+				animation: "detail-spin 0.8s linear infinite",
+			}}
+		/>
+	);
+}
+
+export function LoadingStateA() {
+	const [loading, setLoading] = useState(false);
+
+	useEffect(() => {
+		if (loading) {
+			const t = setTimeout(() => setLoading(false), 6000);
+			return () => clearTimeout(t);
+		}
+	}, [loading]);
+
+	return (
+		<div style={{ ...center, ...demoBox, minHeight: 120 }}>
+			{!loading ? (
+				<button
+					onClick={() => setLoading(true)}
+					style={{
+						...font,
+						padding: "10px 24px",
+						border: `1.5px solid ${c.border}`,
+						background: "transparent",
+						fontSize: 13,
+						cursor: "pointer",
+						color: c.text,
+						borderRadius: 6,
+					}}
+				>
+					Generate Report
+				</button>
+			) : (
+				<div style={{ textAlign: "center" }}>
+					<Spinner />
+					<div
+						style={{
+							...font,
+							fontSize: 13,
+							color: c.textMuted,
+							marginTop: 10,
+						}}
+					>
+						Please wait...
+					</div>
+				</div>
+			)}
+		</div>
+	);
+}
+
+export function LoadingStateB() {
+	const [loading, setLoading] = useState(false);
+	const [elapsed, setElapsed] = useState(0);
+
+	useEffect(() => {
+		if (loading) {
+			const t = setTimeout(() => setLoading(false), 6000);
+			const tick = setInterval(() => setElapsed((e) => e + 1), 1000);
+			return () => {
+				clearTimeout(t);
+				clearInterval(tick);
+			};
+		}
+		setElapsed(0);
+	}, [loading]);
+
+	return (
+		<div style={{ ...center, ...demoBox, minHeight: 120 }}>
+			{!loading ? (
+				<button
+					onClick={() => setLoading(true)}
+					style={{
+						...font,
+						padding: "10px 24px",
+						border: `1.5px solid ${c.border}`,
+						background: "transparent",
+						fontSize: 13,
+						cursor: "pointer",
+						color: c.text,
+						borderRadius: 6,
+					}}
+				>
+					Generate Report
+				</button>
+			) : (
+				<div style={{ textAlign: "center" }}>
+					<Spinner />
+					<div
+						style={{
+							...font,
+							fontSize: 13,
+							color: c.text,
+							marginTop: 10,
+							fontWeight: 600,
+						}}
+					>
+						Generating your report...
+					</div>
+					<div
+						style={{
+							...font,
+							fontSize: 12,
+							color: c.textMuted,
+							marginTop: 4,
+						}}
+					>
+						This usually takes about 6 seconds
+					</div>
+					<div
+						style={{
+							...font,
+							fontSize: 11,
+							color: c.textMuted,
+							marginTop: 8,
+							fontVariantNumeric: "tabular-nums",
+						}}
+					>
+						{elapsed}s elapsed
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }
