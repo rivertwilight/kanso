@@ -41,6 +41,8 @@ import {
 	AnswerLengthB,
 	OnboardingA,
 	OnboardingB,
+	SettingsLabelsA,
+	SettingsLabelsB,
 } from "@/components/essay/WordingDemos";
 
 <DetailDemoStyles />
@@ -67,7 +69,7 @@ I follow a simple test: a button label should complete the sentence "I want to \
 	</ComparisonOption>
 </DetailComparison>
 
-## Placeholder Text Is Not a Label
+## Placeholder Text
 
 Labels and placeholders have different jobs. One names the field. The other previews the format. Problems start when a single element tries to do both.
 
@@ -85,9 +87,7 @@ Try typing in both inputs. Watch what happens to context as you go.
 	</ComparisonOption>
 </DetailComparison>
 
----
-
-## Error Messages Are Conversations
+## Error Messages
 
 An error is a fork in the road. The user tried something, it didn't work, and now they need to know what happened and where to go next.
 
@@ -264,6 +264,26 @@ Users can feel the difference, too. Role-based questions sort people into bucket
 		<OnboardingB />
 	</ComparisonOption>
 </DetailComparison>
+
+## Settings Labels
+
+Settings pages are where wording problems compound. Every toggle is a bet on whether the user understands the current state of their own product. Most settings pages lose that bet repeatedly.
+
+Every row below is a different sub-problem. Try the toggles.
+
+<DetailComparison
+	answer="B"
+	explanation="Five issues in one panel. The left names the technology ('two-factor authentication'), uses a bare noun ('Notifications'), negates itself ('Disable auto-renewal'), dumps leftovers into 'Advanced', and writes a description that repeats the title. The right describes the experience ('Require a code to sign in'), gives toggles a clear on-state ('Send me email notifications'), uses positive phrasing ('Renew automatically'), names the real category ('Billing'), and writes a description that adds new information ('Reduces eye strain'). Same settings, completely different clarity."
+>
+	<ComparisonOption>
+		<SettingsLabelsA />
+	</ComparisonOption>
+	<ComparisonOption>
+		<SettingsLabelsB />
+	</ComparisonOption>
+</DetailComparison>
+
+---
 
 ## Notes
 

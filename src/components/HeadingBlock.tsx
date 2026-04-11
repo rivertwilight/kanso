@@ -9,7 +9,7 @@ interface HeadingBlockProps {
 
 const headingStyles: Record<number, string> = {
 	1: "text-3xl font-bold mb-4 mt-6 font-sans tracking-tight",
-	2: "text-2xl font-bold mb-3 mt-12 lg:mt-16 font-sans tracking-tight border-b border-(--eink-divider) pb-2",
+	2: "text-2xl font-bold mb-3 mt-12 lg:mt-16 font-sans tracking-tight pb-2",
 	3: "text-xl font-semibold mb-2 mt-4 font-sans",
 	4: "text-lg font-semibold mb-2 mt-3 font-sans",
 	5: "text-base font-semibold mb-1 mt-2 font-sans",

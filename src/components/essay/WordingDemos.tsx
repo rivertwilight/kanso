@@ -1235,6 +1235,206 @@ export function OnboardingB() {
 	);
 }
 
+/* ─── 13. Settings Labels ─── */
+
+function Toggle({
+	on,
+	onToggle,
+}: {
+	on: boolean;
+	onToggle: () => void;
+}) {
+	return (
+		<button
+			onClick={onToggle}
+			style={{
+				width: 36,
+				height: 20,
+				borderRadius: 10,
+				border: "none",
+				background: on ? c.text : c.borderLight,
+				position: "relative" as const,
+				cursor: "pointer",
+				transition: "background 0.2s",
+				flexShrink: 0,
+			}}
+		>
+			<span
+				style={{
+					position: "absolute",
+					top: 2,
+					left: on ? 18 : 2,
+					width: 16,
+					height: 16,
+					borderRadius: "50%",
+					background: "#fff",
+					transition: "left 0.2s",
+					boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
+				}}
+			/>
+		</button>
+	);
+}
+
+type SettingsRow = {
+	label: string;
+	description?: string;
+	defaultOn?: boolean;
+};
+
+type SettingsSection = {
+	header?: string;
+	rows: SettingsRow[];
+};
+
+function SettingsPanel({ sections }: { sections: SettingsSection[] }) {
+	const allRows = sections.flatMap((s) => s.rows);
+	const [toggles, setToggles] = useState<boolean[]>(
+		allRows.map((r) => r.defaultOn ?? false)
+	);
+
+	let rowIndex = 0;
+
+	return (
+		<div style={{ padding: "16px 20px", ...demoBox }}>
+			{sections.map((section, si) => (
+				<div key={si}>
+					{section.header && (
+						<div
+							style={{
+								...font,
+								fontSize: 10,
+								fontWeight: 700,
+								color: c.textMuted,
+								textTransform: "uppercase" as const,
+								letterSpacing: "0.06em",
+								padding: si === 0 ? "0 0 8px" : "14px 0 8px",
+							}}
+						>
+							{section.header}
+						</div>
+					)}
+					{section.rows.map((row) => {
+						const i = rowIndex++;
+						return (
+							<div
+								key={i}
+								style={{
+									display: "flex",
+									alignItems: "flex-start",
+									justifyContent: "space-between",
+									gap: 12,
+									padding: "10px 0",
+									borderBottom: `1px solid ${c.borderLight}`,
+								}}
+							>
+								<div style={{ minWidth: 0 }}>
+									<div
+										style={{
+											...font,
+											fontSize: 13,
+											color: c.text,
+											fontWeight: 500,
+										}}
+									>
+										{row.label}
+									</div>
+									{row.description && (
+										<div
+											style={{
+												...font,
+												fontSize: 11,
+												color: c.textMuted,
+												marginTop: 2,
+												lineHeight: 1.4,
+											}}
+										>
+											{row.description}
+										</div>
+									)}
+								</div>
+								<Toggle
+									on={toggles[i]}
+									onToggle={() =>
+										setToggles((t) =>
+											t.map((v, j) =>
+												j === i ? !v : v
+											)
+										)
+									}
+								/>
+							</div>
+						);
+					})}
+				</div>
+			))}
+		</div>
+	);
+}
+
+export function SettingsLabelsA() {
+	return (
+		<SettingsPanel
+			sections={[
+				{
+					rows: [
+						{ label: "Enable two-factor authentication", defaultOn: true },
+						{ label: "Notifications", defaultOn: true },
+						{
+							label: "Dark Mode",
+							description: "Enable dark mode for the application.",
+						},
+					],
+				},
+				{
+					header: "Advanced",
+					rows: [
+						{ label: "Disable auto-renewal" },
+					],
+				},
+			]}
+		/>
+	);
+}
+
+export function SettingsLabelsB() {
+	return (
+		<SettingsPanel
+			sections={[
+				{
+					rows: [
+						{
+							label: "Require a code to sign in",
+							description:
+								"Adds a verification step to protect your account",
+							defaultOn: true,
+						},
+						{
+							label: "Send me email notifications",
+							defaultOn: true,
+						},
+						{
+							label: "Dark Mode",
+							description:
+								"Reduces eye strain in low-light environments",
+						},
+					],
+				},
+				{
+					header: "Billing",
+					rows: [
+						{
+							label: "Renew automatically",
+							description:
+								"Your plan renews on the 1st of each month",
+						},
+					],
+				},
+			]}
+		/>
+	);
+}
+
 /* ─── CSS keyframe injection ─── */
 
 export function DetailDemoStyles() {
