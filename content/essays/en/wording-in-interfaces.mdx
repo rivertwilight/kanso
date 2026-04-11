@@ -12,20 +12,33 @@ seo:
         - error messages
 ---
 
-import DetailComparison, { ComparisonOption } from "@/components/essay/DetailComparison";
+import DetailComparison, {
+	ComparisonOption,
+} from "@/components/essay/DetailComparison";
 import {
-    DetailDemoStyles,
-    ButtonLabelA, ButtonLabelB,
-    PlaceholderLabelA, PlaceholderLabelB,
-    ErrorMessageA, ErrorMessageB,
-    ConfirmationA, ConfirmationB,
-    EmptyStateWordingA, EmptyStateWordingB,
-    DestructiveActionA, DestructiveActionB,
-    EmailWordingA, EmailWordingB,
-    ChangelogA, ChangelogB,
-    LoadingStateA, LoadingStateB,
-    DisabledTooltipA, DisabledTooltipB,
-    AnswerLengthA, AnswerLengthB,
+	DetailDemoStyles,
+	ButtonLabelA,
+	ButtonLabelB,
+	PlaceholderLabelA,
+	PlaceholderLabelB,
+	ErrorMessageA,
+	ErrorMessageB,
+	ConfirmationA,
+	ConfirmationB,
+	EmptyStateWordingA,
+	EmptyStateWordingB,
+	DestructiveActionA,
+	DestructiveActionB,
+	EmailWordingA,
+	EmailWordingB,
+	ChangelogA,
+	ChangelogB,
+	LoadingStateA,
+	LoadingStateB,
+	DisabledTooltipA,
+	DisabledTooltipB,
+	AnswerLengthA,
+	AnswerLengthB,
 } from "@/components/essay/WordingDemos";
 
 <DetailDemoStyles />
@@ -38,7 +51,7 @@ A pixel-perfect layout with lazy copy feels broken. A plain layout with precise 
 
 A button label is a promise — it tells the user what will happen when they click. That makes it one of the highest-stakes pieces of text in any interface.
 
-I follow a simple test: a button label should complete the sentence "I want to \_\_\_." "I want to save changes" works. "I want to OK" does not. If the label can't finish that sentence, it's not doing its job.
+I follow a simple test: a button label should complete the sentence "I want to \_\_\_." If it can't finish that sentence, it's not doing its job.
 
 <DetailComparison
 	answer="B"
@@ -54,9 +67,9 @@ I follow a simple test: a button label should complete the sentence "I want to \
 
 ## Placeholder Text Is Not a Label
 
-A placeholder disappears the moment you start typing, which means it fails at the exact moment the user needs it most — when they're mid-input, trying to remember what the field is asking for.
+Labels and placeholders have different jobs. One names the field. The other previews the format. Problems start when a single element tries to do both.
 
-The label says what it is. The placeholder shows what it looks like.
+Try typing in both inputs. Watch what happens to context as you go.
 
 <DetailComparison
 	answer="B"
@@ -74,9 +87,9 @@ The label says what it is. The placeholder shows what it looks like.
 
 ## Error Messages Are Conversations
 
-The worst error message is "Invalid input." It tells the user they're wrong without telling them how to be right. Good error messages have three parts: what happened, why it happened, and what to do about it.
+An error is a fork in the road. The user tried something, it didn't work, and now they need to know what happened and where to go next.
 
-Tone matters too. "Password must be at least 8 characters" is neutral. "Your password is too short" feels judgmental. "Use 8 or more characters" is helpful.
+The worst error messages communicate failure without offering a path forward. The best ones don't feel like errors at all.
 
 <DetailComparison
 	answer="B"
@@ -92,9 +105,9 @@ Tone matters too. "Password must be at least 8 characters" is neutral. "Your pas
 
 ## Confirmation Messages Name What Happened
 
-"Success" is the confirmation equivalent of "OK" on a button — technically correct and practically useless. The user just performed an action, and the system's response should mirror that specificity back. "Your changes to 'Project Alpha' have been saved" closes the cognitive loop.
+The user just did something. The system should echo back _what_ they did — not just _that_ it worked.
 
-This matters most when users are doing things in bulk or across multiple tabs. If you saved three different documents in the last minute, a green checkmark and "Success!" tells you nothing about which save just completed.
+The difference matters most at scale: three saves in a minute, multiple tabs open, a dozen actions in a session. Vague reassurance is noise.
 
 <DetailComparison
 	answer="B"
@@ -110,9 +123,9 @@ This matters most when users are doing things in bulk or across multiple tabs. I
 
 ## Empty States Are Turning Points
 
-An empty state is the most overlooked moment in interface design — the user had intent, typed a query, navigated somewhere with a purpose, and came up short. Most teams treat this as a non-moment: "No results found." Dead end.
+The user had intent — they typed a query, navigated somewhere with a purpose, and came up short. That moment of unmet expectation is the most overlooked in interface design.
 
-But an empty state is actually a _turning point_. A thoughtful one echoes back what the user tried, confirms the system understood them, and suggests what to do next.
+Most teams treat it as a non-moment. But it's actually the moment with the highest leverage over whether the user tries again or leaves.
 
 <DetailComparison
 	answer="B"
@@ -128,7 +141,7 @@ But an empty state is actually a _turning point_. A thoughtful one echoes back w
 
 ## Destructive Actions Demand Clarity
 
-"Delete" is fine for removing a tag from a list. "Delete" is dangerous for wiping a project someone spent three months building. The word is the same, but the stakes are completely different — and the interface should reflect that.
+The same word can carry completely different stakes depending on what it's pointed at. Removing a tag from a list and wiping a three-month project are both "delete" — but they shouldn't feel the same.
 
 <DetailComparison
 	answer="B"
@@ -144,9 +157,9 @@ But an empty state is actually a _turning point_. A thoughtful one echoes back w
 
 ## Emails Deserve the Same Rigor
 
-Two rules I apply to every transactional email. First: **use consistent nouns**. If the subject line says "invitation," the body should not switch to "invite" halfway through. Inconsistency signals that nobody proofread this.
+Interface copy gets reviewed in Figma. Email copy gets pasted into a template at 11pm. Users notice the difference in care.
 
-Second: **no relative dates**. "This link will expire in 72 hours" is useless the moment someone opens the email a day late. "Expires March 27, 2026" is unambiguous regardless of when the email is read. Relative time is convenient for the sender. Absolute time is useful for the reader.
+Two rules I apply: use consistent nouns throughout, and never use relative dates. Both are about respecting the reader's attention when you can't control _when_ they read.
 
 <DetailComparison
 	answer="B"
@@ -162,13 +175,9 @@ Second: **no relative dates**. "This link will expire in 72 hours" is useless th
 
 ## Changelogs Are Retention Surfaces
 
-Most changelogs read like commit messages: "Added dark mode support. Fixed bug in export." Nobody cares. The engineer who wrote the fix cares. The PM who filed the ticket cares. The user scrolling the "What's New" modal does not.
+A changelog is a retention marketing surface disguised as documentation. Every line is an opportunity to remind users why they pay — or an opportunity to sound like a git log nobody reads.
 
-A changelog is a retention marketing surface disguised as documentation. Every line is an opportunity to remind users why they pay for your product. "Fixed custom font rendering issue" describes what the engineer did. "Your exports now include custom fonts" tells the user what they gained. The first is a task completion. The second is a gift.
-
-The shift is simple: write from the user's perspective, not the developer's. Instead of describing the change, describe the outcome. Instead of naming the component, name the benefit. "Added dark mode support" becomes "You can now switch to dark mode from Settings" — suddenly the user knows exactly where to find it and what to do.
-
-Teams that write changelogs like release notes churn users. Teams that write them like personal letters keep them.
+The shift is simple: describe the outcome, not the change. Name the benefit, not the component.
 
 <DetailComparison
 	answer="B"
@@ -184,11 +193,7 @@ Teams that write changelogs like release notes churn users. Teams that write the
 
 ## Loading Copy Defends a Delay
 
-When the product is slow, the copy _is_ the product. For a few seconds, the user has nothing to look at, nothing to interact with, nothing to do — just words on a screen and a spinner. Every other piece of interface copy describes an action. Loading copy is the only moment where the interface has to justify its own existence in real time.
-
-"Please wait..." is dead air. It communicates nothing except that the system is busy and you should sit there. It doesn't say what's happening, how long it will take, or whether anything is actually working. It's the software equivalent of hold music with no queue position.
-
-"Generating your report — this usually takes about 6 seconds" does three things at once: it names the task (so the user knows something is actually happening), it sets a time expectation (so they know whether to stay or switch tabs), and the word "usually" hedges honestly (so if it takes 8 seconds, the copy still holds).
+When the product is slow, the copy _is_ the product. Every other piece of interface text describes an action. Loading copy is the only moment where the interface has to justify its own existence in real time.
 
 Click "Generate Report" in both panels and wait.
 
@@ -206,9 +211,7 @@ Click "Generate Report" in both panels and wait.
 
 ## Disabled Tooltips Name the Reward
 
-Most apps grey out a button and leave it unexplained. The slightly better ones show "Available on Pro plan." Both are dead ends.
-
-A disabled button is a _desire signal_. The user hovered or clicked — they wanted this feature. That moment of intent is precious, and the tooltip is your one chance to convert it. "Available on Pro plan" names the gate. "Publish on your own domain → Upgrade to Pro" names the reward on the other side of the gate. One points up at a wall. The other points forward through a door.
+A disabled button is a desire signal. The user hovered or clicked — they wanted this. That moment of intent is precious, and the tooltip is your one chance to convert it.
 
 Hover over the locked button in both panels.
 
@@ -226,9 +229,9 @@ Hover over the locked button in both panels.
 
 ## Answer Length Signals Honesty
 
-A one-sentence answer feels confident. A three-paragraph answer feels like it's hiding something — or selling. The length of a response is itself a message, separate from the words.
+The length of a response is itself a message, separate from the words. A one-sentence answer feels confident. A three-paragraph answer feels like it's hiding something — or selling.
 
-"Can I cancel anytime?" is the most trust-sensitive question a user can ask. The answer that spends four sentences explaining the billing cycle, the refund policy, and the support team's availability reads like a legal disclaimer wearing a friendly mask. The answer that says "Yes. No fees, no questions." reads like a company that actually means it.
+"Can I cancel anytime?" is the most trust-sensitive question a user can ask. Watch how length changes the feeling.
 
 <DetailComparison
 	answer="B"
