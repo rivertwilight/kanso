@@ -940,6 +940,182 @@ export function LoadingStateB() {
 	);
 }
 
+/* ─── 10. Disabled Feature Tooltips ─── */
+
+function LockIcon() {
+	return (
+		<svg
+			width="14"
+			height="14"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="2"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+		>
+			<rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+			<path d="M7 11V7a5 5 0 0 1 10 0v4" />
+		</svg>
+	);
+}
+
+const settingsRow: React.CSSProperties = {
+	...font,
+	display: "flex",
+	alignItems: "center",
+	justifyContent: "space-between",
+	padding: "10px 0",
+	borderBottom: `1px solid ${c.borderLight}`,
+};
+
+const disabledBtn: React.CSSProperties = {
+	...font,
+	display: "flex",
+	alignItems: "center",
+	gap: 6,
+	padding: "6px 14px",
+	border: `1px solid ${c.borderLight}`,
+	background: "#f5f5f5",
+	fontSize: 12,
+	color: c.textMuted,
+	cursor: "default",
+	borderRadius: 5,
+	position: "relative" as const,
+};
+
+const tooltipStyle: React.CSSProperties = {
+	...font,
+	position: "absolute",
+	bottom: "calc(100% + 8px)",
+	right: 0,
+	padding: "8px 12px",
+	borderRadius: 6,
+	fontSize: 12,
+	lineHeight: 1.4,
+	whiteSpace: "nowrap",
+	background: c.text,
+	color: "#fff",
+	pointerEvents: "none",
+	boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+};
+
+export function DisabledTooltipA() {
+	const [hover, setHover] = useState(false);
+
+	return (
+		<div style={{ padding: "40px 20px 20px", ...demoBox }}>
+			<div style={{ ...settingsRow, borderBottom: "none" }}>
+				<div>
+					<div style={{ fontSize: 13, fontWeight: 600, color: c.text }}>
+						Custom Domain
+					</div>
+					<div style={{ fontSize: 11, color: c.textMuted, marginTop: 2 }}>
+						Use your own domain for published sites
+					</div>
+				</div>
+				<div style={{ position: "relative" as const }}>
+					<button
+						style={disabledBtn}
+						onMouseEnter={() => setHover(true)}
+						onMouseLeave={() => setHover(false)}
+					>
+						<LockIcon />
+						Configure
+					</button>
+					{hover && (
+						<div style={tooltipStyle}>Available on Pro plan</div>
+					)}
+				</div>
+			</div>
+		</div>
+	);
+}
+
+export function DisabledTooltipB() {
+	const [hover, setHover] = useState(false);
+
+	return (
+		<div style={{ padding: "40px 20px 20px", ...demoBox }}>
+			<div style={{ ...settingsRow, borderBottom: "none" }}>
+				<div>
+					<div style={{ fontSize: 13, fontWeight: 600, color: c.text }}>
+						Custom Domain
+					</div>
+					<div style={{ fontSize: 11, color: c.textMuted, marginTop: 2 }}>
+						Use your own domain for published sites
+					</div>
+				</div>
+				<div style={{ position: "relative" as const }}>
+					<button
+						style={disabledBtn}
+						onMouseEnter={() => setHover(true)}
+						onMouseLeave={() => setHover(false)}
+					>
+						<LockIcon />
+						Configure
+					</button>
+					{hover && (
+						<div style={tooltipStyle}>
+							Unlock custom domains → Pro
+						</div>
+					)}
+				</div>
+			</div>
+		</div>
+	);
+}
+
+/* ─── 11. Answer Length ─── */
+
+const faqQuestion: React.CSSProperties = {
+	...font,
+	fontSize: 13,
+	fontWeight: 700,
+	color: c.text,
+	marginBottom: 8,
+};
+
+const faqAnswer: React.CSSProperties = {
+	...font,
+	fontSize: 13,
+	lineHeight: 1.6,
+	color: c.textSec,
+};
+
+export function AnswerLengthA() {
+	return (
+		<div style={{ padding: 20, ...demoBox }}>
+			<div style={faqQuestion}>Can I cancel anytime?</div>
+			<div style={faqAnswer}>
+				<p style={{ margin: "0 0 8px" }}>
+					Yes, you can cancel your subscription at any time from your
+					account settings. Once you cancel, your current billing cycle
+					will continue until the end of the period.
+				</p>
+				<p style={{ margin: "0 0 8px" }}>
+					Please note that refunds are not provided for partial billing
+					periods. If you cancel mid-cycle, you will retain access to
+					all features until your current period expires.
+				</p>
+				<p style={{ margin: 0 }}>
+					If you have any questions about cancellation, our support
+					team is available 24/7 to assist you.
+				</p>
+			</div>
+		</div>
+	);
+}
+
+export function AnswerLengthB() {
+	return (
+		<div style={{ padding: 20, ...demoBox }}>
+			<div style={faqQuestion}>Can I cancel anytime?</div>
+			<div style={faqAnswer}>Yes. No fees, no questions.</div>
+		</div>
+	);
+}
+
 /* ─── CSS keyframe injection ─── */
 
 export function DetailDemoStyles() {

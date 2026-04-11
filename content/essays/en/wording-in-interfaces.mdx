@@ -24,7 +24,9 @@ import {
     EmailWordingA, EmailWordingB,
     ChangelogA, ChangelogB,
     LoadingStateA, LoadingStateB,
-} from "@/components/essay/DetailDemos";
+    DisabledTooltipA, DisabledTooltipB,
+    AnswerLengthA, AnswerLengthB,
+} from "@/components/essay/WordingDemos";
 
 <DetailDemoStyles />
 
@@ -40,7 +42,7 @@ I follow a simple test: a button label should complete the sentence "I want to \
 
 <DetailComparison
 	answer="B"
-	explanation="Generic labels like 'Submit' or 'OK' force users to scan surrounding context to understand what they're agreeing to. 'Click Here' is worse — it describes the mechanics of interaction, not the outcome. Specific verbs like 'Save Changes' or 'Create Account' encode the action directly into the button, reducing cognitive load and building trust. The user doesn't have to think — the button thinks for them."
+	explanation="'Help' is a noun — it names a category, not an action. 'Get Help' is a verb phrase — it tells you what will happen. Same with 'Desktop App' (what is it?) versus 'Download Desktop App' (now I know what clicking does). 'Become a Pro' sounds aspirational but vague; 'Upgrade Plan' is concrete and actionable. Every label on the right completes the sentence 'I want to ___' — every label on the left leaves you guessing."
 >
 	<ComparisonOption>
 		<ButtonLabelA />
@@ -199,6 +201,44 @@ Click "Generate Report" in both panels and wait.
 	</ComparisonOption>
 	<ComparisonOption>
 		<LoadingStateB />
+	</ComparisonOption>
+</DetailComparison>
+
+## Disabled Tooltips Name the Reward
+
+Most apps grey out a button and leave it unexplained. The slightly better ones show "Available on Pro plan." Both are dead ends.
+
+A disabled button is a _desire signal_. The user hovered or clicked — they wanted this feature. That moment of intent is precious, and the tooltip is your one chance to convert it. "Available on Pro plan" names the gate. "Publish on your own domain → Upgrade to Pro" names the reward on the other side of the gate. One points up at a wall. The other points forward through a door.
+
+Hover over the locked button in both panels.
+
+<DetailComparison
+	answer="B"
+	explanation="'Available on Pro plan' names the gate — it tells the user they can't, full stop. 'Unlock custom domains → Pro' names the reward — it echoes back the thing the user wanted and connects it to the path forward. Same five words, completely different emotional direction. The first tooltip explains why you can't. The second reminds you why you'd want to."
+>
+	<ComparisonOption>
+		<DisabledTooltipA />
+	</ComparisonOption>
+	<ComparisonOption>
+		<DisabledTooltipB />
+	</ComparisonOption>
+</DetailComparison>
+
+## Answer Length Signals Honesty
+
+A one-sentence answer feels confident. A three-paragraph answer feels like it's hiding something — or selling. The length of a response is itself a message, separate from the words.
+
+"Can I cancel anytime?" is the most trust-sensitive question a user can ask. The answer that spends four sentences explaining the billing cycle, the refund policy, and the support team's availability reads like a legal disclaimer wearing a friendly mask. The answer that says "Yes. No fees, no questions." reads like a company that actually means it.
+
+<DetailComparison
+	answer="B"
+	explanation="The left answer is technically accurate and thorough — but thoroughness is the problem. When someone asks 'Can I cancel?', they want a yes or no. Three paragraphs of qualifications, edge cases, and support reassurances signal that the real answer is complicated. 'Yes. No fees, no questions.' is five words and total confidence. It answers the question, addresses the two anxieties behind it (cost and friction), and stops. Brevity is trust."
+>
+	<ComparisonOption>
+		<AnswerLengthA />
+	</ComparisonOption>
+	<ComparisonOption>
+		<AnswerLengthB />
 	</ComparisonOption>
 </DetailComparison>
 
