@@ -51,7 +51,43 @@ Every word in an interface is a design decision. Strip away the colors, the shad
 
 A pixel-perfect layout with lazy copy feels broken. A plain layout with precise copy feels professional. The gap between the two is not aesthetics — it's trust.
 
-## Button Labels Are Promises
+## Onboarding Questions
+
+I feel awkward everytime I see question like "What's your role?" when onboarding a new website. It collects a label for the company's segmentation model.
+
+Users can feel the difference, too. Role-based questions sort people into buckets the company already decided on. Intent-based questions ask the user what they came here to do — and implicitly promise to help them do it. The phrasing reveals whether the product serves the user or the user serves the product.
+
+<DetailComparison
+	answer="B"
+	explanation="'What's your role?' is a demographic question disguised as personalization — it helps the company's analytics dashboard, not the user. The options (Designer, Engineer, PM) are the company's mental model, not the user's. 'What will you use Acme for?' flips the frame: now the options describe outcomes the user actually wants (build a website, write and publish). It signals that the product will adapt to their intent, not file them into a segment. One question collects data. The other starts a relationship."
+>
+	<ComparisonOption>
+		<OnboardingA />
+	</ComparisonOption>
+	<ComparisonOption>
+		<OnboardingB />
+	</ComparisonOption>
+</DetailComparison>
+
+## Settings Labels
+
+Settings pages are where wording problems compound. Every toggle is a bet on whether the user understands the current state of their own product. Most settings pages lose that bet repeatedly.
+
+Every row below is a different sub-problem. Try the toggles.
+
+<DetailComparison
+	answer="B"
+	explanation="Five issues in one panel. The left names the technology ('two-factor authentication'), uses a bare noun ('Notifications'), negates itself ('Disable auto-renewal'), dumps leftovers into 'Advanced', and writes a description that repeats the title. The right describes the experience ('Require a code to sign in'), gives toggles a clear on-state ('Send me email notifications'), uses positive phrasing ('Renew automatically'), names the real category ('Billing'), and writes a description that adds new information ('Reduces eye strain'). Same settings, completely different clarity."
+>
+	<ComparisonOption>
+		<SettingsLabelsA />
+	</ComparisonOption>
+	<ComparisonOption>
+		<SettingsLabelsB />
+	</ComparisonOption>
+</DetailComparison>
+
+## Button Labels
 
 A button label is a promise — it tells the user what will happen when they click. That makes it one of the highest-stakes pieces of text in any interface.
 
@@ -59,7 +95,7 @@ I follow a simple test: a button label should complete the sentence "I want to \
 
 <DetailComparison
 	answer="B"
-	explanation="'Help' is a noun — it names a category, not an action. 'Get Help' is a verb phrase — it tells you what will happen. Same with 'Desktop App' (what is it?) versus 'Download Desktop App' (now I know what clicking does). 'Become a Pro' sounds aspirational but vague; 'Upgrade Plan' is concrete and actionable. Every label on the right completes the sentence 'I want to ___' — every label on the left leaves you guessing."
+	explanation="'Help' is a noun — it names a category, not an action. 'Get Help' is a verb phrase — it tells you what will happen. Same with 'Desktop App' (what is it?) versus 'Download Desktop App' (now I know what clicking does). 'Become a Pro' assume user is 'not' Pro; 'Upgrade Plan' is concrete and actionable."
 >
 	<ComparisonOption>
 		<ButtonLabelA />
@@ -244,42 +280,6 @@ The length of a response is itself a message, separate from the words. A one-sen
 	</ComparisonOption>
 	<ComparisonOption>
 		<AnswerLengthB />
-	</ComparisonOption>
-</DetailComparison>
-
-## Onboarding Questions
-
-I feel awkward everytime I see question like "What's your role?" when onboarding a new website. It collects a label for the company's segmentation model.
-
-Users can feel the difference, too. Role-based questions sort people into buckets the company already decided on. Intent-based questions ask the user what they came here to do — and implicitly promise to help them do it. The phrasing reveals whether the product serves the user or the user serves the product.
-
-<DetailComparison
-	answer="B"
-	explanation="'What's your role?' is a demographic question disguised as personalization — it helps the company's analytics dashboard, not the user. The options (Designer, Engineer, PM) are the company's mental model, not the user's. 'What will you use Acme for?' flips the frame: now the options describe outcomes the user actually wants (build a website, write and publish). It signals that the product will adapt to their intent, not file them into a segment. One question collects data. The other starts a relationship."
->
-	<ComparisonOption>
-		<OnboardingA />
-	</ComparisonOption>
-	<ComparisonOption>
-		<OnboardingB />
-	</ComparisonOption>
-</DetailComparison>
-
-## Settings Labels
-
-Settings pages are where wording problems compound. Every toggle is a bet on whether the user understands the current state of their own product. Most settings pages lose that bet repeatedly.
-
-Every row below is a different sub-problem. Try the toggles.
-
-<DetailComparison
-	answer="B"
-	explanation="Five issues in one panel. The left names the technology ('two-factor authentication'), uses a bare noun ('Notifications'), negates itself ('Disable auto-renewal'), dumps leftovers into 'Advanced', and writes a description that repeats the title. The right describes the experience ('Require a code to sign in'), gives toggles a clear on-state ('Send me email notifications'), uses positive phrasing ('Renew automatically'), names the real category ('Billing'), and writes a description that adds new information ('Reduces eye strain'). Same settings, completely different clarity."
->
-	<ComparisonOption>
-		<SettingsLabelsA />
-	</ComparisonOption>
-	<ComparisonOption>
-		<SettingsLabelsB />
 	</ComparisonOption>
 </DetailComparison>
 
