@@ -1,0 +1,155 @@
+---
+title: "Wording in Interfaces"
+summary: Every word in your interface is a design decision. Can you spot the better copy?
+tag: Design
+createAt: 2026-04-10T00:00:00.000Z
+seo:
+    keywords:
+        - UX writing
+        - microcopy
+        - interface copywriting
+        - UI wording
+        - error messages
+---
+
+<DetailDemoStyles />
+
+Every word in an interface is a design decision. The label on a button. The placeholder in an input. The message when something breaks. Most teams treat copy as filler — something to slot in after the real design work is done, something the PM will figure out. But the words _are_ the interface. Strip away the colors, the shadows, the border radii, and what's left is text. That text is doing most of the work.
+
+A pixel-perfect layout with lazy copy feels broken. A plain layout with precise copy feels professional. The gap between the two is not aesthetics — it's trust.
+
+This essay is interactive. You'll see six pairs of live UI snippets. Try interacting with both options, then reveal the answer to see which one gets the wording right — and why.
+
+---
+
+## 1. Button Labels Are Promises
+
+A button label is a promise. It tells the user what will happen when they click. That makes it one of the highest-stakes pieces of text in any interface — it's the moment right before commitment.
+
+I follow a simple test: a button label should complete the sentence "I want to ___." "I want to save changes" works. "I want to create account" works. "I want to OK" does not. If the label can't finish that sentence, it's not doing its job.
+
+Look at both sets of buttons. Which set tells you exactly what to expect?
+
+<DetailComparison answer="B" explanation="Generic labels like 'Submit' or 'OK' force users to scan surrounding context to understand what they're agreeing to. 'Click Here' is worse — it describes the mechanics of interaction, not the outcome. Specific verbs like 'Save Changes' or 'Create Account' encode the action directly into the button, reducing cognitive load and building trust. The user doesn't have to think — the button thinks for them.">
+<ComparisonOption>
+<ButtonLabelA />
+</ComparisonOption>
+<ComparisonOption>
+<ButtonLabelB />
+</ComparisonOption>
+</DetailComparison>
+
+---
+
+## 2. Placeholder Text Is Not a Label
+
+There's a persistent myth in UI design that placeholders can double as labels. They can't. A placeholder disappears the moment you start typing, which means it fails at the exact moment the user needs it most — when they're mid-input, trying to remember what the field is asking for.
+
+Placeholders have one legitimate job: showing the _format_ of expected input. An email field's placeholder should be "you@example.com" — not "Enter your email address." The label says what it is. The placeholder shows what it looks like.
+
+Try typing in both inputs. Which one keeps you oriented?
+
+<DetailComparison answer="B" explanation="When a placeholder is the only label, it vanishes the moment you start typing — you lose context mid-input. In a form with five fields, this means five moments of disorientation. A persistent label above the input keeps you oriented at all times, while the placeholder serves its proper role: showing the expected format, not naming the field. This distinction is also critical for accessibility — screen readers treat labels and placeholders differently.">
+<ComparisonOption>
+<PlaceholderLabelA />
+</ComparisonOption>
+<ComparisonOption>
+<PlaceholderLabelB />
+</ComparisonOption>
+</DetailComparison>
+
+---
+
+## 3. Error Messages Are Conversations
+
+The worst error message is "Invalid input." It tells the user they're wrong without telling them how to be right. It's the software equivalent of someone shaking their head at you without explaining why.
+
+Good error messages have three parts: what happened, why it happened, and what to do about it. That structure turns a dead end into a fork in the road — the user understands the situation and has a clear next step.
+
+Tone matters here too. "Password must be at least 8 characters" is neutral. "Your password is too short" feels judgmental. "Use 8 or more characters" is helpful. The difference is subtle, but it compounds across dozens of interactions into an overall feeling of hostility or warmth.
+
+Both inputs show an error state. Which message actually helps you fix the problem?
+
+<DetailComparison answer="B" explanation="'Invalid input' is a wall. It communicates failure without offering a path forward. 'This email is already registered — try signing in instead' does three things at once: it names the problem (duplicate email), explains why (already registered), and offers a next step (sign in). It transforms a frustrating moment into a helpful one. The best error messages don't feel like errors — they feel like guidance.">
+<ComparisonOption>
+<ErrorMessageA />
+</ComparisonOption>
+<ComparisonOption>
+<ErrorMessageB />
+</ComparisonOption>
+</DetailComparison>
+
+---
+
+## 4. Confirmation Messages Name What Happened
+
+When someone completes an action, tell them it worked. Not with a generic thumbs-up — with a specific acknowledgment that names what they did.
+
+"Success" is the confirmation equivalent of "OK" on a button. It's technically correct and practically useless. The user just performed an action — saving a document, sending an email, updating a setting — and the system's response should mirror that specificity back. "Your changes to 'Project Alpha' have been saved" tells the user exactly what happened. It closes the cognitive loop.
+
+This matters most when users are doing things in bulk or across multiple tabs. If you saved three different documents in the last minute, a green checkmark and "Success!" tells you nothing about which save just completed.
+
+Both show a success state. Which one gives you confidence that the right thing happened?
+
+<DetailComparison answer="B" explanation="A generic 'Success!' leaves users wondering what succeeded. Did the save go through? The publish? The delete? A specific confirmation like 'Your changes to Project Alpha have been saved' echoes back the action and the object, closing the loop. The timestamp ('Last saved just now') adds another layer of confidence. Vague reassurance is not reassurance — it's noise.">
+<ComparisonOption>
+<ConfirmationA />
+</ComparisonOption>
+<ComparisonOption>
+<ConfirmationB />
+</ComparisonOption>
+</DetailComparison>
+
+---
+
+## 5. Empty States Are Turning Points
+
+An empty state is the most overlooked moment in interface design. It's the moment where the user's expectation meets reality and comes up short — they searched for something that doesn't exist, they opened a section with no content, they tried a filter that matched nothing.
+
+Most teams treat this as a non-moment: "No results found." Period. Dead end. But an empty state is actually a _turning point_. The user had intent — they typed a query, they navigated somewhere with a purpose. A thoughtful empty state acknowledges that intent and redirects it. It echoes back what the user tried, confirms the system understood them, and suggests what to do next.
+
+Try editing the search query in both. Which one helps you move forward?
+
+<DetailComparison answer="B" explanation="'No results found' is a dead end — a closed door with no signage. Echoing back the user's query ('No results for fluxcap') proves the system heard them correctly. Suggesting a next step ('Try a different keyword or check your spelling') opens a new door. The difference is the difference between abandonment and guidance. Users who hit a helpful empty state try again. Users who hit a bare one leave.">
+<ComparisonOption>
+<EmptyStateWordingA />
+</ComparisonOption>
+<ComparisonOption>
+<EmptyStateWordingB />
+</ComparisonOption>
+</DetailComparison>
+
+---
+
+## 6. Destructive Actions Demand Clarity
+
+Destructive actions are where careless wording does real damage. "Delete" is fine for removing a tag from a list. "Delete" is dangerous for wiping a project someone spent three months building. The word is the same, but the stakes are completely different — and the interface should reflect that.
+
+I think about destructive wording on a spectrum. "Remove from list" is low-stakes and reversible. "Delete draft" is medium — the user probably won't miss it. "Permanently delete" is the nuclear option, and the copy needs to make that weight felt. The word "permanently" is doing critical work here. It transforms a casual verb into a solemn warning.
+
+Equally important is what happens _after_ the action. A bare "Deleted." with no undo is a trapdoor. A confirmation that names what was deleted and offers a way back is a safety net.
+
+Click the delete action in both. Which one makes you feel safe about what's about to happen?
+
+<DetailComparison answer="B" explanation="A bare 'Delete' button gives zero context — what's being deleted? Is it reversible? Can I get it back? Naming the target ('Permanently delete Landing Page') makes the gravity of the action visible. The warning 'This action cannot be undone' sets expectations. And the undo option after deletion provides a safety net. The distinction between 'Delete' and 'Permanently delete Landing Page' is not verbosity — it's respect for the user's data and peace of mind.">
+<ComparisonOption>
+<DestructiveActionA />
+</ComparisonOption>
+<ComparisonOption>
+<DestructiveActionB />
+</ComparisonOption>
+</DetailComparison>
+
+---
+
+## The Voice Test
+
+I read every piece of interface copy out loud. If it sounds robotic, I rewrite it. If it sounds like a legal document, I rewrite it. If I wouldn't say it to a colleague sitting next to me, I rewrite it.
+
+Interfaces should sound like a helpful colleague — clear, concise, and human. Not a chatbot trying to be friendly. Not a manual trying to be thorough. Not a lawyer trying to be safe.
+
+Every comparison in this essay follows the same principle: **be specific, be helpful, be human**. Vague copy forces users to guess. Specific copy builds trust. The best interface text is invisible — not because people don't read it, but because it answers their question before they finish forming it.
+
+Words compound. One well-written label is forgettable. A hundred of them make software feel _alive_. The difference between good and great is rarely a feature — it's the sum of a thousand small acts of clarity.
+
+**Every word in your interface is either building trust or eroding it. There is no neutral copy.**

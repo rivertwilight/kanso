@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 
 export function ComparisonOption({ children }: { children: React.ReactNode }) {
-	return <div>{children}</div>;
+	return <div className="h-full [&>*]:h-full">{children}</div>;
 }
 
 interface DetailComparisonProps {
@@ -23,40 +23,53 @@ export default function DetailComparison({
 	const optionA = options[0];
 	const optionB = options[1];
 
-	const getCardStyle = (label: "A" | "B"): React.CSSProperties => {
+	const getOptionStyle = (label: "A" | "B"): React.CSSProperties => {
 		if (!revealed) return {};
 		if (label === answer) {
-			return {
-				borderColor: "var(--eink-ink)",
-				backgroundColor: "var(--eink-paper-warm)",
-			};
+			return { backgroundColor: "var(--eink-paper-warm)" };
 		}
 		return { opacity: 0.45 };
 	};
 
 	return (
 		<div className="my-8">
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-				{(["A", "B"] as const).map((label) => (
-					<div
-						key={label}
-						className="border-2 p-4 text-left transition-all duration-200"
-						style={{
-							borderColor: "var(--eink-border)",
-							...getCardStyle(label),
-						}}
+			<div
+				className="border-2 overflow-hidden flex flex-col md:flex-row"
+				style={{ borderColor: "var(--eink-border)" }}
+			>
+				{/* Option A */}
+				<div
+					className="relative flex-1 transition-all duration-200"
+					style={getOptionStyle("A")}
+				>
+					<span
+						className="absolute top-2 right-2 font-semibold text-xs leading-none z-10"
+						style={{ color: "var(--eink-ink-tertiary)" }}
 					>
-						<div className="mb-3">
-							<span
-								className="font-semibold text-sm"
-								style={{ color: "var(--eink-ink-secondary)" }}
-							>
-								{label}
-							</span>
-						</div>
-						<div>{label === "A" ? optionA : optionB}</div>
-					</div>
-				))}
+						A
+					</span>
+					<div className="h-full">{optionA}</div>
+				</div>
+
+				{/* Divider */}
+				<div
+					className="h-px md:h-auto md:w-px shrink-0"
+					style={{ backgroundColor: "var(--eink-border)" }}
+				/>
+
+				{/* Option B */}
+				<div
+					className="relative flex-1 transition-all duration-200"
+					style={getOptionStyle("B")}
+				>
+					<span
+						className="absolute top-2 right-2 font-semibold text-xs leading-none z-10"
+						style={{ color: "var(--eink-ink-tertiary)" }}
+					>
+						B
+					</span>
+					<div className="h-full">{optionB}</div>
+				</div>
 			</div>
 
 			{!revealed ? (

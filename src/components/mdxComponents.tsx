@@ -8,12 +8,12 @@ import TweetEmbed from "@/components/TweetEmbed";
 import DetailComparison, { ComparisonOption } from "@/components/essay/DetailComparison";
 import {
 	DetailDemoStyles,
-	ButtonLoadingA, ButtonLoadingB,
-	InputLabelA, InputLabelB,
-	IconAlignA, IconAlignB,
-	TruncationA, TruncationB,
-	EmptyStateA, EmptyStateB,
-	DisabledButtonA, DisabledButtonB,
+	ButtonLabelA, ButtonLabelB,
+	PlaceholderLabelA, PlaceholderLabelB,
+	ErrorMessageA, ErrorMessageB,
+	ConfirmationA, ConfirmationB,
+	EmptyStateWordingA, EmptyStateWordingB,
+	DestructiveActionA, DestructiveActionB,
 } from "@/components/essay/DetailDemos";
 
 export const mdxComponents: Record<string, any> = {
@@ -22,12 +22,12 @@ export const mdxComponents: Record<string, any> = {
 	DetailComparison,
 	ComparisonOption,
 	DetailDemoStyles,
-	ButtonLoadingA, ButtonLoadingB,
-	InputLabelA, InputLabelB,
-	IconAlignA, IconAlignB,
-	TruncationA, TruncationB,
-	EmptyStateA, EmptyStateB,
-	DisabledButtonA, DisabledButtonB,
+	ButtonLabelA, ButtonLabelB,
+	PlaceholderLabelA, PlaceholderLabelB,
+	ErrorMessageA, ErrorMessageB,
+	ConfirmationA, ConfirmationB,
+	EmptyStateWordingA, EmptyStateWordingB,
+	DestructiveActionA, DestructiveActionB,
 	img: ImageBlock,
 	table: TableBlock,
 	h1: (props: any) => <HeadingBlock level={1} {...props} />,

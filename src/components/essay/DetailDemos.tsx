@@ -10,6 +10,10 @@ const c = {
 	textMuted: "#999999",
 	border: "#d4d4d4",
 	borderLight: "#e5e5e5",
+	errorRed: "#c0392b",
+	errorBg: "#fef2f2",
+	successGreen: "#16a34a",
+	successBg: "#f0fdf4",
 };
 
 const font: React.CSSProperties = { fontFamily: "system-ui, sans-serif" };
@@ -21,112 +25,58 @@ const center: React.CSSProperties = {
 };
 const demoBox: React.CSSProperties = {
 	background: c.bg,
-	borderRadius: 8,
 	color: c.text,
 };
 
-/* ─── 1. Button Loading ─── */
+/* ─── 1. Button Labels ─── */
 
-function Spinner({ size = 16 }: { size?: number }) {
-	return (
-		<span
-			style={{
-				display: "inline-block",
-				width: size,
-				height: size,
-				border: `2px solid ${c.borderLight}`,
-				borderTopColor: c.text,
-				borderRadius: "50%",
-				animation: "detail-spin 0.8s linear infinite",
-			}}
-		/>
-	);
-}
+const btnBase: React.CSSProperties = {
+	...font,
+	padding: "10px 24px",
+	border: `2px solid ${c.text}`,
+	background: "transparent",
+	fontSize: 14,
+	cursor: "pointer",
+	color: c.text,
+	borderRadius: 6,
+	width: "100%",
+	textAlign: "center" as const,
+};
 
-export function ButtonLoadingA() {
-	const [loading, setLoading] = useState(false);
-
-	useEffect(() => {
-		if (loading) {
-			const t = setTimeout(() => setLoading(false), 2000);
-			return () => clearTimeout(t);
-		}
-	}, [loading]);
-
+export function ButtonLabelA() {
 	return (
 		<div style={{ ...center, ...demoBox }}>
-			<button
-				onClick={() => setLoading(true)}
-				style={{
-					...font,
-					padding: "10px 32px",
-					border: `2px solid ${c.text}`,
-					background: "transparent",
-					fontSize: 14,
-					cursor: "pointer",
-					display: "flex",
-					alignItems: "center",
-					justifyContent: "center",
-					minWidth: 140,
-					minHeight: 42,
-					color: c.text,
-					borderRadius: 6,
-				}}
-			>
-				{loading ? <Spinner /> : "Submit"}
-			</button>
+			<div style={{ display: "flex", flexDirection: "column", gap: 8, width: 180 }}>
+				<button style={btnBase}>Submit</button>
+				<button style={btnBase}>OK</button>
+				<button style={btnBase}>Click Here</button>
+			</div>
 		</div>
 	);
 }
 
-export function ButtonLoadingB() {
-	const [loading, setLoading] = useState(false);
-
-	useEffect(() => {
-		if (loading) {
-			const t = setTimeout(() => setLoading(false), 2000);
-			return () => clearTimeout(t);
-		}
-	}, [loading]);
-
+export function ButtonLabelB() {
 	return (
 		<div style={{ ...center, ...demoBox }}>
-			<button
-				onClick={() => setLoading(true)}
-				style={{
-					...font,
-					padding: "10px 32px",
-					border: `2px solid ${c.text}`,
-					background: "transparent",
-					fontSize: 14,
-					cursor: "pointer",
-					display: "flex",
-					alignItems: "center",
-					justifyContent: "center",
-					gap: 8,
-					minWidth: 140,
-					minHeight: 42,
-					color: c.text,
-					borderRadius: 6,
-				}}
-			>
-				{loading && <Spinner size={14} />}
-				<span>{loading ? "Submitting..." : "Submit"}</span>
-			</button>
+			<div style={{ display: "flex", flexDirection: "column", gap: 8, width: 180 }}>
+				<button style={btnBase}>Save Changes</button>
+				<button style={btnBase}>Create Account</button>
+				<button style={btnBase}>Download Report</button>
+			</div>
 		</div>
 	);
 }
 
-/* ─── 2. Input Label ─── */
+/* ─── 2. Placeholder vs Label ─── */
 
-export function InputLabelA() {
+export function PlaceholderLabelA() {
 	const [value, setValue] = useState("");
 
 	return (
 		<div style={{ padding: 20, ...demoBox }}>
 			<input
 				type="text"
-				placeholder="Email address"
+				placeholder="Enter your email address"
 				value={value}
 				onChange={(e) => setValue(e.target.value)}
 				style={{
@@ -146,7 +96,7 @@ export function InputLabelA() {
 	);
 }
 
-export function InputLabelB() {
+export function PlaceholderLabelB() {
 	const [value, setValue] = useState("");
 	const [focused, setFocused] = useState(false);
 
@@ -167,7 +117,7 @@ export function InputLabelB() {
 			</label>
 			<input
 				type="text"
-				placeholder="jane@example.com"
+				placeholder="you@example.com"
 				value={value}
 				onChange={(e) => setValue(e.target.value)}
 				onFocus={() => setFocused(true)}
@@ -192,139 +142,159 @@ export function InputLabelB() {
 	);
 }
 
-/* ─── 3. Icon Alignment ─── */
+/* ─── 3. Error Messages ─── */
 
-function MenuIcon({ nudge = 0 }: { nudge?: number }) {
+const errorInputStyle: React.CSSProperties = {
+	...font,
+	width: "100%",
+	border: `1.5px solid ${c.errorRed}`,
+	padding: "12px 14px",
+	fontSize: 14,
+	color: c.text,
+	background: c.errorBg,
+	outline: "none",
+	boxSizing: "border-box",
+	borderRadius: 6,
+};
+
+export function ErrorMessageA() {
+	const [value, setValue] = useState("jane@example.com");
+
+	return (
+		<div style={{ padding: 20, ...demoBox }}>
+			<label
+				style={{
+					...font,
+					fontSize: 12,
+					fontWeight: 600,
+					color: c.textSec,
+					marginBottom: 6,
+					display: "block",
+				}}
+			>
+				Email
+			</label>
+			<input
+				type="text"
+				value={value}
+				onChange={(e) => setValue(e.target.value)}
+				style={errorInputStyle}
+			/>
+			<div
+				style={{
+					...font,
+					fontSize: 12,
+					color: c.errorRed,
+					marginTop: 6,
+				}}
+			>
+				Invalid input.
+			</div>
+		</div>
+	);
+}
+
+export function ErrorMessageB() {
+	const [value, setValue] = useState("jane@example.com");
+
+	return (
+		<div style={{ padding: 20, ...demoBox }}>
+			<label
+				style={{
+					...font,
+					fontSize: 12,
+					fontWeight: 600,
+					color: c.textSec,
+					marginBottom: 6,
+					display: "block",
+				}}
+			>
+				Email
+			</label>
+			<input
+				type="text"
+				value={value}
+				onChange={(e) => setValue(e.target.value)}
+				style={errorInputStyle}
+			/>
+			<div
+				style={{
+					...font,
+					fontSize: 12,
+					color: c.errorRed,
+					marginTop: 6,
+				}}
+			>
+				This email is already registered.{" "}
+				<span style={{ textDecoration: "underline", cursor: "pointer" }}>
+					Try signing in instead.
+				</span>
+			</div>
+		</div>
+	);
+}
+
+/* ─── 4. Confirmation Messages ─── */
+
+function CheckIcon() {
 	return (
 		<svg
-			width="16"
-			height="16"
-			viewBox="0 0 16 16"
+			width="20"
+			height="20"
+			viewBox="0 0 20 20"
 			fill="none"
-			style={{ marginTop: nudge, flexShrink: 0 }}
+			style={{ flexShrink: 0 }}
 		>
+			<circle cx="10" cy="10" r="10" fill={c.successGreen} />
 			<path
-				d="M2 3h12M2 8h12M2 13h8"
-				stroke="currentColor"
-				strokeWidth="1.5"
+				d="M6 10.5l2.5 2.5L14 7.5"
+				stroke="#fff"
+				strokeWidth="2"
 				strokeLinecap="round"
+				strokeLinejoin="round"
 			/>
 		</svg>
 	);
 }
 
-export function IconAlignA() {
-	return (
-		<div style={{ ...center, ...demoBox }}>
-			<div
-				style={{
-					...font,
-					padding: "10px 20px",
-					border: `1.5px solid ${c.text}`,
-					fontSize: 14,
-					display: "flex",
-					alignItems: "center",
-					gap: 8,
-					color: c.text,
-					borderRadius: 6,
-				}}
-			>
-				<MenuIcon nudge={2} />
-				<span>Settings</span>
-			</div>
-		</div>
-	);
-}
+const toastStyle: React.CSSProperties = {
+	...font,
+	display: "flex",
+	alignItems: "flex-start",
+	gap: 10,
+	padding: "12px 16px",
+	borderRadius: 8,
+	border: `1px solid ${c.borderLight}`,
+	background: c.successBg,
+};
 
-export function IconAlignB() {
-	return (
-		<div style={{ ...center, ...demoBox }}>
-			<div
-				style={{
-					...font,
-					padding: "10px 20px",
-					border: `1.5px solid ${c.text}`,
-					fontSize: 14,
-					display: "flex",
-					alignItems: "center",
-					gap: 8,
-					color: c.text,
-					borderRadius: 6,
-				}}
-			>
-				<MenuIcon nudge={-1} />
-				<span>Settings</span>
-			</div>
-		</div>
-	);
-}
-
-/* ─── 4. Text Truncation ─── */
-
-export function TruncationA() {
+export function ConfirmationA() {
 	return (
 		<div style={{ padding: 20, ...demoBox }}>
-			<div
-				style={{
-					...font,
-					border: `1px solid ${c.borderLight}`,
-					padding: 16,
-					maxWidth: 200,
-					color: c.text,
-					borderRadius: 8,
-				}}
-			>
-				<div style={{ fontSize: 14, fontWeight: 600 }}>
-					<span>Internatio</span>
-					<span style={{ color: c.textMuted }}>...</span>
-				</div>
-				<div
-					style={{
-						fontSize: 12,
-						color: c.textMuted,
-						marginTop: 4,
-					}}
-				>
-					3 min read
+			<div style={toastStyle}>
+				<CheckIcon />
+				<div>
+					<div style={{ fontSize: 14, fontWeight: 600, color: c.text }}>
+						Success!
+					</div>
 				</div>
 			</div>
 		</div>
 	);
 }
 
-export function TruncationB() {
+export function ConfirmationB() {
 	return (
 		<div style={{ padding: 20, ...demoBox }}>
-			<div
-				style={{
-					...font,
-					border: `1px solid ${c.borderLight}`,
-					padding: 16,
-					maxWidth: 200,
-					color: c.text,
-					borderRadius: 8,
-				}}
-			>
-				<div
-					style={{
-						fontSize: 14,
-						fontWeight: 600,
-						overflow: "hidden",
-						whiteSpace: "nowrap",
-						textOverflow: "ellipsis",
-						width: "100%",
-					}}
-				>
-					International Design Systems
-				</div>
-				<div
-					style={{
-						fontSize: 12,
-						color: c.textMuted,
-						marginTop: 4,
-					}}
-				>
-					3 min read
+			<div style={toastStyle}>
+				<CheckIcon />
+				<div>
+					<div style={{ fontSize: 14, fontWeight: 600, color: c.text }}>
+						Your changes to &ldquo;Project Alpha&rdquo; have been saved.
+					</div>
+					<div style={{ fontSize: 12, color: c.textMuted, marginTop: 2 }}>
+						Last saved just now
+					</div>
 				</div>
 			</div>
 		</div>
@@ -333,7 +303,7 @@ export function TruncationB() {
 
 /* ─── 5. Empty State ─── */
 
-export function EmptyStateA() {
+export function EmptyStateWordingA() {
 	const [query, setQuery] = useState("fluxcap");
 
 	return (
@@ -371,7 +341,7 @@ export function EmptyStateA() {
 	);
 }
 
-export function EmptyStateB() {
+export function EmptyStateWordingB() {
 	const [query, setQuery] = useState("fluxcap");
 
 	return (
@@ -429,9 +399,9 @@ export function EmptyStateB() {
 	);
 }
 
-/* ─── 6. Disabled Button ─── */
+/* ─── 6. Destructive Action ─── */
 
-export function DisabledButtonA() {
+export function DestructiveActionA() {
 	const [clicked, setClicked] = useState(false);
 
 	return (
@@ -445,15 +415,15 @@ export function DisabledButtonA() {
 					style={{
 						...font,
 						padding: "10px 32px",
-						border: `2px solid ${c.text}`,
+						border: `2px solid ${c.errorRed}`,
 						background: "transparent",
 						fontSize: 14,
 						cursor: "pointer",
-						color: c.text,
+						color: c.errorRed,
 						borderRadius: 6,
 					}}
 				>
-					Submit
+					Delete
 				</button>
 				<div
 					style={{
@@ -465,42 +435,80 @@ export function DisabledButtonA() {
 						opacity: clicked ? 1 : 0,
 					}}
 				>
-					Nothing happened...?
+					Deleted.
 				</div>
 			</div>
 		</div>
 	);
 }
 
-export function DisabledButtonB() {
+export function DestructiveActionB() {
+	const [deleted, setDeleted] = useState(false);
+
+	useEffect(() => {
+		if (deleted) {
+			const t = setTimeout(() => setDeleted(false), 4000);
+			return () => clearTimeout(t);
+		}
+	}, [deleted]);
+
 	return (
 		<div style={{ ...center, ...demoBox }}>
 			<div style={{ textAlign: "center" }}>
-				<button
-					disabled
-					style={{
-						...font,
-						padding: "10px 32px",
-						border: `2px solid ${c.borderLight}`,
-						background: "transparent",
-						fontSize: 14,
-						cursor: "not-allowed",
-						color: c.textMuted,
-						borderRadius: 6,
-					}}
-				>
-					Submit
-				</button>
-				<div
-					style={{
-						fontSize: 11,
-						color: c.textMuted,
-						marginTop: 8,
-						minHeight: 16,
-					}}
-				>
-					Fill in required fields first
-				</div>
+				{!deleted ? (
+					<>
+						<div
+							style={{
+								...font,
+								fontSize: 13,
+								color: c.textSec,
+								marginBottom: 10,
+							}}
+						>
+							Landing Page
+						</div>
+						<button
+							onClick={() => setDeleted(true)}
+							style={{
+								...font,
+								padding: "10px 20px",
+								border: `2px solid ${c.errorRed}`,
+								background: "transparent",
+								fontSize: 14,
+								cursor: "pointer",
+								color: c.errorRed,
+								borderRadius: 6,
+							}}
+						>
+							Permanently delete &ldquo;Landing Page&rdquo;
+						</button>
+						<div
+							style={{
+								fontSize: 11,
+								color: c.textMuted,
+								marginTop: 8,
+								minHeight: 16,
+							}}
+						>
+							This action cannot be undone.
+						</div>
+					</>
+				) : (
+					<div style={{ ...font, fontSize: 14, color: c.text }}>
+						&ldquo;Landing Page&rdquo; was deleted.{" "}
+						<span
+							onClick={() => setDeleted(false)}
+							style={{
+								textDecoration: "underline",
+								cursor: "pointer",
+								color: c.text,
+								fontWeight: 600,
+							}}
+						>
+							Undo
+						</span>
+					</div>
+				)}
 			</div>
 		</div>
 	);
