@@ -39,6 +39,8 @@ import {
 	DisabledTooltipB,
 	AnswerLengthA,
 	AnswerLengthB,
+	OnboardingA,
+	OnboardingB,
 } from "@/components/essay/WordingDemos";
 
 <DetailDemoStyles />
@@ -103,7 +105,7 @@ The worst error messages communicate failure without offering a path forward. Th
 	</ComparisonOption>
 </DetailComparison>
 
-## Confirmation Messages Name What Happened
+## Confirmation Messages
 
 The user just did something. The system should echo back _what_ they did — not just _that_ it worked.
 
@@ -121,7 +123,7 @@ The difference matters most at scale: three saves in a minute, multiple tabs ope
 	</ComparisonOption>
 </DetailComparison>
 
-## Empty States Are Turning Points
+## Empty States
 
 The user had intent — they typed a query, navigated somewhere with a purpose, and came up short. That moment of unmet expectation is the most overlooked in interface design.
 
@@ -139,7 +141,7 @@ Most teams treat it as a non-moment. But it's actually the moment with the highe
 	</ComparisonOption>
 </DetailComparison>
 
-## Destructive Actions Demand Clarity
+## Destructive Actions
 
 The same word can carry completely different stakes depending on what it's pointed at. Removing a tag from a list and wiping a three-month project are both "delete" — but they shouldn't feel the same.
 
@@ -155,7 +157,7 @@ The same word can carry completely different stakes depending on what it's point
 	</ComparisonOption>
 </DetailComparison>
 
-## Emails Deserve the Same Rigor
+## Emails Copywriting
 
 Interface copy gets reviewed in Figma. Email copy gets pasted into a template at 11pm. Users notice the difference in care.
 
@@ -173,7 +175,7 @@ Two rules I apply: use consistent nouns throughout, and never use relative dates
 	</ComparisonOption>
 </DetailComparison>
 
-## Changelogs Are Retention Surfaces
+## Changelogs
 
 A changelog is a retention marketing surface disguised as documentation. Every line is an opportunity to remind users why they pay — or an opportunity to sound like a git log nobody reads.
 
@@ -191,7 +193,7 @@ The shift is simple: describe the outcome, not the change. Name the benefit, not
 	</ComparisonOption>
 </DetailComparison>
 
-## Loading Copy Defends a Delay
+## Loading Copy
 
 When the product is slow, the copy _is_ the product. Every other piece of interface text describes an action. Loading copy is the only moment where the interface has to justify its own existence in real time.
 
@@ -209,7 +211,7 @@ Click "Generate Report" in both panels and wait.
 	</ComparisonOption>
 </DetailComparison>
 
-## Disabled Tooltips Name the Reward
+## Disabled Tooltips
 
 A disabled button is a desire signal. The user hovered or clicked — they wanted this. That moment of intent is precious, and the tooltip is your one chance to convert it.
 
@@ -227,7 +229,7 @@ Hover over the locked button in both panels.
 	</ComparisonOption>
 </DetailComparison>
 
-## Answer Length Signals Honesty
+## Answer Length in FAQ
 
 The length of a response is itself a message, separate from the words. A one-sentence answer feels confident. A three-paragraph answer feels like it's hiding something — or selling.
 
@@ -245,14 +247,26 @@ The length of a response is itself a message, separate from the words. A one-sen
 	</ComparisonOption>
 </DetailComparison>
 
+## Onboarding Questions
+
+I feel awkward everytime I see question like "What's your role?" when onboarding a new website. It collects a label for the company's segmentation model.
+
+Users can feel the difference, too. Role-based questions sort people into buckets the company already decided on. Intent-based questions ask the user what they came here to do — and implicitly promise to help them do it. The phrasing reveals whether the product serves the user or the user serves the product.
+
+<DetailComparison
+	answer="B"
+	explanation="'What's your role?' is a demographic question disguised as personalization — it helps the company's analytics dashboard, not the user. The options (Designer, Engineer, PM) are the company's mental model, not the user's. 'What will you use Acme for?' flips the frame: now the options describe outcomes the user actually wants (build a website, write and publish). It signals that the product will adapt to their intent, not file them into a segment. One question collects data. The other starts a relationship."
+>
+	<ComparisonOption>
+		<OnboardingA />
+	</ComparisonOption>
+	<ComparisonOption>
+		<OnboardingB />
+	</ComparisonOption>
+</DetailComparison>
+
 ## Notes
 
 -   Interfaces should sound like a helpful colleague — clear, concise, and human.
 -   Words compound. One well-written label is forgettable. A hundred of them make software feel _alive_.
-
-<br />
-<br />
-
-I collected many details like these and it's free for everyone. You can check them on Detail.
-
-[Go to Detail](https://detail.design)
+-   I collected many details like these and it's free for everyone on [Detail](https://detail.design).

@@ -1116,6 +1116,125 @@ export function AnswerLengthB() {
 	);
 }
 
+/* ─── 12. Onboarding Questions ─── */
+
+const onboardingChip: React.CSSProperties = {
+	...font,
+	padding: "8px 14px",
+	fontSize: 12,
+	border: `1px solid ${c.border}`,
+	background: "transparent",
+	color: c.text,
+	borderRadius: 20,
+	cursor: "pointer",
+	transition: "all 0.15s",
+};
+
+const onboardingChipSelected: React.CSSProperties = {
+	...onboardingChip,
+	background: c.text,
+	color: "#fff",
+	borderColor: c.text,
+};
+
+function OnboardingScreen({
+	question,
+	options,
+}: {
+	question: string;
+	options: string[];
+}) {
+	const [selected, setSelected] = useState<string | null>(null);
+
+	return (
+		<div style={{ padding: 20, ...demoBox }}>
+			<div
+				style={{
+					fontSize: 11,
+					color: c.textMuted,
+					marginBottom: 6,
+					...font,
+					textTransform: "uppercase" as const,
+					letterSpacing: "0.05em",
+				}}
+			>
+				Step 1 of 3
+			</div>
+			<div
+				style={{
+					fontSize: 14,
+					fontWeight: 700,
+					color: c.text,
+					marginBottom: 14,
+					...font,
+				}}
+			>
+				{question}
+			</div>
+			<div
+				style={{
+					display: "flex",
+					flexWrap: "wrap",
+					gap: 8,
+				}}
+			>
+				{options.map((opt) => (
+					<button
+						key={opt}
+						style={
+							selected === opt
+								? onboardingChipSelected
+								: onboardingChip
+						}
+						onClick={() => setSelected(opt)}
+						onMouseEnter={(e) => {
+							if (selected !== opt)
+								e.currentTarget.style.borderColor = c.text;
+						}}
+						onMouseLeave={(e) => {
+							if (selected !== opt)
+								e.currentTarget.style.borderColor = c.border;
+						}}
+					>
+						{opt}
+					</button>
+				))}
+			</div>
+		</div>
+	);
+}
+
+export function OnboardingA() {
+	return (
+		<OnboardingScreen
+			question="What's your role?"
+			options={[
+				"Designer",
+				"Engineer",
+				"Product Manager",
+				"Marketing",
+				"Executive",
+				"Other",
+			]}
+		/>
+	);
+}
+
+export function OnboardingB() {
+	return (
+		<OnboardingScreen
+			question="What will you use Acme for?"
+			options={[
+				"Build a website",
+				"Write and publish",
+				"Manage a team",
+				"Track projects",
+				"Something else",
+			]}
+		/>
+	);
+}
+
 /* ─── CSS keyframe injection ─── */
 
 export function DetailDemoStyles() {
