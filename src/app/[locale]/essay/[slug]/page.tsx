@@ -97,7 +97,7 @@ export default async function ArticlePage({ params }: PageProps) {
 		return <div>Post not found</div>;
 	}
 
-	const { frontmatter, content } = post;
+	const { frontmatter, content, locale: postLocale } = post;
 	const seo = frontmatter.seo;
 
 	// Find the next post, consistent with the home page post list
@@ -162,7 +162,7 @@ export default async function ArticlePage({ params }: PageProps) {
 	// Dynamically import the MDX file as a module — @next/mdx processes it
 	// through the bundler, so import statements inside .mdx files work natively.
 	const { default: MdxContent } = await import(
-		`../../../../../content/essays/${locale}/${slug}.mdx`
+		`../../../../../content/essays/${postLocale}/${slug}.mdx`
 	);
 	const mdxContent = <MdxContent />;
 
