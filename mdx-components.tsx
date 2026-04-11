@@ -1,4 +1,4 @@
-import type { MDXComponents } from "@mdx-js/react";
+import type { MDXComponents } from "mdx/types";
 import { ExternalLink } from "lucide-react";
 import CodeBlock from "@/components/CodeBlock";
 import ImageBlock from "@/components/ImageBlock";
