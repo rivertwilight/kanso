@@ -95,6 +95,13 @@ const KindleBezel: React.FC<KindleBezelProps> = ({
 		}
 	}, [isFadingOut]);
 
+	// Sync data-theme on document root so that the CSS media query
+	// @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) }
+	// respects manual theme overrides
+	useEffect(() => {
+		document.documentElement.dataset.theme = dark ? "dark" : "light";
+	}, [dark]);
+
 	// Reset scroll position to 0 when route changes
 	useEffect(() => {
 		if (scrollableContentRef.current) {

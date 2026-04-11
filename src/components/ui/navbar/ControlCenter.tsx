@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useContext } from "react";
 import { createPortal } from "react-dom";
+import { useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
 import { BatteryIcon } from "../Icons";
 import { Minus, Plus } from "lucide-react";
 import { useAtom, useSetAtom } from "jotai";
@@ -79,6 +81,8 @@ export const ControlCenter: React.FC<ControlCenterProps> = ({
   const [syncing, setSyncing] = useState(false);
   const [dateTime, setDateTime] = useState("");
   const portalContext = useContext(DialogPortalContext);
+  const router = useRouter();
+  const locale = useLocale();
 
   const isDark = colorScheme === "dark";
 
@@ -242,6 +246,7 @@ export const ControlCenter: React.FC<ControlCenterProps> = ({
                 icon={<SettingsIcon size={22} filled={false} />}
                 label="All Settings"
                 active={false}
+                onClick={() => { router.push(`/${locale}/settings`); onClose(); }}
               />
               <span
                 className="text-[10px] font-sans"
@@ -263,7 +268,9 @@ export const ControlCenter: React.FC<ControlCenterProps> = ({
             Brightness
           </div>
           <div className="flex items-center gap-3">
-            <Minus size={16} style={{ color: "var(--eink-ink-muted)" }} className="shrink-0" />
+            <button onClick={() => setBrightness(Math.max(0, brightness - 1))} className="shrink-0 cursor-pointer">
+              <Minus size={16} style={{ color: "var(--eink-ink-muted)" }} />
+            </button>
             <div className="flex-1 relative h-1.5 rounded-full" style={{ backgroundColor: "var(--eink-border)" }}>
               <div
                 className="absolute inset-y-0 left-0 rounded-full"
@@ -293,7 +300,9 @@ export const ControlCenter: React.FC<ControlCenterProps> = ({
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               />
             </div>
-            <Plus size={16} style={{ color: "var(--eink-ink-muted)" }} className="shrink-0" />
+            <button onClick={() => setBrightness(Math.min(24, brightness + 1))} className="shrink-0 cursor-pointer">
+              <Plus size={16} style={{ color: "var(--eink-ink-muted)" }} />
+            </button>
           </div>
         </div>
 

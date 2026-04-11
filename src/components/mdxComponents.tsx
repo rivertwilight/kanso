@@ -5,10 +5,29 @@ import HeadingBlock from "@/components/HeadingBlock";
 import FrameBlock from "@/components/FrameBlock";
 import TableBlock from "@/components/TableBlock";
 import TweetEmbed from "@/components/TweetEmbed";
+import DetailComparison, { ComparisonOption } from "@/components/essay/DetailComparison";
+import {
+	DetailDemoStyles,
+	ButtonLoadingA, ButtonLoadingB,
+	InputLabelA, InputLabelB,
+	IconAlignA, IconAlignB,
+	TruncationA, TruncationB,
+	EmptyStateA, EmptyStateB,
+	DisabledButtonA, DisabledButtonB,
+} from "@/components/essay/DetailDemos";
 
 export const mdxComponents: Record<string, any> = {
 	code: CodeBlock,
 	TweetEmbed,
+	DetailComparison,
+	ComparisonOption,
+	DetailDemoStyles,
+	ButtonLoadingA, ButtonLoadingB,
+	InputLabelA, InputLabelB,
+	IconAlignA, IconAlignB,
+	TruncationA, TruncationB,
+	EmptyStateA, EmptyStateB,
+	DisabledButtonA, DisabledButtonB,
 	img: ImageBlock,
 	table: TableBlock,
 	h1: (props: any) => <HeadingBlock level={1} {...props} />,
