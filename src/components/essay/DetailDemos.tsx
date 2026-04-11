@@ -514,6 +514,69 @@ export function DestructiveActionB() {
 	);
 }
 
+/* ─── 7. Email Wording ─── */
+
+const emailBody: React.CSSProperties = {
+	...font,
+	fontSize: 12,
+	lineHeight: 1.6,
+	color: c.textSec,
+};
+
+const emailLink: React.CSSProperties = {
+	color: c.textSec,
+	textDecoration: "underline",
+	cursor: "pointer",
+};
+
+export function EmailWordingA() {
+	return (
+		<div style={{ padding: 20, ...demoBox }}>
+			<div style={emailBody}>
+				<p style={{ margin: "0 0 12px" }}>
+					This <strong style={{ color: c.text }}>invitation</strong> was
+					intended for hi@vercel.com.
+				</p>
+				<p style={{ margin: "0 0 12px" }}>
+					This <strong style={{ color: c.text }}>invite</strong> was sent on
+					March 24, 2026, 12:55 AM (UTC) and will expire{" "}
+					<strong style={{ color: c.text }}>in 72 hours</strong>. This{" "}
+					<strong style={{ color: c.text }}>invite</strong> was sent from
+					204.13.186.218 located in São Paulo, Brazil. If you were not
+					expecting this invitation, you can ignore this email. If you are
+					concerned about your account&apos;s safety, please visit{" "}
+					<span style={emailLink}>our Help page</span> to get in touch with
+					us.
+				</p>
+				<p style={{ margin: "0 0 12px" }}>
+					<span style={emailLink}>Manage your notification settings</span>
+				</p>
+			</div>
+		</div>
+	);
+}
+
+export function EmailWordingB() {
+	return (
+		<div style={{ padding: 20, ...demoBox }}>
+			<div style={emailBody}>
+				<p style={{ margin: "0 0 12px" }}>
+					This invitation was sent to hi@vercel.com on March 24, 2026 at
+					12:55 AM (UTC) from 204.13.186.218 (São Paulo, Brazil). Expires{" "}
+					<strong style={{ color: c.text }}>March 27, 2026</strong>.
+				</p>
+				<p style={{ margin: "0 0 12px" }}>
+					Didn&apos;t expect this? Safe to ignore. Concerned about your
+					account? Visit <span style={emailLink}>our Help page</span>.
+				</p>
+				<p style={{ margin: "0 0 12px" }}>
+					<span style={emailLink}>Manage notification settings</span>
+				</p>
+			</div>
+		</div>
+	);
+}
+
 /* ─── CSS keyframe injection ─── */
 
 export function DetailDemoStyles() {
