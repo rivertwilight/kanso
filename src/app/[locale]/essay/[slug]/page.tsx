@@ -10,6 +10,7 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
 import { mdxComponents } from "@/components/mdxComponents";
+import { getEssayComponents } from "@/components/essay/essayComponents";
 import { SITE_ROOT, AUTHOR_NAME } from "@/utils/constants";
 
 interface PageProps {
@@ -173,7 +174,7 @@ export default async function ArticlePage({ params }: PageProps) {
 				rehypePlugins: [rehypeKatex],
 			},
 		},
-		components: mdxComponents,
+		components: { ...mdxComponents, ...getEssayComponents(slug) },
 	});
 
 	return (
