@@ -10,6 +10,10 @@ import {
 	Lock,
 	Search,
 	ChevronDown,
+	AlertCircle,
+
+	ChevronRight,
+	Check,
 } from "lucide-react";
 
 /* ─── 1. Button Labels ─── */
@@ -978,6 +982,112 @@ export function SettingsLabelsB() {
 			]}
 		/>
 	);
+}
+
+/* ─── 14. Synonym: Submit vs Send ─── */
+
+function ContactForm({ buttonLabel }: { buttonLabel: string }) {
+	return (
+		<div className="font-demo p-5 bg-white text-neutral-900">
+			<div className="text-sm font-bold mb-3">Contact Us</div>
+			<div className="space-y-2.5">
+				<div>
+					<label className="text-[11px] font-medium text-neutral-600 mb-1 block">
+						Message
+					</label>
+					<div className="w-full border border-neutral-300 py-2 px-3 text-[13px] text-neutral-400 rounded-md h-16" />
+				</div>
+				<button className="w-full py-2 px-4 bg-neutral-900 text-white text-[13px] font-medium rounded-md">
+					{buttonLabel}
+				</button>
+			</div>
+		</div>
+	);
+}
+
+export function SynonymSubmitA() {
+	return <ContactForm buttonLabel="Submit" />;
+}
+
+export function SynonymSubmitB() {
+	return <ContactForm buttonLabel="Send" />;
+}
+
+/* ─── 15. Synonym: Retry vs Try again ─── */
+
+function ErrorCard({ buttonLabel }: { buttonLabel: string }) {
+	return (
+		<div className="font-demo p-5 bg-white text-neutral-900 flex items-center justify-center min-h-[160px]">
+			<div className="text-center">
+				<div className="mb-2 flex justify-center">
+					<AlertCircle
+						size={28}
+						className="text-red-400"
+					/>
+				</div>
+				<div className="text-[13px] font-semibold text-neutral-900 mb-1">
+					Couldn&apos;t load your messages
+				</div>
+				<div className="text-xs text-neutral-400 mb-4">
+					Please check your connection and try again.
+				</div>
+				<button className="py-1.5 px-5 border border-neutral-300 bg-transparent text-[13px] cursor-pointer text-neutral-900 rounded-md">
+					{buttonLabel}
+				</button>
+			</div>
+		</div>
+	);
+}
+
+export function SynonymRetryA() {
+	return <ErrorCard buttonLabel="Try again" />;
+}
+
+export function SynonymRetryB() {
+	return <ErrorCard buttonLabel="Retry" />;
+}
+
+/* ─── 16. Synonym: Continue vs Next ─── */
+
+function CheckoutStep({ buttonLabel }: { buttonLabel: React.ReactNode }) {
+	return (
+		<div className="font-demo p-5 bg-white text-neutral-900">
+			<div className="flex items-center gap-2 mb-4 text-xs text-neutral-400">
+				<span className="flex items-center gap-1 text-green-600 font-medium">
+					<Check size={12} />
+					Shipping
+				</span>
+				<ChevronRight size={12} />
+				<span className="text-neutral-900 font-semibold">
+					Payment
+				</span>
+				<ChevronRight size={12} />
+				<span>Review</span>
+			</div>
+			<div className="border border-neutral-200 rounded-md p-3 mb-4">
+				<div className="text-[11px] text-neutral-400 mb-1">
+					Shipping address
+				</div>
+				<div className="text-[13px] text-neutral-900">
+					Jane Doe
+				</div>
+				<div className="text-xs text-neutral-600">
+					123 Main St, San Francisco, CA 94102
+				</div>
+			</div>
+			<button className="w-full py-2.5 px-4 bg-neutral-900 text-white text-[13px] font-medium rounded-md">
+				{buttonLabel}
+			</button>
+		</div>
+	);
+}
+
+export function SynonymContinueA() {
+	return <CheckoutStep buttonLabel="Next" />;
+}
+
+export function SynonymContinueB() {
+	return <CheckoutStep buttonLabel="Continue to payment" />;
 }
 
 /* ─── CSS injection ─── */

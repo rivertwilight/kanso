@@ -44,6 +44,12 @@ import {
 	OnboardingB,
 	SettingsLabelsA,
 	SettingsLabelsB,
+	SynonymSubmitA,
+	SynonymSubmitB,
+	SynonymRetryA,
+	SynonymRetryB,
+	SynonymContinueA,
+	SynonymContinueB,
 } from "@/components/essay/WordingDemos";
 
 <DetailDemoStyles />
@@ -469,6 +475,102 @@ And there is an exception when the input field itself is the only one on the scr
 		<AnswerLengthB />
 	</ComparisonOption>
 </DetailComparison>
+
+---
+
+## Synonyms
+
+English is full of near-synonyms that dictionaries treat as interchangeable but interfaces cannot. The wrong one shifts the tone, implies the wrong mental model, or adds a millisecond of hesitation. These three pairs come up constantly.
+
+### "Submit" vs "Send"
+
+<DetailComparison
+	answer="B"
+	explanation={
+		<>
+			<p>
+				"Submit" comes from paper bureaucracy — you submit a form,
+				then wait for someone to process it. "Send" comes from
+				conversation — you send a message, and it reaches someone.
+				A contact form is closer to a conversation than a
+				government filing.
+			</p>
+			<p>
+				"Submit" also strips away the object — submit what? "Send"
+				is direct and conversational. It implies the message will
+				reach someone, not disappear into a queue.
+			</p>
+		</>
+	}
+>
+	<ComparisonOption>
+		<SynonymSubmitA />
+	</ComparisonOption>
+	<ComparisonOption>
+		<SynonymSubmitB />
+	</ComparisonOption>
+</DetailComparison>
+
+### Retry vs Try again
+
+<DetailComparison
+	answer="A"
+	explanation={
+		<>
+			<p>
+				"Retry" is a developer term that leaked into the UI. No one
+				says "retry" in conversation — they say "try again." The
+				prefix "re-" is Latin-derived and formal. "Again" is plain
+				English and human.
+			</p>
+			<p>
+				This matters most in error states, where the user is already
+				frustrated. Technical language at a frustration peak makes
+				the product feel cold. Conversational language makes it feel
+				like a partner acknowledging the hiccup.
+			</p>
+		</>
+	}
+>
+	<ComparisonOption>
+		<SynonymRetryA />
+	</ComparisonOption>
+	<ComparisonOption>
+		<SynonymRetryB />
+	</ComparisonOption>
+</DetailComparison>
+
+### Continue vs Next
+
+<DetailComparison
+	answer="B"
+	explanation={
+		<>
+			<p>
+				"Next" is directional but empty — next what? It assumes the
+				user remembers the sequence. "Continue to payment" names the
+				destination, which does two things: it confirms where the
+				user is going, and it sets expectations for what they will
+				see.
+			</p>
+			<p>
+				In a multi-step flow, every click forward is a small trust
+				decision. Naming the destination reduces the cost of that
+				decision to near zero. "Next" asks the user to trust
+				blindly. "Continue to payment" shows them the path.
+			</p>
+		</>
+	}
+>
+	<ComparisonOption>
+		<SynonymContinueA />
+	</ComparisonOption>
+	<ComparisonOption>
+		<SynonymContinueB />
+	</ComparisonOption>
+</DetailComparison>
+
+---
 
 ## Notes
 
