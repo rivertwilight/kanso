@@ -1,62 +1,18 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { HelpCircle, Monitor, Sparkles } from "lucide-react";
-
-/* ─── Standalone palette (no design tokens) ─── */
-const c = {
-	bg: "#ffffff",
-	text: "#1a1a1a",
-	textSec: "#555555",
-	textMuted: "#999999",
-	border: "#d4d4d4",
-	borderLight: "#e5e5e5",
-	errorRed: "#c0392b",
-	errorBg: "#fef2f2",
-	successGreen: "#16a34a",
-	successBg: "#f0fdf4",
-};
-
-const font: React.CSSProperties = {
-	fontFamily: "'Geist Sans', system-ui, sans-serif",
-};
-const center: React.CSSProperties = {
-	display: "flex",
-	justifyContent: "center",
-	alignItems: "center",
-	padding: 20,
-};
-const demoBox: React.CSSProperties = {
-	background: c.bg,
-	color: c.text,
-};
+import {
+	HelpCircle,
+	Monitor,
+	Sparkles,
+	Ellipsis,
+	CircleCheck,
+	Lock,
+	Search,
+	ChevronDown,
+} from "lucide-react";
 
 /* ─── 1. Button Labels ─── */
-
-function MoreIcon() {
-	return (
-		<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-			<circle cx="3" cy="8" r="1.5" />
-			<circle cx="8" cy="8" r="1.5" />
-			<circle cx="13" cy="8" r="1.5" />
-		</svg>
-	);
-}
-
-const menuItem: React.CSSProperties = {
-	...font,
-	display: "flex",
-	alignItems: "center",
-	gap: 8,
-	width: "100%",
-	padding: "8px 14px",
-	fontSize: 13,
-	color: c.text,
-	background: "transparent",
-	border: "none",
-	textAlign: "left" as const,
-	cursor: "pointer",
-};
 
 type MenuItem = { icon: React.ReactNode; label: string };
 
@@ -70,59 +26,25 @@ function ButtonLabelMenu({
 	items: MenuItem[];
 }) {
 	return (
-		<div
-			style={{
-				...demoBox,
-				padding: 20,
-				display: "flex",
-				flexDirection: "column",
-				alignItems: "center",
-				gap: 12,
-			}}
-		>
+		<div className="font-demo bg-white text-neutral-900 p-5 flex flex-col items-center gap-3">
 			<button
 				onClick={onToggle}
-				style={{
-					...font,
-					display: "flex",
-					alignItems: "center",
-					gap: 6,
-					padding: "8px 16px",
-					border: `1.5px solid ${c.border}`,
-					background: "transparent",
-					fontSize: 13,
-					cursor: "pointer",
-					color: c.text,
-					borderRadius: 6,
-				}}
+				className="flex items-center gap-1.5 px-4 py-2 border-[1.5px] border-neutral-300 bg-transparent text-[13px] cursor-pointer text-neutral-900 rounded-md"
 			>
-				<MoreIcon />
+				<Ellipsis size={16} />
 				<span>More</span>
 			</button>
 			<div
-				style={{
-					background: c.bg,
-					border: `1px solid ${c.border}`,
-					borderRadius: 8,
-					boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-					minWidth: 180,
-					padding: "4px 0",
-					opacity: open ? 1 : 0,
-					transform: open ? "translateY(0)" : "translateY(-4px)",
-					transition: "opacity 0.15s, transform 0.15s",
-					pointerEvents: open ? ("auto" as const) : ("none" as const),
-				}}
+				className={`bg-white border border-neutral-300 rounded-lg shadow-md min-w-[180px] py-1 transition-all duration-150 ${
+					open
+						? "opacity-100 translate-y-0 pointer-events-auto"
+						: "opacity-0 -translate-y-1 pointer-events-none"
+				}`}
 			>
 				{items.map((item, i) => (
 					<button
 						key={i}
-						style={menuItem}
-						onMouseEnter={(e) =>
-							(e.currentTarget.style.background = c.borderLight)
-						}
-						onMouseLeave={(e) =>
-							(e.currentTarget.style.background = "transparent")
-						}
+						className="flex items-center gap-2 w-full py-2 px-3.5 text-[13px] text-neutral-900 bg-transparent border-none text-left cursor-pointer hover:bg-neutral-100"
 					>
 						{item.icon}
 						{item.label}
@@ -156,7 +78,10 @@ export function ButtonLabelB() {
 			onToggle={() => setOpen(!open)}
 			items={[
 				{ icon: <HelpCircle size={15} />, label: "Get Help" },
-				{ icon: <Monitor size={15} />, label: "Download Desktop App" },
+				{
+					icon: <Monitor size={15} />,
+					label: "Download Desktop App",
+				},
 				{ icon: <Sparkles size={15} />, label: "Upgrade Plan" },
 			]}
 		/>
@@ -169,24 +94,13 @@ export function PlaceholderLabelA() {
 	const [value, setValue] = useState("");
 
 	return (
-		<div style={{ padding: 20, ...demoBox }}>
+		<div className="font-demo p-5 bg-white text-neutral-900">
 			<input
 				type="text"
 				placeholder="Enter your email address"
 				value={value}
 				onChange={(e) => setValue(e.target.value)}
-				style={{
-					...font,
-					width: "100%",
-					border: `1px solid ${c.border}`,
-					padding: "12px 14px",
-					fontSize: 14,
-					color: c.text,
-					background: "transparent",
-					outline: "none",
-					boxSizing: "border-box",
-					borderRadius: 6,
-				}}
+				className="w-full border border-neutral-300 py-3 px-3.5 text-sm text-neutral-900 bg-transparent outline-none rounded-md"
 			/>
 		</div>
 	);
@@ -197,17 +111,11 @@ export function PlaceholderLabelB() {
 	const [focused, setFocused] = useState(false);
 
 	return (
-		<div style={{ padding: 20, ...demoBox }}>
+		<div className="font-demo p-5 bg-white text-neutral-900">
 			<label
-				style={{
-					...font,
-					fontSize: 12,
-					fontWeight: 600,
-					color: focused ? c.text : c.textSec,
-					marginBottom: 6,
-					display: "block",
-					transition: "color 0.15s",
-				}}
+				className={`text-xs font-semibold mb-1.5 block transition-colors duration-150 ${
+					focused ? "text-neutral-900" : "text-neutral-600"
+				}`}
 			>
 				Email address
 			</label>
@@ -218,21 +126,11 @@ export function PlaceholderLabelB() {
 				onChange={(e) => setValue(e.target.value)}
 				onFocus={() => setFocused(true)}
 				onBlur={() => setFocused(false)}
-				style={{
-					...font,
-					width: "100%",
-					border: focused
-						? `1.5px solid ${c.text}`
-						: `1px solid ${c.border}`,
-					padding: "12px 14px",
-					fontSize: 14,
-					color: c.text,
-					background: "transparent",
-					outline: "none",
-					boxSizing: "border-box",
-					transition: "border-color 0.15s",
-					borderRadius: 6,
-				}}
+				className={`w-full py-3 px-3.5 text-sm text-neutral-900 bg-transparent outline-none rounded-md transition-colors duration-150 ${
+					focused
+						? "border-[1.5px] border-neutral-900"
+						: "border border-neutral-300"
+				}`}
 			/>
 		</div>
 	);
@@ -240,52 +138,21 @@ export function PlaceholderLabelB() {
 
 /* ─── 3. Error Messages ─── */
 
-const errorInputStyle: React.CSSProperties = {
-	...font,
-	width: "100%",
-	border: `1.5px solid ${c.errorRed}`,
-	padding: "12px 14px",
-	fontSize: 14,
-	color: c.text,
-	background: c.errorBg,
-	outline: "none",
-	boxSizing: "border-box",
-	borderRadius: 6,
-};
-
 export function ErrorMessageA() {
 	const [value, setValue] = useState("jane@example.com");
 
 	return (
-		<div style={{ padding: 20, ...demoBox }}>
-			<label
-				style={{
-					...font,
-					fontSize: 12,
-					fontWeight: 600,
-					color: c.textSec,
-					marginBottom: 6,
-					display: "block",
-				}}
-			>
+		<div className="font-demo p-5 bg-white text-neutral-900">
+			<label className="text-xs font-semibold text-neutral-600 mb-1.5 block">
 				Email
 			</label>
 			<input
 				type="text"
 				value={value}
 				onChange={(e) => setValue(e.target.value)}
-				style={errorInputStyle}
+				className="w-full border-[1.5px] border-red-700 py-3 px-3.5 text-sm text-neutral-900 bg-red-50 outline-none rounded-md"
 			/>
-			<div
-				style={{
-					...font,
-					fontSize: 12,
-					color: c.errorRed,
-					marginTop: 6,
-				}}
-			>
-				Invalid input.
-			</div>
+			<div className="text-xs text-red-700 mt-1.5">Invalid input.</div>
 		</div>
 	);
 }
@@ -294,37 +161,19 @@ export function ErrorMessageB() {
 	const [value, setValue] = useState("jane@example.com");
 
 	return (
-		<div style={{ padding: 20, ...demoBox }}>
-			<label
-				style={{
-					...font,
-					fontSize: 12,
-					fontWeight: 600,
-					color: c.textSec,
-					marginBottom: 6,
-					display: "block",
-				}}
-			>
+		<div className="font-demo p-5 bg-white text-neutral-900">
+			<label className="text-xs font-semibold text-neutral-600 mb-1.5 block">
 				Email
 			</label>
 			<input
 				type="text"
 				value={value}
 				onChange={(e) => setValue(e.target.value)}
-				style={errorInputStyle}
+				className="w-full border-[1.5px] border-red-700 py-3 px-3.5 text-sm text-neutral-900 bg-red-50 outline-none rounded-md"
 			/>
-			<div
-				style={{
-					...font,
-					fontSize: 12,
-					color: c.errorRed,
-					marginTop: 6,
-				}}
-			>
+			<div className="text-xs text-red-700 mt-1.5">
 				This email is already registered.{" "}
-				<span
-					style={{ textDecoration: "underline", cursor: "pointer" }}
-				>
+				<span className="underline cursor-pointer">
 					Try signing in instead.
 				</span>
 			</div>
@@ -336,47 +185,20 @@ export function ErrorMessageB() {
 
 function CheckIcon() {
 	return (
-		<svg
-			width="20"
-			height="20"
-			viewBox="0 0 20 20"
-			fill="none"
-			style={{ flexShrink: 0 }}
-		>
-			<circle cx="10" cy="10" r="10" fill={c.successGreen} />
-			<path
-				d="M6 10.5l2.5 2.5L14 7.5"
-				stroke="#fff"
-				strokeWidth="2"
-				strokeLinecap="round"
-				strokeLinejoin="round"
-			/>
-		</svg>
+		<CircleCheck
+			size={20}
+			className="shrink-0 text-green-600 fill-green-600 stroke-white"
+		/>
 	);
 }
 
-const toastStyle: React.CSSProperties = {
-	...font,
-	display: "flex",
-	alignItems: "flex-start",
-	gap: 10,
-	padding: "12px 16px",
-	borderRadius: 8,
-	border: `1px solid ${c.borderLight}`,
-	background: c.successBg,
-};
-
 export function ConfirmationA() {
 	return (
-		<div style={{ padding: 20, ...demoBox }}>
-			<div style={toastStyle}>
+		<div className="font-demo p-5 bg-white text-neutral-900">
+			<div className="flex items-start gap-2.5 py-3 px-4 rounded-lg border border-neutral-200 bg-green-50">
 				<CheckIcon />
-				<div>
-					<div
-						style={{ fontSize: 14, fontWeight: 600, color: c.text }}
-					>
-						Successfully Saved.
-					</div>
+				<div className="text-sm font-semibold text-neutral-900">
+					Successfully Saved.
 				</div>
 			</div>
 		</div>
@@ -385,16 +207,12 @@ export function ConfirmationA() {
 
 export function ConfirmationB() {
 	return (
-		<div style={{ padding: 20, ...demoBox }}>
-			<div style={toastStyle}>
+		<div className="font-demo p-5 bg-white text-neutral-900">
+			<div className="flex items-start gap-2.5 py-3 px-4 rounded-lg border border-neutral-200 bg-green-50">
 				<CheckIcon />
-				<div>
-					<div
-						style={{ fontSize: 14, fontWeight: 600, color: c.text }}
-					>
-						Your changes to &ldquo;Project Alpha&rdquo; have been
-						saved.
-					</div>
+				<div className="text-sm font-semibold text-neutral-900">
+					Your changes to &ldquo;Project Alpha&rdquo; have been
+					saved.
 				</div>
 			</div>
 		</div>
@@ -407,34 +225,15 @@ export function EmptyStateWordingA() {
 	const [query, setQuery] = useState("fluxcap");
 
 	return (
-		<div style={{ padding: 20, ...font, ...demoBox }}>
+		<div className="font-demo p-5 bg-white text-neutral-900">
 			<input
 				type="text"
 				value={query}
 				onChange={(e) => setQuery(e.target.value)}
-				style={{
-					...font,
-					width: "100%",
-					border: `1px solid ${c.border}`,
-					padding: "8px 12px",
-					fontSize: 13,
-					color: c.text,
-					background: "transparent",
-					outline: "none",
-					boxSizing: "border-box",
-					marginBottom: 16,
-					borderRadius: 6,
-				}}
+				className="w-full border border-neutral-300 py-2 px-3 text-[13px] text-neutral-900 bg-transparent outline-none mb-4 rounded-md"
 				placeholder="Search..."
 			/>
-			<div
-				style={{
-					textAlign: "center",
-					padding: "20px 0",
-					fontSize: 14,
-					color: c.textMuted,
-				}}
-			>
+			<div className="text-center py-5 text-sm text-neutral-400">
 				No results found.
 			</div>
 		</div>
@@ -445,59 +244,26 @@ export function EmptyStateWordingB() {
 	const [query, setQuery] = useState("fluxcap");
 
 	return (
-		<div style={{ padding: 20, ...font, ...demoBox }}>
+		<div className="font-demo p-5 bg-white text-neutral-900">
 			<input
 				type="text"
 				value={query}
 				onChange={(e) => setQuery(e.target.value)}
-				style={{
-					...font,
-					width: "100%",
-					border: `1px solid ${c.border}`,
-					padding: "8px 12px",
-					fontSize: 13,
-					color: c.text,
-					background: "transparent",
-					outline: "none",
-					boxSizing: "border-box",
-					marginBottom: 16,
-					borderRadius: 6,
-				}}
+				className="w-full border border-neutral-300 py-2 px-3 text-[13px] text-neutral-900 bg-transparent outline-none mb-4 rounded-md"
 				placeholder="Search..."
 			/>
-			<div style={{ textAlign: "center", padding: "12px 0" }}>
-				<div
-					style={{
-						marginBottom: 8,
-						display: "flex",
-						justifyContent: "center",
-					}}
-				>
-					<svg
-						width="32"
-						height="32"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke={c.textMuted}
-						strokeWidth="1.5"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-					>
-						<circle cx="11" cy="11" r="8" />
-						<path d="m21 21-4.3-4.3" />
-					</svg>
+			<div className="text-center py-3">
+				<div className="mb-2 flex justify-center">
+					<Search
+						size={32}
+						strokeWidth={1.5}
+						className="text-neutral-400"
+					/>
 				</div>
-				<div
-					style={{
-						fontSize: 14,
-						fontWeight: 600,
-						marginBottom: 4,
-						color: c.text,
-					}}
-				>
+				<div className="text-sm font-semibold mb-1 text-neutral-900">
 					No results for &ldquo;{query}&rdquo;
 				</div>
-				<div style={{ fontSize: 12, color: c.textMuted }}>
+				<div className="text-xs text-neutral-400">
 					Try a different keyword or check your spelling.
 				</div>
 			</div>
@@ -507,71 +273,45 @@ export function EmptyStateWordingB() {
 
 /* ─── 6. Destructive Action ─── */
 
-const dangerZoneLabel: React.CSSProperties = {
-	...font,
-	fontSize: 12,
-	fontWeight: 700,
-	textTransform: "uppercase" as const,
-	letterSpacing: "0.04em",
-	color: c.errorRed,
-	marginBottom: 12,
-};
-
-const projectRow: React.CSSProperties = {
-	display: "flex",
-	alignItems: "center",
-	justifyContent: "space-between",
-	padding: "10px 12px",
-	border: `1px solid ${c.borderLight}`,
-	borderRadius: 6,
-	marginBottom: 8,
-};
-
-const projectName: React.CSSProperties = {
-	...font,
-	fontSize: 13,
-	fontWeight: 600,
-	color: c.text,
-};
-
-const projectMeta: React.CSSProperties = {
-	...font,
-	fontSize: 11,
-	color: c.textMuted,
-};
-
 export function DestructiveActionA() {
 	const [clicked, setClicked] = useState<string | null>(null);
 
 	return (
-		<div style={{ padding: 20, minHeight: 158, ...demoBox }}>
-			<div style={dangerZoneLabel}>Danger zone</div>
+		<div className="font-demo p-5 min-h-[158px] bg-white text-neutral-900">
+			<div className="text-xs font-bold uppercase tracking-wider text-red-700 mb-3">
+				Danger zone
+			</div>
 			{["Landing Page", "Blog"].map((name) => (
-				<div key={name} style={projectRow}>
+				<div
+					key={name}
+					className="flex items-center justify-between py-2.5 px-3 border border-neutral-200 rounded-md mb-2"
+				>
 					<div>
-						<div style={projectName}>{name}</div>
-						<div style={projectMeta}>Edited 2 days ago</div>
+						<div className="text-[13px] font-semibold text-neutral-900">
+							{name}
+						</div>
+						<div className="text-[11px] text-neutral-400">
+							Edited 2 days ago
+						</div>
 					</div>
 					<button
 						onClick={() => {
 							setClicked(name);
 							setTimeout(() => setClicked(null), 1500);
 						}}
-						style={{
-							...font,
-							padding: "5px 14px",
-							border: `1px solid ${c.errorRed}`,
-							background: "transparent",
-							fontSize: 12,
-							cursor: "pointer",
-							color: c.errorRed,
-							borderRadius: 5,
-						}}
+						className="py-1 px-3.5 border border-red-700 bg-transparent text-xs cursor-pointer text-red-700 rounded-[5px]"
 					>
 						Delete
 					</button>
 				</div>
 			))}
+			<div
+				className={`text-[11px] text-neutral-400 mt-1 min-h-4 transition-opacity duration-200 ${
+					clicked ? "opacity-100" : "opacity-0"
+				}`}
+			>
+				Deleted.
+			</div>
 		</div>
 	);
 }
@@ -589,100 +329,96 @@ export function DestructiveActionB() {
 	const projects = ["Landing Page", "Blog"];
 
 	return (
-		<div style={{ padding: 20, minHeight: 158, ...demoBox }}>
-			<div style={dangerZoneLabel}>Danger zone</div>
-			{projects.map((name) => (
-				<div key={name} style={projectRow}>
-					<div>
-						<div style={projectName}>{name}</div>
-						<div style={projectMeta}>Edited 2 days ago</div>
-					</div>
-					<button
-						onClick={() => setDeleted(name)}
-						style={{
-							...font,
-							padding: "5px 14px",
-							border: `1px solid ${c.errorRed}`,
-							background: "transparent",
-							fontSize: 12,
-							cursor: "pointer",
-							color: c.errorRed,
-							borderRadius: 5,
-						}}
+		<div className="font-demo p-5 min-h-[158px] bg-white text-neutral-900">
+			<div className="text-xs font-bold uppercase tracking-wider text-red-700 mb-3">
+				Danger zone
+			</div>
+			{deleted && (
+				<div className="text-xs text-neutral-900 py-2 px-3 bg-red-50 rounded-md mb-2 flex justify-between items-center">
+					<span>
+						&ldquo;{deleted}&rdquo; was deleted.
+					</span>
+					<span
+						onClick={() => setDeleted(null)}
+						className="font-semibold underline cursor-pointer"
 					>
-						Permanently delete &ldquo;{name}&rdquo;
-					</button>
+						Undo
+					</span>
 				</div>
-			))}
+			)}
+			{projects
+				.filter((name) => name !== deleted)
+				.map((name) => (
+					<div
+						key={name}
+						className="flex items-center justify-between py-2.5 px-3 border border-neutral-200 rounded-md mb-2"
+					>
+						<div>
+							<div className="text-[13px] font-semibold text-neutral-900">
+								{name}
+							</div>
+							<div className="text-[11px] text-neutral-400">
+								Edited 2 days ago
+							</div>
+						</div>
+						<button
+							onClick={() => setDeleted(name)}
+							className="py-1 px-3.5 border border-red-700 bg-transparent text-xs cursor-pointer text-red-700 rounded-[5px]"
+						>
+							Permanently delete &ldquo;{name}&rdquo;
+						</button>
+					</div>
+				))}
+			{!deleted && (
+				<div className="text-[11px] text-neutral-400 mt-1">
+					This action cannot be undone.
+				</div>
+			)}
 		</div>
 	);
 }
 
 /* ─── 7. Email Wording ─── */
 
-const emailHeader: React.CSSProperties = {
-	...font,
-	fontSize: 11,
-	color: c.textMuted,
-	padding: "6px 0",
-	borderBottom: `1px solid ${c.borderLight}`,
-	display: "flex",
-	gap: 6,
-};
-
-const emailHeaderLabel: React.CSSProperties = {
-	flexShrink: 0,
-};
-
-const emailHeaderValue: React.CSSProperties = {
-	color: c.text,
-};
-
-const emailBody: React.CSSProperties = {
-	...font,
-	fontSize: 12,
-	lineHeight: 1.6,
-	color: c.textSec,
-};
-
-const emailLink: React.CSSProperties = {
-	color: c.textSec,
-	textDecoration: "underline",
-	cursor: "pointer",
-};
-
 export function EmailWordingA() {
 	return (
-		<div style={{ padding: 20, ...demoBox }}>
-			<div style={emailHeader}>
-				<span style={emailHeaderLabel}>To:</span>
-				<span style={emailHeaderValue}>hi@vercel.com</span>
+		<div className="font-demo p-5 bg-white text-neutral-900">
+			<div className="text-[11px] text-neutral-400 py-1.5 border-b border-neutral-200 flex gap-1.5">
+				<span className="shrink-0">To:</span>
+				<span className="text-neutral-900">hi@vercel.com</span>
 			</div>
-			<div style={{ ...emailHeader, marginBottom: 12 }}>
-				<span style={emailHeaderLabel}>Subject:</span>
-				<span style={emailHeaderValue}>
+			<div className="text-[11px] text-neutral-400 py-1.5 border-b border-neutral-200 flex gap-1.5 mb-3">
+				<span className="shrink-0">Subject:</span>
+				<span className="text-neutral-900">
 					You&apos;ve been invited to join Acme Inc.
 				</span>
 			</div>
-			<div style={emailBody}>
-				<p style={{ margin: "0 0 12px" }}>
-					This <strong style={{ color: c.text }}>invitation</strong>{" "}
+			<div className="text-xs leading-relaxed text-neutral-600">
+				<p className="mb-3">
+					This{" "}
+					<strong className="text-neutral-900">invitation</strong>{" "}
 					was intended for hi@vercel.com.
 				</p>
-				<p style={{ margin: "0 0 12px" }}>
-					This <strong style={{ color: c.text }}>invite</strong> was
+				<p className="mb-3">
+					This{" "}
+					<strong className="text-neutral-900">invite</strong> was
 					sent on March 24, 2026, 12:55 AM (UTC) and will expire{" "}
-					<strong style={{ color: c.text }}>in 72 hours</strong>. This{" "}
-					<strong style={{ color: c.text }}>invite</strong> was sent
-					from 204.13.186.218 located in São Paulo, Brazil. If you
-					were not expecting this invitation, you can ignore this
+					<strong className="text-neutral-900">
+						in 72 hours
+					</strong>
+					. This{" "}
+					<strong className="text-neutral-900">invite</strong> was
+					sent from 204.13.186.218 located in São Paulo, Brazil. If
+					you were not expecting this invitation, you can ignore this
 					email. If you are concerned about your account&apos;s
 					safety, please visit{" "}
-					<span style={emailLink}>our Help page</span> to get in touch
-					with us.
+					<span className="underline cursor-pointer">
+						our Help page
+					</span>{" "}
+					to get in touch with us.
 				</p>
-				<p style={{ margin: "0 0 12px" }}>
-					<span style={emailLink}>
+				<p className="mb-3">
+					<span className="underline cursor-pointer">
 						Manage your notification settings
 					</span>
 				</p>
@@ -693,31 +429,39 @@ export function EmailWordingA() {
 
 export function EmailWordingB() {
 	return (
-		<div style={{ padding: 20, ...demoBox }}>
-			<div style={emailHeader}>
-				<span style={emailHeaderLabel}>To:</span>
-				<span style={emailHeaderValue}>hi@vercel.com</span>
+		<div className="font-demo p-5 bg-white text-neutral-900">
+			<div className="text-[11px] text-neutral-400 py-1.5 border-b border-neutral-200 flex gap-1.5">
+				<span className="shrink-0">To:</span>
+				<span className="text-neutral-900">hi@vercel.com</span>
 			</div>
-			<div style={{ ...emailHeader, marginBottom: 12 }}>
-				<span style={emailHeaderLabel}>Subject:</span>
-				<span style={emailHeaderValue}>
+			<div className="text-[11px] text-neutral-400 py-1.5 border-b border-neutral-200 flex gap-1.5 mb-3">
+				<span className="shrink-0">Subject:</span>
+				<span className="text-neutral-900">
 					Invitation to join Acme Inc.
 				</span>
 			</div>
-			<div style={emailBody}>
-				<p style={{ margin: "0 0 12px" }}>
+			<div className="text-xs leading-relaxed text-neutral-600">
+				<p className="mb-3">
 					This invitation was sent to hi@vercel.com on March 24, 2026
 					at 12:55 AM (UTC) from 204.13.186.218 (São Paulo, Brazil).
 					Expires{" "}
-					<strong style={{ color: c.text }}>March 27, 2026</strong>.
+					<strong className="text-neutral-900">
+						March 27, 2026
+					</strong>
+					.
 				</p>
-				<p style={{ margin: "0 0 12px" }}>
+				<p className="mb-3">
 					Didn&apos;t expect this? Safe to ignore. Concerned about
 					your account? Visit{" "}
-					<span style={emailLink}>our Help page</span>.
+					<span className="underline cursor-pointer">
+						our Help page
+					</span>
+					.
 				</p>
-				<p style={{ margin: "0 0 12px" }}>
-					<span style={emailLink}>Manage notification settings</span>
+				<p className="mb-3">
+					<span className="underline cursor-pointer">
+						Manage notification settings
+					</span>
 				</p>
 			</div>
 		</div>
@@ -726,132 +470,72 @@ export function EmailWordingB() {
 
 /* ─── 8. Changelog ─── */
 
-const changelogItem: React.CSSProperties = {
-	...font,
-	fontSize: 13,
-	lineHeight: 1.5,
-	padding: "8px 0",
-	borderBottom: `1px solid ${c.borderLight}`,
-	color: c.textSec,
-};
-
-const changelogTag: React.CSSProperties = {
-	...font,
-	display: "inline-block",
-	fontSize: 10,
-	fontWeight: 700,
-	textTransform: "uppercase" as const,
-	letterSpacing: "0.05em",
-	padding: "2px 6px",
-	borderRadius: 3,
-	marginRight: 8,
-	verticalAlign: "middle",
-};
+function ChangelogEntry({
+	tag,
+	tagColor,
+	children,
+	last,
+}: {
+	tag: string;
+	tagColor: string;
+	children: React.ReactNode;
+	last?: boolean;
+}) {
+	const colorMap: Record<string, string> = {
+		blue: "bg-blue-100 text-blue-800",
+		green: "bg-green-100 text-green-800",
+		yellow: "bg-yellow-100 text-yellow-800",
+	};
+	return (
+		<div
+			className={`text-[13px] leading-normal py-2 text-neutral-600 ${
+				last ? "" : "border-b border-neutral-200"
+			}`}
+		>
+			<span
+				className={`inline-block text-[10px] font-bold uppercase tracking-wider py-0.5 px-1.5 rounded-sm mr-2 align-middle ${colorMap[tagColor]}`}
+			>
+				{tag}
+			</span>
+			{children}
+		</div>
+	);
+}
 
 export function ChangelogA() {
 	return (
-		<div style={{ padding: 20, ...demoBox }}>
-			<div
-				style={{
-					...font,
-					fontSize: 14,
-					fontWeight: 700,
-					color: c.text,
-					marginBottom: 12,
-				}}
-			>
+		<div className="font-demo p-5 bg-white text-neutral-900">
+			<div className="text-sm font-bold text-neutral-900 mb-3">
 				v2.4.0
 			</div>
-			<div style={changelogItem}>
-				<span
-					style={{
-						...changelogTag,
-						background: "#dbeafe",
-						color: "#1e40af",
-					}}
-				>
-					New
-				</span>
+			<ChangelogEntry tag="New" tagColor="blue">
 				Added dark mode support
-			</div>
-			<div style={changelogItem}>
-				<span
-					style={{
-						...changelogTag,
-						background: "#dcfce7",
-						color: "#166534",
-					}}
-				>
-					Fix
-				</span>
+			</ChangelogEntry>
+			<ChangelogEntry tag="Fix" tagColor="green">
 				Fixed an issue that content may be blank in PDF export
-			</div>
-			<div style={{ ...changelogItem, borderBottom: "none" }}>
-				<span
-					style={{
-						...changelogTag,
-						background: "#fef9c3",
-						color: "#854d0e",
-					}}
-				>
-					Fix
-				</span>
+			</ChangelogEntry>
+			<ChangelogEntry tag="Fix" tagColor="yellow" last>
 				Fixed custom font rendering issue
-			</div>
+			</ChangelogEntry>
 		</div>
 	);
 }
 
 export function ChangelogB() {
 	return (
-		<div style={{ padding: 20, ...demoBox }}>
-			<div
-				style={{
-					...font,
-					fontSize: 14,
-					fontWeight: 700,
-					color: c.text,
-					marginBottom: 12,
-				}}
-			>
+		<div className="font-demo p-5 bg-white text-neutral-900">
+			<div className="text-sm font-bold text-neutral-900 mb-3">
 				v2.4.0
 			</div>
-			<div style={changelogItem}>
-				<span
-					style={{
-						...changelogTag,
-						background: "#dbeafe",
-						color: "#1e40af",
-					}}
-				>
-					New
-				</span>
+			<ChangelogEntry tag="New" tagColor="blue">
 				You can now switch to dark mode from Settings
-			</div>
-			<div style={changelogItem}>
-				<span
-					style={{
-						...changelogTag,
-						background: "#dcfce7",
-						color: "#166534",
-					}}
-				>
-					Fix
-				</span>
+			</ChangelogEntry>
+			<ChangelogEntry tag="Fix" tagColor="green">
 				PDFs no longer export as blank pages on Firefox
-			</div>
-			<div style={{ ...changelogItem, borderBottom: "none" }}>
-				<span
-					style={{
-						...changelogTag,
-						background: "#dcfce7",
-						color: "#166534",
-					}}
-				>
-					Fix
-				</span>
+			</ChangelogEntry>
+			<ChangelogEntry tag="Fix" tagColor="green" last>
 				Your exports now include custom fonts
-			</div>
+			</ChangelogEntry>
 		</div>
 	);
 }
@@ -861,15 +545,8 @@ export function ChangelogB() {
 function Spinner({ size = 18 }: { size?: number }) {
 	return (
 		<span
-			style={{
-				display: "inline-block",
-				width: size,
-				height: size,
-				border: `2px solid ${c.borderLight}`,
-				borderTopColor: c.textSec,
-				borderRadius: "50%",
-				animation: "detail-spin 0.8s linear infinite",
-			}}
+			className="inline-block border-2 border-neutral-200 border-t-neutral-500 rounded-full animate-spin"
+			style={{ width: size, height: size, animationDuration: "0.8s" }}
 		/>
 	);
 }
@@ -885,34 +562,18 @@ export function LoadingStateA() {
 	}, [loading]);
 
 	return (
-		<div style={{ ...center, ...demoBox, minHeight: 120 }}>
+		<div className="font-demo flex justify-center items-center p-5 bg-white text-neutral-900 min-h-[120px]">
 			{!loading ? (
 				<button
 					onClick={() => setLoading(true)}
-					style={{
-						...font,
-						padding: "10px 24px",
-						border: `1.5px solid ${c.border}`,
-						background: "transparent",
-						fontSize: 13,
-						cursor: "pointer",
-						color: c.text,
-						borderRadius: 6,
-					}}
+					className="py-2.5 px-6 border-[1.5px] border-neutral-300 bg-transparent text-[13px] cursor-pointer text-neutral-900 rounded-md"
 				>
 					Generate Report
 				</button>
 			) : (
-				<div style={{ textAlign: "center" }}>
+				<div className="text-center">
 					<Spinner />
-					<div
-						style={{
-							...font,
-							fontSize: 13,
-							color: c.textMuted,
-							marginTop: 10,
-						}}
-					>
+					<div className="text-[13px] text-neutral-400 mt-2.5">
 						Please wait...
 					</div>
 				</div>
@@ -928,7 +589,10 @@ export function LoadingStateB() {
 	useEffect(() => {
 		if (loading) {
 			const t = setTimeout(() => setLoading(false), 6000);
-			const tick = setInterval(() => setElapsed((e) => e + 1), 1000);
+			const tick = setInterval(
+				() => setElapsed((e) => e + 1),
+				1000
+			);
 			return () => {
 				clearTimeout(t);
 				clearInterval(tick);
@@ -938,56 +602,24 @@ export function LoadingStateB() {
 	}, [loading]);
 
 	return (
-		<div style={{ ...center, ...demoBox, minHeight: 120 }}>
+		<div className="font-demo flex justify-center items-center p-5 bg-white text-neutral-900 min-h-[120px]">
 			{!loading ? (
 				<button
 					onClick={() => setLoading(true)}
-					style={{
-						...font,
-						padding: "10px 24px",
-						border: `1.5px solid ${c.border}`,
-						background: "transparent",
-						fontSize: 13,
-						cursor: "pointer",
-						color: c.text,
-						borderRadius: 6,
-					}}
+					className="py-2.5 px-6 border-[1.5px] border-neutral-300 bg-transparent text-[13px] cursor-pointer text-neutral-900 rounded-md"
 				>
 					Generate Report
 				</button>
 			) : (
-				<div style={{ textAlign: "center" }}>
+				<div className="text-center">
 					<Spinner />
-					<div
-						style={{
-							...font,
-							fontSize: 13,
-							color: c.text,
-							marginTop: 10,
-							fontWeight: 600,
-						}}
-					>
+					<div className="text-[13px] text-neutral-900 mt-2.5 font-semibold">
 						Generating your report...
 					</div>
-					<div
-						style={{
-							...font,
-							fontSize: 12,
-							color: c.textMuted,
-							marginTop: 4,
-						}}
-					>
+					<div className="text-xs text-neutral-400 mt-1">
 						This usually takes about 6 seconds
 					</div>
-					<div
-						style={{
-							...font,
-							fontSize: 11,
-							color: c.textMuted,
-							marginTop: 8,
-							fontVariantNumeric: "tabular-nums",
-						}}
-					>
+					<div className="text-[11px] text-neutral-400 mt-2 tabular-nums">
 						{elapsed}s elapsed
 					</div>
 				</div>
@@ -999,88 +631,26 @@ export function LoadingStateB() {
 /* ─── 10. Disabled Feature Tooltips ─── */
 
 function LockIcon() {
-	return (
-		<svg
-			width="14"
-			height="14"
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			strokeWidth="2"
-			strokeLinecap="round"
-			strokeLinejoin="round"
-		>
-			<rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-			<path d="M7 11V7a5 5 0 0 1 10 0v4" />
-		</svg>
-	);
+	return <Lock size={14} />;
 }
-
-const settingsRow: React.CSSProperties = {
-	...font,
-	display: "flex",
-	alignItems: "center",
-	justifyContent: "space-between",
-	padding: "10px 0",
-	borderBottom: `1px solid ${c.borderLight}`,
-};
-
-const disabledBtn: React.CSSProperties = {
-	...font,
-	display: "flex",
-	alignItems: "center",
-	gap: 6,
-	padding: "6px 14px",
-	border: `1px solid ${c.borderLight}`,
-	background: "#f5f5f5",
-	fontSize: 12,
-	color: c.textMuted,
-	cursor: "default",
-	borderRadius: 5,
-	position: "relative" as const,
-};
-
-const tooltipStyle: React.CSSProperties = {
-	...font,
-	position: "absolute",
-	bottom: "calc(100% + 8px)",
-	right: 0,
-	padding: "8px 12px",
-	borderRadius: 6,
-	fontSize: 12,
-	lineHeight: 1.4,
-	whiteSpace: "nowrap",
-	background: c.text,
-	color: "#fff",
-	pointerEvents: "none",
-	boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-};
 
 export function DisabledTooltipA() {
 	const [hover, setHover] = useState(false);
 
 	return (
-		<div style={{ padding: "40px 20px 20px", ...demoBox }}>
-			<div style={{ ...settingsRow, borderBottom: "none" }}>
+		<div className="font-demo pt-10 px-5 pb-5 bg-white text-neutral-900">
+			<div className="flex items-center justify-between py-2.5">
 				<div>
-					<div
-						style={{ fontSize: 13, fontWeight: 600, color: c.text }}
-					>
+					<div className="text-[13px] font-semibold text-neutral-900">
 						Custom Domain
 					</div>
-					<div
-						style={{
-							fontSize: 11,
-							color: c.textMuted,
-							marginTop: 2,
-						}}
-					>
+					<div className="text-[11px] text-neutral-400 mt-0.5">
 						Use your own domain for published sites
 					</div>
 				</div>
-				<div style={{ position: "relative" as const }}>
+				<div className="relative">
 					<button
-						style={disabledBtn}
+						className="flex items-center gap-1.5 py-1.5 px-3.5 border border-neutral-200 bg-neutral-100 text-xs text-neutral-400 cursor-default rounded-[5px]"
 						onMouseEnter={() => setHover(true)}
 						onMouseLeave={() => setHover(false)}
 					>
@@ -1088,7 +658,9 @@ export function DisabledTooltipA() {
 						Configure
 					</button>
 					{hover && (
-						<div style={tooltipStyle}>Available on Pro plan</div>
+						<div className="absolute bottom-[calc(100%+8px)] right-0 py-2 px-3 rounded-md text-xs leading-snug whitespace-nowrap bg-neutral-900 text-white pointer-events-none shadow-md">
+							Available on Pro plan
+						</div>
 					)}
 				</div>
 			</div>
@@ -1100,27 +672,19 @@ export function DisabledTooltipB() {
 	const [hover, setHover] = useState(false);
 
 	return (
-		<div style={{ padding: "40px 20px 20px", ...demoBox }}>
-			<div style={{ ...settingsRow, borderBottom: "none" }}>
+		<div className="font-demo pt-10 px-5 pb-5 bg-white text-neutral-900">
+			<div className="flex items-center justify-between py-2.5">
 				<div>
-					<div
-						style={{ fontSize: 13, fontWeight: 600, color: c.text }}
-					>
+					<div className="text-[13px] font-semibold text-neutral-900">
 						Custom Domain
 					</div>
-					<div
-						style={{
-							fontSize: 11,
-							color: c.textMuted,
-							marginTop: 2,
-						}}
-					>
+					<div className="text-[11px] text-neutral-400 mt-0.5">
 						Use your own domain for published sites
 					</div>
 				</div>
-				<div style={{ position: "relative" as const }}>
+				<div className="relative">
 					<button
-						style={disabledBtn}
+						className="flex items-center gap-1.5 py-1.5 px-3.5 border border-neutral-200 bg-neutral-100 text-xs text-neutral-400 cursor-default rounded-[5px]"
 						onMouseEnter={() => setHover(true)}
 						onMouseLeave={() => setHover(false)}
 					>
@@ -1128,7 +692,7 @@ export function DisabledTooltipB() {
 						Configure
 					</button>
 					{hover && (
-						<div style={tooltipStyle}>
+						<div className="absolute bottom-[calc(100%+8px)] right-0 py-2 px-3 rounded-md text-xs leading-snug whitespace-nowrap bg-neutral-900 text-white pointer-events-none shadow-md">
 							Unlock custom domains → Pro
 						</div>
 					)}
@@ -1140,75 +704,36 @@ export function DisabledTooltipB() {
 
 /* ─── 11. Answer Length ─── */
 
-const faqRow: React.CSSProperties = {
-	borderBottom: `1px solid ${c.borderLight}`,
-};
-
-const faqSummary: React.CSSProperties = {
-	...font,
-	fontSize: 13,
-	fontWeight: 600,
-	color: c.text,
-	padding: "12px 0",
-	cursor: "pointer",
-	listStyle: "none",
-	display: "flex",
-	justifyContent: "space-between",
-	alignItems: "center",
-};
-
-const faqBody: React.CSSProperties = {
-	...font,
-	fontSize: 13,
-	lineHeight: 1.6,
-	color: c.textSec,
-	paddingBottom: 12,
-};
-
 function FaqChevron() {
 	return (
-		<svg
-			width="14"
-			height="14"
-			viewBox="0 0 16 16"
-			fill="none"
-			stroke="currentColor"
-			strokeWidth="2"
-			strokeLinecap="round"
-			strokeLinejoin="round"
-			style={{
-				color: c.textMuted,
-				flexShrink: 0,
-				transition: "transform 0.15s",
-			}}
-			className="faq-chevron"
-		>
-			<path d="M4 6l4 4 4-4" />
-		</svg>
+		<ChevronDown
+			size={14}
+			className="faq-chevron text-neutral-400 shrink-0 transition-transform duration-150"
+		/>
 	);
 }
 
 export function AnswerLengthA() {
 	return (
-		<div style={{ padding: "8px 20px", height: 180, ...demoBox }}>
-			<details style={{ ...faqRow, borderBottom: "none" }} open>
-				<summary style={faqSummary}>
+		<div className="font-demo py-2 px-5 h-[180px] bg-white text-neutral-900">
+			<details open>
+				<summary className="text-[13px] font-semibold text-neutral-900 py-3 cursor-pointer list-none flex justify-between items-center">
 					<span>Can I cancel anytime?</span>
 					<FaqChevron />
 				</summary>
-				<div style={faqBody}>
-					<p style={{ margin: "0 0 8px" }}>
+				<div className="text-[13px] leading-relaxed text-neutral-600 pb-3">
+					<p className="mb-2">
 						Yes, you can cancel your subscription at any time from
 						your account settings. Once you cancel, your current
 						billing cycle will continue until the end of the period.
 					</p>
-					<p style={{ margin: "0 0 8px" }}>
+					<p className="mb-2">
 						Please note that refunds are not provided for partial
 						billing periods. If you cancel mid-cycle, you will
 						retain access to all features until your current period
 						expires.
 					</p>
-					<p style={{ margin: 0 }}>
+					<p>
 						If you have any questions about cancellation, our
 						support team is available 24/7 to assist you.
 					</p>
@@ -1220,38 +745,21 @@ export function AnswerLengthA() {
 
 export function AnswerLengthB() {
 	return (
-		<div style={{ padding: "8px 20px", height: 180, ...demoBox }}>
-			<details style={{ ...faqRow, borderBottom: "none" }} open>
-				<summary style={faqSummary}>
+		<div className="font-demo py-2 px-5 h-[180px] bg-white text-neutral-900">
+			<details open>
+				<summary className="text-[13px] font-semibold text-neutral-900 py-3 cursor-pointer list-none flex justify-between items-center">
 					<span>Can I cancel anytime?</span>
 					<FaqChevron />
 				</summary>
-				<div style={faqBody}>Yes. No fees, no questions.</div>
+				<div className="text-[13px] leading-relaxed text-neutral-600 pb-3">
+					Yes. No fees, no questions.
+				</div>
 			</details>
 		</div>
 	);
 }
 
 /* ─── 12. Onboarding Questions ─── */
-
-const onboardingChip: React.CSSProperties = {
-	...font,
-	padding: "8px 14px",
-	fontSize: 12,
-	border: `1px solid ${c.border}`,
-	background: "transparent",
-	color: c.text,
-	borderRadius: 20,
-	cursor: "pointer",
-	transition: "all 0.15s",
-};
-
-const onboardingChipSelected: React.CSSProperties = {
-	...onboardingChip,
-	background: c.text,
-	color: "#fff",
-	borderColor: c.text,
-};
 
 function OnboardingScreen({
 	question,
@@ -1263,54 +771,23 @@ function OnboardingScreen({
 	const [selected, setSelected] = useState<string | null>(null);
 
 	return (
-		<div style={{ padding: 20, ...demoBox }}>
-			<div
-				style={{
-					fontSize: 11,
-					color: c.textMuted,
-					marginBottom: 6,
-					...font,
-					textTransform: "uppercase" as const,
-					letterSpacing: "0.05em",
-				}}
-			>
+		<div className="font-demo p-5 bg-white text-neutral-900">
+			<div className="text-[11px] text-neutral-400 mb-1.5 uppercase tracking-wider">
 				Step 1 of 3
 			</div>
-			<div
-				style={{
-					fontSize: 14,
-					fontWeight: 700,
-					color: c.text,
-					marginBottom: 14,
-					...font,
-				}}
-			>
+			<div className="text-sm font-bold text-neutral-900 mb-3.5">
 				{question}
 			</div>
-			<div
-				style={{
-					display: "flex",
-					flexWrap: "wrap",
-					gap: 8,
-				}}
-			>
+			<div className="flex flex-wrap gap-2">
 				{options.map((opt) => (
 					<button
 						key={opt}
-						style={
+						className={`py-2 px-3.5 text-xs rounded-full cursor-pointer transition-all duration-150 ${
 							selected === opt
-								? onboardingChipSelected
-								: onboardingChip
-						}
+								? "bg-neutral-900 text-white border border-neutral-900"
+								: "bg-transparent text-neutral-900 border border-neutral-300 hover:border-neutral-900"
+						}`}
 						onClick={() => setSelected(opt)}
-						onMouseEnter={(e) => {
-							if (selected !== opt)
-								e.currentTarget.style.borderColor = c.text;
-						}}
-						onMouseLeave={(e) => {
-							if (selected !== opt)
-								e.currentTarget.style.borderColor = c.border;
-						}}
 					>
 						{opt}
 					</button>
@@ -1357,30 +834,14 @@ function Toggle({ on, onToggle }: { on: boolean; onToggle: () => void }) {
 	return (
 		<button
 			onClick={onToggle}
-			style={{
-				width: 36,
-				height: 20,
-				borderRadius: 10,
-				border: "none",
-				background: on ? c.text : c.borderLight,
-				position: "relative" as const,
-				cursor: "pointer",
-				transition: "background 0.2s",
-				flexShrink: 0,
-			}}
+			className={`relative w-9 h-5 rounded-full border-none cursor-pointer transition-colors duration-200 shrink-0 ${
+				on ? "bg-neutral-900" : "bg-neutral-200"
+			}`}
 		>
 			<span
-				style={{
-					position: "absolute",
-					top: 2,
-					left: on ? 18 : 2,
-					width: 16,
-					height: 16,
-					borderRadius: "50%",
-					background: "#fff",
-					transition: "left 0.2s",
-					boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
-				}}
+				className={`absolute top-0.5 w-4 h-4 rounded-full bg-white shadow-sm transition-[left] duration-200 ${
+					on ? "left-[18px]" : "left-0.5"
+				}`}
 			/>
 		</button>
 	);
@@ -1406,20 +867,14 @@ function SettingsPanel({ sections }: { sections: SettingsSection[] }) {
 	let rowIndex = 0;
 
 	return (
-		<div style={{ padding: "16px 20px", ...demoBox }}>
+		<div className="font-demo py-4 px-5 bg-white text-neutral-900">
 			{sections.map((section, si) => (
 				<div key={si}>
 					{section.header && (
 						<div
-							style={{
-								...font,
-								fontSize: 10,
-								fontWeight: 700,
-								color: c.textMuted,
-								textTransform: "uppercase" as const,
-								letterSpacing: "0.06em",
-								padding: si === 0 ? "0 0 8px" : "14px 0 8px",
-							}}
+							className={`text-[10px] font-bold text-neutral-400 uppercase tracking-widest ${
+								si === 0 ? "pb-2" : "pt-3.5 pb-2"
+							}`}
 						>
 							{section.header}
 						</div>
@@ -1429,36 +884,14 @@ function SettingsPanel({ sections }: { sections: SettingsSection[] }) {
 						return (
 							<div
 								key={i}
-								style={{
-									display: "flex",
-									alignItems: "flex-start",
-									justifyContent: "space-between",
-									gap: 12,
-									padding: "10px 0",
-									borderBottom: `1px solid ${c.borderLight}`,
-								}}
+								className="flex items-start justify-between gap-3 py-2.5 border-b border-neutral-200"
 							>
-								<div style={{ minWidth: 0 }}>
-									<div
-										style={{
-											...font,
-											fontSize: 13,
-											color: c.text,
-											fontWeight: 500,
-										}}
-									>
+								<div className="min-w-0">
+									<div className="text-[13px] text-neutral-900 font-medium">
 										{row.label}
 									</div>
 									{row.description && (
-										<div
-											style={{
-												...font,
-												fontSize: 11,
-												color: c.textMuted,
-												marginTop: 2,
-												lineHeight: 1.4,
-											}}
-										>
+										<div className="text-[11px] text-neutral-400 mt-0.5 leading-snug">
 											{row.description}
 										</div>
 									)}
@@ -1467,7 +900,9 @@ function SettingsPanel({ sections }: { sections: SettingsSection[] }) {
 									on={toggles[i]}
 									onToggle={() =>
 										setToggles((t) =>
-											t.map((v, j) => (j === i ? !v : v))
+											t.map((v, j) =>
+												j === i ? !v : v
+											)
 										)
 									}
 								/>
@@ -1545,14 +980,17 @@ export function SettingsLabelsB() {
 	);
 }
 
-/* ─── CSS keyframe injection ─── */
+/* ─── CSS injection ─── */
 
 export function DetailDemoStyles() {
 	return (
 		<style>{`
 			@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap');
-			@keyframes detail-spin {
-				to { transform: rotate(360deg); }
+			.font-demo,
+			.font-demo button,
+			.font-demo input,
+			.font-demo summary {
+				font-family: 'Geist Sans', system-ui, sans-serif;
 			}
 			details > summary::-webkit-details-marker,
 			details > summary::marker {
