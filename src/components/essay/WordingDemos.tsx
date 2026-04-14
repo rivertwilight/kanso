@@ -17,7 +17,9 @@ const c = {
 	successBg: "#f0fdf4",
 };
 
-const font: React.CSSProperties = { fontFamily: "system-ui, sans-serif" };
+const font: React.CSSProperties = {
+	fontFamily: "'Geist Sans', system-ui, sans-serif",
+};
 const center: React.CSSProperties = {
 	display: "flex",
 	justifyContent: "center",
@@ -108,7 +110,7 @@ function ButtonLabelMenu({
 					opacity: open ? 1 : 0,
 					transform: open ? "translateY(0)" : "translateY(-4px)",
 					transition: "opacity 0.15s, transform 0.15s",
-					pointerEvents: open ? "auto" as const : "none" as const,
+					pointerEvents: open ? ("auto" as const) : ("none" as const),
 				}}
 			>
 				{items.map((item, i) => (
@@ -320,7 +322,9 @@ export function ErrorMessageB() {
 				}}
 			>
 				This email is already registered.{" "}
-				<span style={{ textDecoration: "underline", cursor: "pointer" }}>
+				<span
+					style={{ textDecoration: "underline", cursor: "pointer" }}
+				>
 					Try signing in instead.
 				</span>
 			</div>
@@ -368,8 +372,10 @@ export function ConfirmationA() {
 			<div style={toastStyle}>
 				<CheckIcon />
 				<div>
-					<div style={{ fontSize: 14, fontWeight: 600, color: c.text }}>
-						Success!
+					<div
+						style={{ fontSize: 14, fontWeight: 600, color: c.text }}
+					>
+						Successfully Saved.
 					</div>
 				</div>
 			</div>
@@ -383,8 +389,11 @@ export function ConfirmationB() {
 			<div style={toastStyle}>
 				<CheckIcon />
 				<div>
-					<div style={{ fontSize: 14, fontWeight: 600, color: c.text }}>
-						Your changes to &ldquo;Project Alpha&rdquo; have been saved.
+					<div
+						style={{ fontSize: 14, fontWeight: 600, color: c.text }}
+					>
+						Your changes to &ldquo;Project Alpha&rdquo; have been
+						saved.
 					</div>
 				</div>
 			</div>
@@ -457,7 +466,13 @@ export function EmptyStateWordingB() {
 				placeholder="Search..."
 			/>
 			<div style={{ textAlign: "center", padding: "12px 0" }}>
-				<div style={{ marginBottom: 8, display: "flex", justifyContent: "center" }}>
+				<div
+					style={{
+						marginBottom: 8,
+						display: "flex",
+						justifyContent: "center",
+					}}
+				>
 					<svg
 						width="32"
 						height="32"
@@ -557,19 +572,6 @@ export function DestructiveActionA() {
 					</button>
 				</div>
 			))}
-			<div
-				style={{
-					...font,
-					fontSize: 11,
-					color: c.textMuted,
-					marginTop: 4,
-					minHeight: 16,
-					transition: "opacity 0.2s",
-					opacity: clicked ? 1 : 0,
-				}}
-			>
-				Deleted.
-			</div>
 		</div>
 	);
 }
@@ -589,71 +591,29 @@ export function DestructiveActionB() {
 	return (
 		<div style={{ padding: 20, minHeight: 158, ...demoBox }}>
 			<div style={dangerZoneLabel}>Danger zone</div>
-			{deleted && (
-				<div
-					style={{
-						...font,
-						fontSize: 12,
-						color: c.text,
-						padding: "8px 12px",
-						background: c.errorBg,
-						borderRadius: 6,
-						marginBottom: 8,
-						display: "flex",
-						justifyContent: "space-between",
-						alignItems: "center",
-					}}
-				>
-					<span>&ldquo;{deleted}&rdquo; was deleted.</span>
-					<span
-						onClick={() => setDeleted(null)}
+			{projects.map((name) => (
+				<div key={name} style={projectRow}>
+					<div>
+						<div style={projectName}>{name}</div>
+						<div style={projectMeta}>Edited 2 days ago</div>
+					</div>
+					<button
+						onClick={() => setDeleted(name)}
 						style={{
-							fontWeight: 600,
-							textDecoration: "underline",
+							...font,
+							padding: "5px 14px",
+							border: `1px solid ${c.errorRed}`,
+							background: "transparent",
+							fontSize: 12,
 							cursor: "pointer",
+							color: c.errorRed,
+							borderRadius: 5,
 						}}
 					>
-						Undo
-					</span>
+						Permanently delete &ldquo;{name}&rdquo;
+					</button>
 				</div>
-			)}
-			{projects
-				.filter((name) => name !== deleted)
-				.map((name) => (
-					<div key={name} style={projectRow}>
-						<div>
-							<div style={projectName}>{name}</div>
-							<div style={projectMeta}>Edited 2 days ago</div>
-						</div>
-						<button
-							onClick={() => setDeleted(name)}
-							style={{
-								...font,
-								padding: "5px 14px",
-								border: `1px solid ${c.errorRed}`,
-								background: "transparent",
-								fontSize: 12,
-								cursor: "pointer",
-								color: c.errorRed,
-								borderRadius: 5,
-							}}
-						>
-							Permanently delete &ldquo;{name}&rdquo;
-						</button>
-					</div>
-				))}
-			{!deleted && (
-				<div
-					style={{
-						...font,
-						fontSize: 11,
-						color: c.textMuted,
-						marginTop: 4,
-					}}
-				>
-					This action cannot be undone.
-				</div>
-			)}
+			))}
 		</div>
 	);
 }
@@ -700,26 +660,31 @@ export function EmailWordingA() {
 			</div>
 			<div style={{ ...emailHeader, marginBottom: 12 }}>
 				<span style={emailHeaderLabel}>Subject:</span>
-				<span style={emailHeaderValue}>You&apos;ve been invited to join Acme Inc.</span>
+				<span style={emailHeaderValue}>
+					You&apos;ve been invited to join Acme Inc.
+				</span>
 			</div>
 			<div style={emailBody}>
 				<p style={{ margin: "0 0 12px" }}>
-					This <strong style={{ color: c.text }}>invitation</strong> was
-					intended for hi@vercel.com.
+					This <strong style={{ color: c.text }}>invitation</strong>{" "}
+					was intended for hi@vercel.com.
 				</p>
 				<p style={{ margin: "0 0 12px" }}>
-					This <strong style={{ color: c.text }}>invite</strong> was sent on
-					March 24, 2026, 12:55 AM (UTC) and will expire{" "}
+					This <strong style={{ color: c.text }}>invite</strong> was
+					sent on March 24, 2026, 12:55 AM (UTC) and will expire{" "}
 					<strong style={{ color: c.text }}>in 72 hours</strong>. This{" "}
-					<strong style={{ color: c.text }}>invite</strong> was sent from
-					204.13.186.218 located in São Paulo, Brazil. If you were not
-					expecting this invitation, you can ignore this email. If you are
-					concerned about your account&apos;s safety, please visit{" "}
-					<span style={emailLink}>our Help page</span> to get in touch with
-					us.
+					<strong style={{ color: c.text }}>invite</strong> was sent
+					from 204.13.186.218 located in São Paulo, Brazil. If you
+					were not expecting this invitation, you can ignore this
+					email. If you are concerned about your account&apos;s
+					safety, please visit{" "}
+					<span style={emailLink}>our Help page</span> to get in touch
+					with us.
 				</p>
 				<p style={{ margin: "0 0 12px" }}>
-					<span style={emailLink}>Manage your notification settings</span>
+					<span style={emailLink}>
+						Manage your notification settings
+					</span>
 				</p>
 			</div>
 		</div>
@@ -735,17 +700,21 @@ export function EmailWordingB() {
 			</div>
 			<div style={{ ...emailHeader, marginBottom: 12 }}>
 				<span style={emailHeaderLabel}>Subject:</span>
-				<span style={emailHeaderValue}>Invitation to join Acme Inc.</span>
+				<span style={emailHeaderValue}>
+					Invitation to join Acme Inc.
+				</span>
 			</div>
 			<div style={emailBody}>
 				<p style={{ margin: "0 0 12px" }}>
-					This invitation was sent to hi@vercel.com on March 24, 2026 at
-					12:55 AM (UTC) from 204.13.186.218 (São Paulo, Brazil). Expires{" "}
+					This invitation was sent to hi@vercel.com on March 24, 2026
+					at 12:55 AM (UTC) from 204.13.186.218 (São Paulo, Brazil).
+					Expires{" "}
 					<strong style={{ color: c.text }}>March 27, 2026</strong>.
 				</p>
 				<p style={{ margin: "0 0 12px" }}>
-					Didn&apos;t expect this? Safe to ignore. Concerned about your
-					account? Visit <span style={emailLink}>our Help page</span>.
+					Didn&apos;t expect this? Safe to ignore. Concerned about
+					your account? Visit{" "}
+					<span style={emailLink}>our Help page</span>.
 				</p>
 				<p style={{ margin: "0 0 12px" }}>
 					<span style={emailLink}>Manage notification settings</span>
@@ -815,7 +784,7 @@ export function ChangelogA() {
 				>
 					Fix
 				</span>
-				Fixed bug in PDF export
+				Fixed an issue that content may be blank in PDF export
 			</div>
 			<div style={{ ...changelogItem, borderBottom: "none" }}>
 				<span
@@ -1094,10 +1063,18 @@ export function DisabledTooltipA() {
 		<div style={{ padding: "40px 20px 20px", ...demoBox }}>
 			<div style={{ ...settingsRow, borderBottom: "none" }}>
 				<div>
-					<div style={{ fontSize: 13, fontWeight: 600, color: c.text }}>
+					<div
+						style={{ fontSize: 13, fontWeight: 600, color: c.text }}
+					>
 						Custom Domain
 					</div>
-					<div style={{ fontSize: 11, color: c.textMuted, marginTop: 2 }}>
+					<div
+						style={{
+							fontSize: 11,
+							color: c.textMuted,
+							marginTop: 2,
+						}}
+					>
 						Use your own domain for published sites
 					</div>
 				</div>
@@ -1126,10 +1103,18 @@ export function DisabledTooltipB() {
 		<div style={{ padding: "40px 20px 20px", ...demoBox }}>
 			<div style={{ ...settingsRow, borderBottom: "none" }}>
 				<div>
-					<div style={{ fontSize: 13, fontWeight: 600, color: c.text }}>
+					<div
+						style={{ fontSize: 13, fontWeight: 600, color: c.text }}
+					>
 						Custom Domain
 					</div>
-					<div style={{ fontSize: 11, color: c.textMuted, marginTop: 2 }}>
+					<div
+						style={{
+							fontSize: 11,
+							color: c.textMuted,
+							marginTop: 2,
+						}}
+					>
 						Use your own domain for published sites
 					</div>
 				</div>
@@ -1191,7 +1176,11 @@ function FaqChevron() {
 			strokeWidth="2"
 			strokeLinecap="round"
 			strokeLinejoin="round"
-			style={{ color: c.textMuted, flexShrink: 0, transition: "transform 0.15s" }}
+			style={{
+				color: c.textMuted,
+				flexShrink: 0,
+				transition: "transform 0.15s",
+			}}
 			className="faq-chevron"
 		>
 			<path d="M4 6l4 4 4-4" />
@@ -1209,18 +1198,19 @@ export function AnswerLengthA() {
 				</summary>
 				<div style={faqBody}>
 					<p style={{ margin: "0 0 8px" }}>
-						Yes, you can cancel your subscription at any time from your
-						account settings. Once you cancel, your current billing cycle
-						will continue until the end of the period.
+						Yes, you can cancel your subscription at any time from
+						your account settings. Once you cancel, your current
+						billing cycle will continue until the end of the period.
 					</p>
 					<p style={{ margin: "0 0 8px" }}>
-						Please note that refunds are not provided for partial billing
-						periods. If you cancel mid-cycle, you will retain access to
-						all features until your current period expires.
+						Please note that refunds are not provided for partial
+						billing periods. If you cancel mid-cycle, you will
+						retain access to all features until your current period
+						expires.
 					</p>
 					<p style={{ margin: 0 }}>
-						If you have any questions about cancellation, our support
-						team is available 24/7 to assist you.
+						If you have any questions about cancellation, our
+						support team is available 24/7 to assist you.
 					</p>
 				</div>
 			</details>
@@ -1236,9 +1226,7 @@ export function AnswerLengthB() {
 					<span>Can I cancel anytime?</span>
 					<FaqChevron />
 				</summary>
-				<div style={faqBody}>
-					Yes. No fees, no questions.
-				</div>
+				<div style={faqBody}>Yes. No fees, no questions.</div>
 			</details>
 		</div>
 	);
@@ -1365,13 +1353,7 @@ export function OnboardingB() {
 
 /* ─── 13. Settings Labels ─── */
 
-function Toggle({
-	on,
-	onToggle,
-}: {
-	on: boolean;
-	onToggle: () => void;
-}) {
+function Toggle({ on, onToggle }: { on: boolean; onToggle: () => void }) {
 	return (
 		<button
 			onClick={onToggle}
@@ -1485,9 +1467,7 @@ function SettingsPanel({ sections }: { sections: SettingsSection[] }) {
 									on={toggles[i]}
 									onToggle={() =>
 										setToggles((t) =>
-											t.map((v, j) =>
-												j === i ? !v : v
-											)
+											t.map((v, j) => (j === i ? !v : v))
 										)
 									}
 								/>
@@ -1506,19 +1486,21 @@ export function SettingsLabelsA() {
 			sections={[
 				{
 					rows: [
-						{ label: "Enable two-factor authentication", defaultOn: true },
+						{
+							label: "Enable two-factor authentication",
+							defaultOn: true,
+						},
 						{ label: "Notifications", defaultOn: true },
 						{
 							label: "Dark Mode",
-							description: "Enable dark mode for the application.",
+							description:
+								"Enable dark mode for the application.",
 						},
 					],
 				},
 				{
 					header: "Advanced",
-					rows: [
-						{ label: "Disable auto-renewal" },
-					],
+					rows: [{ label: "Disable auto-renewal" }],
 				},
 			]}
 		/>
@@ -1568,6 +1550,7 @@ export function SettingsLabelsB() {
 export function DetailDemoStyles() {
 	return (
 		<style>{`
+			@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap');
 			@keyframes detail-spin {
 				to { transform: rotate(360deg); }
 			}
