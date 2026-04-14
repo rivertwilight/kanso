@@ -492,115 +492,168 @@ export function EmptyStateWordingB() {
 
 /* ─── 6. Destructive Action ─── */
 
+const dangerZoneLabel: React.CSSProperties = {
+	...font,
+	fontSize: 12,
+	fontWeight: 700,
+	textTransform: "uppercase" as const,
+	letterSpacing: "0.04em",
+	color: c.errorRed,
+	marginBottom: 12,
+};
+
+const projectRow: React.CSSProperties = {
+	display: "flex",
+	alignItems: "center",
+	justifyContent: "space-between",
+	padding: "10px 12px",
+	border: `1px solid ${c.borderLight}`,
+	borderRadius: 6,
+	marginBottom: 8,
+};
+
+const projectName: React.CSSProperties = {
+	...font,
+	fontSize: 13,
+	fontWeight: 600,
+	color: c.text,
+};
+
+const projectMeta: React.CSSProperties = {
+	...font,
+	fontSize: 11,
+	color: c.textMuted,
+};
+
 export function DestructiveActionA() {
-	const [clicked, setClicked] = useState(false);
+	const [clicked, setClicked] = useState<string | null>(null);
 
 	return (
-		<div style={{ ...center, ...demoBox }}>
-			<div style={{ textAlign: "center" }}>
-				<button
-					onClick={() => {
-						setClicked(true);
-						setTimeout(() => setClicked(false), 1500);
-					}}
-					style={{
-						...font,
-						padding: "10px 32px",
-						border: `2px solid ${c.errorRed}`,
-						background: "transparent",
-						fontSize: 14,
-						cursor: "pointer",
-						color: c.errorRed,
-						borderRadius: 6,
-					}}
-				>
-					Delete
-				</button>
-				<div
-					style={{
-						fontSize: 11,
-						color: c.textMuted,
-						marginTop: 8,
-						minHeight: 16,
-						transition: "opacity 0.2s",
-						opacity: clicked ? 1 : 0,
-					}}
-				>
-					Deleted.
+		<div style={{ padding: 20, minHeight: 158, ...demoBox }}>
+			<div style={dangerZoneLabel}>Danger zone</div>
+			{["Landing Page", "Blog"].map((name) => (
+				<div key={name} style={projectRow}>
+					<div>
+						<div style={projectName}>{name}</div>
+						<div style={projectMeta}>Edited 2 days ago</div>
+					</div>
+					<button
+						onClick={() => {
+							setClicked(name);
+							setTimeout(() => setClicked(null), 1500);
+						}}
+						style={{
+							...font,
+							padding: "5px 14px",
+							border: `1px solid ${c.errorRed}`,
+							background: "transparent",
+							fontSize: 12,
+							cursor: "pointer",
+							color: c.errorRed,
+							borderRadius: 5,
+						}}
+					>
+						Delete
+					</button>
 				</div>
+			))}
+			<div
+				style={{
+					...font,
+					fontSize: 11,
+					color: c.textMuted,
+					marginTop: 4,
+					minHeight: 16,
+					transition: "opacity 0.2s",
+					opacity: clicked ? 1 : 0,
+				}}
+			>
+				Deleted.
 			</div>
 		</div>
 	);
 }
 
 export function DestructiveActionB() {
-	const [deleted, setDeleted] = useState(false);
+	const [deleted, setDeleted] = useState<string | null>(null);
 
 	useEffect(() => {
 		if (deleted) {
-			const t = setTimeout(() => setDeleted(false), 4000);
+			const t = setTimeout(() => setDeleted(null), 4000);
 			return () => clearTimeout(t);
 		}
 	}, [deleted]);
 
+	const projects = ["Landing Page", "Blog"];
+
 	return (
-		<div style={{ ...center, ...demoBox }}>
-			<div style={{ textAlign: "center" }}>
-				{!deleted ? (
-					<>
-						<div
-							style={{
-								...font,
-								fontSize: 13,
-								color: c.textSec,
-								marginBottom: 10,
-							}}
-						>
-							Landing Page
+		<div style={{ padding: 20, minHeight: 158, ...demoBox }}>
+			<div style={dangerZoneLabel}>Danger zone</div>
+			{deleted && (
+				<div
+					style={{
+						...font,
+						fontSize: 12,
+						color: c.text,
+						padding: "8px 12px",
+						background: c.errorBg,
+						borderRadius: 6,
+						marginBottom: 8,
+						display: "flex",
+						justifyContent: "space-between",
+						alignItems: "center",
+					}}
+				>
+					<span>&ldquo;{deleted}&rdquo; was deleted.</span>
+					<span
+						onClick={() => setDeleted(null)}
+						style={{
+							fontWeight: 600,
+							textDecoration: "underline",
+							cursor: "pointer",
+						}}
+					>
+						Undo
+					</span>
+				</div>
+			)}
+			{projects
+				.filter((name) => name !== deleted)
+				.map((name) => (
+					<div key={name} style={projectRow}>
+						<div>
+							<div style={projectName}>{name}</div>
+							<div style={projectMeta}>Edited 2 days ago</div>
 						</div>
 						<button
-							onClick={() => setDeleted(true)}
+							onClick={() => setDeleted(name)}
 							style={{
 								...font,
-								padding: "10px 20px",
-								border: `2px solid ${c.errorRed}`,
+								padding: "5px 14px",
+								border: `1px solid ${c.errorRed}`,
 								background: "transparent",
-								fontSize: 14,
+								fontSize: 12,
 								cursor: "pointer",
 								color: c.errorRed,
-								borderRadius: 6,
+								borderRadius: 5,
 							}}
 						>
-							Permanently delete &ldquo;Landing Page&rdquo;
+							Permanently delete &ldquo;{name}&rdquo;
 						</button>
-						<div
-							style={{
-								fontSize: 11,
-								color: c.textMuted,
-								marginTop: 8,
-								minHeight: 16,
-							}}
-						>
-							This action cannot be undone.
-						</div>
-					</>
-				) : (
-					<div style={{ ...font, fontSize: 14, color: c.text }}>
-						&ldquo;Landing Page&rdquo; was deleted.{" "}
-						<span
-							onClick={() => setDeleted(false)}
-							style={{
-								textDecoration: "underline",
-								cursor: "pointer",
-								color: c.text,
-								fontWeight: 600,
-							}}
-						>
-							Undo
-						</span>
 					</div>
-				)}
-			</div>
+				))}
+			{!deleted && (
+				<div
+					style={{
+						...font,
+						fontSize: 11,
+						color: c.textMuted,
+						marginTop: 4,
+					}}
+				>
+					This action cannot be undone.
+				</div>
+			)}
 		</div>
 	);
 }
@@ -1068,50 +1121,91 @@ export function DisabledTooltipB() {
 
 /* ─── 11. Answer Length ─── */
 
-const faqQuestion: React.CSSProperties = {
-	...font,
-	fontSize: 13,
-	fontWeight: 700,
-	color: c.text,
-	marginBottom: 8,
+const faqRow: React.CSSProperties = {
+	borderBottom: `1px solid ${c.borderLight}`,
 };
 
-const faqAnswer: React.CSSProperties = {
+const faqSummary: React.CSSProperties = {
+	...font,
+	fontSize: 13,
+	fontWeight: 600,
+	color: c.text,
+	padding: "12px 0",
+	cursor: "pointer",
+	listStyle: "none",
+	display: "flex",
+	justifyContent: "space-between",
+	alignItems: "center",
+};
+
+const faqBody: React.CSSProperties = {
 	...font,
 	fontSize: 13,
 	lineHeight: 1.6,
 	color: c.textSec,
+	paddingBottom: 12,
 };
+
+function FaqChevron() {
+	return (
+		<svg
+			width="14"
+			height="14"
+			viewBox="0 0 16 16"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="2"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			style={{ color: c.textMuted, flexShrink: 0, transition: "transform 0.15s" }}
+			className="faq-chevron"
+		>
+			<path d="M4 6l4 4 4-4" />
+		</svg>
+	);
+}
 
 export function AnswerLengthA() {
 	return (
-		<div style={{ padding: 20, ...demoBox }}>
-			<div style={faqQuestion}>Can I cancel anytime?</div>
-			<div style={faqAnswer}>
-				<p style={{ margin: "0 0 8px" }}>
-					Yes, you can cancel your subscription at any time from your
-					account settings. Once you cancel, your current billing cycle
-					will continue until the end of the period.
-				</p>
-				<p style={{ margin: "0 0 8px" }}>
-					Please note that refunds are not provided for partial billing
-					periods. If you cancel mid-cycle, you will retain access to
-					all features until your current period expires.
-				</p>
-				<p style={{ margin: 0 }}>
-					If you have any questions about cancellation, our support
-					team is available 24/7 to assist you.
-				</p>
-			</div>
+		<div style={{ padding: "8px 20px", height: 180, ...demoBox }}>
+			<details style={{ ...faqRow, borderBottom: "none" }} open>
+				<summary style={faqSummary}>
+					<span>Can I cancel anytime?</span>
+					<FaqChevron />
+				</summary>
+				<div style={faqBody}>
+					<p style={{ margin: "0 0 8px" }}>
+						Yes, you can cancel your subscription at any time from your
+						account settings. Once you cancel, your current billing cycle
+						will continue until the end of the period.
+					</p>
+					<p style={{ margin: "0 0 8px" }}>
+						Please note that refunds are not provided for partial billing
+						periods. If you cancel mid-cycle, you will retain access to
+						all features until your current period expires.
+					</p>
+					<p style={{ margin: 0 }}>
+						If you have any questions about cancellation, our support
+						team is available 24/7 to assist you.
+					</p>
+				</div>
+			</details>
 		</div>
 	);
 }
 
 export function AnswerLengthB() {
 	return (
-		<div style={{ padding: 20, ...demoBox }}>
-			<div style={faqQuestion}>Can I cancel anytime?</div>
-			<div style={faqAnswer}>Yes. No fees, no questions.</div>
+		<div style={{ padding: "8px 20px", height: 180, ...demoBox }}>
+			<details style={{ ...faqRow, borderBottom: "none" }} open>
+				<summary style={faqSummary}>
+					<span>Can I cancel anytime?</span>
+					<FaqChevron />
+				</summary>
+				<div style={faqBody}>
+					Yes. No fees, no questions.
+				</div>
+			</details>
 		</div>
 	);
 }
@@ -1442,6 +1536,17 @@ export function DetailDemoStyles() {
 		<style>{`
 			@keyframes detail-spin {
 				to { transform: rotate(360deg); }
+			}
+			details > summary::-webkit-details-marker,
+			details > summary::marker {
+				display: none;
+				content: "";
+			}
+			details[open] > summary .faq-chevron {
+				transform: rotate(180deg);
+			}
+			details[open] > summary .reveal-chevron {
+				transform: rotate(90deg);
 			}
 		`}</style>
 	);
