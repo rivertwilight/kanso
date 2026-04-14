@@ -11,7 +11,6 @@ import {
 	Search,
 	ChevronDown,
 	AlertCircle,
-
 	ChevronRight,
 	Check,
 } from "lucide-react";
@@ -215,8 +214,7 @@ export function ConfirmationB() {
 			<div className="flex items-start gap-2.5 py-3 px-4 rounded-lg border border-neutral-200 bg-green-50">
 				<CheckIcon />
 				<div className="text-sm font-semibold text-neutral-900">
-					Your changes to &ldquo;Project Alpha&rdquo; have been
-					saved.
+					Your changes to &ldquo;Project Alpha&rdquo; have been saved.
 				</div>
 			</div>
 		</div>
@@ -278,8 +276,6 @@ export function EmptyStateWordingB() {
 /* ─── 6. Destructive Action ─── */
 
 export function DestructiveActionA() {
-	const [clicked, setClicked] = useState<string | null>(null);
-
 	return (
 		<div className="font-demo p-5 min-h-[158px] bg-white text-neutral-900">
 			<div className="text-xs font-bold uppercase tracking-wider text-red-700 mb-3">
@@ -298,24 +294,11 @@ export function DestructiveActionA() {
 							Edited 2 days ago
 						</div>
 					</div>
-					<button
-						onClick={() => {
-							setClicked(name);
-							setTimeout(() => setClicked(null), 1500);
-						}}
-						className="py-1 px-3.5 border border-red-700 bg-transparent text-xs cursor-pointer text-red-700 rounded-[5px]"
-					>
+					<button className="py-1 px-3.5 border border-red-700 bg-transparent text-xs cursor-pointer text-red-700 rounded-[5px]">
 						Delete
 					</button>
 				</div>
 			))}
-			<div
-				className={`text-[11px] text-neutral-400 mt-1 min-h-4 transition-opacity duration-200 ${
-					clicked ? "opacity-100" : "opacity-0"
-				}`}
-			>
-				Deleted.
-			</div>
 		</div>
 	);
 }
@@ -337,47 +320,27 @@ export function DestructiveActionB() {
 			<div className="text-xs font-bold uppercase tracking-wider text-red-700 mb-3">
 				Danger zone
 			</div>
-			{deleted && (
-				<div className="text-xs text-neutral-900 py-2 px-3 bg-red-50 rounded-md mb-2 flex justify-between items-center">
-					<span>
-						&ldquo;{deleted}&rdquo; was deleted.
-					</span>
-					<span
-						onClick={() => setDeleted(null)}
-						className="font-semibold underline cursor-pointer"
-					>
-						Undo
-					</span>
-				</div>
-			)}
-			{projects
-				.filter((name) => name !== deleted)
-				.map((name) => (
-					<div
-						key={name}
-						className="flex items-center justify-between py-2.5 px-3 border border-neutral-200 rounded-md mb-2"
-					>
-						<div>
-							<div className="text-[13px] font-semibold text-neutral-900">
-								{name}
-							</div>
-							<div className="text-[11px] text-neutral-400">
-								Edited 2 days ago
-							</div>
+			{projects.map((name) => (
+				<div
+					key={name}
+					className="flex items-center justify-between py-2.5 px-3 border border-neutral-200 rounded-md mb-2"
+				>
+					<div>
+						<div className="text-[13px] font-semibold text-neutral-900">
+							{name}
 						</div>
-						<button
-							onClick={() => setDeleted(name)}
-							className="py-1 px-3.5 border border-red-700 bg-transparent text-xs cursor-pointer text-red-700 rounded-[5px]"
-						>
-							Permanently delete &ldquo;{name}&rdquo;
-						</button>
+						<div className="text-[11px] text-neutral-400">
+							Edited 2 days ago
+						</div>
 					</div>
-				))}
-			{!deleted && (
-				<div className="text-[11px] text-neutral-400 mt-1">
-					This action cannot be undone.
+					<button
+						onClick={() => setDeleted(name)}
+						className="py-1 px-3.5 border border-red-700 bg-transparent text-xs cursor-pointer text-red-700 rounded-[5px]"
+					>
+						Permanently delete &ldquo;{name}&rdquo;
+					</button>
 				</div>
-			)}
+			))}
 		</div>
 	);
 }
@@ -400,21 +363,17 @@ export function EmailWordingA() {
 			<div className="text-xs leading-relaxed text-neutral-600">
 				<p className="mb-3">
 					This{" "}
-					<strong className="text-neutral-900">invitation</strong>{" "}
-					was intended for hi@vercel.com.
+					<strong className="text-neutral-900">invitation</strong> was
+					intended for hi@vercel.com.
 				</p>
 				<p className="mb-3">
-					This{" "}
-					<strong className="text-neutral-900">invite</strong> was
-					sent on March 24, 2026, 12:55 AM (UTC) and will expire{" "}
-					<strong className="text-neutral-900">
-						in 72 hours
-					</strong>
-					. This{" "}
-					<strong className="text-neutral-900">invite</strong> was
-					sent from 204.13.186.218 located in São Paulo, Brazil. If
-					you were not expecting this invitation, you can ignore this
-					email. If you are concerned about your account&apos;s
+					This <strong className="text-neutral-900">invite</strong>{" "}
+					was sent on March 24, 2026, 12:55 AM (UTC) and will expire{" "}
+					<strong className="text-neutral-900">in 72 hours</strong>.
+					This <strong className="text-neutral-900">invite</strong>{" "}
+					was sent from 204.13.186.218 located in São Paulo, Brazil.
+					If you were not expecting this invitation, you can ignore
+					this email. If you are concerned about your account&apos;s
 					safety, please visit{" "}
 					<span className="underline cursor-pointer">
 						our Help page
@@ -449,9 +408,7 @@ export function EmailWordingB() {
 					This invitation was sent to hi@vercel.com on March 24, 2026
 					at 12:55 AM (UTC) from 204.13.186.218 (São Paulo, Brazil).
 					Expires{" "}
-					<strong className="text-neutral-900">
-						March 27, 2026
-					</strong>
+					<strong className="text-neutral-900">March 27, 2026</strong>
 					.
 				</p>
 				<p className="mb-3">
@@ -593,10 +550,7 @@ export function LoadingStateB() {
 	useEffect(() => {
 		if (loading) {
 			const t = setTimeout(() => setLoading(false), 6000);
-			const tick = setInterval(
-				() => setElapsed((e) => e + 1),
-				1000
-			);
+			const tick = setInterval(() => setElapsed((e) => e + 1), 1000);
 			return () => {
 				clearTimeout(t);
 				clearInterval(tick);
@@ -904,9 +858,7 @@ function SettingsPanel({ sections }: { sections: SettingsSection[] }) {
 									on={toggles[i]}
 									onToggle={() =>
 										setToggles((t) =>
-											t.map((v, j) =>
-												j === i ? !v : v
-											)
+											t.map((v, j) => (j === i ? !v : v))
 										)
 									}
 								/>
@@ -1020,10 +972,7 @@ function ErrorCard({ buttonLabel }: { buttonLabel: string }) {
 		<div className="font-demo p-5 bg-white text-neutral-900 flex items-center justify-center min-h-[160px]">
 			<div className="text-center">
 				<div className="mb-2 flex justify-center">
-					<AlertCircle
-						size={28}
-						className="text-red-400"
-					/>
+					<AlertCircle size={28} className="text-red-400" />
 				</div>
 				<div className="text-[13px] font-semibold text-neutral-900 mb-1">
 					Couldn&apos;t load your messages
@@ -1058,9 +1007,7 @@ function CheckoutStep({ buttonLabel }: { buttonLabel: React.ReactNode }) {
 					Shipping
 				</span>
 				<ChevronRight size={12} />
-				<span className="text-neutral-900 font-semibold">
-					Payment
-				</span>
+				<span className="text-neutral-900 font-semibold">Payment</span>
 				<ChevronRight size={12} />
 				<span>Review</span>
 			</div>
@@ -1068,9 +1015,7 @@ function CheckoutStep({ buttonLabel }: { buttonLabel: React.ReactNode }) {
 				<div className="text-[11px] text-neutral-400 mb-1">
 					Shipping address
 				</div>
-				<div className="text-[13px] text-neutral-900">
-					Jane Doe
-				</div>
+				<div className="text-[13px] text-neutral-900">Jane Doe</div>
 				<div className="text-xs text-neutral-600">
 					123 Main St, San Francisco, CA 94102
 				</div>
