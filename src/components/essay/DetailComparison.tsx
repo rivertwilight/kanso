@@ -37,52 +37,65 @@ export default function DetailComparison({
 
 	return (
 		<div className="mt-3 mb-8">
-			<div
-				className={`border-2 overflow-hidden flex ${
-					isVertical
-						? "flex-col"
-						: "flex-col md:flex-row"
-				}`}
-				style={{ borderColor: "var(--eink-border)" }}
-			>
-				{/* Option A */}
+			<div className="flex gap-2">
 				<div
-					className="relative flex-1 transition-all duration-200"
-					style={getOptionStyle("A")}
+					className={`flex-1 min-w-0 border-2 overflow-hidden flex ${
+						isVertical
+							? "flex-col"
+							: "flex-col md:flex-row"
+					}`}
+					style={{ borderColor: "var(--eink-border)" }}
 				>
-					<span
-						className="absolute top-2 right-2 font-semibold text-xs leading-none z-10"
-						style={{ color: "var(--eink-ink-tertiary)" }}
+					{/* Option A */}
+					<div
+						className="flex-1 transition-all duration-200"
+						style={getOptionStyle("A")}
 					>
-						A
-					</span>
-					<div className="h-full">{optionA}</div>
+						<div className="h-full">{optionA}</div>
+					</div>
+
+					{/* Divider */}
+					<div
+						className={
+							isVertical
+								? "h-px shrink-0"
+								: "h-px md:h-auto md:w-px shrink-0"
+						}
+						style={{ backgroundColor: "var(--eink-border)" }}
+					/>
+
+					{/* Option B */}
+					<div
+						className="flex-1 transition-all duration-200"
+						style={getOptionStyle("B")}
+					>
+						<div className="h-full">{optionB}</div>
+					</div>
 				</div>
 
-				{/* Divider */}
+				{/* Right-side labels (vertical / mobile) */}
 				<div
-					className={
-						isVertical
-							? "h-px shrink-0"
-							: "h-px md:h-auto md:w-px shrink-0"
-					}
-					style={{ backgroundColor: "var(--eink-border)" }}
-				/>
-
-				{/* Option B */}
-				<div
-					className="relative flex-1 transition-all duration-200"
-					style={getOptionStyle("B")}
+					className={`flex flex-col text-xs font-semibold ${
+						isVertical ? "" : "md:hidden"
+					}`}
+					style={{ color: "var(--eink-ink-tertiary)" }}
 				>
-					<span
-						className="absolute top-2 right-2 font-semibold text-xs leading-none z-10"
-						style={{ color: "var(--eink-ink-tertiary)" }}
-					>
-						B
-					</span>
-					<div className="h-full">{optionB}</div>
+					<div className="flex-1 flex items-center">A</div>
+					<div className="flex-1 flex items-center">B</div>
 				</div>
 			</div>
+
+			{/* Bottom labels (horizontal desktop only) */}
+			{!isVertical && (
+				<div
+					className="hidden md:flex text-xs font-semibold mt-1.5"
+					style={{ color: "var(--eink-ink-tertiary)" }}
+				>
+					<div className="flex-1 text-center">A</div>
+					<div className="w-px shrink-0" />
+					<div className="flex-1 text-center">B</div>
+				</div>
+			)}
 
 			<details
 				className="mt-4 border border-dashed"

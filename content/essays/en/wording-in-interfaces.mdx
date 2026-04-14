@@ -3,6 +3,7 @@ title: "Wording in Interfaces"
 summary: Every word in your interface is a design decision. Can you spot the better copy?
 cover: "/og-wording-in-interfaces.png"
 createAt: 2026-04-11T00:00:00.000Z
+updateAt: 2026-04-14
 seo:
     keywords:
         - UX writing
@@ -55,10 +56,27 @@ A pixel-perfect layout with lazy copy feels broken. A plain layout with precise 
 
 <DetailComparison
 	answer="B"
-	explanation={<>
-		<p>Role-based questions sort people into buckets the company already decided on. Intent-based questions ask the user what they came here to do — and implicitly promise to help them do it. The phrasing reveals whether the product serves the user or the user serves the product.</p>
-		<p>"What's your role?" is a demographic question disguised as personalization — it helps the company's analytics dashboard, not the user. The options (Designer, Engineer, PM) are the company's mental model, not the user's. "What will you use Acme for?" flips the frame: now the options describe outcomes the user actually wants (build a website, write and publish). It signals that the product will adapt to their intent, not file them into a segment.</p>
-	</>}
+	explanation={
+		<>
+			<p>
+				Role-based questions sort people into buckets the company
+				already decided on. Intent-based questions ask the user what
+				they came here to do — and implicitly promise to help them do
+				it. The phrasing reveals whether the product serves the user or
+				the user serves the product.
+			</p>
+			<p>
+				"What's your role?" is a demographic question disguised as
+				personalization — it helps the company's analytics dashboard,
+				not the user. The options (Designer, Engineer, PM) are the
+				company's mental model, not the user's. "What will you use Acme
+				for?" flips the frame: now the options describe outcomes the
+				user actually wants (build a website, write and publish). It
+				signals that the product will adapt to their intent, not file
+				them into a segment.
+			</p>
+		</>
+	}
 >
 	<ComparisonOption>
 		<OnboardingA />
@@ -74,10 +92,27 @@ Every row below is a different sub-problem. Try the toggles.
 
 <DetailComparison
 	answer="A"
-	explanation={<>
-		<p>Settings pages are where wording problems compound. Every toggle is a bet on whether the user understands the current state of their own product.</p>
-		<p>Five issues in one panel. The right names the technology ("two-factor authentication"), uses a bare noun ("Notifications"), negates itself ("Disable auto-renewal"), dumps leftovers into "Advanced", and writes a description that repeats the title. The left describes the experience ("Require a code to sign in"), gives toggles a clear on-state ("Send me email notifications"), uses positive phrasing ("Renew automatically"), names the real category ("Billing"), and writes a description that adds new information ("Reduces eye strain"). Same settings, completely different clarity.</p>
-	</>}
+	explanation={
+		<>
+			<p>
+				Settings pages are where wording problems compound. Every toggle
+				is a bet on whether the user understands the current state of
+				their own product.
+			</p>
+			<p>
+				Five issues in one panel. The right names the technology
+				("two-factor authentication"), uses a bare noun
+				("Notifications"), negates itself ("Disable auto-renewal"),
+				dumps leftovers into "Advanced", and writes a description that
+				repeats the title. The left describes the experience ("Require a
+				code to sign in"), gives toggles a clear on-state ("Send me
+				email notifications"), uses positive phrasing ("Renew
+				automatically"), names the real category ("Billing"), and writes
+				a description that adds new information ("Reduces eye strain").
+				Same settings, completely different clarity.
+			</p>
+		</>
+	}
 >
 	<ComparisonOption>
 		<SettingsLabelsB />
@@ -91,10 +126,23 @@ Every row below is a different sub-problem. Try the toggles.
 
 <DetailComparison
 	answer="A"
-	explanation={<>
-		<p>A button label is a promise — it tells the user what will happen when they click. A simple test: a button label should complete the sentence "I want to ___." If it can't finish that sentence, it's not doing its job.</p>
-		<p>"Help" is a noun — it names a category, not an action. "Get Help" is a verb phrase — it tells you what will happen. Same with "Desktop App" (what is it?) versus "Download Desktop App" (now I know what clicking does). "Become a Pro" assumes the user is "not" Pro; "Upgrade Plan" is concrete and actionable.</p>
-	</>}
+	explanation={
+		<>
+			<p>
+				A button label is a promise — it tells the user what will happen
+				when they click. A simple test: a button label should complete
+				the sentence "I want to ___." If it can't finish that sentence,
+				it's not doing its job.
+			</p>
+			<p>
+				"Help" is a noun — it names a category, not an action. "Get
+				Help" is a verb phrase — it tells you what will happen. Same
+				with "Desktop App" (what is it?) versus "Download Desktop App"
+				(now I know what clicking does). "Become a Pro" assumes the user
+				is "not" Pro; "Upgrade Plan" is concrete and actionable.
+			</p>
+		</>
+	}
 >
 	<ComparisonOption>
 		<ButtonLabelB />
@@ -110,10 +158,25 @@ Try typing in both inputs. Watch what happens to context as you go.
 
 <DetailComparison
 	answer="B"
-	explanation={<>
-		<p>Labels and placeholders have different jobs. One names the field. The other previews the format. Problems start when a single element tries to do both.</p>
-		<p>When a placeholder is the only label, it vanishes the moment you start typing — you lose context mid-input. In a form with five fields, this means five moments of disorientation. A persistent label above the input keeps you oriented at all times, while the placeholder serves its proper role: showing the expected format, not naming the field. This distinction is also critical for accessibility — screen readers treat labels and placeholders differently.</p>
-	</>}
+	explanation={
+		<>
+			<p>
+				Labels and placeholders have different jobs. One names the
+				field. The other previews the format. Problems start when a
+				single element tries to do both.
+			</p>
+			<p>
+				When a placeholder is the only label, it vanishes the moment you
+				start typing — you lose context mid-input. In a form with five
+				fields, this means five moments of disorientation. A persistent
+				label above the input keeps you oriented at all times, while the
+				placeholder serves its proper role: showing the expected format,
+				not naming the field. This distinction is also critical for
+				accessibility — screen readers treat labels and placeholders
+				differently.
+			</p>
+		</>
+	}
 >
 	<ComparisonOption>
 		<PlaceholderLabelA />
@@ -123,16 +186,27 @@ Try typing in both inputs. Watch what happens to context as you go.
 	</ComparisonOption>
 </DetailComparison>
 
-And there is an exception when the input field itself is the only one on the screen. You can just hint user with a placeholder.
+And there is an exception when the input field itself is the only one on the screen. You can just hint the user with a placeholder.
 
 ## Error Messages
 
 <DetailComparison
 	answer="A"
-	explanation={<>
-		<p>The worst error messages communicate failure without offering a path forward. The best ones don't feel like errors at all.</p>
-		<p>"Invalid input" is a wall. "This email is already registered — try signing in instead" does three things at once: it names the problem (duplicate email), explains why (already registered), and offers a next step (sign in). It transforms a frustrating moment into a helpful one.</p>
-	</>}
+	explanation={
+		<>
+			<p>
+				The worst error messages communicate failure without offering a
+				path forward. The best ones don't feel like errors at all.
+			</p>
+			<p>
+				"Invalid input" is a wall. "This email is already registered —
+				try signing in instead" does three things at once: it names the
+				problem (duplicate email), explains why (already registered),
+				and offers a next step (sign in). It transforms a frustrating
+				moment into a helpful one.
+			</p>
+		</>
+	}
 >
 	<ComparisonOption>
 		<ErrorMessageB />
@@ -147,10 +221,23 @@ And there is an exception when the input field itself is the only one on the scr
 <DetailComparison
 	answer="B"
 	direction="vertical"
-	explanation={<>
-		<p>The user just did something. The system should echo back <em>what</em> they did — not just <em>that</em> it worked. The difference matters most at scale: three saves in a minute, multiple tabs open, a dozen actions in a session.</p>
-		<p>A generic "Success!" leaves users wondering what succeeded. Did the save go through? The publish? The delete? A specific confirmation like "Your changes to Project Alpha have been saved" echoes back the action and the object, closing the loop. The timestamp ("Last saved just now") adds another layer of confidence. Vague reassurance is not reassurance — it's noise.</p>
-	</>}
+	explanation={
+		<>
+			<p>
+				The user just did something. The system should echo back{" "}
+				<em>what</em> they did — not just <em>that</em> it worked. The
+				difference matters most at scale: three saves in a minute,
+				multiple tabs open, a dozen actions in a session.
+			</p>
+			<p>
+				A generic "Success!" leaves users wondering what succeeded. Did
+				the save go through? The publish? The delete? A specific
+				confirmation like "Your changes to Project Alpha have been
+				saved" echoes back the action and the object, closing the loop.
+				Vague reassurance is not reassurance — it's noise.
+			</p>
+		</>
+	}
 >
 	<ComparisonOption>
 		<ConfirmationA />
@@ -164,10 +251,26 @@ And there is an exception when the input field itself is the only one on the scr
 
 <DetailComparison
 	answer="B"
-	explanation={<>
-		<p>The user had intent — they typed a query, navigated somewhere with a purpose, and came up short. That moment of unmet expectation is the most overlooked in interface design. Most teams treat it as a non-moment. But it's actually the moment with the highest leverage over whether the user tries again or leaves.</p>
-		<p>"No results found" is a dead end — a closed door with no signage. Echoing back the user's query ("No results for fluxcap") proves the system heard them correctly. Suggesting a next step ("Try a different keyword or check your spelling") opens a new door. Users who hit a helpful empty state try again. Users who hit a bare one leave.</p>
-	</>}
+	explanation={
+		<>
+			<p>
+				The user had intent — they typed a query, navigated somewhere
+				with a purpose, and came up short. That moment of unmet
+				expectation is the most overlooked in interface design. Most
+				teams treat it as a non-moment. But it's actually the moment
+				with the highest leverage over whether the user tries again or
+				leaves.
+			</p>
+			<p>
+				"No results found" is a dead end — a closed door with no
+				signage. Echoing back the user's query ("No results for
+				fluxcap") proves the system heard them correctly. Suggesting a
+				next step ("Try a different keyword or check your spelling")
+				opens a new door. Users who hit a helpful empty state try again.
+				Users who hit a bare one leave.
+			</p>
+		</>
+	}
 >
 	<ComparisonOption>
 		<EmptyStateWordingA />
@@ -182,10 +285,21 @@ And there is an exception when the input field itself is the only one on the scr
 <DetailComparison
 	answer="A"
 	direction="vertical"
-	explanation={<>
-		<p>The same word can carry completely different stakes depending on what it's pointed at. Removing a tag from a list and wiping a three-month project are both "delete" — but they shouldn't feel the same.</p>
-		<p>A bare "Delete" button gives zero context — what's being deleted? Is it reversible? Naming the target ("Permanently delete Landing Page") makes the gravity of the action visible.</p>
-	</>}
+	explanation={
+		<>
+			<p>
+				The same word can carry completely different stakes depending on
+				what it's pointed at. Removing a tag from a list and wiping a
+				three-month project are both "delete" — but they shouldn't feel
+				the same.
+			</p>
+			<p>
+				A bare "Delete" button gives zero context — what's being
+				deleted? Is it reversible? Naming the target ("Permanently
+				delete Landing Page") makes the gravity of the action visible.
+			</p>
+		</>
+	}
 >
 	<ComparisonOption>
 		<DestructiveActionB />
@@ -195,14 +309,30 @@ And there is an exception when the input field itself is the only one on the scr
 	</ComparisonOption>
 </DetailComparison>
 
-## Emails Copywriting
+## Email Copywriting
 
 <DetailComparison
 	answer="B"
-	explanation={<>
-		<p>Interface copy gets reviewed in Figma. Email copy gets pasted into a template at 11pm. Users notice the difference in care. Two rules I apply: use consistent nouns throughout, and never use relative dates.</p>
-		<p>The left version switches between "invitation" and "invite" three times — a subtle but real inconsistency that erodes trust. It also uses "will expire in 72 hours," forcing the reader to calculate the actual deadline. The right version uses "invitation" consistently, states the expiration as an absolute date (March 27, 2026), and condenses the security disclaimer from a wall of text into two direct sentences. Every improvement is about respecting the reader's time and attention.</p>
-	</>}
+	explanation={
+		<>
+			<p>
+				Interface copy gets reviewed in Figma. Email copy gets pasted
+				into a template at 11pm. Users notice the difference in care.
+				Two rules I apply: use consistent nouns throughout, and never
+				use relative dates.
+			</p>
+			<p>
+				The left version switches between "invitation" and "invite"
+				three times — a subtle but real inconsistency that erodes trust.
+				It also uses "will expire in 72 hours," forcing the reader to
+				calculate the actual deadline. The right version uses
+				"invitation" consistently, states the expiration as an absolute
+				date (March 27, 2026), and condenses the security disclaimer
+				from a wall of text into two direct sentences. Every improvement
+				is about respecting the reader's time and attention.
+			</p>
+		</>
+	}
 >
 	<ComparisonOption>
 		<EmailWordingA />
@@ -216,10 +346,27 @@ And there is an exception when the input field itself is the only one on the scr
 
 <DetailComparison
 	answer="A"
-	explanation={<>
-		<p>A changelog is a retention marketing surface disguised as documentation. Every line is an opportunity to remind users why they pay — or an opportunity to sound like a git log nobody reads. The shift is simple: describe the outcome, not the change.</p>
-		<p>The right reads like a git log — it describes what engineers did, using internal language ("support", "rendering issue", "bug"). The left speaks directly to the user: "You can now..." and "Your exports now include..." reframe every change as something the user gained. It also names the specific problem that was fixed ("blank pages on Firefox") instead of the vague "bug in PDF export". Users don't care about your bugs — they care about their workflows.</p>
-	</>}
+	explanation={
+		<>
+			<p>
+				A changelog is a retention marketing surface disguised as
+				documentation. Every line is an opportunity to remind users why
+				they pay — or an opportunity to sound like a git log nobody
+				reads. The shift is simple: describe the outcome, not the
+				change.
+			</p>
+			<p>
+				The right reads like a git log — it describes what engineers
+				did, using internal language ("support", "rendering issue",
+				"bug"). The left speaks directly to the user: "You can now..."
+				and "Your exports now include..." reframe every change as
+				something the user gained. It also names the specific problem
+				that was fixed ("blank pages on Firefox") instead of the vague
+				"bug in PDF export". Users don't care about your bugs — they
+				care about their workflows.
+			</p>
+		</>
+	}
 >
 	<ComparisonOption>
 		<ChangelogB />
@@ -235,10 +382,23 @@ Click "Generate Report" in both panels and wait.
 
 <DetailComparison
 	answer="B"
-	explanation={<>
-		<p>When the product is slow, the copy <em>is</em> the product. Loading copy is the only moment where the interface has to justify its own existence in real time.</p>
-		<p>"Please wait..." is empty — it tells you nothing about what's happening or how long it'll take. The right version names the action ("Generating your report"), sets an expectation ("about 6 seconds"), and shows a live elapsed counter that proves the system is still working. When a delay is unavoidable, the copy's job is to make the wait feel intentional rather than broken.</p>
-	</>}
+	explanation={
+		<>
+			<p>
+				When the product is slow, the copy <em>is</em> the product.
+				Loading copy is the only moment where the interface has to
+				justify its own existence in real time.
+			</p>
+			<p>
+				"Please wait..." is empty — it tells you nothing about what's
+				happening or how long it'll take. The right version names the
+				action ("Generating your report"), sets an expectation ("about 6
+				seconds"), and shows a live elapsed counter that proves the
+				system is still working. When a delay is unavoidable, the copy's
+				job is to make the wait feel intentional rather than broken.
+			</p>
+		</>
+	}
 >
 	<ComparisonOption>
 		<LoadingStateA />
@@ -254,10 +414,23 @@ Hover over the locked button in both panels.
 
 <DetailComparison
 	answer="A"
-	explanation={<>
-		<p>A disabled button is a desire signal. The user hovered or clicked — they wanted this. That moment of intent is precious, and the tooltip is your one chance to convert it.</p>
-		<p>"Available on Pro plan" names the gate — it tells the user they can't, full stop. "Unlock custom domains → Pro" names the reward — it echoes back the thing the user wanted and connects it to the path forward. Same five words, completely different emotional direction. The first tooltip explains why you can't. The second reminds you why you'd want to.</p>
-	</>}
+	explanation={
+		<>
+			<p>
+				A disabled button is a desire signal. The user hovered or
+				clicked — they wanted this. That moment of intent is precious,
+				and the tooltip is your one chance to convert it.
+			</p>
+			<p>
+				"Available on Pro plan" names the gate — it tells the user they
+				can't, full stop. "Unlock custom domains → Pro" names the reward
+				— it echoes back the thing the user wanted and connects it to
+				the path forward. Same five words, completely different
+				emotional direction. The first tooltip explains why you can't.
+				The second reminds you why you'd want to.
+			</p>
+		</>
+	}
 >
 	<ComparisonOption>
 		<DisabledTooltipB />
@@ -271,10 +444,27 @@ Hover over the locked button in both panels.
 
 <DetailComparison
 	answer="B"
-	explanation={<>
-		<p>The length of a response is itself a message, separate from the words. A one-sentence answer feels confident. A three-paragraph answer feels like it's hiding something — or selling. "Can I cancel anytime?" is the most trust-sensitive question a user can ask.</p>
-		<p>The left answer is technically accurate and thorough — but thoroughness is the problem. When someone asks "Can I cancel?", they want a yes or no. Three paragraphs of qualifications, edge cases, and support reassurances signal that the real answer is complicated. "Yes. No fees, no questions." is five words and total confidence. It answers the question, addresses the two anxieties behind it (cost and friction), and stops. Brevity is trust.</p>
-	</>}
+	explanation={
+		<>
+			<p>
+				The length of a response is itself a message, separate from the
+				words. A one-sentence answer feels confident. A three-paragraph
+				answer feels like it's hiding something — or selling. "Can I
+				cancel anytime?" is the most trust-sensitive question a user can
+				ask.
+			</p>
+			<p>
+				The left answer is technically accurate and thorough — but
+				thoroughness is the problem. When someone asks "Can I cancel?",
+				they want a yes or no. Three paragraphs of qualifications, edge
+				cases, and support reassurances signal that the real answer is
+				complicated. "Yes. No fees, no questions." is five words and
+				total confidence. It answers the question, addresses the two
+				anxieties behind it (cost and friction), and stops. Brevity is
+				trust.
+			</p>
+		</>
+	}
 >
 	<ComparisonOption>
 		<AnswerLengthA />
@@ -283,8 +473,6 @@ Hover over the locked button in both panels.
 		<AnswerLengthB />
 	</ComparisonOption>
 </DetailComparison>
-
----
 
 ## Notes
 
