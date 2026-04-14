@@ -58,9 +58,8 @@ export default function LauncherApp(props: LauncherAppProps) {
 									Rene Wang <br />{" "}
 									<span className="opacity-60">
 										{" "}
-										Design Engineer from China. I love
-										crafting software. Previously, I worked
-										as engineer at ByteDance.
+										Design Engineer based in China,
+										previously at ByteDance.
 									</span>
 								</div>
 							</div>
