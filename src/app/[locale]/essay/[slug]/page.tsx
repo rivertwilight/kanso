@@ -32,6 +32,11 @@ export async function generateMetadata({
 	const { frontmatter, content } = post;
 	const seo = frontmatter.seo;
 
+	const t = await getTranslations({
+		locale,
+		namespace: "metadata",
+	});
+
 	// Extract SEO fields if available, otherwise use fallbacks
 	const title = extractSeoField(seo, "title") || frontmatter.title || slug;
 	const description =
@@ -55,6 +60,7 @@ export async function generateMetadata({
 			description,
 			url: `${SITE_ROOT}/${locale}/essay/${slug}`,
 			type: "article",
+			siteName: t("title"),
 			publishedTime: frontmatter.createAt
 				? new Date(frontmatter.createAt).toISOString()
 				: undefined,
