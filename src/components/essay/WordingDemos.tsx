@@ -638,7 +638,7 @@ export function DisabledTooltipA() {
 	const [hover, setHover] = useState(false);
 
 	return (
-		<div className="font-demo pt-10 px-5 pb-5 bg-white text-neutral-900">
+		<div className="font-demo pt-5 px-5 pb-5 bg-white text-neutral-900">
 			<div className="flex items-center justify-between py-2.5">
 				<div>
 					<div className="text-[13px] font-semibold text-neutral-900">
@@ -672,7 +672,7 @@ export function DisabledTooltipB() {
 	const [hover, setHover] = useState(false);
 
 	return (
-		<div className="font-demo pt-10 px-5 pb-5 bg-white text-neutral-900">
+		<div className="font-demo pt-5 px-5 pb-5 bg-white text-neutral-900">
 			<div className="flex items-center justify-between py-2.5">
 				<div>
 					<div className="text-[13px] font-semibold text-neutral-900">
