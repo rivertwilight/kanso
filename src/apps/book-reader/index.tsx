@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, ReactNode, useMemo, useCallback } from "react";
 import { useAtom } from "jotai";
 import { readerSettingsAtom } from "@/system/atoms/readerSettings";
-import { tocVisibleAtom } from "./atoms";
+import { tocVisibleAtom, settingsOpenAtom } from "./atoms";
 import AppToolbar from "@/system/components/AppToolbar";
 import { List, ListItem, ListItemText } from "@/components/ui";
 import { ChevronRightIcon } from "@/components/ui";
@@ -109,6 +109,7 @@ export default function BookReaderApp({
 	const articleRef = useRef<HTMLElement>(null);
 	const [settings] = useAtom(readerSettingsAtom);
 	const [tocVisible, setTocVisible] = useAtom(tocVisibleAtom);
+	const [settingsOpen, setSettingsOpen] = useAtom(settingsOpenAtom);
 	const [headings, setHeadings] = useState<TocHeading[]>([]);
 
 	// Reset scroll position when navigating to article
@@ -156,6 +157,26 @@ export default function BookReaderApp({
 		});
 		setHeadings(extracted);
 	}, [postContent]);
+
+	// Keyboard shortcuts: T for ToC, S for Settings
+	useEffect(() => {
+		const handleKeyDown = (e: KeyboardEvent) => {
+			const tag = (e.target as HTMLElement)?.tagName;
+			if (tag === "INPUT" || tag === "TEXTAREA" || (e.target as HTMLElement)?.isContentEditable) return;
+
+			if (e.key === "t" || e.key === "T") {
+				e.preventDefault();
+				setSettingsOpen(false);
+				setTocVisible((v) => !v);
+			} else if (e.key === "s" || e.key === "S") {
+				e.preventDefault();
+				setTocVisible(false);
+				setSettingsOpen((v) => !v);
+			}
+		};
+		window.addEventListener("keydown", handleKeyDown);
+		return () => window.removeEventListener("keydown", handleKeyDown);
+	}, [setTocVisible, setSettingsOpen]);
 
 	const handleTocItemClick = useCallback((headingId: string) => {
 		// Close the TOC panel first, then scroll after layout settles.

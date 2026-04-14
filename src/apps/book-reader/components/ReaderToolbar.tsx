@@ -8,7 +8,7 @@ import {
 	ArrowBackSharpIcon,
 } from "@/components/ui/Icons";
 import ReaderSettingsSheet from "./ReaderSettingsSheet";
-import { tocVisibleAtom } from "../atoms";
+import { tocVisibleAtom, settingsOpenAtom } from "../atoms";
 import { Table2Icon, ALargeSmallIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -77,7 +77,7 @@ export const ReaderToolbar: React.FC<ReaderToolbarProps> = ({
 }) => {
 	const router = useRouter();
 	const t = useTranslations();
-	const [settingsOpen, setSettingsOpen] = useState(false);
+	const [settingsOpen, setSettingsOpen] = useAtom(settingsOpenAtom);
 	const [tocVisible, setTocVisible] = useAtom(tocVisibleAtom);
 
 	const handleBack = () => {
