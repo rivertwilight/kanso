@@ -58,6 +58,8 @@ Every word in an interface is a design decision. Strip away the colors, the shad
 
 A pixel-perfect layout with lazy copy feels broken. A plain layout with precise copy feels professional. The gap between the two is not aesthetics — it's trust.
 
+For each part below, ask yourself before checking the answer: **which one is better, A or B?**
+
 ## Onboarding Questions
 
 <DetailComparison
@@ -160,26 +162,23 @@ Every row below is a different sub-problem. Try the toggles.
 
 ## Placeholder Text
 
-Try typing in both inputs. Watch what happens to context as you go.
-
 <DetailComparison
 	answer="B"
 	explanation={
 		<>
 			<p>
-				Labels and placeholders have different jobs. One names the
-				field. The other previews the format. Problems start when a
-				single element tries to do both.
+				"Enter keywords" describes the mechanic — type words into a
+				box. The user already knows that. "Search issues, projects,
+				pages" describes the scope — it tells the user what the
+				search covers, which is the thing they actually need to
+				know.
 			</p>
 			<p>
-				When a placeholder is the only label, it vanishes the moment you
-				start typing — you lose context mid-input. In a form with five
-				fields, this means five moments of disorientation. A persistent
-				label above the input keeps you oriented at all times, while the
-				placeholder serves its proper role: showing the expected format,
-				not naming the field. This distinction is also critical for
-				accessibility — screen readers treat labels and placeholders
-				differently.
+				A good placeholder answers the question the user has at that
+				moment. In a search field, the question is never "what do I
+				physically do?" — it's "what can I find here?" Naming the
+				searchable objects turns the placeholder into a feature
+				discovery surface.
 			</p>
 		</>
 	}
@@ -191,8 +190,6 @@ Try typing in both inputs. Watch what happens to context as you go.
 		<PlaceholderLabelB />
 	</ComparisonOption>
 </DetailComparison>
-
-And there is an exception when the input field itself is the only one on the screen. You can just hint the user with a placeholder.
 
 ## Error Messages
 

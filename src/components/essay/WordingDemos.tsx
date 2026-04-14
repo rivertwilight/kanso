@@ -94,47 +94,27 @@ export function ButtonLabelB() {
 /* ─── 2. Placeholder vs Label ─── */
 
 export function PlaceholderLabelA() {
-	const [value, setValue] = useState("");
-
 	return (
 		<div className="font-demo p-5 bg-white text-neutral-900">
-			<input
-				type="text"
-				placeholder="Enter your email address"
-				value={value}
-				onChange={(e) => setValue(e.target.value)}
-				className="w-full border border-neutral-300 py-3 px-3.5 text-sm text-neutral-900 bg-transparent outline-none rounded-md"
-			/>
+			<div className="flex items-center gap-2 border border-neutral-300 rounded-md py-2.5 px-3">
+				<Search size={15} className="text-neutral-400 shrink-0" />
+				<span className="text-sm text-neutral-400">
+					Enter keywords...
+				</span>
+			</div>
 		</div>
 	);
 }
 
 export function PlaceholderLabelB() {
-	const [value, setValue] = useState("");
-	const [focused, setFocused] = useState(false);
-
 	return (
 		<div className="font-demo p-5 bg-white text-neutral-900">
-			<label
-				className={`text-xs font-semibold mb-1.5 block transition-colors duration-150 ${
-					focused ? "text-neutral-900" : "text-neutral-600"
-				}`}
-			>
-				Email address
-			</label>
-			<input
-				type="text"
-				placeholder="you@example.com"
-				value={value}
-				onChange={(e) => setValue(e.target.value)}
-				onFocus={() => setFocused(true)}
-				onBlur={() => setFocused(false)}
-				className={`w-full py-3 px-3.5 text-sm text-neutral-900 bg-transparent outline-none rounded-md transition-colors duration-150 ${
-					focused
-						? "border-[1.5px] border-neutral-900"
-						: "border border-neutral-300"
-				}`}
-			/>
+			<div className="flex items-center gap-2 border border-neutral-300 rounded-md py-2.5 px-3">
+				<Search size={15} className="text-neutral-400 shrink-0" />
+				<span className="text-sm text-neutral-400">
+					Search projects...
+				</span>
+			</div>
 		</div>
 	);
 }
