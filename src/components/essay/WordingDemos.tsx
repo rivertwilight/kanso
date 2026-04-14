@@ -102,10 +102,13 @@ function ButtonLabelMenu({
 					background: c.bg,
 					border: `1px solid ${c.border}`,
 					borderRadius: 8,
-					boxShadow: open ? "0 4px 12px rgba(0,0,0,0.1)" : "none",
+					boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
 					minWidth: 180,
 					padding: "4px 0",
-					visibility: open ? "visible" : "hidden",
+					opacity: open ? 1 : 0,
+					transform: open ? "translateY(0)" : "translateY(-4px)",
+					transition: "opacity 0.15s, transform 0.15s",
+					pointerEvents: open ? "auto" as const : "none" as const,
 				}}
 			>
 				{items.map((item, i) => (
@@ -383,9 +386,6 @@ export function ConfirmationB() {
 					<div style={{ fontSize: 14, fontWeight: 600, color: c.text }}>
 						Your changes to &ldquo;Project Alpha&rdquo; have been saved.
 					</div>
-					<div style={{ fontSize: 12, color: c.textMuted, marginTop: 2 }}>
-						Last saved just now
-					</div>
 				</div>
 			</div>
 		</div>
@@ -660,6 +660,24 @@ export function DestructiveActionB() {
 
 /* ─── 7. Email Wording ─── */
 
+const emailHeader: React.CSSProperties = {
+	...font,
+	fontSize: 11,
+	color: c.textMuted,
+	padding: "6px 0",
+	borderBottom: `1px solid ${c.borderLight}`,
+	display: "flex",
+	gap: 6,
+};
+
+const emailHeaderLabel: React.CSSProperties = {
+	flexShrink: 0,
+};
+
+const emailHeaderValue: React.CSSProperties = {
+	color: c.text,
+};
+
 const emailBody: React.CSSProperties = {
 	...font,
 	fontSize: 12,
@@ -676,6 +694,14 @@ const emailLink: React.CSSProperties = {
 export function EmailWordingA() {
 	return (
 		<div style={{ padding: 20, ...demoBox }}>
+			<div style={emailHeader}>
+				<span style={emailHeaderLabel}>To:</span>
+				<span style={emailHeaderValue}>hi@vercel.com</span>
+			</div>
+			<div style={{ ...emailHeader, marginBottom: 12 }}>
+				<span style={emailHeaderLabel}>Subject:</span>
+				<span style={emailHeaderValue}>You&apos;ve been invited to join Acme Inc.</span>
+			</div>
 			<div style={emailBody}>
 				<p style={{ margin: "0 0 12px" }}>
 					This <strong style={{ color: c.text }}>invitation</strong> was
@@ -703,6 +729,14 @@ export function EmailWordingA() {
 export function EmailWordingB() {
 	return (
 		<div style={{ padding: 20, ...demoBox }}>
+			<div style={emailHeader}>
+				<span style={emailHeaderLabel}>To:</span>
+				<span style={emailHeaderValue}>hi@vercel.com</span>
+			</div>
+			<div style={{ ...emailHeader, marginBottom: 12 }}>
+				<span style={emailHeaderLabel}>Subject:</span>
+				<span style={emailHeaderValue}>Invitation to join Acme Inc.</span>
+			</div>
 			<div style={emailBody}>
 				<p style={{ margin: "0 0 12px" }}>
 					This invitation was sent to hi@vercel.com on March 24, 2026 at
