@@ -60,7 +60,7 @@ export default function LauncherApp(props: LauncherAppProps) {
 										{" "}
 										Design Engineer from China. I love
 										crafting software. Previously, I worked
-										as enginner at ByteDance.
+										as engineer at ByteDance.
 									</span>
 								</div>
 							</div>
