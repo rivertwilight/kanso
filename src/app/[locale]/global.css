@@ -446,6 +446,18 @@ mark {
   padding: 0 0.125em;
 }
 
+/* Reader highlight — subtler than full-inversion selection */
+.reader-highlight {
+  background-color: var(--eink-divider);
+  color: inherit;
+  padding: 0;
+  cursor: pointer;
+}
+
+.reader-highlight[data-has-note="true"] {
+  background-color: var(--eink-border);
+}
+
 /**
  * =============================================================================
  * ************   Kindle Style: No Animations   ************

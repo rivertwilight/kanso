@@ -1,14 +1,19 @@
 "use client";
 
 import { useEffect, useRef, useState, ReactNode, useMemo, useCallback } from "react";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { readerSettingsAtom } from "@/system/atoms/readerSettings";
-import { tocVisibleAtom, settingsOpenAtom } from "./atoms";
+import { tocVisibleAtom, settingsOpenAtom, currentSlugAtom } from "./atoms";
 import AppToolbar from "@/system/components/AppToolbar";
 import { List, ListItem, ListItemText } from "@/components/ui";
 import { ChevronRightIcon } from "@/components/ui";
 import Link from "next/link";
 import "katex/dist/katex.min.css";
+import { useTextSelection } from "./hooks/useTextSelection";
+import { useHighlightRenderer } from "./hooks/useHighlightRenderer";
+import SelectionPopup from "./components/SelectionPopup";
+import HighlightPopup from "./components/HighlightPopup";
+import NoteDialog from "./components/NoteDialog";
 
 interface TocHeading {
 	id: string;
@@ -107,10 +112,22 @@ export default function BookReaderApp({
 }: BookReaderAppProps) {
 	const topRef = useRef<HTMLDivElement>(null);
 	const articleRef = useRef<HTMLElement>(null);
+	const sectionRef = useRef<HTMLElement>(null);
+	const wrapperRef = useRef<HTMLDivElement>(null);
 	const [settings] = useAtom(readerSettingsAtom);
 	const [tocVisible, setTocVisible] = useAtom(tocVisibleAtom);
 	const [settingsOpen, setSettingsOpen] = useAtom(settingsOpenAtom);
 	const [headings, setHeadings] = useState<TocHeading[]>([]);
+	const setCurrentSlug = useSetAtom(currentSlugAtom);
+
+	// Set current slug for highlight storage
+	useEffect(() => {
+		setCurrentSlug(id);
+	}, [id, setCurrentSlug]);
+
+	// Highlight hooks
+	useTextSelection(sectionRef, wrapperRef);
+	useHighlightRenderer(sectionRef, wrapperRef);
 
 	// Reset scroll position when navigating to article
 	useEffect(() => {
@@ -242,6 +259,8 @@ export default function BookReaderApp({
 				<div className="overflow-hidden p-0">
 					<div className="w-full h-4"></div>
 					<div
+						ref={wrapperRef}
+						className="relative"
 						style={{
 							paddingLeft: readerStyles.paddingLeft,
 							paddingRight: readerStyles.paddingRight,
@@ -299,6 +318,7 @@ export default function BookReaderApp({
 							</div>
 
 							<section
+								ref={sectionRef}
 								itemProp="articleBody"
 								style={{
 									fontSize: readerStyles.fontSize,
@@ -309,6 +329,9 @@ export default function BookReaderApp({
 								{postContent}
 							</section>
 						</article>
+						<SelectionPopup />
+						<HighlightPopup />
+						<NoteDialog />
 						{nextPost && (
 							<div className="mt-16">
 								<Link
