@@ -50,6 +50,8 @@ import {
 	SynonymRetryB,
 	SynonymContinueA,
 	SynonymContinueB,
+	NewsletterPlaceholderA,
+	NewsletterPlaceholderB,
 } from "@/components/essay/WordingDemos";
 
 <DetailDemoStyles />
@@ -108,16 +110,16 @@ Every row below is a different sub-problem. Try the toggles.
 				their own product.
 			</p>
 			<p>
-				Five issues in one panel. B names the technology
-				("two-factor authentication"), uses a bare noun
-				("Notifications"), negates itself ("Disable auto-renewal"),
-				dumps leftovers into "Advanced", and writes a description that
-				repeats the title. A describes the experience ("Require a
-				code to sign in"), gives toggles a clear on-state ("Send me
-				email notifications"), uses positive phrasing ("Renew
-				automatically"), names the real category ("Billing"), and writes
-				a description that adds new information ("Reduces eye strain").
-				Same settings, completely different clarity.
+				Five issues in one panel. B names the technology ("two-factor
+				authentication"), uses a bare noun ("Notifications"), negates
+				itself ("Disable auto-renewal"), dumps leftovers into
+				"Advanced", and writes a description that repeats the title. A
+				describes the experience ("Require a code to sign in"), gives
+				toggles a clear on-state ("Send me email notifications"), uses
+				positive phrasing ("Renew automatically"), names the real
+				category ("Billing"), and writes a description that adds new
+				information ("Reduces eye strain"). Same settings, completely
+				different clarity.
 			</p>
 		</>
 	}
@@ -171,11 +173,9 @@ Every row below is a different sub-problem. Try the toggles.
 				which is the thing they actually need to know.
 			</p>
 			<p>
-				A good placeholder answers the question the user has at that
-				moment. In a search field, the question is never "what do I
-				physically do?" — it's "what can I find here?" Naming the
-				searchable objects turns the placeholder into a feature
-				discovery surface.
+				In a search field, the question is never "what do I physically
+				do?" — it's "what can I find here?" Naming the searchable
+				objects turns the placeholder into a feature discovery surface.
 			</p>
 		</>
 	}
@@ -185,6 +185,35 @@ Every row below is a different sub-problem. Try the toggles.
 	</ComparisonOption>
 	<ComparisonOption>
 		<PlaceholderLabelB />
+	</ComparisonOption>
+</DetailComparison>
+
+<DetailComparison
+	answer="B"
+	direction="vertical"
+	explanation={
+		<>
+			<p>
+				"Subscribe to newsletter" repeats the button's job — the
+				user can already see "Subscribe" right there. Placeholder
+				text that echoes the action wastes the one chance to
+				communicate something the user actually needs: what to type.
+			</p>
+			<p>
+				An example email like "contact@rene.wang" does two things
+				at once: it shows the expected format (an email address) and
+				implicitly answers "what goes here?" without the user
+				having to think. Showing an example is almost always more
+				helpful than describing the field.
+			</p>
+		</>
+	}
+>
+	<ComparisonOption>
+		<NewsletterPlaceholderA />
+	</ComparisonOption>
+	<ComparisonOption>
+		<NewsletterPlaceholderB />
 	</ComparisonOption>
 </DetailComparison>
 
@@ -283,29 +312,33 @@ Every row below is a different sub-problem. Try the toggles.
 ## Destructive Actions
 
 <DetailComparison
-	answer="A"
+	answer="B"
 	direction="vertical"
 	explanation={
 		<>
 			<p>
-				The same word can carry completely different stakes depending on
-				what it's pointed at. Removing a tag from a list and wiping a
-				three-month project are both "delete" — but they shouldn't feel
-				the same.
+				The default instinct is to escalate fear — WARNING, permanent,
+				irreversible, cannot be undone. Three synonyms for the same
+				thing, and the user still doesn't know what they'd actually
+				lose. Fear-based copy becomes noise. Users learn to click
+				through it the way they learn to ignore cookie banners.
 			</p>
 			<p>
-				A bare "Delete" button gives zero context — what's being
-				deleted? Is it reversible? Naming the target ("Permanently
-				delete Landing Page") makes the gravity of the action visible.
+				B lists factual consequences: 12 posts unpublished, 3
+				teammates locked out. Now the user can actually weigh the
+				decision. Even the button labels differ — "Cancel" is a
+				generic escape hatch; "Keep project" reframes the safe option
+				as a positive choice. Fear is not information. Consequences
+				are.
 			</p>
 		</>
 	}
 >
 	<ComparisonOption>
-		<DestructiveActionB />
+		<DestructiveActionA />
 	</ComparisonOption>
 	<ComparisonOption>
-		<DestructiveActionA />
+		<DestructiveActionB />
 	</ComparisonOption>
 </DetailComparison>
 
@@ -356,14 +389,14 @@ Every row below is a different sub-problem. Try the toggles.
 				change.
 			</p>
 			<p>
-				B reads like a git log — it describes what engineers
-				did, using internal language ("support", "rendering issue",
-				"bug"). A speaks directly to the user: "You can now..."
-				and "Your exports now include..." reframe every change as
-				something the user gained. It also names the specific problem
-				that was fixed ("blank pages on Firefox") instead of the vague
-				"bug in PDF export". Users don't care about your bugs — they
-				care about their workflows.
+				B reads like a git log — it describes what engineers did, using
+				internal language ("support", "rendering issue", "bug"). A
+				speaks directly to the user: "You can now..." and "Your exports
+				now include..." reframe every change as something the user
+				gained. It also names the specific problem that was fixed
+				("blank pages on Firefox") instead of the vague "bug in PDF
+				export". Users don't care about your bugs — they care about
+				their workflows.
 			</p>
 		</>
 	}
@@ -389,8 +422,8 @@ Every row below is a different sub-problem. Try the toggles.
 			</p>
 			<p>
 				"Please wait..." is empty — it tells you nothing about what's
-				happening or how long it'll take. B names the
-				action ("Generating your report"), sets an expectation ("about 6
+				happening or how long it'll take. B names the action
+				("Generating your report"), sets an expectation ("about 6
 				seconds"), and shows a live elapsed counter that proves the
 				system is still working. When a delay is unavoidable, the copy's
 				job is to make the wait feel intentional rather than broken.
@@ -450,14 +483,13 @@ Every row below is a different sub-problem. Try the toggles.
 				ask.
 			</p>
 			<p>
-				A is technically accurate and thorough — but
-				thoroughness is the problem. When someone asks "Can I cancel?",
-				they want a yes or no. Three paragraphs of qualifications, edge
-				cases, and support reassurances signal that the real answer is
-				complicated. "Yes. No fees, no questions." is five words and
-				total confidence. It answers the question, addresses the two
-				anxieties behind it (cost and friction), and stops. Brevity is
-				trust.
+				A is technically accurate and thorough — but thoroughness is the
+				problem. When someone asks "Can I cancel?", they want a yes or
+				no. Three paragraphs of qualifications, edge cases, and support
+				reassurances signal that the real answer is complicated. "Yes.
+				No fees, no questions." is five words and total confidence. It
+				answers the question, addresses the two anxieties behind it
+				(cost and friction), and stops. Brevity is trust.
 			</p>
 		</>
 	}

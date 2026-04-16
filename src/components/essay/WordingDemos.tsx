@@ -11,6 +11,7 @@ import {
 	Search,
 	ChevronDown,
 	AlertCircle,
+	AlertTriangle,
 	ChevronRight,
 	Check,
 } from "lucide-react";
@@ -117,6 +118,33 @@ export function PlaceholderLabelB() {
 			</div>
 		</div>
 	);
+}
+
+/* ─── 2b. Newsletter Placeholder ─── */
+
+function NewsletterInput({ placeholder }: { placeholder: string }) {
+	return (
+		<div className="font-demo p-5 bg-white text-neutral-900">
+			<div className="flex items-center border border-neutral-300 rounded-lg p-1.5 gap-2">
+				<input
+					type="email"
+					placeholder={placeholder}
+					className="flex-1 min-w-0 py-2 px-2.5 text-sm text-neutral-900 bg-transparent border-none outline-none placeholder:text-neutral-400"
+				/>
+				<button className="shrink-0 py-2 px-4 bg-neutral-900 text-white text-[13px] font-medium border-none cursor-pointer rounded-md">
+					Subscribe
+				</button>
+			</div>
+		</div>
+	);
+}
+
+export function NewsletterPlaceholderA() {
+	return <NewsletterInput placeholder="Subscribe to newsletter" />;
+}
+
+export function NewsletterPlaceholderB() {
+	return <NewsletterInput placeholder="contact@rene.wang" />;
 }
 
 /* ─── 3. Error Messages ─── */
@@ -257,70 +285,54 @@ export function EmptyStateWordingB() {
 
 export function DestructiveActionA() {
 	return (
-		<div className="font-demo p-5 min-h-[158px] bg-white text-neutral-900">
-			<div className="text-xs font-bold uppercase tracking-wider text-red-700 mb-3">
-				Danger zone
-			</div>
-			{["Landing Page", "Blog"].map((name) => (
-				<div
-					key={name}
-					className="flex items-center justify-between py-2.5 px-3 border border-neutral-200 rounded-md mb-2"
-				>
-					<div>
-						<div className="text-[13px] font-semibold text-neutral-900">
-							{name}
-						</div>
-						<div className="text-[11px] text-neutral-400">
-							Edited 2 days ago
-						</div>
+		<div className="font-demo p-5 bg-white text-neutral-900">
+			<div className="rounded-lg border border-neutral-200 shadow-sm p-5">
+				<div className="flex items-center gap-2 mb-3">
+					<AlertTriangle size={20} className="text-red-600 shrink-0" />
+					<div className="text-sm font-bold text-red-700">
+						Warning: Permanent Deletion
 					</div>
-					<button className="py-1 px-3.5 border border-red-700 bg-transparent text-xs cursor-pointer text-red-700 rounded-[5px]">
-						Delete
+				</div>
+				<p className="text-[13px] leading-relaxed text-neutral-600 mb-4">
+					Are you sure you want to permanently delete this project?
+					This action is irreversible and cannot be undone. All
+					associated data will be permanently removed from our
+					servers.
+				</p>
+				<div className="flex justify-end gap-2">
+					<button className="py-2 px-4 border border-neutral-300 bg-transparent text-[13px] cursor-pointer text-neutral-600 rounded-md">
+						Cancel
+					</button>
+					<button className="py-2 px-4 border border-red-700 bg-red-700 text-[13px] cursor-pointer text-white rounded-md">
+						I understand, delete permanently
 					</button>
 				</div>
-			))}
+			</div>
 		</div>
 	);
 }
 
 export function DestructiveActionB() {
-	const [deleted, setDeleted] = useState<string | null>(null);
-
-	useEffect(() => {
-		if (deleted) {
-			const t = setTimeout(() => setDeleted(null), 4000);
-			return () => clearTimeout(t);
-		}
-	}, [deleted]);
-
-	const projects = ["Landing Page", "Blog"];
-
 	return (
-		<div className="font-demo p-5 min-h-[158px] bg-white text-neutral-900">
-			<div className="text-xs font-bold uppercase tracking-wider text-red-700 mb-3">
-				Danger zone
-			</div>
-			{projects.map((name) => (
-				<div
-					key={name}
-					className="flex items-center justify-between py-2.5 px-3 border border-neutral-200 rounded-md mb-2"
-				>
-					<div>
-						<div className="text-[13px] font-semibold text-neutral-900">
-							{name}
-						</div>
-						<div className="text-[11px] text-neutral-400">
-							Edited 2 days ago
-						</div>
-					</div>
-					<button
-						onClick={() => setDeleted(name)}
-						className="py-1 px-3.5 border border-red-700 bg-transparent text-xs cursor-pointer text-red-700 rounded-[5px]"
-					>
-						Permanently delete &ldquo;{name}&rdquo;
+		<div className="font-demo p-5 bg-white text-neutral-900">
+			<div className="rounded-lg border border-neutral-200 shadow-sm p-5">
+				<div className="text-sm font-bold text-neutral-900 mb-3">
+					Delete &ldquo;Landing Page&rdquo;?
+				</div>
+				<ul className="text-[13px] leading-relaxed text-neutral-600 mb-4 list-disc pl-4 space-y-1">
+					<li>12 published posts will be unpublished</li>
+					<li>3 team members will lose access</li>
+					<li>Cannot be undone</li>
+				</ul>
+				<div className="flex justify-end gap-2">
+					<button className="py-2 px-4 border border-neutral-300 bg-transparent text-[13px] cursor-pointer text-neutral-600 rounded-md">
+						Keep project
+					</button>
+					<button className="py-2 px-4 border border-red-700 bg-red-700 text-[13px] cursor-pointer text-white rounded-md">
+						Delete project
 					</button>
 				</div>
-			))}
+			</div>
 		</div>
 	);
 }
