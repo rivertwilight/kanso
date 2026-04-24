@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
 	HelpCircle,
 	Monitor,
@@ -29,8 +29,24 @@ function ButtonLabelMenu({
 	onToggle: () => void;
 	items: MenuItem[];
 }) {
+	const ref = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (!open) return;
+		const handle = (e: MouseEvent) => {
+			if (ref.current && !ref.current.contains(e.target as Node)) {
+				onToggle();
+			}
+		};
+		document.addEventListener("mousedown", handle);
+		return () => document.removeEventListener("mousedown", handle);
+	}, [open, onToggle]);
+
 	return (
-		<div className="font-demo bg-white text-neutral-900 p-5 flex flex-col items-center gap-3">
+		<div
+			ref={ref}
+			className="font-demo bg-white text-neutral-900 p-5 flex flex-col items-center gap-3"
+		>
 			<button
 				onClick={onToggle}
 				className="flex items-center gap-1.5 px-4 py-2 border-[1.5px] border-neutral-300 bg-transparent text-[13px] cursor-pointer text-neutral-900 rounded-md"
@@ -97,11 +113,13 @@ export function ButtonLabelB() {
 export function PlaceholderLabelA() {
 	return (
 		<div className="font-demo p-5 bg-white text-neutral-900">
-			<div className="flex items-center gap-2 border border-neutral-300 rounded-md py-2.5 px-3">
+			<div className="flex items-center gap-2 border border-neutral-300 rounded-md py-2.5 px-3 transition-colors focus-within:border-neutral-900">
 				<Search size={15} className="text-neutral-400 shrink-0" />
-				<span className="text-sm text-neutral-400">
-					Enter keywords...
-				</span>
+				<input
+					type="search"
+					placeholder="Enter keywords..."
+					className="flex-1 min-w-0 text-sm text-neutral-900 bg-transparent border-none outline-none focus:outline-none placeholder:text-neutral-400"
+				/>
 			</div>
 		</div>
 	);
@@ -110,11 +128,13 @@ export function PlaceholderLabelA() {
 export function PlaceholderLabelB() {
 	return (
 		<div className="font-demo p-5 bg-white text-neutral-900">
-			<div className="flex items-center gap-2 border border-neutral-300 rounded-md py-2.5 px-3">
+			<div className="flex items-center gap-2 border border-neutral-300 rounded-md py-2.5 px-3 transition-colors focus-within:border-neutral-900">
 				<Search size={15} className="text-neutral-400 shrink-0" />
-				<span className="text-sm text-neutral-400">
-					Search projects...
-				</span>
+				<input
+					type="search"
+					placeholder="Search projects..."
+					className="flex-1 min-w-0 text-sm text-neutral-900 bg-transparent border-none outline-none focus:outline-none placeholder:text-neutral-400"
+				/>
 			</div>
 		</div>
 	);
@@ -125,11 +145,11 @@ export function PlaceholderLabelB() {
 function NewsletterInput({ placeholder }: { placeholder: string }) {
 	return (
 		<div className="font-demo p-5 bg-white text-neutral-900">
-			<div className="flex items-center border border-neutral-300 rounded-lg p-1.5 gap-2">
+			<div className="flex items-center border border-neutral-300 rounded-lg p-1.5 gap-2 transition-colors focus-within:border-neutral-900">
 				<input
 					type="email"
 					placeholder={placeholder}
-					className="flex-1 min-w-0 py-2 px-2.5 text-sm text-neutral-900 bg-transparent border-none outline-none placeholder:text-neutral-400"
+					className="flex-1 min-w-0 py-2 px-2.5 text-sm text-neutral-900 bg-transparent border-none outline-none focus:outline-none placeholder:text-neutral-400"
 				/>
 				<button className="shrink-0 py-2 px-4 bg-neutral-900 text-white text-[13px] font-medium border-none cursor-pointer rounded-md">
 					Subscribe
@@ -972,7 +992,7 @@ function ErrorCard({ buttonLabel }: { buttonLabel: string }) {
 				<div className="text-xs text-neutral-400 mb-4">
 					Please check your connection and try again.
 				</div>
-				<button className="py-1.5 px-5 border border-neutral-300 bg-transparent text-[13px] cursor-pointer text-neutral-900 rounded-md">
+				<button className="py-1.5 px-5 border border-neutral-300 bg-transparent text-[13px] cursor-pointer text-neutral-900 rounded-md transition-colors hover:bg-neutral-50 hover:border-neutral-400">
 					{buttonLabel}
 				</button>
 			</div>
@@ -1012,7 +1032,7 @@ function CheckoutStep({ buttonLabel }: { buttonLabel: React.ReactNode }) {
 					123 Main St, San Francisco, CA 94102
 				</div>
 			</div>
-			<button className="w-full py-2.5 px-4 bg-neutral-900 text-white text-[13px] font-medium rounded-md">
+			<button className="w-full py-2.5 px-4 bg-neutral-900 text-white text-[13px] font-medium rounded-md cursor-pointer transition-colors hover:bg-neutral-800">
 				{buttonLabel}
 			</button>
 		</div>
